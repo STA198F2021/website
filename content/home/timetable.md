@@ -6,7 +6,7 @@ active = true  # Activate this widget? true/false
 weight = 20  # Order that this section will appear.
 
 title = "Timetable"
-subtitle = "Videos released on Mondays, code alongs on Thursdays, workshops on Fridays. Access official course information [here](http://www.drps.ed.ac.uk/20-21/dpt/cxmath08077.htm)."
+subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; office hours Tuesdays, Wednesdays, and Thursdays; labs due Wednesdays; homework due Fridays."
 
 # Showcase important course info at a glance.
 # 
@@ -15,33 +15,32 @@ subtitle = "Videos released on Mondays, code alongs on Thursdays, workshops on F
 # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
 
 [[feature]]
-  icon = "youtube"
-  icon_pack = "fab"
+  icon = "keyboard"
+  icon_pack = "fas"
   name = "Monday"
-  description = "Videos released"  
-  
+  description = "Code along lab sessions - 10:15-11:30am, 1:45-3:00pm, or 5:15-6:30pm"  
+   
 [[feature]]
   icon = "comments"
   icon_pack = "far"
   name = "Tuesday"
-  description = "Student hours - TBA"  
+  description = "Professor hours - 1-2pm"  
+  
+[[feature]]
+  icon = "university"
+  icon_pack = "fas"
+  name = "Wednesday"
+  description = "Class - 10:15-11:30am; Professor hours - 11:30am-12:30pm"  
   
 [[feature]]
   icon = "comments"
   icon_pack = "far"
-  name = "Wednesday"
-  description = "Student hours - TBA"  
-  
-[[feature]]
-  icon = "keyboard"
-  icon_pack = "fas"
   name = "Thursday"
-  description = "Code along sessions - 11:10-12:00"
+  description = "TA hours - TBA"
   
 [[feature]]
-  icon = "laptop-code"
+  icon = "university"
   icon_pack = "fas"
   name = "Friday"
-  description = "Workshops - 10:00-10:50, 11:10-12:00, or 12:10-13:00"  
-
+  description = "Class - 10:15-11:30am"
 +++

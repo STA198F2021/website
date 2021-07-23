@@ -10,6 +10,6 @@ share: false
 title: Privacy Policy
 ---
 
-This website only contains publicly available content from the Introduction to Data Science course at University of Edinburgh. 
-Any materials available to only officially enrolled students are hosted on LEARN, the learning management system used at University of Edinburgh. 
-Student work is completed and submitted as private GitHub repositories which are visible only to officially enrolled students and course organizer and tutors.
+This website only contains publicly available content from the Introduction to Global Health Data Science course at Duke University.
+Any materials available only to officially enrolled students are hosted on Sakai, the learning management system used at Duke.
+Student work is completed and submitted as private GitHub repositories which are visible only to officially enrolled students and course staff.

@@ -10,34 +10,35 @@ subtitle = "Showcase your inner data scientist"
 
 ## TL;DR
 
-Pick a dataset, any dataset...
+Pick a global health data set ...
 
-...and do something with it. That is your final project in a nutshell. More details below.
+...and do something informative with it. That is your final project in a nutshell. More details below.
 
 ## May be too long, but please do read
 
-The final project for this class will consist of analysis on a dataset of your own choosing. The dataset may already exist, or you may collect your own data using a survey or by conducting an experiment. You can choose the data based on your interests or based on work in other courses or research projects. The goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (and beyond, if you like) and apply them to a novel dataset in a meaningful way.
+The final project for this class will consist of analysis on a data set of your own choosing. The data set may already exist, or you may collect your own data using a survey or by conducting an experiment. You can choose the data based on your interests or based on work in other courses or research projects. The goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (and beyond, if you like) and apply them to a novel data set in a meaningful way.
 
 The goal is not to do an exhaustive data analysis i.e., do not calculate every statistic and procedure you have learned for every variable, but rather let me know that you are proficient at asking meaningful questions and answering them with results of data analysis, that you are proficient in using R, and that you are proficient at interpreting and presenting the results. Focus on methods that help you begin to answer your research questions. You do not have to apply every statistical procedure we learned. Also, critique your own methods and provide suggestions for improving your analysis. Issues pertaining to the reliability and validity of your data, and appropriateness of the statistical analysis should be discussed here.
 
-The project is very open ended. You should create some kind of compelling visualization(s) of this data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is required. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. 
+The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is required. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. 
 
 ### Data
 
-In order for you to have the greatest chance of success with this project it is important that you choose a manageable dataset. This means that the data should be readily accessible and large enough that multiple relationships can be explored. As such, your dataset must have at least 50 observations and between 10 to 20 variables (exceptions can be made but you must speak with me first). The variables in the data should include categorical variables, discrete numerical variables, and continuous numerical variables.
+In order for you to have the greatest chance of success with this project it is important that you choose a manageable data set. This means that the data should be readily accessible and large enough that multiple relationships can be explored. As such, your data set must have at least 50 observations and say 10-20 variables (exceptions can be made, but you must speak with me first). The variables in the data should include categorical variables, discrete numerical variables, and continuous numerical variables.
 
-If you are using a dataset that comes in a format that we haven't encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source. If you are having trouble ask for help before it is too late.
+If you are using a data set that comes in a format that we haven't encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source. If you are having trouble ask for help before it is too late.
 
-**Note on reusing datasets from class:** Do not reuse datasets used in examples, homework assignments, or labs in the class.
+**Note on reusing data sets from class:** Do not reuse data sets used in examples, homework assignments, or labs in the class.
 
 Below are a list of data repositories that might be of interest to browse. You're not limited to these resources, and in fact you're encouraged to venture beyond them. But you might find something interesting there:
 
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
-- [NHS Scotland Open Data](https://www.opendata.nhs.scot/)
-- [Edinburgh Open Data](https://edinburghopendata.info/)
-- [Open access to Scotland's official statistics](https://statistics.gov.scot/home)
-- [Bikeshare data portal](https://www.bikeshare.com/data/)
-- [UK Gov Data](https://data.gov.uk/)
+- [Global Health Data Exchange](http://ghdx.healthdata.org/ihme_data)
+- [WHO Data Collections](https://www.who.int/data/collections)
+- [Demographic and Health Surveys Data](https://dhsprogram.com/data/)
+- [World Bank Health Data](https://data.worldbank.org/topic/8)
+- [WHO/UNICEF Joint Monitoring Program on Water Supply, Sanitation, and Hygiene](https://washdata.org/data)
+- [UN Refugee Data Finder](https://www.unhcr.org/refugee-statistics/download/?url=E1ZxP4)
 - [Kaggle datasets](https://www.kaggle.com/datasets)
 - [OpenIntro datasets](http://openintrostat.github.io/openintro/)
 - [Awesome public datasets](https://github.com/awesomedata/awesome-public-datasets)
@@ -48,9 +49,9 @@ Below are a list of data repositories that might be of interest to browse. You'r
 
 ### Deliverables
 
-1. Proposal     - due Tuesday, 27 Oct, at 16:00
-1. Presentation - due Friday, 4 Dec, at 09:00 as pre-recorded video or live presentation in workshop
-1. Write-up     - due Friday, 4 Dec, at 09:00
+1. Proposal     - due Frday, October 1, at 4:00pm
+1. Presentation - Wednesday, December 1, in class
+1. Write-up     - due Wednesday, December 1, at 10:00am
 
 #### Proposal
 
@@ -117,12 +118,11 @@ Style and format does count for this assignment, so please take the time to make
 
 Total                          | 100 pts
 -------------------------------|--------
-Proposal                       | 10 pts
-Presentation                   | 50 pts
-Write-up                       | 15 pts
-Reproducibility and organization | 10 pts
-Team peer evaluation           | 10 pts
-Classmates' evaluation         | 5 pts
+Proposal                       | 15 pts
+Presentation                   | 30 pts
+Write-up                       | 40 pts
+Reproducibility and organization | 15 pts
+
 
 ### Criteria
 
@@ -133,7 +133,7 @@ Classmates' evaluation         | 5 pts
 
 ### Team peer evaluation
 
-You will be asked to fill out a survey where you rate the contribution and teamwork of each team member out of 10 points. You will additionally report a contribution percentage for each team member. Filling out the survey is a prerequisite for getting credit on the team member evaluation.If you are suggesting that an individual did less than 20% of the work, pleaseprovide some explanation. If any individual gets an average peer score indicating that they did less than 10% of the work, this person will receive half the grade of the rest of the group.
+You will be asked to fill out a survey where you  will report a contribution percentage for each team member. Filling out the survey is a prerequisite for getting credit on the team member evaluation.If you are suggesting that an individual did less than their fair share of the work, please provide some explanation. When peer scores indicate a team member did not do their fair share of work, proportional grading may be used (e.g., half the fair share yields half the points expected).
 
 ### Late work policy
 
