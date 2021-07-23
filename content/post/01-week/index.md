@@ -29,6 +29,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 |:---------------------|:--------:|
 |  Meet the course team |   | 
 | Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides/week-01/w1-d01-welcome/w1-l01-welcome.html#1)  | 
+| Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides/week-02/w1-d05-viz-cat/w2-l02-viz-cat.html#1)  | 
 | AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d02-your-turn-unvotes-covid/w1-d02-your-turn-unvotes-covid.html#1) | 
 |  Course information   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d03-course-information/w1-d03-course-information.html#1) |
 |  Meet the toolkit: course operation     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d04-toolkit-course/w1-d04-toolkit-course.html#1) | 
