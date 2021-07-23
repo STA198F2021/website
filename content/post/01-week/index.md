@@ -28,8 +28,8 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | <div style="width:250px;text-align:left">Title</div> |  <div style="width:80px;text-align:center">Slides</div> |
 |:---------------------|:--------:|
 |  Meet the course team |   | 
-| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides/week-01/w1-d01-welcome/w1-l01-welcome.html#1)  | 
-| Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides/week-02/w1-d05-viz-cat/w2-l02-viz-cat.html#1)  | 
+| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides-sta198fall2021/week-01/w1-d01-welcome/w1-l01-welcome.html#1)  | 
+| Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides-sta198fall2021/week-02/w1-d05-viz-cat/w2-l02-viz-cat.html#1)  | 
 | AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d02-your-turn-unvotes-covid/w1-d02-your-turn-unvotes-covid.html#1) | 
 |  Course information   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d03-course-information/w1-d03-course-information.html#1) |
 |  Meet the toolkit: course operation     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d04-toolkit-course/w1-d04-toolkit-course.html#1) | 
@@ -59,7 +59,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 ### Interactive R tutorials
 
-The following interactive R tutorials is designed to give you more practice with R. If you're struggling with any of the topics covered this week, we strongly recommend you work through it.
+The following interactive R tutorial is designed to give you more practice with R. If you're struggling with any of the topics covered this week, we strongly recommend you work through it.
 
 |  <div style="width:480px"></div>  |  <div style="width:200px"></div>  |
 |:---|:---|
