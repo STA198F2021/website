@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2020-09-21T00:00:00Z"
+date: "2021-08-23T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2020-09-21T00:00:00Z"
+lastmod: "2021-08-23T00:00:00Z"
 projects: []
 subtitle: 'Get acquainted with the course, the technology, the workflow, and the skills you will acquire throughout the semester :toolbox:'
 summary: Get acquainted with the course, the technology, the workflow, and the skills you will acquire throughout the semester.
@@ -23,19 +23,17 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 - Complete the [assignments](/post/01-week/#assignments)
 
 
-### Videos
+### Slides
 
-You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube [here](https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM) and on MediaHopper [here](https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/).
-
-| <div style="width:50px;text-align:center">No.</div> | <div style="width:250px;text-align:left">Title</div> | <div style="width:80px;text-align:center">YouTube</div> | <div style="width:80px;text-align:center">MediaHopper</div> |  <div style="width:80px;text-align:center">Slides</div> | <div style="width:80px;text-align:center">Length</div> |
-|:---:|:---------------------|:-------:|:-----------:|:--------:|:------:|
-| 00  | Meet the course team | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/lX93oBGaBwQ) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Meet+the+course+team/1_q82gknap) |  | 02:36 |
-| 01  | Welcome to IDS!      | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/OJ1xR0ObhIw) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/Week+1+-+01+-+Welcome+to+IDS%21/1_b5uz1e1a) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d01-welcome/w1-d01-welcome.html#1)  | 15:07 |
-| 02  | AE: First dataviz    | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/r-uTBEclM1E) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+02+-+First+dataviz/1_krzz4v2a) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d02-your-turn-unvotes-covid/w1-d02-your-turn-unvotes-covid.html#1) | 08:10 |
-| 03  | Course information   | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/ICBb9yWwgbA) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+03+-+Course+information/1_5kvzfhgv) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d03-course-information/w1-d03-course-information.html#1) | 26:17 |
-| 04  | Meet the toolkit: course operation     | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/KA4zOPgZqN8) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+04+-+Meet+the+toolkitA+Course+operation/1_spbwu8g0) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d04-toolkit-course/w1-d04-toolkit-course.html#1) | 10:45 |
-| 05  | Meet the toolkit: programming     | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/mTAZLFcpnLI) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+05+-+Meet+the+toolkitA+Programming/1_pbi0vuko) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d05-toolkit-r/w1-d05-toolkit-r.html#1) | 34:17 |
-| 06  | Meet the toolkit: version control and collaboration     | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/124DQasLyNQ) | [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+06+-+Meet+the+toolkitA+Version+control+and+collaboration/1_e2snrdxn) | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d05-toolkit-git/w1-d06-toolkit-git.html#1) | 11:24 |
+| <div style="width:250px;text-align:left">Title</div> |  <div style="width:80px;text-align:center">Slides</div> |
+|:---------------------|:--------:|
+|  Meet the course team |   | 
+| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides/week-01/w1-d01-welcome/w1-l01-welcome.html#1)  | 
+| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d02-your-turn-unvotes-covid/w1-d02-your-turn-unvotes-covid.html#1) | 
+|  Course information   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d03-course-information/w1-d03-course-information.html#1) |
+|  Meet the toolkit: course operation     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d04-toolkit-course/w1-d04-toolkit-course.html#1) | 
+|  Meet the toolkit: programming     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d05-toolkit-r/w1-d05-toolkit-r.html#1) |
+|  Meet the toolkit: version control and collaboration      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d05-toolkit-git/w1-d06-toolkit-git.html#1) | 
 
 ### Assignments
 
