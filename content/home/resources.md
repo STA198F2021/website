@@ -11,7 +11,7 @@ title = "Resources"
 
 - [R 4 Data Science](http://r4ds.had.co.nz)
 - [Open Intro: Introduction to Modern Statistics](https://openintro-ims.netlify.app/)
-
+- [Principles of Biostatistics (not required; library reserve; wait for 3rd edition if you want to buy)](https://www.routledge.com/Principles-of-Biostatistics/Pagano-Gauvreau/p/book/9781138593145?gclid=Cj0KCQjw0emHBhC1ARIsAL1QGNepIqhs571JGGOWM5ry7fbOgXI5eqkGRlbEiQ172MRsW2vPenAPRzUaAk4fEALw_wcB)
 ## Tools
 
 - [RStudio](https://rstudio.com/)
@@ -22,5 +22,5 @@ title = "Resources"
 
 - [RStudio](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
 - [R Markdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
-- [Data visaulization with ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- [Data visualization with ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 - [Data wrangling with dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)

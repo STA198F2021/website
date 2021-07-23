@@ -13,17 +13,15 @@ lastmod: "2020-09-21T00:00:00Z"
 projects: []
 subtitle: 'Get acquainted with the course, the technology, the workflow, and the skills you will acquire throughout the semester :toolbox:'
 summary: Get acquainted with the course, the technology, the workflow, and the skills you will acquire throughout the semester.
-title: 'Week 1 - Welcome to IDS'
+title: 'Week 1 - Welcome to Global Health Data Science'
 ---
 
 ### Tasks
 
-- Watch the [videos](/post/01-week/#videos)
 - Complete the [readings](/post/01-week/#readings)
-- Visit the course on [Learn](https://www.learn.ed.ac.uk/) to join RStudio Cloud
-- Complete the [Getting to Know you survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMkU3TzFXRTkyTFBVVjBLVUVTRDdJVlg2WS4u)
+- Visit the course on [Sakai](https://www.sakai.duke.edu) to complete the Getting to Know You survey
 - Complete the [assignments](/post/01-week/#assignments)
-  - Participation in the Extra Credit opportunity is optional, but **highly** encouraged
+
 
 ### Videos
 
@@ -41,16 +39,11 @@ You have two options for watching the course videos, on YouTube or on MediaHoppe
 
 ### Assignments
 
-**Note:** This week's assignments will not be marked, they are provided as practice and to help you get acquainted with the material without the pressure of grades. Formative feedback will be provided. Even though there is no penalty for not completing them, you are urged to complete them so that you are prepared for next week and beyond.
-
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | *Due this week* | | |
-| OQ 00 | [Syllabus data](https://minecr.shinyapps.io/00-overview) | Sun, 27 Sep, 23:59 UK |
-| *Due next week* | | |
-| Lab 00 | [Hello IDS!](https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html) | Tue, 29 Sep, 16:00 UK |
-| HW 00  | [Pet names](https://ids-s1-20.github.io/homework/hw-00/hw-00-pet-names.html) | Thur, 1 Oct, 16:00 UK |
-| EC | [Extra credit](/extra-credit/extra-credit-01.html) | Multiple (see assignment) |
+| Survey | [Sakai Getting to Know You Survey](https://sakai.duke.edu) | Friday, August 27, 4:00pm |
+| Lab 01 | [Hello, Data Science!](https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html) | Wednesday, August 25, 4:00pm |
 
 ### Readings
 
@@ -58,23 +51,12 @@ You have two options for watching the course videos, on YouTube or on MediaHoppe
 |:---:|:---|:---:|
 | :page_facing_up: | [Course syllabus](https://introds.org/) | **Required** | 
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
-| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/getting-started-with-data.html#basic-stents-strokes) | **Required** |
-| :page_facing_up: | [How to read an R help page](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
+| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |
 |  :fountain_pen:  | [How R changed me as an analyst](https://nhsrcommunity.com/blog/how-r-changed-me-as-an-analyst/) | Optional
 
-### Code-along
-
-This week we worked with the [Himalayan climbing expeditions data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-22/readme.md) from TidyTuesday. TidyTuesday is a weekly social data project for the R community. Read more about TidyTuesday [here](https://github.com/rfordatascience/tidytuesday) and see people's contributions on Twitter under the [#tidytuesday hashtag](https://twitter.com/search?q=tidytuesday&src=typed_query). 
-
-You can find starter code for this session on [RStudio Cloud](https://rstudio.cloud/), in the project titled *Code Along 01 - Himalayan Climbing Expeditions*.
-
-| <div style="width:200px"></div>  | <div style="width:480px"></div>  |
-|:---|:---|
-| Recording | [<span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span>](https://youtu.be/QiNlCEPw6Gc) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [<span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+01+-+Code+along/1_41jajjd7) |
-| Session artifacts | [**`.Rmd`**](https://github.com/ids-s1-20/code-along/blob/master/01-code-along/himalayan-climbing.Rmd) &nbsp;&nbsp;&nbsp; [**`.md`**](https://github.com/ids-s1-20/code-along/blob/master/01-code-along/himalayan-climbing.md) |
-| Bonus | [Text analysis of chat transcript from the session!](https://github.com/ids-s1-20/code-along/blob/master/01-code-along/01-chat-analysis.md) |
 
 ### Interactive R tutorials
 
