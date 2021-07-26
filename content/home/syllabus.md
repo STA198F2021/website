@@ -61,6 +61,7 @@ Your overall course grade will be comprised of the following components, and the
 
 A letter grade will be assigned as follows.
 
+ | | | | |
 ----|----|----|----|----
 93 | &le; | A  | &le; | 100
 90 | &le; | A- | &lt; | 93 

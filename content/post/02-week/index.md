@@ -9,16 +9,15 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2020-09-28T00:00:00Z"
+lastmod: "2021-08-30T00:00:00Z"
 projects: []
-subtitle: 'Data visualization and interpretation of graphical information :bar_chart:'
-summary: Data visualization and interpretation of graphical information.
-title: 'Week 2 - Visualizing data'
+subtitle: 'Foundations in Probability'
+summary: Probability
+title: 'Week 2 - Foundations in Probability'
 ---
 
 ### Tasks
 
-- Watch the [videos](/post/02-week/#videos)
 - Complete the [readings](/post/02-week/#readings)
 - Complete the [assignments](/post/02-week/#assignments)
 - If you haven't yet done so:

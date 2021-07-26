@@ -8,7 +8,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 30  # Order that this section will appear.
 
-title = "Things are going to look a little different than expected this year, but we got you!"
+title = "Not your average biostatistics class...and we mean for you to succeed!"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
