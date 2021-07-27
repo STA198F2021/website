@@ -1,7 +1,7 @@
 ---
 title: "Visualising numerical data"
-subtitle: "<br><br> Introduction to Data Science"
-author: "[introds.org](https://introds.org/)"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:

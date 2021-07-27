@@ -1,7 +1,7 @@
 ---
 title: "Visualising data with ggplot2"
 subtitle: "<br><br> Introduction to Global Health Data Science"
-author: "[introds.org](https://introds.org/)"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
