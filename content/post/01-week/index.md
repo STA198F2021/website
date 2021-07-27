@@ -20,7 +20,7 @@ authors: admin
 ### Tasks
 
 - Complete the [readings](/post/01-week/#readings)
-- Visit the course on [Sakai](https://www.sakai.duke.edu) to complete the Getting to Know You survey
+- Visit the course on [Sakai](https://sakai.duke.edu) to complete the Getting to Know You survey
 - Complete the [assignments](/post/01-week/#assignments)
 
 
