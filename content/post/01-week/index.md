@@ -28,7 +28,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | <div style="width:250px;text-align:left">Title</div> |  <div style="width:80px;text-align:center">Slides</div> |
 |:---------------------|:--------:|
 |  Meet the course team |   | 
-| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://github.com/STA198F2021/website.git/static/slides/week-01/w1-l01-welcome.html#1)  | 
+| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](/slides/week-01/w1-l01-welcome.html#1)  | 
 | AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://ids-s1-20.github.io/slides/week-01/w1-d02-your-turn-unvotes-covid/w1-d02-your-turn-unvotes-covid.html#1) | 
 | Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides-sta198fall2021/week-02/w1-d05-viz-cat/w2-l02-viz-cat.html#1)  | 
 | Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://amy-herring.github.io/slides-sta198fall2021/week-02/w1-d05-viz-cat/w2-l02-viz-cat.html#1)  | 
