@@ -45,22 +45,16 @@
   
 [[main]]
   name = "<i class='fab fa-github'></i>"
-  url = "https://github.com/ids-s1-20"
+  url = "https://github.com/STA198F2021"
   weight = 100
 
 [[main]]
   name = "<i class='fab fa-r-project'></i>"
-  url = "https://rstudio.cloud"
+  url = "https://www.rstudio.com"
   weight = 110
 
 [[main]]
-  name = "<i class='ai ai-piazza'></i>"
-  url = "https://piazza.com"
-  weight = 120
-  menu_align_right = true
-
-[[main]]
   name = "<i class='fas fa-university'></i>"
-  url = "https://www.learn.ed.ac.uk/"
+  url = "https://sakai.duke.edu"
   weight = 130
   menu_align_right = true
