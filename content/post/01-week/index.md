@@ -28,7 +28,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 |:---:|:---------------------|
 |  Meet the course team |   | 
 | Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](/slides/week-01/w1-l01-welcome.html#1)  | 
-| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-d02-your-turn-unvotes-covid.html#1) | 
+| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-d02-your-turn-lifeexp-covid.html#1) | 
 | Data Visualization      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l02-ggplot2.html#1)  | 
 
 ### Assignments
