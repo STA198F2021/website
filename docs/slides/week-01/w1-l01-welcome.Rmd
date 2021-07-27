@@ -98,11 +98,10 @@ A: We can discuss that over `r emo::ji("coffee")`.
 
 <br>
 
-AMY UPDATE LINK
 
 .larger[
 .center[
-[**introds.org**](https://introds.org/)
+[**Course Website**](https://sta198f2021.github.io/website/)
 ]
 ]
 
