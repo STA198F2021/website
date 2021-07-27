@@ -32,7 +32,7 @@ Pick one and complete it. Optionally, try the other one as well.
 **Option 1.**
 
 - Go to  R Studio and start `AE 01a - First dataviz - Life Expectancy`.
-- In the Files pane (bottom right corner), spot the file called `lifeexpex.Rmd`. 
+- In the Files pane (bottom right corner), spot the file called `w1-ae01a-lifeexp.Rmd`. 
 - Open it and click "Knit".
 - Then...
   - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
@@ -46,7 +46,7 @@ Pick one and complete it. Optionally, try the other one as well.
 **Option 2.**
 
 - Go to [RStudio Cloud](https://rstudio.cloud/) and start `AE 01b - First dataviz - COVID-19`.
-- In the Files pane (bottom right corner), spot the file called `covid.Rmd`.
+- In the Files pane (bottom right corner), spot the file called `w1-ae01b-covid.Rmd`.
 - Open it and click "Knit".
 - Then...
   - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
