@@ -101,17 +101,16 @@ directions = ""
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
-office_hours = ["David: Tuesdays 10-11, Mine: Wednesdays 12-1"]
+office_hours = ["Tuesdays 1-2 and Wednesdays 11:30-12:30"]
 
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  {icon = "piazza", icon_pack = "ai", name = "Piazza", link = "https://piazza.com"},
-  {icon = "envelope", icon_pack = "fas", name = "Email", link = "mailto:mine.cetinkaya-rundel@ed.ac.uk"},
+  {icon = "envelope", icon_pack = "fas", name = "Email", link = "mailto:amy.herring@duke.edu"},
   ]
   
 # Enter an optional link for booking appointments (e.g. calendly.com).
-appointment_url = "https://calendly.com/minecr"
+appointment_url = ""
 
 ############################
 ## Social
@@ -129,9 +128,9 @@ twitter = ""
 
 # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
 #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-date_format = "2 Jan 2006"
+date_format = "Mon, Jan 2, 2006"
 #   Examples: "3:04 pm" or "15:04"
-time_format = "15:04"
+time_format = "3:04 pm"
 
 # List delimiter (separates parts of an address)
 # Popular separators are ", " (comma), "<br>" (new line), " " (space)

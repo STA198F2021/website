@@ -15,7 +15,7 @@ title = "Resources"
 ## Tools
 
 - [RStudio](https://rstudio.com/)
-- [GitHub](https://github.com/ids-s1-20/)
+- [GitHub](https://github.com/STA198F2021)
 
 
 ## Cheatsheets

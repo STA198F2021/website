@@ -22,14 +22,19 @@ title = "Not your average biostatistics class...and we mean for you to succeed!"
 
   # Background color.
   # color = "navy"
-  
+
   # Background gradient.
   # gradient_start = "DeepSkyBlue"
   # gradient_end = "SkyBlue"
   
   # Background image.
-  image = "remote-learners.jpeg"  # Name of image in `static/img/`.
-  image_darken = 0.6  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
+  image = "dghimap2.png"  # Name of image in `static/img/`.
+  image_darken = 0.2  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
+
+  # image = "remote-learners.jpeg"  # Name of image in `static/img/`
+
+  
+
 
   # Text color (true=light or false=dark).
   text_color_light = true

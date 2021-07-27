@@ -8,7 +8,7 @@ role: Fall 2021
 social:
 - icon: github
   icon_pack: fab
-  link: https://github.com/ids-s1-20
+  link: https://github.com/STA198F2021
 - icon: r-project
   icon_pack: fab
   link: https://rstudio.com/
