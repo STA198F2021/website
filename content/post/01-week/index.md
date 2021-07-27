@@ -13,7 +13,7 @@ lastmod: "2021-08-30T00:00:00Z"
 projects: []
 subtitle: 'Welcome'
 summary: Intro
-title: 'Week 1 - Welcome to Global Health Data Scienc'
+title: 'Week 1 - Welcome to Global Health Data Science'
 ---
 
 ### Tasks

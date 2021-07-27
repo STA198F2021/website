@@ -49,7 +49,7 @@ authors: admin
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
-| :page_facing_up: | [Course syllabus](https://introds.org/) | **Required** | 
+| :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
