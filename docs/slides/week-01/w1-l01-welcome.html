@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Welcome to STA 198/GLHLTH 298!</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="introds.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Welcome to STA 198/GLHLTH 298!
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://introds.org/">introds.org</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+## Data science
+
+.pull-left-wide[
+- Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. 
+
+- This is a course on health data science, with an emphasis on statistical thinking and global health challenges.
+
+- Our process involves
+
+  - forming a question of interest,
+  - (collecting) and summarizing data,
+  - and interpreting and communicating results.
+
+
+]
+
+---
+
+
+## Global health data science
+
+.pull-left-wide[
+
+STA 198 will
+
+- provide a tour of basic statistical methods useful in public health and biomedical research
+
+- emphasize intuition and understanding of the methods, with a focus on critical assessment of evidence, data-driven decision-making, and effective communication of insights from data
+
+- make use of timely, relevant examples from global health science
+
+- utilize free, modern software and reproducible research methods for transparency and data sharing.
+
+]
+
+---
+
+## Course FAQ
+
+.pull-left-wide[
+**Q - What data science background does this course assume?**  
+A - None.
+
+**Q - Is this an intro stat course?**  
+A - While statistics `\(\ne\)` data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is *not* your typical high school statistics course.
+
+**Q - Will we be doing computing?**   
+A - Yes, extensively.
+]
+
+---
+
+## Course FAQ
+
+.pull-left-wide[
+**Q - Is this an intro CS course?**  
+A - No, but many themes are shared.
+
+**Q - What computing language will we learn?**  
+A - R.
+
+**Q: Why not language X?**  
+A: We can discuss that over ☕.
+]
+
+---
+
+## Course info online...
+
+... where you can find everything except your grades!
+
+&lt;br&gt;
+
+AMY UPDATE LINK
+
+.larger[
+.center[
+[**introds.org**](https://introds.org/)
+]
+]
+
+---
+
+class: middle
+
+# Software
+
+---
+
+&lt;img src="img/excel.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/r.png" width="60%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/rstudio.png" width="73%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+class: middle
+
+# Data science life cycle
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.001.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.002.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.003.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.004.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.005.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+
+&lt;img src="img/data-science-cycle/data-science-cycle.006.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.007.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/data-science-cycle/data-science-cycle.009.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+&lt;img src="img/mengap.png" width="65%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+A study at Penn (Chen et al, 2008) found that men presenting at emergency departments with acute nontraumatic abdominal pain received painkillers more quickly than women. 
+
+---
+
+
+
+class: middle
+
+# Let's dive in!
+
+
+---
+
+## Men's Health Gap
+
+.pull-left-wide[
+
+- Health gaps are differences in the prevalence of disease, access to healthcare, or health outcomes across different groups.
+
+- The earlier slide highlighted a small (n `\(\approx\)` 900) study in one emergency room that showed men were more likely to receive painkillers, and received them more quickly, than women.
+
+- Mortality data and life expectancy from infancy tell a different story.
+
+]
+
+---
+
+## Dilemma: Measurement of Gender Minorities
+
+.pull-left-wide[
+- Research on health gaps among gender minorities is limited due to a variety of factors, including
+
+  - binary gender construction,
+  - pre-populated vs. open-field survey items,
+  - and many others
+  
+- These measurement issues lead to misclassification and impede research on important health issues affecting gender minorities
+
+- Once data are collected, analysts may have limited options (survey design is critical!)
+
+]
+
+---
+
+## Life Expectancy
+
+- The [Institute for Health Metrics and Evaluation (IHME)](http://www.healthdata.org) is a resource for data on a variety of important health outcomes worldwide. 
+
+- IHME maintains the [Global Burden of Disease (GBD)](http://ghdx.healthdata.org) tool, a valueable resource for policymakers and others that quantifies health loss due to a variety of risk factors, diseases, and injuries.
+
+- We consider data from IHME on (estimated) infant life expectancy from the years 1994-2019 as a function of location (primarily country) and binary gender. 
+
+- Here **life expectancy** is the \# of years an infant can expect to live if mortality rates in the current year remain unchanged for the rest of their life. Life expectancy usually underestimates how long the baby will actually live, as mortality rates have been declining over time.
+
+
+---
+
+# What is in a dataset?
+
+---
+
+## Dataset terminology
+
+- Each row is an **observation**
+- Each column is a **variable**
+
+.small[
+
+
+```r
+life &lt;- readr::read_csv("lifeexp/lifeexpectancy_infant.csv")
+
+life
+```
+
+```
+## # A tibble: 12,240 x 4
+##   location sex     year lifeexp
+##   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Japan    Female  2019    87.7
+## 2 Japan    Female  2018    87.6
+## 3 Japan    Female  2017    87.6
+## 4 Japan    Female  2016    87.4
+## 5 Japan    Female  2015    87.3
+## 6 Japan    Female  2014    87.1
+## # … with 12,234 more rows
+```
+
+]
+
+---
+
+
+
+## What's in the life expectancy data?
+
+Take a `glimpse` at the data:
+
+
+```r
+glimpse(life)
+```
+
+```
+## Rows: 12,240
+## Columns: 4
+## $ location &lt;chr&gt; "Japan", "Japan", "Japan", "Japan", "Japan", "…
+## $ sex      &lt;chr&gt; "Female", "Female", "Female", "Female", "Femal…
+## $ year     &lt;dbl&gt; 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2019…
+## $ lifeexp  &lt;dbl&gt; 87.65871, 87.64361, 87.64209, 87.44221, 87.328…
+```
+
+---
+
+.question[
+How many rows and columns does this dataset have?
+What does each row represent?
+What does each column represent?
+]
+
+
+---
+
+.question[
+How many rows and columns does this dataset have?
+]
+
+.pull-left[
+
+```r
+nrow(life) # number of rows
+```
+
+```
+## [1] 12240
+```
+
+```r
+ncol(life) # number of columns
+```
+
+```
+## [1] 4
+```
+
+```r
+dim(life)  # dimensions (row column)
+```
+
+```
+## [1] 12240     4
+```
+]
+
+---
+
+class: middle
+
+# Exploratory data analysis
+
+---
+
+## What is EDA?
+
+- Exploratory data analysis (EDA) is an approach to analysing data sets to summarize its main characteristics
+- Often, this is visual -- this is what we'll focus on first
+- But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis -- this is what we'll focus on next
+
+---
+
+## Life expectancy over time
+
+.question[ 
+How would you describe the relationship between year and life expectancy?
+What other variables would help us understand data points that don't follow the overall trend?
+What is causing the **outliers** at the bottom?
+]
+
+&lt;img src="w1-l01-welcome_files/figure-html/unnamed-chunk-17-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+Ok, ugly plot!  We'll break it down soon -- but first, the outliers....
+
+---
+
+
+```r
+# we want to look at the bottom 5 values of life expectancy (5 just in case some points are exactly the same)
+life %&gt;% top_n(-5,lifeexp)
+```
+
+```
+## # A tibble: 5 x 4
+##   location sex     year lifeexp
+##   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Burundi  Male    1997   40.8 
+## 2 Haiti    Female  2010   36.9 
+## 3 Haiti    Male    2010   28.8 
+## 4 Rwanda   Female  1994   11.2 
+## 5 Rwanda   Male    1994    9.14
+```
+
+Are these data errors, realistic estimates, or neither?  (Hint: recall how life expectancy is calculated)
+
+---
+
+
+class: middle
+
+# Data visualization
+
+---
+
+## Data visualization
+
+&gt; *"The simple graph has brought more information to the data analyst's mind than any other device." --- John Tukey*
+
+- Data visualization is the creation and study of the visual representation of data
+- Many tools for visualizing data -- R is one of them
+- Many approaches/systems within R for making data visualizations -- **ggplot2** is one of them, and that's what we're going to use
+
+---
+
+## ggplot2 `\(\in\)` tidyverse
+
+.pull-left[
+&lt;img src="img/ggplot2-part-of-tidyverse.png" width="80%" style="display: block; margin: auto;" /&gt;
+] 
+.pull-right[ 
+- **ggplot2** is tidyverse's data visualization package 
+- `gg` in "ggplot2" stands for Grammar of Graphics 
+- Inspired by the book **Grammar of Graphics** by Leland Wilkinson
+]
+
+---
+
+## Grammar of Graphics
+
+.pull-left-narrow[
+A grammar of graphics is a tool that enables us to concisely describe the components of a graphic
+]
+.pull-right-wide[
+&lt;img src="img/grammar-of-graphics.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[ Source: [BloggoType](http://bloggotype.blogspot.com/2016/08/holiday-notes2-grammar-of-graphics.html)]
+
+---
+
+## Men's gap in life expectancy by year
+
+Let's subset to a few countries to de-clutter the plot.
+
+
+```r
+life %&gt;%
+  filter(location %in% c("United States of America","Rwanda","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp,shape=sex,color=location))+geom_point()
+```
+
+&lt;img src="w1-l01-welcome_files/figure-html/lifeexp-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+We'll learn to make this a lot better later!
+
+---
+
+
+
+.question[ 
+- What are the functions doing the plotting?
+- What is the dataset being plotted?
+- Which variables map to which features (aesthetics) of the plot?
+]
+
+
+```r
+life %&gt;%
+  filter(location %in% c("United States of America","Rwanda","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp,shape=sex,color=location))+geom_point()
+```
+
+
+
+---
+
+## Hello ggplot2!
+
+.pull-left-wide[
+- `ggplot()` is the main function in ggplot2
+- Plots are constructed in layers
+- Structure of the code for plots can be summarized as
+
+
+```r
+ggplot(data = [dataset], 
+       mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+- The ggplot2 package comes with the tidyverse
+
+
+```r
+library(tidyverse)
+```
+
+- For help with ggplot2, see [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
+]
+
+---
+
+class: middle
+
+# Why do we visualize?
+
+---
+
+## Anscombe's quartet/datasaurus dozen
+
+
+
+.pull-left[
+
+```
+## # A tibble: 142 x 3
+##   dataset     x     y
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 dino     55.4  97.2
+## 2 dino     51.5  96.0
+## 3 dino     46.2  94.5
+## 4 dino     42.8  91.4
+## 5 dino     40.8  88.3
+## 6 dino     38.7  84.9
+## # … with 136 more rows
+```
+
+```
+## # A tibble: 142 x 3
+##   dataset     x     y
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 star     58.2  91.9
+## 2 star     58.2  92.2
+## 3 star     58.7  90.3
+## 4 star     57.3  89.9
+## 5 star     58.1  92.0
+## 6 star     57.5  88.1
+## # … with 136 more rows
+```
+] 
+.pull-right[
+
+```
+## # A tibble: 142 x 3
+##   dataset      x     y
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1 bullseye  51.2  83.3
+## 2 bullseye  59.0  85.5
+## 3 bullseye  51.9  85.8
+## 4 bullseye  48.2  85.0
+## 5 bullseye  41.7  84.0
+## 6 bullseye  37.9  82.6
+## # … with 136 more rows
+```
+
+```
+## # A tibble: 142 x 3
+##   dataset     x     y
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 dots     51.1  90.9
+## 2 dots     50.5  89.1
+## 3 dots     50.2  85.5
+## 4 dots     50.1  83.1
+## 5 dots     50.6  82.9
+## 6 dots     50.3  83.0
+## # … with 136 more rows
+```
+]
+
+---
+
+## Summarising Anscombe's quartet/datasaurus dozen
+
+
+
+
+```r
+summdat=datasaurus_dozen %&gt;%
+  group_by(dataset) %&gt;%
+  summarise(
+    mean_x = mean(x), 
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    r = cor(x, y)
+  )
+```
+
+
+---
+
+## Summarising Anscombe's quartet/datasaurus dozen
+
+
+```
+## # A tibble: 13 x 6
+##    dataset    mean_x mean_y  sd_x  sd_y       r
+##    &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1 away         54.3   47.8  16.8  26.9 -0.0641
+##  2 bullseye     54.3   47.8  16.8  26.9 -0.0686
+##  3 circle       54.3   47.8  16.8  26.9 -0.0683
+##  4 dino         54.3   47.8  16.8  26.9 -0.0645
+##  5 dots         54.3   47.8  16.8  26.9 -0.0603
+##  6 h_lines      54.3   47.8  16.8  26.9 -0.0617
+##  7 high_lines   54.3   47.8  16.8  26.9 -0.0685
+##  8 slant_down   54.3   47.8  16.8  26.9 -0.0690
+##  9 slant_up     54.3   47.8  16.8  26.9 -0.0686
+## 10 star         54.3   47.8  16.8  26.9 -0.0630
+## 11 v_lines      54.3   47.8  16.8  26.9 -0.0694
+## 12 wide_lines   54.3   47.8  16.8  26.9 -0.0666
+## 13 x_shape      54.3   47.8  16.8  26.9 -0.0656
+```
+
+---
+
+## Visualizing the data
+
+&lt;img src="w1-l01-welcome_files/figure-html/quartet-plot-1.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;!--
+
+ggplot(quartet, aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(~ set, ncol = 4)
+  
+life %&gt;%
+    ggplot(aes(x = year, y = lifeexp))+geom_point()
+
+ let's see what's going on with the low outliers
+life %&gt;% top_n(-5,lifeexp)
+
+life %&gt;%
+  filter(location %in% c("United States of America","Rwanda","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp))+geom_point()
+      
+# our country name looks too long
+life[["location"]] &lt;-life[["location"]] %&gt;%
+  str_replace( pattern = "United States of America", replacement = "USA")
+
+life %&gt;%
+  filter(location == "USA") %&gt;%
+      ggplot(aes(x = year, y = lifeexp))+geom_point()
+
+life %&gt;%
+  filter(location=="USA") %&gt;%
+      ggplot(aes(x = year, y = lifeexp,group=sex))+geom_point()+geom_line(aes(color=sex))
+
+
+life %&gt;%
+  filter(location %in% c("USA","Rwanda","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp,group=sex))+geom_point()+geom_line(aes(color=sex)) + facet_grid(location ~ .)
+
+life %&gt;%
+  filter(location %in% c("USA","Brazil","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp,group=sex))+geom_point()+geom_line(aes(color=sex)) + facet_grid(location ~ .)
+
+life %&gt;%
+  filter(location %in% c("USA","Brazil","China")) %&gt;%
+      ggplot(aes(x = year, y = lifeexp,group=location))+geom_point()+geom_line(aes(color=location)) + facet_grid(sex ~ .)
+      
+      
+# compare male vs female life expectancy
+
+      
+life %&gt;%
+  filter(year == '2019') %&gt;%
+     spread(sex,lifeexp) %&gt;%
+      ggplot(aes(x=Female,y=Male))+geom_point()+
+      xlab("Female Life Expectancy (Years)")+ ylab("Male Life Expectancy (Years)") + ggtitle ("2019 Life Expectancy")
+      
+#add line with slope 1 intercept 0      
+life %&gt;%
+  filter(year == '2019') %&gt;%
+     spread(sex,lifeexp) %&gt;%
+      ggplot(aes(x=Female,y=Male))+geom_point()+
+      xlab("Female Life Expectancy (Years)")+ ylab("Male Life Expectancy (Years)") + ggtitle ("2019 Life Expectancy")+geom_abline(intercept=0,slope=1)
+      
+#points below line female life expectancy &gt; male
+#what are the points above the line?
+
+life %&gt;%
+  filter(year == '2019') %&gt;%
+     spread(sex,lifeexp) %&gt;%
+       top_n(-3,Female-Male)
+
+
+#is men's health gap increasing over time?
+# to get decent scatter plot graph women life exp vs men
+#in a single year
+#calculate women-men for a country in each year
+#need then to manipulate data to put on one row -- future lab on wrangling?
+
+--&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

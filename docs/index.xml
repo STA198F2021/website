@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sta 198</title>
-    <link>/</link>
-      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://sta198f2021.github.io/website/</link>
+      <atom:link href="https://sta198f2021.github.io/website/index.xml" rel="self" type="application/rss+xml" />
     <description>Sta 198</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Mon, 30 Nov 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Sta 198</title>
-      <link>/</link>
+      <link>https://sta198f2021.github.io/website/</link>
     </image>
     
     <item>
       <title>Posts</title>
-      <link>/post/</link>
+      <link>https://sta198f2021.github.io/website/post/</link>
       <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/</guid>
+      <guid>https://sta198f2021.github.io/website/post/</guid>
       <description></description>
     </item>
     

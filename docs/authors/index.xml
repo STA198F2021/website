@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors | Sta 198</title>
-    <link>/authors/</link>
-      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://sta198f2021.github.io/website/authors/</link>
+      <atom:link href="https://sta198f2021.github.io/website/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Mon, 30 Nov 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Authors</title>
-      <link>/authors/</link>
+      <link>https://sta198f2021.github.io/website/authors/</link>
     </image>
     
     <item>
       <title></title>
-      <link>/authors/amy/</link>
+      <link>https://sta198f2021.github.io/website/authors/amy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/authors/amy/</guid>
+      <guid>https://sta198f2021.github.io/website/authors/amy/</guid>
       <description>&lt;p&gt;My name is Amy Herring and my pronouns are she/her. I am Sara &amp;amp; Charles Ayres Distinguished Professor in the Department of Statistical Science and also hold appointments in the Duke Global Health Institute and in the Department of Biostatistics &amp;amp; Bioinformatics. My work is focused on statistics and its applications in health, and my expertise includes analysis of longitudinal or otherwise correlated data, missing data and measurement error, Bayesian methods, and general biostatistics.  I enjoy working on a variety of research projects on campus and beyond. I earned my doctorate in biostatistics at Harvard, and before that I was an undergraduate double major in English and mathematics. In addition to my work and family activities, I enjoy reading, cats, and working outdoors (i.e. laptop on my porch overlooking the garden with a cup of black tea!).&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title></title>
-      <link>/authors/admin/</link>
+      <link>https://sta198f2021.github.io/website/authors/admin/</link>
       <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/admin/</guid>
+      <guid>https://sta198f2021.github.io/website/authors/admin/</guid>
       <description>&lt;p&gt;Rigorous introduction to health data science using current applications in biomedical research, epidemiology, and health policy. Use modern statistical software to conduct reproducible data exploration, visualization, and analysis. Interpret and translate results for interdisciplinary researchers. Critically evaluate data-based claims, decisions, and policies. Includes exploratory data analysis, visualization, basics of probability and inference, predictive modeling and classification. This course focuses on the R computing language. No statistical or computing background is necessary.&lt;/p&gt;
 </description>
     </item>

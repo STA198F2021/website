@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sta 198</title>
-    <link>/authors/admin/</link>
-      <atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://sta198f2021.github.io/website/authors/admin/</link>
+      <atom:link href="https://sta198f2021.github.io/website/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Sta 198</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Mon, 30 Nov 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Sta 198</title>
-      <link>/authors/admin/</link>
+      <link>https://sta198f2021.github.io/website/authors/admin/</link>
     </image>
     
     <item>
       <title>Week 11 - Looking beyond IDS</title>
-      <link>/post/11-week/</link>
+      <link>https://sta198f2021.github.io/website/post/11-week/</link>
       <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/11-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/11-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Finish your project and submit (last push to GitHub repo) by 10am on Friday, 4 December&lt;/li&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
 &lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -106,7 +106,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -181,20 +181,20 @@
 &lt;/table&gt;
 &lt;p&gt;&lt;em&gt;to be posted&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
+&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Week 10 - Model validation and uncertainty quantification</title>
-      <link>/post/10-week/</link>
+      <link>https://sta198f2021.github.io/website/post/10-week/</link>
       <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/10-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/10-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/10-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/10-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/10-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) Fill out surveys:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUOFU4VEFUVUMzV0hHQUIyT0NGTTNIQjFOSC4u&#34;&gt;What shall we learn in Week 11?&lt;/a&gt;&lt;/li&gt;
@@ -313,7 +313,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -385,14 +385,14 @@
     
     <item>
       <title>Week 9 - Classification and model building</title>
-      <link>/post/09-week/</link>
+      <link>https://sta198f2021.github.io/website/post/09-week/</link>
       <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/09-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/09-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/09-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/09-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/09-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
 &lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -543,14 +543,14 @@
     
     <item>
       <title>Week 8 - Modelling data</title>
-      <link>/post/08-week/</link>
+      <link>https://sta198f2021.github.io/website/post/08-week/</link>
       <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/08-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/08-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/08-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/08-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/08-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/08-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/08-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/08-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
 &lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -729,14 +729,14 @@
     
     <item>
       <title>Week 7 - Data science ethics</title>
-      <link>/post/07-week/</link>
+      <link>https://sta198f2021.github.io/website/post/07-week/</link>
       <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>/post/07-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/07-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/07-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/07-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/07-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/07-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/07-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/07-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) Submit your project re-proposal by 16:00 on Friday, 6 November&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
@@ -938,14 +938,14 @@
     
     <item>
       <title>Week 6 - Web scraping and programming </title>
-      <link>/post/06-week/</link>
+      <link>https://sta198f2021.github.io/website/post/06-week/</link>
       <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>/post/06-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/06-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/06-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/06-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/06-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/06-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/06-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/06-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) Complete the &lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYQkmofaddEJLg-Rh784Tz0RUMUhLSFM2WFJUS0pKTUtVQk5RSzhVRFNIQi4u&#34;&gt;Course feedback survey&lt;/a&gt; by 5pm on Friday, 30th October (not graded)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
@@ -1148,16 +1148,16 @@
     
     <item>
       <title>Week 5 - Communicating data science results effectively</title>
-      <link>/post/05-week/</link>
+      <link>https://sta198f2021.github.io/website/post/05-week/</link>
       <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>/post/05-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/05-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/05-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/05-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/05-week/#assignments&#34;&gt;assignments&lt;/a&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/05-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/05-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/05-week/#assignments&#34;&gt;assignments&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;Especially work on the &lt;a href=&#34;/#project&#34;&gt;project proposal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Especially work on the &lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;project proposal&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1272,7 +1272,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;https://sta198f2021.github.io/website/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1351,14 +1351,14 @@
     
     <item>
       <title>Week 4 - Importing and recoding data</title>
-      <link>/post/04-week/</link>
+      <link>https://sta198f2021.github.io/website/post/04-week/</link>
       <pubDate>Mon, 12 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>/post/04-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/04-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/04-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/04-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/04-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/04-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/04-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/04-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
 &lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -1474,7 +1474,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;https://sta198f2021.github.io/website/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1543,14 +1543,14 @@
     
     <item>
       <title>Week 3 - Wrangling and tidying data</title>
-      <link>/post/03-week/</link>
+      <link>https://sta198f2021.github.io/website/post/03-week/</link>
       <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>/post/03-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/03-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;/post/03-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/03-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/03-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/03-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/03-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/03-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) Complete the &lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMFNaSjAxMDQyUDZHQk9ZOFMxQlZERDlMUC4u&#34;&gt;Course feedback survey&lt;/a&gt; (not graded)&lt;/li&gt;
 &lt;li&gt;(Optional) Participate in the Virtual exchange (extra credit)
 &lt;ul&gt;
@@ -1673,12 +1673,12 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;EC&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;/extra-credit/extra-credit-02.html&#34;&gt;Extra credit&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/extra-credit/extra-credit-02.html&#34;&gt;Extra credit&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Multiple (see assignment)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;https://sta198f2021.github.io/website/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1752,13 +1752,13 @@
     
     <item>
       <title>Week 2 - Foundations in Probability</title>
-      <link>/post/02-week/</link>
+      <link>https://sta198f2021.github.io/website/post/02-week/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/post/02-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/02-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/02-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;/post/02-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/02-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/02-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;If you haven&amp;rsquo;t yet done so:
 &lt;ul&gt;
 &lt;li&gt;Complete the &lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMkU3TzFXRTkyTFBVVjBLVUVTRDdJVlg2WS4u&#34;&gt;Getting to Know you survey&lt;/a&gt;&lt;/li&gt;
@@ -1856,7 +1856,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;EC&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;/extra-credit/extra-credit-01.html&#34;&gt;Extra credit&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/extra-credit/extra-credit-01.html&#34;&gt;Extra credit&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Multiple (see assignment)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -1876,7 +1876,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice &lt;a href=&#34;https://sta198f2021.github.io/website/troubleshoot/github-org.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1965,15 +1965,15 @@
     
     <item>
       <title>Overview</title>
-      <link>/post/00-overview/</link>
+      <link>https://sta198f2021.github.io/website/post/00-overview/</link>
       <pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/post/00-overview/</guid>
+      <guid>https://sta198f2021.github.io/website/post/00-overview/</guid>
       <description>
-&lt;script src=&#34;/post/00-overview/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://sta198f2021.github.io/website/post/00-overview/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, is not super unlikely this semester! If deadlines need to be adjusted due to COVID related reasons, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines but this might be difficult to ensure.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/00-overview/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sta198f2021.github.io/website/post/00-overview/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

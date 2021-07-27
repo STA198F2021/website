@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | Sta 198</title>
-    <link>/tags/</link>
-      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://sta198f2021.github.io/website/tags/</link>
+      <atom:link href="https://sta198f2021.github.io/website/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Tags</title>
-      <link>/tags/</link>
+      <link>https://sta198f2021.github.io/website/tags/</link>
     </image>
     
   </channel>
