@@ -1,0 +1,159 @@
+---
+title: "Probability in Action"
+subtitle: "<br><br> Introduction to Data Science"
+author: "[introds.org](https://introds.org/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: ["../../xaringan-themer.css", "../../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+```
+
+class: middle
+
+# Evaluating COVID Rapid Tests
+
+---
+
+### InteliSwab Rapid Test
+
+On June 4, 2021, the FDA approved the InteliSwab Rapid Test for non-prescription at-home use. The company submitted the following data with the request for FDA approval.
+
+```{r inteliswab}
+load("data/intel.rda")
+
+intel.dat %>%
+  group_by(intelliswab,rtpcr) %>%
+  summarise(n=n()) 
+```
+
+---
+
+### Describing COVID Test Properties
+
+Last time we discussed properties of a mammogram for diagnosing breast cancer. In the breast cancer setting, we have well-established diagnostic procedures and a "gold standard" of diagnosis (surgery and pathological examination). For COVID, diagnostics are still evolving, and we lack a perfect diagnosis - in their FDA submission, InteliSwab was compared to a molecular assay (RT-PCR), which is not a perfect diagnostic measure (though we think it is very good).
+
+For this reason, instead of talking about **sensitivity** of the rapid test, we talk about **positive percent agreement**, and instead of talking about specificity, we talk about **negative percent agreement**, even though the definitions are the same.
+
+---
+
+### Positive and Negative Percent Agreement
+
+- **Positive percent agreement** is the conditional probability (times 100%) that the InteliSwab rapid test diagnoses COVID (is positive), given that the molecular assay is positive.
+
+- **Negative percent agreement** is the conditional probability (times 100%) that the InteliSwab rapid test is negative, given that the molecular assay is negative.
+
+
+
+---
+
+### You Try It!
+
+Craft a short press release on the InteliSwab at-home COVID test approval. In your press release, mention the test properties (positive and negative percent agreement) and also include the conditional probability that a person would test positive on a RT-PCR test even if the InteliSwab rapid test result were negative. 
+
+---
+
+
+
+### Back to GATS
+
+We consider data from the Global Adult Tobacco Survey (GATS). Because of strongly gendered cultural norms around smoking in China, we will focus on smoking behavior as well as interviewer-identified binary gender.
+
+---
+
+```{r gats,echo=FALSE}
+library(tidyverse)
+library(openintro)
+
+gats <- readr::read_csv("data/GATS_REV.csv")
+
+gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
+gats$PROVINCE=factor(gats$PROVINCE,levels=seq(1:31),labels=c("Beijing","Tianjin","Hebei","Shanxi","Neimenggu","Liaoning","Jilin","Heilongjiang","Shanghai","Jiangsu","Zhejiang","Anhui","Fujian","Jiangxi","Shangdong","Henan","Hubei","Hunan","Guangdong","Guangxi","Hainan","Chongqing","Sichuan","Guizhou","Yunnan","Xizang","Shaanxi","Gansu","Qinghai","Ningxia","Xinjiang"))
+gats$REGION6=factor(gats$REGION6,levels=seq(1:6),labels=c("North","North-East","East","South-Central","South-West","North-West"))
+gats$REGION3=factor(gats$REGION3,levels=seq(1:3),labels=c("East","Central","West"))
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$CURRENTSMOKE=factor(gats$CURRENTSMOKE,levels=c(1,2,7),labels=c("Yes","No","Don't Know"))
+gats$EDUCATION=factor(gats$EDUCATION,levels=c(1,2,3,4,5,6,7,8,77,99),labels=c("None","Less than Primary School","Primary School","Less than Secondary School","Secondary School","High School","University","Postgraduate","Don't Know","Refused"))
+gats$OCCUPATION=factor(gats$OCCUPATION,levels=c(1,2,3,4,5,6,7,8,9,10,77,99),labels=c("Farming","Government","Business","Teacher","Healthcare","Student","Soldier","Unemployed","Retired","Other","Don't Know","Refused"))
+gats$HEARDOFECIG=factor(gats$HEARDOFECIG,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$ECIGUSE=factor(gats$ECIGUSE,levels=c(1,2,3,9),labels=c("Daily","Less than Daily","Not at All","Refused"))
+gats$TRYSTOP=factor(gats$TRYSTOP,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$HOMESMOKERULES=factor(gats$HOMESMOKERULES,levels=c(1,2,3,4,7,9),labels=c("Allowed","Not Allowed but Exceptions","Never Allowed","No Rules","Don't Know","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+
+
+  
+```
+
+### Data
+
+## Selected variables
+
+<br>
+
+.midi[
+variable        | description
+----------------|-------------
+`CURRENTSMOKE`      |	yes, no, or don't know
+`AGE` |	computed from date of birth
+`EDUCATION`	          | highest level of education completed
+`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary"; options for male, female, missing/NA
+`PROVINCE`       |	residence of the individual
+]
+
+Other data are also available in the file. Sample survey weights are not included but should be used to obtain nationally-representative estimates (our estimates are fairly close for the quantities we consider today).
+---
+
+### GATS-Based Data
+
+Suppose we know that a population consists of 
+
+---
+
+### Missing and Murdered Indigenous Women and Girls (MMIWG)
+
+Recently the Urban Indian Health Institute (UIHI) published a report on the ongoing crisis of missing and murdered indigenous women and girls in the US. Challenges to addressing the crisis include lack of publicly-available data, inaccurate attribution of race (a hospital system recently reported 44% racial misclassification among American Indians and Alaska Natives), and law enforcement challenges related to multiple jurisdictions (federal, state, and tribal).
+
+UIHI reported the following data for Washington State in 2018:
+
+|:---|--------|--------:|
+| Race | \# Missing | Total Population of Women & Girls |
+| White | 450 | 2,963,532 |
+| African American | 117 | 149,291 |
+| AI/AN | 56 | 71,208 |
+| Asian/Pacific Islander | 43 | 400,757 |
+
+---
+
+### You Try It!
+
+Using these data, calculate the following probabilities. Let the event $A$ denote the event that a woman is identified as American Indian or Alaska Native, and let the event $B$ denote that she is missing.
+
+- $P(A)$ probability a woman in Washington state is American Indian or Alaska Native
+- $P(B)$ probability a women in Washington state is missing
+- $P(B \mid A)$ probability a woman in Washington state is missing given that she is American Indian or Alaska Native
+- $P(B \mid \overline{A})$ probability a woman in Washington state is missing given that she is not American Indian or Alaska Native
+- $P(A mid B)$ probability a woman in Washington state is American Indian or Alaska Native given that she is missing
+
+---
+### You Try It
+
+Suppose the probability of missingness conditional on race is the same in Alaska and Washington state. However, proportionately more Alaska Native and Native American women live in Alaska, with racial distribution 71.7% white, 4% African American, 17.1% American Indian and Alaska Native, and 7.2% Asian.
+
+Consider a missing woman in Alaska. Use Bayes's Theorem to derive the probability that she is Alaska Native or American Indian, given that she is missing. How does this probability compare to the probability you calculated for Washington state?
+
+

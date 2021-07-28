@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2021-07-20T00:00:00Z"
+date: "2021-08-23T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,9 +9,9 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-08-30T00:00:00Z"
+lastmod: "2021-07-28T00:00:00Z"
 projects: []
-subtitle: 'Welcome'
+subtitle: 'Welcome to STA 198 / GLHLTH 298!'
 summary: Intro
 title: 'Week 1 - Welcome to Global Health Data Science'
 ---
@@ -38,7 +38,10 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 ### Assignments
 
-
+| <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
+|:---|:---|:---|
+| *Due this week* | | |
+| Lab 00 | [Hello Data Science!](https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html) | Wednesday, August 25, 4pm |
 
 ### Readings
 
@@ -46,13 +49,14 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 |:---:|:---|:---:|
 | :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
+| :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
 | :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :open_book: | IMS: [Chp 4, Sec. 4.1, 4.2, and 4.6](https://openintro-ims.netlify.app/explore-categorical.html) | **Required** |
+| :open_book: | IMS: [Chp 5](https://openintro-ims.netlify.app/explore-numerical.html) | **Required** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |
 |  :fountain_pen:  | [How R changed me as an analyst](https://nhsrcommunity.com/blog/how-r-changed-me-as-an-analyst/) | Optional
-| :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
-| :open_book: | [IMS::Chp 2 - Summarizing and visualizing data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html) | **Required** |
 | :page_facing_up: | [Make a plot](https://socviz.co/makeplot.html) | Optional |
 | :bar_chart:      | [Information is beautiful - COVID-19 data visualisations](https://informationisbeautiful.net/visualizations/covid-19-coronavirus-infographic-datapack/) | Optional |
 | :bar_chart:      | [Wealth shown to scale](https://mkorostoff.github.io/1-pixel-wealth/) | Optional |
@@ -63,7 +67,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 ### Interactive R tutorials
 
- If you're struggling with any of the topics covered this week, we strongly recommend you work through this tutorial.
+ If you're struggling with the topics covered this week, we strongly recommend you work through this tutorial.
  
 |  <div style="width:480px"></div>  |  <div style="width:200px"></div>  |
 |:---|:---|

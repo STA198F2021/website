@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2021-07-20T00:00:00Z"
+date: "2021-08-30T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-08-30T00:00:00Z"
+lastmod: "2021-07-28T00:00:00Z"
 projects: []
 subtitle: 'Foundations in Probability'
 summary: Probability
@@ -23,18 +23,16 @@ title: 'Week 2 - Foundations in Probability'
 - If you haven't yet done so:
 	- Complete the [Getting to Know you survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMkU3TzFXRTkyTFBVVjBLVUVTRDdJVlg2WS4u)
 
-### Videos
 
-You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube [here](https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM) and on MediaHopper [here](https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/).
 
-| <div style="width:50px;text-align:center">No.</div> | <div style="width:250px;text-align:left">Title</div> | <div style="width:80px;text-align:center">YouTube</div> | <div style="width:80px;text-align:center">MediaHopper</div> |  <div style="width:80px;text-align:center">Slides</div> | <div style="width:80px;text-align:center">Length</div> |
-|:---:|:---------------------|:-------:|:-----------:|:--------:|:------:|
-| 01 | Keeping up with IDS: Week 2 | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/77AuFuHL9bo) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+02+-+01+-+KUWIDS/1_jrohp541) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://github.com/ids-s1-20/slides/blob/main/week-02/w2-d01-kuwids/w2-d01-kuwids.pdf) | 10:25 |
-| 02 | Data and visualisation | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/FddF4b_GuTI) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+2+-+02+-+Data+and+visualisation/1_4lhhe9i5) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://ids-s1-20.github.io/slides/week-02/w2-d02-data-viz/w2-d02-data-viz.html#1) | 23:52 |
-| 03 | Visualising data with ggplot2 | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/s2NF2J36ljE) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+02+-+03+-+Visualising+data+with+ggplot2/1_nhkjgruh) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://ids-s1-20.github.io/slides/week-02/w2-d03-ggplot2/w2-d03-ggplot2.html#1) | 21:40 |
-| 04 | Visualising numerical data | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/waBabVTI8ec) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+2+-+04+-+Visualising+numerical+data/1_po2ufyev) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://ids-s1-20.github.io/slides/week-02/w2-d04-viz-num/w2-d04-viz-num.html#1) | 23:57 |
-| 05 | Visualising categorical data | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/21h3rEO8k2E) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+02+-+05+-+Visualising+categorical+data/1_cibb29fc) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://ids-s1-20.github.io/slides/week-02/w2-d05-viz-cat/w2-d05-viz-cat.html#1) | 6:28 |
-| 06 | AE: StarWars + Dataviz | [<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/3UaLPtCKkXQ) | [<span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span>](https://media.ed.ac.uk/media/IDS+-+Week+02+-+06+-+AEA+StarWars+%2B+Dataviz/1_httcg4wa) | [<span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span>](https://rstudio.cloud/) | 5:18 |
+| <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
+|:---:|:---------------------|
+|  Meet the course team | link here  | 
+| Introduction to Probability   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w2-l01-prob.html#1)  | 
+
+
+
+
 
 ### Assignments
 
@@ -54,12 +52,10 @@ If you're having difficulty accessing your HW or Lab repo, see troubleshooting a
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
-| :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
-| :open_book: | [IMS::Chp 2 - Summarizing and visualizing data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html) | **Required** |
-| :page_facing_up: | [Make a plot](https://socviz.co/makeplot.html) | Optional |
-| :bar_chart:      | [Information is beautiful - COVID-19 data visualisations](https://informationisbeautiful.net/visualizations/covid-19-coronavirus-infographic-datapack/) | Optional |
-| :bar_chart:      | [Wealth shown to scale](https://mkorostoff.github.io/1-pixel-wealth/) | Optional |
-| :bar_chart:      | [Explore COVID-19 Symptoms Search Trends](https://pair-code.github.io/covid19_symptom_dataset/?date=2020-09-07) | Optional |
+| :open_book: | [IMS::Chp 2 - Study Design](https://openintro-ims.netlify.app/data-design.html) | **Required** |
+| :open_book: | [Seeing Theory::Chp 1 - Basic Probability](https://seeing-theory.brown.edu/basic-probability/index.html) | **Required** |
+| :open_book: | [Seeing Theory::Chp 2 - Compound Probability](https://seeing-theory.brown.edu/compound-probability/index.html#section1) | **Required** |
+
 
 ### Code-along
 
