@@ -18,7 +18,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 ### Tasks
 
-- Complete the [readings](/post/01-week/#readings)
+- Complete the [readings](https://sta198f2021.github.io/website/post/01-week/#readings)
 - Complete the [assignments](/post/01-week/#assignments)
 - If you haven't yet done so:
 	- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
@@ -27,11 +27,11 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 |  Meet the course team |   | 
-| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](/slides/week-01/w1-l01-welcome.html#1)  | 
+| Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l01-welcome.html#1)  | 
 | AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
 | Data Visualization Start-Up      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l02-ggplot2.html#1)  | 
-| Data Visualization: Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l03-viz-num.html#1)  | 
-| Data Visualization: Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l04-viz-cat.html#1)  | 
+| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l03-viz-num.html#1)  | 
+| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l04-viz-cat.html#1)  | 
 
 
 
