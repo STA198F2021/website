@@ -28,10 +28,10 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 |:---:|:---------------------|
 |  Meet the course team | link here  | 
 | Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l01-welcome.html#1)  | 
-| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
-| Data Visualization Start-Up      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l02-ggplot2.html#1)  | 
-| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l03-viz-num.html#1)  | 
-| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](slides/week-01/w1-l04-viz-cat.html#1)  | 
+| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
+| Data Visualization Start-Up      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l02-ggplot2.html#1)  | 
+| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l03-viz-num.html#1)  | 
+| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l04-viz-cat.html#1)  | 
 
 
 
