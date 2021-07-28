@@ -25,7 +25,7 @@ Prof. Herring will each hold office hours on Tuesdays and Wednesdays, and TA off
 
 These will be held on Mondays, and they will not be recorded unless requested in advance. We expect that you show up to the workshop session you've been assigned to weekly. During these sessions you will work in teams on computing lab exercises and you will finish the exercises after the workshop and turn in your lab reports by Wednesday 4pm UK. Labs will be submitted as GitHub repositories and teams with the lowest score for each student will be dropped. 
 
-A frequently asked questions "What happens if I can't make it to a lab one week because I'm sick or have another obligation at that time?" Answers below:
+A frequently asked question: "What happens if I can't make it to class or a lab one week because I'm sick or have another obligation at that time?" Answer below:
 
 - First, if you have another obligation every week at the time of your lab, you should change into another lab. If you can't make any of the lab times, you should drop this class.
 - Chances are you asked this question because you're only missing one or two workshops throughout the semester:
@@ -154,6 +154,8 @@ Furthermore, I would like to create a learning environment for my students that 
 ### Learning during a pandemic
 
 I want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don't hesitate to ask.
+
+- Out of respect for others sharing your physical space, the class expectation will be that if you are sick, you will stay home and participate remotely. Accommodations 
 
 - You *never* owe me personal information about your health (mental or physical), but you're always welcome to talk to me. If I can’t help, I likely know someone who can.
 
