@@ -1,0 +1,111 @@
+---
+title: "Probability in Action"
+subtitle: "<br><br> Introduction to Data Science"
+author: "[introds.org](https://introds.org/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+```
+
+class: middle
+
+# Evaluating COVID Rapid Tests
+
+---
+
+### InteliSwab Rapid Test
+
+On June 4, 2021, the FDA approved the InteliSwab Rapid Test for non-prescription at-home use. The company submitted the following data with the request for FDA approval.
+
+```{r inteliswab}
+load("data/intel.rda")
+
+intel.dat %>%
+  group_by(intelliswab,rtpcr) %>%
+  summarise(n=n()) 
+```
+
+---
+
+### COVID Test Data
+
+One thing to note is that the proportion of positive test results is quite high. This is not surprising for a study of this type. The company wants to have a good number of COVID cases as well as controls in order to illustrate the test properties, and getting enough cases to do so using a random sample of the population would involve a fairly large number of samples. Thus the company will **oversample** presumed COVID cases for the study (a type of **stratified** sampling).
+
+---
+
+### Describing COVID Test Properties
+
+Last time we discussed properties of a mammogram for diagnosing breast cancer. In the breast cancer setting, we have well-established diagnostic procedures and a "gold standard" of diagnosis (surgery and pathological examination). For COVID, diagnostics are still evolving, and we lack a perfect diagnosis - in their FDA submission, InteliSwab was compared to a molecular assay (RT-PCR), which is not a perfect diagnostic measure (though we think it is very good).
+
+For this reason, instead of talking about **sensitivity** of the rapid test, we talk about **positive percent agreement**, and instead of talking about **specificity**, we talk about **negative percent agreement**, even though we calculate these quantities similarly.
+
+---
+
+### Positive and Negative Percent Agreement
+
+- **Positive percent agreement** is the conditional probability (times 100%) that the InteliSwab rapid test diagnoses COVID (is positive), given that the molecular assay is positive.
+
+- **Negative percent agreement** is the conditional probability (times 100%) that the InteliSwab rapid test is negative, given that the molecular assay is negative.
+
+
+
+---
+
+### You Try It!
+
+Craft a short press release on the InteliSwab at-home COVID test approval. In your press release, include the conditional probability that a person would test positive on a RT-PCR test even if the InteliSwab rapid test result were negative, and comment on how a person might adjust behavior based on the at-home COVID test results.
+
+Caveat: The FDA study was not conducted on a random sample of the population but involved stratified sampling, with oversampling of presumed cases. The probability a negative InteliSwab test is "right" (assuming RT-PCR tells the truth) will depend on the background prevalence of COVID in the population, so you may wish to vary this quantity when doing your calculations to reflect a random sample in a realistic setting rather than the enriched population used by the company.
+
+
+---
+
+### Missing and Murdered Indigenous Women and Girls (MMIWG)
+
+Recently the Urban Indian Health Institute (UIHI) published a report on the ongoing crisis of missing and murdered indigenous women and girls in the US. Challenges to addressing the crisis include lack of publicly-available data, inaccurate attribution of race (a hospital system recently reported 44% racial misclassification among American Indians and Alaska Natives), and law enforcement challenges related to overlap of multiple jurisdictions (federal, tribal, state, and local).
+
+UIHI reported the following data for Washington State in 2018:
+
+| <div style="width:200px"></div>  | <div style="width:200px"></div>  |  <div style="width:400px"></div> |
+|:---|--------:|--------:|
+| **Race** | **\# Missing** | **Total Population of Women & Girls** |
+| White | 450 | 2,963,532 |
+| African American | 117 | 149,291 |
+| AI/AN | 56 | 71,208 |
+| Asian/Pacific Islander | 43 | 400,757 |
+
+---
+
+### You Try It!
+
+Using these data, calculate the following probabilities. Let the event $A$ denote the event that a woman is identified as American Indian or Alaska Native, and let the event $B$ denote that she is missing.
+
+- $P(A)$, the probability a woman in Washington state is American Indian or Alaska Native
+- $P(B)$, the probability a women in Washington state is missing
+- $P(B \mid A)$, the probability a woman in Washington state is missing given that she is American Indian or Alaska Native
+- $P(B \mid \overline{A})$, the probability a woman in Washington state is missing given that she is not American Indian or Alaska Native
+- $P(A mid B)$, the probability a woman in Washington state is American Indian or Alaska Native given that she is missing
+
+---
+### You Try It
+
+Suppose the probability of missingness conditional on race is the same in Alaska and Washington. However, proportionately more Alaska Native and Native American women live in Alaska, with racial distribution 71.7% white, 4% African American, 17.1% American Indian and Alaska Native, and 7.2% Asian.
+
+Consider a missing woman in Alaska. Use Bayes's Theorem to derive the probability that she is Alaska Native or American Indian, given that she is missing. How does this probability compare to the probability you calculated for Washington?
+
+
