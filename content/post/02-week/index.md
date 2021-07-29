@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2021-08-30T00:00:00Z"
+date: "2021-07-20T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-07-28T00:00:00Z"
+lastmod: "2021-07-20T00:00:00Z"
 projects: []
 subtitle: 'Probability in Action'
 summary: Probability
