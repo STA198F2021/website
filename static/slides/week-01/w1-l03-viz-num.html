@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualising numerical data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Course Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="/Users/amyherring/Documents/GitHub/website/static/slides/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="/Users/amyherring/Documents/GitHub/website/static/slides/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualising numerical data
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Course Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Terminology
+
+---
+
+## Number of variables involved
+
+- Univariate data analysis - distribution of single variable
+- Bivariate data analysis - relationship between two variables
+- Multivariate data analysis - relationship between many variables at once, sometimes focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only a finite number of distinct values (e.g., counts), respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
+
+---
+
+## Data: Life Expectancy
+
+.pull-left-wide[
+
+- We focus again on the IHME data on estimated life expectancy for a variety of countries and locations worldwide, in the year 2019.
+
+
+```r
+glimpse(lifespan2019)
+```
+
+```
+## Rows: 408
+## Columns: 5
+## $ location        &lt;chr&gt; "Afghanistan", "Afghanistan", "Albania"…
+## $ worldbankregion &lt;chr&gt; "South Asia", "South Asia", "Europe and…
+## $ pop             &lt;dbl&gt; 38041757, 38041757, 2854191, 2854191, 4…
+## $ sex             &lt;chr&gt; "Male", "Female", "Female", "Male", "Fe…
+## $ lifeexp         &lt;dbl&gt; 63.46025, 63.22770, 81.38516, 75.83942,…
+```
+
+]
+
+
+---
+
+## Selected variables
+
+&lt;br&gt;
+
+.midi[
+variable        | description
+----------------|-------------
+`location`      |	Country or area name
+`worldbankregion` |	World region, as classified by World Bank
+`pop`	          | Estimated 2019 population of the location
+`sex`	          | Binary sex as reported by the country
+`lifeexp`       |	Life expectancy from infancy
+]
+
+---
+
+## Variable types
+
+&lt;br&gt;
+
+variable        | type
+----------------|-------------
+`location`   |	categorical, not ordinal
+`worldbankregion` |	categorical, not ordinal
+`pop`	        | numerical, discrete
+`sex`	        | categorical, not ordinal
+`lifeexp`         |	numerical, continuous
+
+In the full data (not subset to 2019), `year` is an additional numerical, discrete variable.
+
+---
+
+class: middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+- shape:
+    - skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    - modality: unimodal, bimodal, multimodal, uniform
+- center: mean (`mean`), median (`median`), mode 
+- spread: range (`range`), standard deviation (`sd`), variance (square of `sd`), inter-quartile range (`IQR`)
+- unusual observations
+
+---
+
+## Measures of center
+
+Consider a random variable `\(x_i\)` that is the estimated life expectancy for country `\(i\)`, `\(i=1,\ldots,n\)` among `\(n\)` countries.
+
+- mean: estimated as `\(\overline{x}=\frac{\sum_{i=1}^n x_i}{n}\)`
+
+- median: middle number/50th %ile, `\(x_{(n+1)/2}\)`
+  - for `\(n\)` odd, the median is the middle number
+  - for `\(n\)` even, the median is the mean of the two middle numbers
+  - just remember it splits the ordered data in half
+  
+- mode: most frequent value in data set
+
+---
+
+## Measures of spread
+
+- variance: average squared distance from mean
+
+- standard deviation (sd): square root of variance (on same scale as data), often estimated in a single sample as `\(\frac{\sum_{i=1}^n (x_i-\overline{x})^2}{n-1}\)` 
+
+- range: difference between highest and lowest values, e.g. `\(x_{(n)}-x_{(1)}\)`
+
+- interquartile range: difference between 75th and 25th %iles
+
+
+
+---
+
+class: middle
+
+# Relationships among numerical variables
+
+---
+
+## Scatterplot
+
+Previously we viewed a scatterplot showing the relationship of life expectancy of females to that of males in each location.
+
+
+```r
+ggplot(lifeexpwide2019, aes(x = Female, y = Male)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy")
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-3-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+# Histogram
+
+---
+
+## Histogram
+
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram() 
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-4-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Histograms and binwidth
+
+.panelset[
+.panel[.panel-name[binwidth = 1000]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 0.5) 
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-5-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[binwidth = 5000]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 3) 
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-6-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[binwidth = 20000]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 10) 
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-7-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Customizing histograms
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 3) +
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        )
+```
+]
+]
+
+---
+
+## Fill with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp,
+*              fill = worldbankregion)) +
+      geom_histogram(binwidth = 3,
+*                    alpha = 0.5) +
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        )
+```
+]
+]
+
+---
+
+## Facet with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + 
+      geom_histogram(binwidth = 3,
+                     alpha = 0.5) + 
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        ) +
+*       facet_wrap(~ worldbankregion, nrow=3)
+```
+]
+]
+
+---
+
+
+## Facet with a categorical variable (fixing labels)
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + 
+      geom_histogram(binwidth = 3,
+                     alpha = 0.5) + 
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        ) +
+        facet_wrap(~ worldbankregion, nrow=3) +
+          theme(
+            strip.background = element_blank(),
+            strip.text.x = element_blank()
+          )
+```
+]
+]
+
+---
+
+
+class: middle
+
+# Density plot
+
+---
+
+## Density plot
+
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+*     geom_density()
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Density plots and adjusting bandwidth
+
+.panelset[
+.panel[.panel-name[adjust = 0.5]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+*     geom_density(adjust = 0.5)
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-13-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[adjust = 1]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 1)  #&lt;&lt; default bandwidth
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-14-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[adjust = 2]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+*     geom_density(adjust = 2)
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-15-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Customizing density plots
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 1) + 
+*         labs(
+*         x = "Female life expectancy (years)",
+*         y = "Density",
+*         title = "2019 Life Expectancy of Women"
+*       )
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp,
+*              fill = worldbankregion)) +
+      geom_density(adjust = 1) + 
+          labs( 
+          x = "Female life expectancy (years)", 
+          y = "Density", 
+          title = "2019 Life Expectancy of Women",
+*         fill = "Region"
+        ) 
+```
+]
+]
+
+---
+
+class: middle
+
+# Box plot
+
+---
+
+## Box plot
+
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+*     geom_boxplot()
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/boxp-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Box plot
+
+.pull-left[
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+- Technical specs vary across software packages
+- Median: line in middle of box
+- Hinges (25th and 75th %iles): edges of box
+- Upper whisker extends to largest data point no more than `\(1.5 \times IQR\)` from the hinge (75th %ile); similar definition for lower whisker
+- Outliers (beyond whiskers) plotted individually
+]
+
+---
+
+## Box plot
+
+The distribution of population is highly skewed...
+
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+*   ggplot(aes(x = pop)) +
+      geom_boxplot()
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Box plot
+
+Here we plot the natural logarithm of the population, due to the heavy skew (China, India). Now the outliers are the small locations.
+
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+*   ggplot(aes(x = log(pop))) +
+      geom_boxplot()
+```
+
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Customizing box plots
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp)) +
+      geom_boxplot() +
+*        labs(
+*         x = "Female life expectancy (years)",
+*         y = NULL,
+*         title = "2019 Life Expectancy of Women"
+          ) +
+*     theme(
+*         axis.ticks.y = element_blank(),
+*         axis.text.y = element_blank()
+*     )
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l03-viz-num_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+lifespan2019 %&gt;%
+  filter(sex == 'Female') %&gt;%
+    ggplot(aes(x = lifeexp,
+               y = worldbankregion)) +
+      geom_boxplot() +
+         labs( 
+          x = "Female life expectancy (years)",  
+*         y = NULL,
+          title = "2019 Life Expectancy of Women",
+          subtitle = "By region"
+          ) 
+```
+]
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

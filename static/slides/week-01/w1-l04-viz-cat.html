@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualising categorical data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Course Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="/Users/amyherring/Documents/GitHub/website/static/slides/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="/Users/amyherring/Documents/GitHub/website/static/slides/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualising categorical data
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Course Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Recap
+
+---
+
+## Variables
+
+- **Numerical** variables can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+### Data
+
+We consider data from the Global Adult Tobacco Survey (GATS), which is designed to provide nationally-representative data on non-institutionalized people 15 years and older. This survey is a global standard for systematically monitoring adult tobacco use and is produced by the Centers for Disease Control (CDC) in collaboration with the World Health Organization (WHO), RTI International, and Johns Hopkins University.
+
+China has the largest smoking population in the world and accounts for roughly 40% of tobacco consumption worldwide. We will focus on GATS data from China in 2018 (the most recent survey year), but note data from other countries are available from the [WHO's Microdata Repository](https://extranet.who.int/ncdsmicrodata/index.php/home).
+
+---
+
+### Data 
+
+
+```r
+glimpse(gats)
+```
+
+```
+## Rows: 19,376
+## Columns: 18
+## $ CASEID         &lt;dbl&gt; 601010, 601012, 601013, 601014, 601015, …
+## $ RESIDENCE      &lt;fct&gt; Urban, Urban, Urban, Urban, Urban, Urban…
+## $ PROVINCE       &lt;fct&gt; Beijing, Beijing, Beijing, Beijing, Beij…
+## $ REGION6        &lt;fct&gt; North, North, North, North, North, North…
+## $ REGION3        &lt;fct&gt; East, East, East, East, East, East, East…
+## $ AGE            &lt;dbl&gt; 33.95342, 35.92877, 70.52055, 56.95342, …
+## $ GENDER         &lt;fct&gt; Female, Male, Male, Male, Female, Female…
+## $ CURRENTSMOKE   &lt;fct&gt; No, No, No, No, Yes, No, No, No, No, Yes…
+## $ EDUCATION      &lt;fct&gt; High School, Postgraduate, Secondary Sch…
+## $ OCCUPATION     &lt;fct&gt; Other, Other, Retired, Other, Retired, B…
+## $ AGESTART       &lt;dbl&gt; NA, NA, NA, NA, 20, NA, NA, NA, NA, 14, …
+## $ CIGS_DAY       &lt;dbl&gt; NA, NA, NA, NA, 10, NA, NA, NA, NA, 5, N…
+## $ HEARDOFECIG    &lt;fct&gt; No, Yes, Yes, Yes, Yes, Yes, Yes, No, Ye…
+## $ ECIGUSE        &lt;fct&gt; NA, Not at All, Not at All, Not at All, …
+## $ TRYSTOP        &lt;fct&gt; NA, NA, NA, NA, Yes, NA, NA, NA, NA, No,…
+## $ HOMESMOKERULES &lt;fct&gt; Never Allowed, Never Allowed, Never Allo…
+## $ SMOKESICK      &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, …
+## $ SMOKECANCER    &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, …
+```
+
+---
+
+### Data
+
+## Selected variables
+
+&lt;br&gt;
+
+.midi[
+variable        | description
+----------------|-------------
+`CURRENTSMOKE`      |	yes, no, or don't know
+`AGE` |	computed from date of birth
+`EDUCATION`	          | highest level of education completed
+`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary"; options for male, female, missing/NA
+`PROVINCE`       |	residence of the individual
+]
+
+Other data are also available in the file. Sample survey weights are not included but should be used to obtain nationally-representative estimates (our estimates are fairly close for the quantities we consider today).
+---
+
+
+
+class: middle
+
+# Bar plot
+
+---
+
+## Bar plot
+
+
+```r
+ggplot(gats, aes(x = CURRENTSMOKE)) +
+  geom_bar()
+```
+
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Segmented bar plot
+
+
+```r
+ggplot(gats, aes(x = CURRENTSMOKE, 
+*                 fill = GENDER)) +
+  geom_bar()
+```
+
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Segmented bar plot
+
+
+```r
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) +
+* geom_bar(position = "fill")
+```
+
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[
+Which bar plot is a more useful representation for visualizing the relationship between smoking and gender?
+]
+
+.pull-left[
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Customizing bar plots
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(gats, aes(y = CURRENTSMOKE, 
+                  fill = GENDER)) +
+  geom_bar(position = "fill")  +
+* labs (
+*   x = "Proportion",
+*   y = "Current Smoker?",
+*   fill = "Gender",
+*   title = "Smoking by Gender",
+*   subtitle = "2018"
+*   )
+```
+]
+]
+
+---
+
+class: middle
+
+# Relationships between numerical and categorical variables
+
+---
+
+## Already talked about...
+
+- Colouring and faceting histograms and density plots
+- Side-by-side box plots
+
+---
+
+## Violin plots
+
+Violin plots are like boxplots, but instead of showing the quartiles (25th, 50th, and 75th %iles), they show rotated density plots on each side.
+
+---
+
+## Violin plots
+
+
+```r
+ggplot(gats, aes(x = AGE, y = EDUCATION)) +
+  geom_violin() 
+```
+
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Ridge plots
+
+Ridge plots also show density estimates across categorical groups
+
+---
+
+## Ridge plots
+
+
+```r
+library(ggridges)
+ggplot(gats, aes(x = AGE, y = EDUCATION, fill = EDUCATION, color = EDUCATION)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+&lt;img src="w1-l04-viz-cat_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
