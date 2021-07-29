@@ -5,7 +5,7 @@ author: "[introds.org](https://introds.org/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
-    css: ["../../xaringan-themer.css", "../../slides.css"]
+    css: ["../xaringan-themer.css", "../slides.css"]
     lib_dir: libs
     nature:
       ratio: "16:9"
@@ -41,33 +41,6 @@ One goal of **statistics** is to make **inferences** about a **population** base
 
 
 
----
-
-### Data
-
-We consider data from the Global Adult Tobacco Survey (GATS). Because of strongly gendered cultural norms around smoking in China, we will focus on smoking behavior as well as interviewer-identified binary gender.
-
----
-
-
-
-### Data
-
-## Selected variables
-
-<br>
-
-.midi[
-variable        | description
-----------------|-------------
-`CURRENTSMOKE`      |	yes, no, or don't know
-`AGE` |	computed from date of birth
-`EDUCATION`	          | highest level of education completed
-`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary"; options for male, female, missing/NA
-`PROVINCE`       |	residence of the individual
-]
-
-Other data are also available in the file. Sample survey weights are not included but should be used to obtain nationally-representative estimates (our estimates are fairly close for the quantities we consider today).
 ---
 
 class: middle

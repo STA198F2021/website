@@ -4,7 +4,7 @@ subtitle: "01 - First dataviz"
 output:
   xaringan::moon_reader:
     seal: false
-    css: ["../slides.css", "../../xaringan-themer.css"]
+    css: ["../slides.css", "../xaringan-themer.css"]
     lib_dir: libs
     nature:
       ratio: "16:9"
