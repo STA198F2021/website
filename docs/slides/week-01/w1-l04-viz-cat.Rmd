@@ -1,0 +1,218 @@
+---
+title: "Visualising categorical data"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(openintro)
+
+gats <- readr::read_csv("data/GATS_REV.csv")
+
+gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
+gats$PROVINCE=factor(gats$PROVINCE,levels=seq(1:31),labels=c("Beijing","Tianjin","Hebei","Shanxi","Neimenggu","Liaoning","Jilin","Heilongjiang","Shanghai","Jiangsu","Zhejiang","Anhui","Fujian","Jiangxi","Shangdong","Henan","Hubei","Hunan","Guangdong","Guangxi","Hainan","Chongqing","Sichuan","Guizhou","Yunnan","Xizang","Shaanxi","Gansu","Qinghai","Ningxia","Xinjiang"))
+gats$REGION6=factor(gats$REGION6,levels=seq(1:6),labels=c("North","North-East","East","South-Central","South-West","North-West"))
+gats$REGION3=factor(gats$REGION3,levels=seq(1:3),labels=c("East","Central","West"))
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$CURRENTSMOKE=factor(gats$CURRENTSMOKE,levels=c(1,2,7),labels=c("Yes","No","Don't Know"))
+gats$EDUCATION=factor(gats$EDUCATION,levels=c(1,2,3,4,5,6,7,8,77,99),labels=c("None","Less than Primary School","Primary School","Less than Secondary School","Secondary School","High School","University","Postgraduate","Don't Know","Refused"))
+gats$OCCUPATION=factor(gats$OCCUPATION,levels=c(1,2,3,4,5,6,7,8,9,10,77,99),labels=c("Farming","Government","Business","Teacher","Healthcare","Student","Soldier","Unemployed","Retired","Other","Don't Know","Refused"))
+gats$HEARDOFECIG=factor(gats$HEARDOFECIG,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$ECIGUSE=factor(gats$ECIGUSE,levels=c(1,2,3,9),labels=c("Daily","Less than Daily","Not at All","Refused"))
+gats$TRYSTOP=factor(gats$TRYSTOP,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$HOMESMOKERULES=factor(gats$HOMESMOKERULES,levels=c(1,2,3,4,7,9),labels=c("Allowed","Not Allowed but Exceptions","Never Allowed","No Rules","Don't Know","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+```
+
+class: middle
+
+# Recap
+
+---
+
+## Variables
+
+- **Numerical** variables can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+### Data
+
+We consider data from the Global Adult Tobacco Survey (GATS), which is designed to provide nationally-representative data on non-institutionalized people 15 years and older. This survey is a global standard for systematically monitoring adult tobacco use and is produced by the Centers for Disease Control (CDC) in collaboration with the World Health Organization (WHO), RTI International, and Johns Hopkins University.
+
+China has the largest smoking population in the world and accounts for roughly 40% of tobacco consumption worldwide. We will focus on GATS data from China in 2018 (the most recent survey year), but note data from other countries are available from the [WHO's Microdata Repository](https://extranet.who.int/ncdsmicrodata/index.php/home).
+
+---
+
+### Data 
+
+```{r}
+glimpse(gats)
+```
+
+---
+
+### Data
+
+## Selected variables
+
+<br>
+
+.midi[
+variable        | description
+----------------|-------------
+`CURRENTSMOKE`      |	yes, no, or don't know
+`AGE` |	computed from date of birth
+`EDUCATION`	          | highest level of education completed
+`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary"; options for male, female, missing/NA
+`PROVINCE`       |	residence of the individual
+]
+
+Other data are also available in the file. Sample survey weights are not included but should be used to obtain nationally-representative estimates (our estimates are fairly close for the quantities we consider today).
+---
+
+
+
+class: middle
+
+# Bar plot
+
+---
+
+## Bar plot
+
+```{r}
+ggplot(gats, aes(x = CURRENTSMOKE)) +
+  geom_bar()
+```
+
+---
+
+## Segmented bar plot
+
+```{r}
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) + #<<
+  geom_bar()
+```
+
+---
+
+## Segmented bar plot
+
+```{r}
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) +
+  geom_bar(position = "fill")  #<<
+```
+
+---
+
+.question[
+Which bar plot is a more useful representation for visualizing the relationship between smoking and gender?
+]
+
+.pull-left[
+```{r echo=FALSE, out.width = "100%"}
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) + 
+  geom_bar()
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width = "100%"}
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) +
+  geom_bar(position = "fill")  
+```
+]
+
+---
+
+## Customizing bar plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "bar-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r bar-custom, fig.show = "hide", warning = FALSE}
+
+ggplot(gats, aes(y = CURRENTSMOKE, 
+                  fill = GENDER)) +
+  geom_bar(position = "fill")  +
+  labs ( #<<
+    x = "Proportion", #<<
+    y = "Current Smoker?", #<<
+    fill = "Gender", #<<
+    title = "Smoking by Gender", #<<
+    subtitle = "2018" #<<
+    ) #<<
+
+```
+]
+]
+
+---
+
+class: middle
+
+# Relationships between numerical and categorical variables
+
+---
+
+## Already talked about...
+
+- Colouring and faceting histograms and density plots
+- Side-by-side box plots
+
+---
+
+## Violin plots
+
+Violin plots are like boxplots, but instead of showing the quartiles (25th, 50th, and 75th %iles), they show rotated density plots on each side.
+
+---
+
+## Violin plots
+
+```{r warning = FALSE}
+
+ggplot(gats, aes(x = AGE, y = EDUCATION)) +
+  geom_violin() 
+
+```
+
+---
+
+## Ridge plots
+
+Ridge plots also show density estimates across categorical groups
+
+---
+
+## Ridge plots
+
+```{r warning = FALSE}
+library(ggridges)
+ggplot(gats, aes(x = AGE, y = EDUCATION, fill = EDUCATION, color = EDUCATION)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
