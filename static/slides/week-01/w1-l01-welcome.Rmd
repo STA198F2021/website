@@ -69,7 +69,7 @@ STA 198 will
 A - None.
 
 **Q - Is this an intro stat course?**  
-A - While statistics $\ne$ data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is *not* your typical high school statistics course.
+A - While statistics $\ne$ data science, they are very closely related and have tremendous overlap. Hence, this course is a great way to get started with statistics. However, this course is *not*  your typical high school statistics course.
 
 **Q - Will we be doing computing?**   
 A - Yes, extensively.
@@ -209,9 +209,9 @@ class: middle
 
 - Health gaps are differences in the prevalence of disease, access to healthcare, or health outcomes across different groups.
 
-- The earlier slide highlighted a small (n $\approx$ 900) study in one emergency room that showed men were more likely to receive painkillers, and received them more quickly, than women.
+- The earlier slide accompanied an article about a small (n $\approx$ 900) study in one emergency room that showed men were more likely to receive painkillers, and received them more quickly, than women, given similar presentations.
 
-- Mortality data and life expectancy from infancy tell a different story.
+- Mortality data and life expectancy from infancy tell a story about a health gap in the opposite direction.
 
 ]
 
@@ -238,7 +238,7 @@ class: middle
 
 - The [Institute for Health Metrics and Evaluation (IHME)](http://www.healthdata.org) is a resource for data on a variety of important health outcomes worldwide. 
 
-- IHME maintains the [Global Burden of Disease (GBD)](http://ghdx.healthdata.org) tool, a valueable resource for policymakers and others that quantifies health loss due to a variety of risk factors, diseases, and injuries.
+- IHME maintains the [Global Burden of Disease (GBD)](http://ghdx.healthdata.org) tool, a valuable resource for policymakers and others that quantifies health loss due to a variety of risk factors, diseases, and injuries.
 
 - We consider data from IHME on (estimated) infant life expectancy from the years 1994-2019 as a function of location (primarily country) and binary gender. 
 
@@ -331,7 +331,7 @@ life %>%
        x = "Year", y = "Life Expectancy (Years)") 
 ```
 
-Ok, ugly plot!  We'll break it down soon -- but first, the outliers....
+$~~~~~~~$ Ok, ugly plot!  We'll break it down soon -- but first, the outliers....
 
 ---
 

@@ -37,7 +37,7 @@ title: 'Week 2 - Foundations in Probability'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | *Due this week* | | |
-| Lab 02 | [Hello IDS!](https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html) | Wed., Sept. 1, 4:00pm |
+| Lab 01 | [Hello R!](https://introds-duke.netlify.app/exploring-data.html#labs) | Wednesday, September 1, 4pm |
 | HW 01  | [Pet names](https://ids-s1-20.github.io/homework/hw-00/hw-00-pet-names.html) | Fri., Sept. 3, 4:00pm |
 
 If you're having difficulty accessing your HW or Lab repo, see troubleshooting advice [here](/troubleshoot/github-org.html).

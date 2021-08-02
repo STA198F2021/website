@@ -18,25 +18,25 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "keyboard"
   icon_pack = "fas"
   name = "Monday"
-  description = "Code along lab sessions - 10:15-11:30am, 1:45-3:00pm, or 5:15-6:30pm"  
+  description = "Code along lab sessions - 10:15-11:30am (Jackie), 1:45-3:00pm (Phuc), or 5:15-6:30pm (Phuc)"  
    
 [[feature]]
   icon = "comments"
   icon_pack = "far"
   name = "Tuesday"
-  description = "Professor hours - 1-2pm"  
+  description = "Prof. Herring hours - 1-2pm"  
   
 [[feature]]
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "Class - 10:15-11:30am; Professor hours - 11:30am-12:30pm"  
+  description = "Class - 10:15-11:30am; Prof. Herring hours - 11:30am-12:30pm"  
   
 [[feature]]
   icon = "comments"
   icon_pack = "far"
   name = "Thursday"
-  description = "TA hours - TBA"
+  description = "Phuc hours - 4-5pm (Zoom)"
   
 [[feature]]
   icon = "university"
