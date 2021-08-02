@@ -19,7 +19,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 ### Tasks
 
 - Complete the [readings](https://sta198f2021.github.io/website/post/01-week/#readings)
-- Complete the [assignments](/post/01-week/#assignments)
+- Complete the [assignments](https://sta198f2021.github.io/website/post/01-week/#assignments)
 - If you haven't yet done so:
 	- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
 
@@ -40,14 +40,17 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
-| *Due this week* | | |
-| Lab 00 | [Hello Data Science!](https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html) | Wednesday, August 25, 4pm |
+| *Do this week* | | |
+| Practice 1 | [Basics of R and R Studio](http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary) |  |
+| Practice 2  | [Basics of R Markdown](http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown) |  |
+
 
 ### Readings
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
+
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
 | :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
@@ -67,7 +70,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 ### Interactive R tutorials
 
- If you're struggling with the topics covered this week, we strongly recommend you work through this tutorial.
+ If you're struggling with the topics covered this week, we strongly recommend you work through this additional tutorial.
  
 |  <div style="width:480px"></div>  |  <div style="width:200px"></div>  |
 |:---|:---|

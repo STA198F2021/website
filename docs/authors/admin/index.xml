@@ -72,14 +72,19 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Do this week&lt;/em&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Lab 00&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/labs/lab-00/lab-00-hello-ids.html&#34;&gt;Hello Data Science!&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wednesday, August 25, 4pm&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Practice 1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary&#34;&gt;Basics of R and R Studio&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Practice 2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown&#34;&gt;Basics of R Markdown&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -98,75 +103,23 @@
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/&#34;&gt;Course syllabus&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;R4DS: &lt;a href=&#34;https://r4ds.had.co.nz/explore-intro.html&#34;&gt;Chp 2, Introduction&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://r4ds.had.co.nz/data-visualisation.html&#34;&gt;R4DS::Chp 3 - Data visualisation&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/data-hello.html&#34;&gt;Chp 1, Sec 1.1 and 1.2&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/explore-categorical.html&#34;&gt;Chp 4, Sec. 4.1, 4.2, and 4.6&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/explore-numerical.html&#34;&gt;Chp 5&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://socviz.co/appendix.html#a-little-more-about-r&#34;&gt;How to read an R help page (Section A.1.1)&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ropensci.github.io/reproducibility-guide/sections/introduction/&#34;&gt;rOpenSci&amp;rsquo;s Reproducibility Guide&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970&#34;&gt;1,500 scientists lift the lid on reproducibility&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;🖋&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://nhsrcommunity.com/blog/how-r-changed-me-as-an-analyst/&#34;&gt;How R changed me as an analyst&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://socviz.co/makeplot.html&#34;&gt;Make a plot&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📊&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://informationisbeautiful.net/visualizations/covid-19-coronavirus-infographic-datapack/&#34;&gt;Information is beautiful - COVID-19 data visualisations&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📊&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://mkorostoff.github.io/1-pixel-wealth/&#34;&gt;Wealth shown to scale&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📊&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://pair-code.github.io/covid19_symptom_dataset/?date=2020-09-07&#34;&gt;Explore COVID-19 Symptoms Search Trends&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;| 📖 | R4DS: &lt;a href=&#34;https://r4ds.had.co.nz/explore-intro.html&#34;&gt;Chp 2, Introduction&lt;/a&gt; | &lt;strong&gt;Required&lt;/strong&gt; |
+| 📖 | &lt;a href=&#34;https://r4ds.had.co.nz/data-visualisation.html&#34;&gt;R4DS::Chp 3 - Data visualisation&lt;/a&gt; | &lt;strong&gt;Required&lt;/strong&gt; |
+| 📖 | IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/data-hello.html&#34;&gt;Chp 1, Sec 1.1 and 1.2&lt;/a&gt; | &lt;strong&gt;Required&lt;/strong&gt; |
+| 📖 | IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/explore-categorical.html&#34;&gt;Chp 4, Sec. 4.1, 4.2, and 4.6&lt;/a&gt; | &lt;strong&gt;Required&lt;/strong&gt; |
+| 📖 | IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/explore-numerical.html&#34;&gt;Chp 5&lt;/a&gt; | &lt;strong&gt;Required&lt;/strong&gt; |
+| 📄 | &lt;a href=&#34;https://socviz.co/appendix.html#a-little-more-about-r&#34;&gt;How to read an R help page (Section A.1.1)&lt;/a&gt; | Optional |
+| 📄 | &lt;a href=&#34;https://ropensci.github.io/reproducibility-guide/sections/introduction/&#34;&gt;rOpenSci&amp;rsquo;s Reproducibility Guide&lt;/a&gt; | Optional |
+| 📄 | &lt;a href=&#34;https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970&#34;&gt;1,500 scientists lift the lid on reproducibility&lt;/a&gt; | Optional |
+|  🖋  | &lt;a href=&#34;https://nhsrcommunity.com/blog/how-r-changed-me-as-an-analyst/&#34;&gt;How R changed me as an analyst&lt;/a&gt; | Optional
+| 📄 | &lt;a href=&#34;https://socviz.co/makeplot.html&#34;&gt;Make a plot&lt;/a&gt; | Optional |
+| 📊      | &lt;a href=&#34;https://informationisbeautiful.net/visualizations/covid-19-coronavirus-infographic-datapack/&#34;&gt;Information is beautiful - COVID-19 data visualisations&lt;/a&gt; | Optional |
+| 📊      | &lt;a href=&#34;https://mkorostoff.github.io/1-pixel-wealth/&#34;&gt;Wealth shown to scale&lt;/a&gt; | Optional |
+| 📊      | &lt;a href=&#34;https://pair-code.github.io/covid19_symptom_dataset/?date=2020-09-07&#34;&gt;Explore COVID-19 Symptoms Search Trends&lt;/a&gt; | Optional |&lt;/p&gt;
 &lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;re struggling with the topics covered this week, we strongly recommend you work through this tutorial.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re struggling with the topics covered this week, we strongly recommend you work through this additional tutorial.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
