@@ -20,18 +20,17 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 - Complete the [readings](https://sta198f2021.github.io/website/post/01-week/#readings)
 - Complete the [assignments](https://sta198f2021.github.io/website/post/01-week/#assignments)
-- If you haven't yet done so:
-	- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
+- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
 
+### Class Slides and Activities
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 |  Meet the course team | link here  | 
 | Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l01-welcome.html#1)  | 
-| AE: First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
+| First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
 | Data Visualization Start-Up      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l02-ggplot2.html#1)  | 
-| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l03-viz-num.html#1)  | 
-| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l04-viz-cat.html#1)  | 
+
 
 
 
@@ -50,12 +49,9 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
-
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
 | :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
-| :open_book: | IMS: [Chp 4, Sec. 4.1, 4.2, and 4.6](https://openintro-ims.netlify.app/explore-categorical.html) | **Required** |
-| :open_book: | IMS: [Chp 5](https://openintro-ims.netlify.app/explore-numerical.html) | **Required** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |
@@ -68,7 +64,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 
 
-### Interactive R tutorials
+### Interactive R Tutorials
 
  If you're struggling with the topics covered this week, we strongly recommend you work through this additional tutorial.
  

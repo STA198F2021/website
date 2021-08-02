@@ -21,12 +21,14 @@ title: 'Week 2 - Foundations in Probability'
 - Complete the [readings](/post/02-week/#readings)
 - Complete the [assignments](/post/02-week/#assignments)
 - If you haven't yet done so:
-	- Complete the [Getting to Know you survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMkU3TzFXRTkyTFBVVjBLVUVTRDdJVlg2WS4u)
+	- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
 
 
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
+| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l03-viz-num.html#1)  | 
+| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l04-viz-cat.html#1)  | 
 | Introduction to Probability   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l01-prob.html#1)  | 
 | Probability in Action | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l02-prob.html#1)  | 
 
@@ -46,6 +48,8 @@ If you're having difficulty accessing your HW or Lab repo, see troubleshooting a
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
+| :open_book: | IMS: [Chp 4, Sec. 4.1, 4.2, and 4.6](https://openintro-ims.netlify.app/explore-categorical.html) | **Required** |
+| :open_book: | IMS: [Chp 5](https://openintro-ims.netlify.app/explore-numerical.html) | **Required** |
 | :open_book: | [IMS::Chp 2 - Study Design](https://openintro-ims.netlify.app/data-design.html) | **Required** |
 | :open_book: | [Seeing Theory::Chp 1 - Basic Probability](https://seeing-theory.brown.edu/basic-probability/index.html) | **Required** |
 | :open_book: | [Seeing Theory::Chp 2 - Compound Probability](https://seeing-theory.brown.edu/compound-probability/index.html#section1) | **Required** |
