@@ -8,12 +8,6 @@ social:
 - icon: envelope
   icon_pack: fas
   link: "mailto:eli.feder@duke.edu"
-- icon: github
-  icon_pack: fab
-  link: https://github.com/amy-herring
-- icon: twitter
-  icon_pack: fab
-  link: https://twitter.com/amyhherring
 weight: 10
   
 # Organizational groups that you belong to (for People widget)
