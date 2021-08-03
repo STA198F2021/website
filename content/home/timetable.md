@@ -18,7 +18,7 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "keyboard"
   icon_pack = "fas"
   name = "Monday"
-  description = "Code along lab sessions - 10:15-11:30am (Jackie), 1:45-3:00pm (Phuc), or 5:15-6:30pm (Phuc)"  
+  description = "Code along lab sessions - 10:15-11:30am (Jackie), 1:45-3:00pm (Phuc+Eli), or 5:15-6:30pm (Phuc+Eli)"  
    
 [[feature]]
   icon = "comments"

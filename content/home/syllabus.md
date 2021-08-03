@@ -44,7 +44,7 @@ You will be responsible for the completion of an open ended final project for th
 
 ### Teams 
 
-For all of the team based assignments in this class you will be randomly assigned to teams of 2-3 students - these teams will change after each assignment. You will work in these teams during class and on the homework assignment. For team based assignments, all team members are expected to contribute equally to the completion of each assignment and you will be asked to evaluate your team members after each assignment is due. Failure adequately to contribute to an assignment will result in a penalty to your mark relative to the team's overall mark.
+For all of the team based assignments in this class you will be randomly assigned to teams of 3-4 students - these teams will change after each assignment. You will work in these teams during class and on the homework assignment. For team based assignments, all team members are expected to contribute equally to the completion of each assignment and you will be asked to evaluate your team members after each assignment is due. Failure adequately to contribute to an assignment will result in a penalty to your mark relative to the team's overall mark.
 
 Students are expected to make use of the provided GitHub repository as their central collaborative platform. Commits to this repository will be used as a metric (one of several) of each team member's relative contribution for each homework.
 
