@@ -38,6 +38,10 @@ Overall these policies are put in place to ensure communication between team mem
 
 Beyond the in class activities, you will be assigned regular homework assignments throughout the semester. These assignments will be completed individually and submitted to Gradescope. Homework with the lowest score for each student will be dropped. 
 
+### Quizzes
+
+Regular quizzes on Sakai will be used to ensure students are keeping up with the reading assignments. These quizzes will generally be due Wednesday mornings by 10:00 am and should be completed individually.
+
 ### Final project
 
 You will be responsible for the completion of an open ended final project for this course, the goal of which is to tackle an "interesting" problem using the tools and techniques covered in this class. Additional details on the project will be provided as the course progresses. Each team's work will also be shared with and evaluated by at least one other team at an earlier stage in order to provide feedback. You must complete the final project and be in class (or on video) to present it. 
@@ -56,8 +60,9 @@ Your overall course grade will be comprised of the following components, and the
 
 - Homework: 15%
 - Labs: 15%
+- Quizzes: 10%
 - Project: 15%
-- Exams (10% exam 1; 20% exam 2; 25% final exam)
+- Exams (10% exam 1; 15% exam 2; 20% final exam)
 
 A letter grade will be assigned as follows.
 
@@ -83,13 +88,19 @@ Regrade requests must be made within two days of when a report is returned. Thes
 
 ## Policies
 
+## Class attendance
+
+Students are expected to attend class and labs in person, health permitting. Students with respiratory symptoms (or symptoms of other diseases communicable in a classroom setting) should stay home and watch class recordings.
+
 ### Zoom expectations
 
-- When in a large session you should,
+Some office hours will be on Zoom, and it may become necessary to hold some class or lab meetings on Zoom, depending on collective health and safety considerations.
+
+- When in a full group session you should,
   - have your microphone muted by default
   - use the raise your hand feature or type in the chat for questions and comments
 
-- In the small team sessions you should,
+- In the small team sessions or office hours you should
   - have your camera turned on as much as possible
   - engage with your team mates via voice and text chat
   - take turns sharing your screen when necessary
@@ -130,14 +141,12 @@ All work is due on the stated due date. Due dates are there to help guide your p
   - Project proposal: Late work accepted up to 4 days past the deadline, with 5% penalty for each day
   - Project re-proposal: No late work accepted (this is an optional assignment)
   - Project: No late work accepted 
-  - Exams: students with known conflicts on exam days should contact the instructor as soon as possible. Make-up exams will not be given. If the final exam grade is higher than the grade on either exam 1 or exam 2, then it will automatically be substituted to the student's benefit. 
+  - Exams: students with known conflicts on exam days should contact the instructor as soon as possible. Make-up exams will not be given. If the final exam grade is higher than the grade on either exam 1 or exam 2, then it will automatically be substituted to the student's benefit, for a maximum of one exam substitution. 
     - Example: If a student misses the second exam, the final exam grade will substitute for the exam 2 grade.
     - Example: If a student misses the first exam, the final exam grade will substitute for the exam 1 grade.
     - Example: If a student misses both exam 1 and exam 2, the final exam grade will substitute for exam 2 (worth more points), and the exam 1 grade will be zero.
-    - Example: If a student misses the final exam, the course grade will be X unless the student in failing (in which case the course grade is F). If no acceptable explanation is presented to the academic dean's office within 48 hours of missing the exam, the course grade is F. If the exam absence is excused, the dean, Professor, and student make arrangements for a make-up examination as soon as possible.
     - Example: If a student completes all three exams, and the final exam grade is higher than the grade for either exam 1 or exam 2, then the final exam grade will substitute for the prior exam grade in a manner that maximizes the student's score (because the exams have unequal weight in the final grade calculation, it may be preferable to use the final exam to substitute for the exam 2 grade due to its heavier weight, even if its score is slightly higher than the score on exam 1). If the final exam grade is lower than the grades on exam 1 or exam 2, no substitutions are made.
-    
-
+    - Example: If a student misses the final exam, the course grade will be X unless the student in failing (in which case the course grade is F). If no acceptable explanation is presented to the academic dean's office within 48 hours of missing the exam, the course grade is F. If the exam absence is excused, the dean, Professor, and student make arrangements for a make-up examination as soon as possible.
 
 
 ### Diversity & inclusion
@@ -155,7 +164,7 @@ Furthermore, I would like to create a learning environment for my students that 
 
 I want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don't hesitate to ask.
 
-- Out of respect for others sharing your physical space, the class expectation will be that if you are sick, you will stay home and participate remotely. Accommodations 
+- Out of respect for others sharing your physical space, the class expectation will be that if you are sick, you will stay home and participate remotely. 
 
 - You *never* owe me personal information about your health (mental or physical), but you're always welcome to talk to me. If I can’t help, I likely know someone who can.
 
