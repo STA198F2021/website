@@ -39,7 +39,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
-| *Do this week* | | |
+| *Do this week (not graded, just for practice!)* | | |
 | Practice 1 | [Basics of R and R Studio](http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary) |  |
 | Practice 2  | [Basics of R Markdown](http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown) |  |
 
