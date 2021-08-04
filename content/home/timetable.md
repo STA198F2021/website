@@ -30,7 +30,7 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "Class - 10:15-11:30am; Prof. Herring hours - 11:30am-12:30pm"  
+  description = "Class - 10:15-11:30am \\ Prof. Herring hours - 11:30am-12:30pm"  
   
 [[feature]]
   icon = "comments"
