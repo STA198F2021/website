@@ -1,0 +1,689 @@
+---
+title: "Visualising data with ggplot2"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+life <- readr::read_csv("lifeexp/lifeexpectancy_infant.csv")
+regmapping <- readr::read_csv("lifeexp/loc.csv")
+lifespan=mutate(life) %>% 
+    left_join(regmapping, ., by = 'location')
+
+lifeexpwide = lifespan %>%
+  spread(sex,lifeexp)
+
+lifeexpwide2019=lifespan %>%
+  filter(year == '2019') %>%
+     spread(sex,lifeexp) 
+
+```
+
+
+## ggplot2 $\in$ tidyverse
+
+.pull-left[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/ggplot2-part-of-tidyverse.png")
+```
+] 
+.pull-right[ 
+- **ggplot2** is tidyverse's data visualization package 
+- Structure of the code for plots can be summarized as
+
+```{r eval = FALSE}
+ggplot(data = [dataset], 
+       mapping = aes(x = [x-variable], 
+                     y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+]
+
+---
+
+## Data: Life expectancy from infancy
+
+IHME data on location (mostly countries), World Bank region, binary sex, and estimated life expectancy and population in 2019 will be used to explore the men's health gap (later we will add more years)
+
+.pull-left-narrow[
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/drabernathy.png")
+```
+Dr. Abernathy of *The Simpsons* (aged 40)
+]
+.pull-right-wide[
+
+
+```{r}
+glimpse(lifeexpwide2019)
+```
+Grampa Simpson (attr. Matt Groening)
+```{r grampa,echo=FALSE,out.width="10%"}
+knitr::include_graphics("img/Abraham_Simpson.png")
+```
+
+
+
+]
+
+---
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "lifeexpscatter", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r lifeexpscatter, fig.show = "hide"}
+ggplot(data = lifeexpwide2019, 
+       mapping = aes(x = Female, y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy",
+       color = "World Bank Region")
+```
+]
+]
+
+---
+
+class: middle
+
+# Coding out loud
+
+---
+
+.midi[
+> **Start with the `lifeexpwide2019` data**
+]
+
+.pull-left[
+```{r lifeexpwide2019-0, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019) #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-0", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data
+> **map female life expectancy to the x-axis**
+]
+
+.pull-left[
+```{r lifeexpwide2019-1, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female)) #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-1", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data
+> map female life expectancy to the x-axis
+> **and map male life expectancy to the y-axis.**
+]
+
+.pull-left[
+```{r lifeexpwide2019-2, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male)) #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-2", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> **Represent each observation with a point**
+]
+
+.pull-left[
+```{r lifeexpwide2019-3, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male)) + 
+  geom_point() #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-3", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> **and map region to the color of each point.**
+]
+
+.pull-left[
+```{r lifeexpwide2019-4, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) + #<<
+  geom_point()
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-4", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> and map region to the color of each point.
+> **Title the plot "Life expectancy"**
+]
+
+.pull-left[
+```{r lifeexpwide2019-5, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy") #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-5", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> and map region to the color of each point.
+> Title the plot "Life expectancy", 
+> **add the subtitle "2019"**
+]
+
+.pull-left[
+```{r lifeexpwide2019-6, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019") #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-6", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> and map region to the color of each point.
+> Title the plot "Life expectancy", 
+> add the subtitle "2019", 
+> **label the x and y axes as "Female life expectancy" and "Male life expectancy", respectively**
+]
+
+.pull-left[
+```{r lifeexpwide2019-7, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy") #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-7", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> and map region to the color of each point.
+> Title the plot "Life expectancy", 
+> add the subtitle "2019", 
+> label the x and y axes as "Female life expectancy" and "Male life expectancy", respectively,
+> **label the legend "World Bank Region"**
+]
+
+.pull-left[
+```{r lifeexpwide2019-8, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy",color="World Bank Region") #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-8", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.midi[
+> Start with the `lifeexpwide2019` data,
+> map female life expectancy to the x-axis
+> and map male life expectancy to the y-axis. 
+> Represent each observation with a point
+> and map region to the color of each point.
+> Title the plot "Life expectancy", 
+> add the subtitle "2019", 
+> label the x and y axes as "Female life expectancy" and "Male life expectancy", respectively,
+> label the legend "World Bank Region",
+> **and add a caption for the data source.**
+]
+
+.pull-left[
+```{r lifeexpwide2019-9, fig.show = "hide", warning = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy",color="World Bank Region",
+       caption = "Source: IHME") #<<
+```
+]
+.pull-right[
+```{r ref.label = "lifeexpwide2019-9", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
+```
+]
+
+---
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label="lifeexpwide2019-9-nohighlight", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r lifeexpwide2019-9-nohighlight, fig.show = "hide"}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy",color="World Bank Region",
+       caption = "Source: IHME") 
+```
+]
+.panel[.panel-name[Narrative]
+.pull-left-wide[
+.midi[
+Start with the `lifeexpwide2019` data,
+map female life expectancy to the x-axis,
+and map male life expectancy to the y-axis. 
+
+Represent each observation with a point
+and map region to the color of each point.
+
+Title the plot "Life expectancy", 
+add the subtitle "2019", 
+label the x and y axes as "Female life expectancy" and "Male life expectancy", respectively,
+label the legend "World Bank Region", 
+and add a caption for the data source.
+
+]
+]
+]
+]
+
+---
+
+## Argument names
+
+.tip[
+You can omit the names of first two arguments when building plots with `ggplot()`.
+]
+
+.pull-left[
+```{r named-args, eval = FALSE}
+ggplot(data = lifeexpwide2019,
+       mapping = aes(x = Female,
+                     y = Male,
+                     color = worldbankregion)) +
+  geom_point() 
+```
+]
+.pull-right[
+```{r not-named-args, eval = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female,
+           y = Male,
+           color = worldbankregion)) +
+  geom_point() 
+```
+]
+
+---
+
+class: middle
+
+# Aesthetics
+
+---
+
+## Aesthetics options
+
+Commonly used characteristics of plotting characters that can be **mapped to a specific variable** in the data are
+
+- `color`
+- `shape`
+- `size`
+- `alpha` (transparency)
+
+---
+
+## Color
+
+.pull-left[
+```{r color, fig.show = "hide", warning = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           color = worldbankregion)) + #<<
+  geom_point() 
+```
+]
+.pull-right[
+```{r ref.label = "color", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+## Shape
+
+.pull-left[
+```{r shape-region, fig.show = "hide", warning = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           shape = worldbankregion)) + #<<
+  geom_point() 
+```
+]
+.pull-right[
+```{r ref.label = "shape-region", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+## Shape
+
+Can also map to the same variable as `color` (helps for color vision deficiency)
+
+.pull-left[
+```{r shape-col-region, fig.show = "hide", warning = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           shape = worldbankregion, #<<
+           color = worldbankregion)) + #<<
+  geom_point() 
+```
+]
+.pull-right[
+```{r ref.label = "shape-col-region", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+## Size
+
+.pull-left[
+```{r size, fig.show = "hide", warning = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           color = worldbankregion,
+           size = pop)) + #<<
+  geom_point() 
+```
+]
+.pull-right[
+```{r ref.label = "size", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+## Alpha
+
+.pull-left[
+```{r alpha, fig.show = "hide", warning = FALSE}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           color = worldbankregion,
+           alpha = pop)) + #<<
+  geom_point() 
+```
+]
+.pull-right[
+```{r ref.label = "alpha", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+.pull-left[
+**Mapping**
+
+```{r warning = FALSE, out.width = "100%"}
+ggplot(lifeexpwide2019,
+       aes(x = Female, 
+           y = Male,
+           size = pop)) + #<<
+  geom_point()
+```
+]
+.pull-right[
+**Setting**
+
+```{r warning = FALSE, out.width = "100%"}
+ggplot(lifeexpwide2019,
+       aes(x = Female,
+           y = Male)) + 
+  geom_point(size = 2) #<<
+```
+]
+
+---
+
+## Mapping vs. setting
+
+- **Mapping:** Determine the size, alpha, etc. of points based on the values of a variable in the data
+  - goes into `aes()`
+
+- **Setting:** Determine the size, alpha, etc. of points **not** based on the values of a variable in the data
+  - goes into `geom_*()` (this was `geom_point()` in the previous example, but we'll learn about other geoms soon!)
+  
+---
+
+class: middle
+
+# Faceting
+
+---
+
+## Faceting
+
+- Smaller plots that display different subsets of the data
+- Useful for exploring conditional relationships and large data
+
+---
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "facet", echo = FALSE, warning = FALSE, out.width = "70%"}
+```
+]
+.panel[.panel-name[Code]
+
+```{r facet, fig.show = "hide"}
+lifeexpwide %>%
+  filter(year %in% c(1999, 2009,2019),worldbankregion %in% c("North America","South Asia","Sub-Saharan Africa")) %>%
+    ggplot(aes(x = Female,
+               y = Male)) + 
+  geom_point() +
+  facet_grid(year~worldbankregion) #<<
+
+```
+]
+]
+
+---
+
+## Various ways to facet
+
+---
+
+```{r warning = FALSE, fig.asp = 0.5}
+lifeexpwide %>%
+  filter(year %in% c(1999, 2009,2019),worldbankregion %in% c("North America","South Asia","Sub-Saharan Africa")) %>%
+    ggplot(aes(x = Female,
+               y = Male)) + 
+  geom_point() +
+  facet_wrap(~worldbankregion)
+```
+
+---
+
+```{r warning = FALSE, fig.asp = 0.5}
+lifeexpwide %>%
+  filter(year %in% c(1999, 2009,2019),worldbankregion %in% c("North America","South Asia","Sub-Saharan Africa")) %>%
+    ggplot(aes(x = Female,
+               y = Male)) + 
+  geom_point() +
+  facet_grid(.~worldbankregion)
+```
+
+---
+
+
+## Faceting summary
+
+- `facet_grid()`:
+    - 2d grid
+    - `rows ~ cols`
+    - use `.` for no split
+- `facet_wrap()`: 1d ribbon wrapped according to number of rows and columns specified or available plotting area
+
+---
+
+## Facet and color
+
+.pull-left-narrow[
+```{r facet-color-legend, fig.show = "hide", warning = FALSE}
+lifeexpwide %>%
+  filter(year %in% c(1999, 2009,2019),worldbankregion %in% c("North America","South Asia","Sub-Saharan Africa")) %>%
+    ggplot(aes(x = Female,
+               y = Male,
+               color=year)) + 
+  geom_point() +
+  facet_wrap(~worldbankregion)
+
+```
+]
+.pull-right-wide[
+```{r ref.label = "facet-color-legend", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]
+
+---
+
+## Face and color, no legend
+
+.pull-left-narrow[
+```{r facet-color-no-legend, fig.show = "hide", warning = FALSE}
+
+lifeexpwide %>%
+   filter(year %in% c(1999, 2009,2019),worldbankregion %in% c("North America","South Asia","Sub-Saharan Africa")) %>%
+   ggplot(aes(x = Female,
+               y = Male,
+               color=year)) + 
+  geom_point() +
+  facet_wrap(~worldbankregion) +
+  guides(color = FALSE) #<<
+
+```
+]
+.pull-right-wide[
+```{r ref.label = "facet-color-no-legend", echo = FALSE, warning = FALSE, out.width = "100%"}
+```
+]

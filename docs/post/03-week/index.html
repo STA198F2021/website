@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Introduction to Global Health Data Science">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Data wrangling, joining, and tidying.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://sta198f2021.github.io/website/post/03-week/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(19, 84, 142)">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/website/css/academic.min.8c1f4b385bdf9bf84df1dfae5955e979.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/website/index.webmanifest">
+  <link rel="icon" type="image/png" href="/website/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/website/img/icon-192.png">
+
+  <link rel="canonical" href="https://sta198f2021.github.io/website/post/03-week/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="STA 198 / GLHLTH 298">
+  <meta property="og:url" content="https://sta198f2021.github.io/website/post/03-week/">
+  <meta property="og:title" content="Week 3 - Wrangling and tidying data | STA 198 / GLHLTH 298">
+  <meta property="og:description" content="Data wrangling, joining, and tidying."><meta property="og:image" content="https://sta198f2021.github.io/website/post/03-week/featured.jpg">
+  <meta property="twitter:image" content="https://sta198f2021.github.io/website/post/03-week/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-07-31T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-07-31T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sta198f2021.github.io/website/post/03-week/"
+  },
+  "headline": "Week 3 - Wrangling and tidying data",
+  
+  "image": [
+    "https://sta198f2021.github.io/website/post/03-week/featured.jpg"
+  ],
+  
+  "datePublished": "2021-07-31T00:00:00Z",
+  "dateModified": "2021-07-31T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Introduction to Global Health Data Science"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "STA 198 / GLHLTH 298",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sta198f2021.github.io/website/img/icon-512.png"
+    }
+  },
+  "description": "Data wrangling, joining, and tidying."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Week 3 - Wrangling and tidying data | STA 198 / GLHLTH 298</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/website/">STA 198 / GLHLTH 298</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#timetable"><span>Timetable</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#schedule"><span>Schedule</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#syllabus"><span>Syllabus</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#help"><span>Help</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#project"><span>Project</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#resources"><span>Resources</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/website/#people"><span>People</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://github.com/STA198F2021" target="_blank" rel="noopener"><span><i class='fab fa-github'></i></span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://www.rstudio.com" target="_blank" rel="noopener"><span><i class='fab fa-r-project'></i></span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://sakai.duke.edu" target="_blank" rel="noopener"><span><i class='fas fa-university'></i></span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Week 3 - Wrangling and tidying data</h1>
+
+  
+  <p class="page-subtitle">Data wrangling, joining, and tidying 🔧</p>
+  
+
+  
+    
+
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  <span><a href="/website/authors/admin/">Introduction to Global Health Data Science</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Sat, Jul 31, 2021
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+  
+    
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h3 id="tasks">Tasks</h3>
+<ul>
+<li>Watch the <a href="/post/03-week/#videos">videos</a></li>
+<li>Complete the <a href="/post/03-week/#readings">readings</a></li>
+<li>Complete the <a href="/post/03-week/#assignments">assignments</a></li>
+<li>(Optional) Complete the <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMFNaSjAxMDQyUDZHQk9ZOFMxQlZERDlMUC4u">Course feedback survey</a> (not graded)</li>
+<li>(Optional) Participate in the Virtual exchange (extra credit)
+<ul>
+<li><em>Task details to be posted</em></li>
+<li>Zoom call on Friday, 9 Oct, 19:00-20:00 UK time</li>
+</ul>
+</li>
+</ul>
+<h3 id="videos">Videos</h3>
+<p>You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube <a href="https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM">here</a> and on MediaHopper <a href="https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="width:50px;text-align:center">No.</div></th>
+<th style="text-align:left"><div style="width:250px;text-align:left">Title</div></th>
+<th style="text-align:center"><div style="width:80px;text-align:center">YouTube</div></th>
+<th style="text-align:center"><div style="width:80px;text-align:center">MediaHopper</div></th>
+<th style="text-align:center"><div style="width:80px;text-align:center">Slides</div></th>
+<th style="text-align:center"><div style="width:80px;text-align:center">Length</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">01</td>
+<td style="text-align:left">Keeping up with IDS: Week 3</td>
+<td style="text-align:center"><a href="https://youtu.be/VlfnShvjL0c"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+01+-+Keeping+up+with+IDS/1_faaiztni"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d01-kuwids/w3-d01-kuwids.pdf"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">6:23</td>
+</tr>
+<tr>
+<td style="text-align:center">02</td>
+<td style="text-align:left">Tidy data</td>
+<td style="text-align:center"><a href="https://youtu.be/Ux85eR3h9hw"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+02+-+Tidy+data/1_lc61ottc"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d02-tidy-data/w3-d02-tidy-data.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">6:46</td>
+</tr>
+<tr>
+<td style="text-align:center">03</td>
+<td style="text-align:left">Grammar of data wrangling</td>
+<td style="text-align:center"><a href="https://youtu.be/ZCaYBES_VEk"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+03+-+Grammar+of+data+wrangling/1_meyz4shf"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d03-grammar-wrangle/w3-d03-grammar-wrangle.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">13:13</td>
+</tr>
+<tr>
+<td style="text-align:center">04</td>
+<td style="text-align:left">Working with a single data frame</td>
+<td style="text-align:center"><a href="https://youtu.be/0229Uq2hkJo"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+04+-+Working+with+a+single+data+frame/1_bismxagl"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d04-single-df/w3-d04-single-df.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">32:15</td>
+</tr>
+<tr>
+<td style="text-align:center">05</td>
+<td style="text-align:left">Working with multiple data frames</td>
+<td style="text-align:center"><a href="https://youtu.be/VdV5ABsaf5Y"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+05+-+Working+with+multiple+data+frames/1_pz5t7dhx"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d05-multi-df/w3-d05-multi-df.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">17:26</td>
+</tr>
+<tr>
+<td style="text-align:center">06</td>
+<td style="text-align:left">Tidying data</td>
+<td style="text-align:center"><a href="https://youtu.be/x3KM5uxaFdI"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+06+-+Tidying+data/1_wa4tmotd"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-03/w3-d06-tidying/w3-d06-tidying.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
+<td style="text-align:center">20:14</td>
+</tr>
+<tr>
+<td style="text-align:center">07</td>
+<td style="text-align:left">AE: Hotels + Data wrangling</td>
+<td style="text-align:center"><a href="https://youtu.be/BXlOd4EYQrI"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
+<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+07+-+AEA+Hotels+%2B+Data+wrangling/1_nua37qzj"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">30:58</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assignments">Assignments</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><div style="width:120px;text-align:left">Assignment</div></th>
+<th style="text-align:left"><div style="width:340px;text-align:left">Title</div></th>
+<th style="text-align:left"><div style="width:200px;text-align:left">Due</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>Due this week</em></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Lab 01</td>
+<td style="text-align:left"><a href="https://ids-s1-20.github.io/labs/lab-01/lab-01-plastic-waste.html">Plastic waste</a></td>
+<td style="text-align:left">Tue, 6 Oct, 16:00 UK</td>
+</tr>
+<tr>
+<td style="text-align:left">OQ 02</td>
+<td style="text-align:left"><a href="https://minecr.shinyapps.io/02-datawrangle/">Data wrangling</a></td>
+<td style="text-align:left">Sun, 11 Oct, 23:59 UK</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Due next week</em></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Lab 02</td>
+<td style="text-align:left"><a href="https://ids-s1-20.github.io/labs/lab-02/lab-02-sad-plot.html">Take a sad plot and make it better</a></td>
+<td style="text-align:left">Tue, 13 Oct, 16:00 UK</td>
+</tr>
+<tr>
+<td style="text-align:left">HW 01</td>
+<td style="text-align:left"><a href="https://ids-s1-20.github.io/homework/hw-01/hw-01-edinburgh.html">All about Edinburgh</a></td>
+<td style="text-align:left">Thur, 15 Oct, 16:00 UK</td>
+</tr>
+<tr>
+<td style="text-align:left">EC</td>
+<td style="text-align:left"><a href="/extra-credit/extra-credit-02.html">Extra credit</a></td>
+<td style="text-align:left">Multiple (see assignment)</td>
+</tr>
+</tbody>
+</table>
+<p>If you&rsquo;re having difficulty accessing your HW or Lab repo, see troubleshooting advice <a href="/troubleshoot/github-org.html">here</a>.</p>
+<h3 id="readings">Readings</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="width:50px"></div></th>
+<th style="text-align:left"><div style="width:420px"></div></th>
+<th style="text-align:center"><div style="width:200px"></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">📖</td>
+<td style="text-align:left"><a href="https://r4ds.had.co.nz/workflow-basics.html">R4DS::Chp 4 - Workflow: basics</a></td>
+<td style="text-align:center"><strong>Required</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">📖</td>
+<td style="text-align:left"><a href="https://r4ds.had.co.nz/transform.html">R4DS::Chp 5 - Data transformation</a></td>
+<td style="text-align:center"><strong>Required</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">📖</td>
+<td style="text-align:left"><a href="https://openintro-ims.netlify.app/summarizing-visualizing-data.html">IMS::Chp 2 - Summarizing and visualizing data</a> (If you haven&rsquo;t read it last week!)</td>
+<td style="text-align:center"><strong>Required</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-along">Code-along</h3>
+<p>The data come from <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-29/readme.md">TidyTuesday</a>. TidyTuesday is a weekly social data project for the R community. Read more about TidyTuesday <a href="https://github.com/rfordatascience/tidytuesday">here</a> and see people&rsquo;s contributions on Twitter under the <a href="https://twitter.com/search?q=tidytuesday&amp;src=typed_query">#tidytuesday hashtag</a>.</p>
+<p>You can find starter code for this session on <a href="https://rstudio.cloud/">RStudio Cloud</a>, in the project titled <em>Code Along 03 - College tuition, diversity, and pay</em>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><div style="width:200px"></div></th>
+<th style="text-align:left"><div style="width:480px"></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Recording</td>
+<td style="text-align:left"><a href="https://youtu.be/Ycpwmn62aOA"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a>       <a href="https://media.ed.ac.uk/media/IDS+-+Week+03+-+Code+along/1_tm65h61m"><span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span></a></td>
+</tr>
+<tr>
+<td style="text-align:left">Session artifacts</td>
+<td style="text-align:left"><a href="https://github.com/ids-s1-20/code-along/blob/master/03-code-along/college.Rmd"><strong><code>.Rmd</code></strong></a>     <a href="https://github.com/ids-s1-20/code-along/blob/master/03-code-along/college.md"><strong><code>.md</code></strong></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="interactive-r-tutorials">Interactive R tutorials</h3>
+<p>The following are interactive R tutorials, designed to give you more practice with R. These are optional, but the &ldquo;Airbnb listings in Edinburgh&rdquo; dataset show up in your next homework assignment as well, so you might want to go through that one so that you can gain familiarity with it. If you&rsquo;re struggling with any of the topics covered this week, we strongly recommend you work through the second tutorial as well.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><div style="width:480px"></div></th>
+<th style="text-align:left"><div style="width:200px"></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://minecr.shinyapps.io/dsbox-02-accidents/">Road Traffic Accidents</a></td>
+<td style="text-align:left">Related to HW 01</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://rstudio.cloud/learn/primers/2">Work with data</a></td>
+<td style="text-align:left">Extra practice</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+
+
+    
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card">
+    
+      
+      <img class="portrait mr-3" src="/website/authors/admin/avatar_hu53d975520220643adb7e6f60561aefe2_76296_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://sta198f2021.github.io/website/">Introduction to Global Health Data Science</a></h5>
+      <h6 class="card-subtitle">Fall 2021</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://github.com/STA198F2021" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://rstudio.com/" target="_blank" rel="noopener">
+              <i class="fab fa-r-project"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://sakai.duke.edu/" target="_blank" rel="noopener">
+              <i class="fas fa-university"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/website/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/website/js/academic.min.ed33540d237401c60f85cf8788c40575.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
