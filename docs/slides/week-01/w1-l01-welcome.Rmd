@@ -5,7 +5,9 @@ author: "[introds.org](https://introds.org/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
-    css: ["../xaringan-themer.css", "../slides.css"]
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
     lib_dir: libs
     nature:
       ratio: "16:9"
