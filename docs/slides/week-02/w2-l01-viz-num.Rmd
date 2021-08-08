@@ -1,0 +1,574 @@
+---
+title: "Visualising numerical data"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(openintro)
+
+life <- readr::read_csv("lifeexp/lifeexpectancy_infant.csv")
+regmapping <- readr::read_csv("lifeexp/loc.csv")
+lifespan=mutate(life) %>% 
+    left_join(regmapping, ., by = 'location')
+
+lifespan2019=lifespan %>%
+  filter(year=='2019') %>%
+  select(-year)
+
+lifeexpwide = lifespan %>%
+  spread(sex,lifeexp)
+
+lifeexpwide2019=lifespan %>%
+  filter(year == '2019') %>%
+     spread(sex,lifeexp) %>%
+      select(-year)
+
+
+```
+
+class: middle
+
+# Terminology
+
+---
+
+## Number of variables involved
+
+- Univariate data analysis - distribution of single variable
+- Bivariate data analysis - relationship between two variables
+- Multivariate data analysis - relationship between many variables at once, sometimes focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only a finite number of distinct values (e.g., counts), respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
+
+---
+
+## Data: Life Expectancy
+
+.pull-left-wide[
+
+- We focus again on the IHME data on estimated life expectancy for a variety of countries and locations worldwide, in the year 2019.
+
+```{r output.lines=18}
+glimpse(lifespan2019)
+```
+
+]
+
+
+---
+
+## Selected variables
+
+<br>
+
+.midi[
+variable        | description
+----------------|-------------
+`location`      |	Country or area name
+`worldbankregion` |	World region, as classified by World Bank
+`pop`	          | Estimated 2019 population of the location
+`sex`	          | Binary sex as reported by the country
+`lifeexp`       |	Life expectancy from infancy
+]
+
+---
+
+## Variable types
+
+<br>
+
+variable        | type
+----------------|-------------
+`location`   |	categorical, not ordinal
+`worldbankregion` |	categorical, not ordinal
+`pop`	        | numerical, discrete
+`sex`	        | categorical, not ordinal
+`lifeexp`         |	numerical, continuous
+
+In the full data (not subset to 2019), `year` is an additional numerical, discrete variable.
+
+---
+
+class: middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+- shape:
+    - skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    - modality: unimodal, bimodal, multimodal, uniform
+- center: mean (`mean`), median (`median`), mode 
+- spread: range (`range`), standard deviation (`sd`), variance (square of `sd`), inter-quartile range (`IQR`)
+- unusual observations
+
+---
+
+## Measures of center
+
+Consider a random variable $x_i$ that is the estimated life expectancy for country $i$, $i=1,\ldots,n$ among $n$ countries.
+
+- mean: estimated as $\overline{x}=\frac{\sum_{i=1}^n x_i}{n}$
+
+- median: middle number/50th %ile, $x_{(n+1)/2}$
+  - for $n$ odd, the median is the middle number
+  - for $n$ even, the median is the mean of the two middle numbers
+  - just remember it splits the ordered data in half
+  
+- mode: most frequent value in data set
+
+---
+
+## Measures of spread
+
+- variance: average squared distance from mean
+
+- standard deviation (sd): square root of variance (on same scale as data), often estimated in a single sample as $\frac{\sum_{i=1}^n (x_i-\overline{x})^2}{n-1}$ 
+
+- range: difference between highest and lowest values, e.g. $x_{(n)}-x_{(1)}$
+
+- interquartile range: difference between 75th and 25th %iles
+
+
+
+---
+
+class: middle
+
+# Relationships among numerical variables
+
+---
+
+## Scatterplot
+
+Previously we viewed a scatterplot showing the relationship of life expectancy of females to that of males in each location.
+
+```{r warning = FALSE,out.width="40%"}
+ggplot(lifeexpwide2019, aes(x = Female, y = Male)) +
+  geom_point() +
+  labs(title = "Life expectancy",
+       subtitle = "2019",
+       x = "Female life expectancy", y = "Male life expectancy")
+```
+
+
+---
+
+class: middle
+
+# Histogram
+
+---
+
+## Histogram
+
+```{r message = TRUE, out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram() 
+```
+
+---
+
+## Histograms and binwidth
+
+.panelset[
+.panel[.panel-name[binwidth = 1000]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 0.5) 
+```
+]
+.panel[.panel-name[binwidth = 5000]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 3) 
+```
+]
+.panel[.panel-name[binwidth = 20000]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 10) 
+```
+]
+]
+
+---
+
+## Customizing histograms
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-custom, fig.show = "hide", warning = FALSE}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_histogram(binwidth = 3) +
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        )
+```
+]
+]
+
+---
+
+## Fill with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-fill", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-fill, fig.show = "hide", warning = FALSE}
+
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + #<<
+      geom_histogram(binwidth = 3,
+                     alpha = 0.5) + #<<
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        )
+
+```
+]
+]
+
+---
+
+## Facet with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-facet", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-facet, fig.show = "hide", warning = FALSE}
+
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + 
+      geom_histogram(binwidth = 3,
+                     alpha = 0.5) + 
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        ) +
+        facet_wrap(~ worldbankregion, nrow=3) #<<
+
+```
+]
+]
+
+---
+
+
+## Facet with a categorical variable (fixing labels)
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-facet2", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-facet2, fig.show = "hide", warning = FALSE}
+
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + 
+      geom_histogram(binwidth = 3,
+                     alpha = 0.5) + 
+        labs(
+          x = "Female life expectancy (years)",
+          y = "Frequency",
+          title = "2019 Life Expectancy of Women"
+        ) +
+        facet_wrap(~ worldbankregion, nrow=3) +
+          theme(
+            strip.background = element_blank(),
+            strip.text.x = element_blank()
+          )
+
+```
+]
+]
+
+---
+
+
+class: middle
+
+# Density plot
+
+---
+
+## Density plot
+
+```{r}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_density()  #<<
+
+
+```
+
+---
+
+## Density plots and adjusting bandwidth
+
+.panelset[
+.panel[.panel-name[adjust = 0.5]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 0.5)  #<<
+```
+]
+.panel[.panel-name[adjust = 1]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 1)  #<< default bandwidth
+```
+]
+.panel[.panel-name[adjust = 2]
+```{r out.width = "40%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 2)  #<<
+```
+]
+]
+
+---
+
+## Customizing density plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "density-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r density-custom, fig.show = "hide", warning = FALSE}
+
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_density(adjust = 1) + 
+          labs( #<<
+          x = "Female life expectancy (years)", #<<
+          y = "Density", #<<
+          title = "2019 Life Expectancy of Women" #<<
+        ) #<<
+
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "density-cat", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r density-cat, fig.show = "hide", warning = FALSE}
+
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp,
+               fill = worldbankregion)) + #<<
+      geom_density(adjust = 1) + 
+          labs( 
+          x = "Female life expectancy (years)", 
+          y = "Density", 
+          title = "2019 Life Expectancy of Women",
+          fill = "Region" #<<
+        ) 
+
+```
+]
+]
+
+---
+
+class: middle
+
+# Box plot
+
+---
+
+## Box plot
+
+```{r boxp}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_boxplot() #<<
+
+```
+
+---
+
+## Box plot
+
+.pull-left[
+
+```{r ref.label = "boxp", echo = FALSE, warning = FALSE}
+```
+]
+
+.pull-right[
+- Technical specs vary across software packages
+- Median: line in middle of box
+- Hinges (25th and 75th %iles): edges of box
+- Upper whisker extends to largest data point no more than $1.5 \times IQR$ from the hinge (75th %ile); similar definition for lower whisker
+- Outliers (beyond whiskers) plotted individually
+]
+
+---
+
+## Box plot
+
+The distribution of population is highly skewed...
+
+```{r, out.width="80%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = pop)) + #<<
+      geom_boxplot()
+
+```
+
+---
+
+## Box plot
+
+Here we plot the natural logarithm of the population, due to the heavy skew (China, India). Now the outliers are the small locations.
+
+```{r, out.width="80%"}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = log(pop))) + #<<
+      geom_boxplot()
+
+```
+
+---
+
+## Customizing box plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "box-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r box-custom, fig.show = "hide", warning = FALSE}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp)) +
+      geom_boxplot() +
+         labs( #<<
+          x = "Female life expectancy (years)",  #<<
+          y = NULL,  #<<
+          title = "2019 Life Expectancy of Women" #<<
+          ) +
+      theme( #<< 
+          axis.ticks.y = element_blank(), #<<
+          axis.text.y = element_blank() #<<
+      ) #<<
+
+
+
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "box-cat", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r box-cat, fig.show = "hide", warning = FALSE}
+lifespan2019 %>%
+  filter(sex == 'Female') %>%
+    ggplot(aes(x = lifeexp,
+               y = worldbankregion)) +
+      geom_boxplot() +
+         labs( 
+          x = "Female life expectancy (years)",  
+          y = NULL,  #<<
+          title = "2019 Life Expectancy of Women",
+          subtitle = "By region"
+          ) 
+
+```
+]
+]
+

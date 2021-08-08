@@ -24,19 +24,19 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "comments"
   icon_pack = "far"
   name = "Tuesday"
-  description = "Prof. Herring hours - 1-2pm; Jackie hours - 2-3pm; Eli hours - 5-6pm"  
+  description = "Prof. Herring hours - 1-2pm <br> Jackie hours - 2-3pm <br> Eli hours - 5-6pm"  
   
 [[feature]]
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "Class - 10:15-11:30am \\ Prof. Herring hours - 11:30am-12:30pm"  
+  description = "Class - 10:15-11:30am <br> Prof. Herring hours - 11:30am-12:30pm"  
   
 [[feature]]
   icon = "comments"
   icon_pack = "far"
   name = "Thursday"
-  description = "Phuc hours - 4-5pm (Zoom); Jackie hours - 5-6pm"
+  description = "Phuc hours - 4-5pm (Zoom) <br> Jackie hours - 5-6pm"
   
 [[feature]]
   icon = "university"
