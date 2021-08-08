@@ -14,12 +14,12 @@ title = "Syllabus"
 - **Monday:** Code-along lab sessions
 - **Tuesday and Wednesday:** Professor office hours
 - **Wednesday and Friday:** Class
-- **Thursday:** TA office hours
+- **Tuesday and Thursday:** TA office hours
 
 
 ### Student hours
 
-Prof. Herring will each hold office hours on Tuesdays and Wednesdays, and TA office hours will be on Thursdays. These will not be recorded, and zoom options will be available. It's a great time to get real time answers to your questions or just say hi!
+Prof. Herring will each hold office hours on Tuesdays and Wednesdays, and TA office hours will be on Tuesdays and Thursdays. These will not be recorded, and zoom options will be available. It's a great time to get real time answers to your questions or just say hi!
 
 ### Code along sessions/labs
 
