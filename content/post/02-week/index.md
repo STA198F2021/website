@@ -27,10 +27,10 @@ title: 'Week 2 - Foundations in Probability'
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
-| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l03-viz-num.html#1)  | 
-| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l04-viz-cat.html#1)  | 
-| Introduction to Probability   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l01-prob.html#1)  | 
-| Probability in Action | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l02-prob.html#1)  | 
+| Data Visualization: Focus on Numeric Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w2-l01-viz-num.html#1)  | 
+| Data Visualization: Focus on Categorical Data      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l02-viz-cat.html#1)  | 
+| Introduction to Probability   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l03-prob.html#1)  | 
+| Probability in Action | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l04-prob.html#1)  | 
 
 
 
