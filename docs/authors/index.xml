@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | STA 198 / GLHLTH 298</title>
+    <link>https://sta198f2021.github.io/website/authors/</link>
+      <atom:link href="https://sta198f2021.github.io/website/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Sun, 08 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
+      <title>Authors</title>
+      <link>https://sta198f2021.github.io/website/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>https://sta198f2021.github.io/website/authors/amy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/amy/</guid>
+      <description>&lt;p&gt;My name is Amy Herring, and my pronouns are she/her/hers. I am Sara &amp;amp; Charles Ayres Distinguished Professor in the Department of Statistical Science and also hold appointments in the Duke Global Health Institute and in the Department of Biostatistics &amp;amp; Bioinformatics. I enjoy working on a variety of research projects on campus and beyond, and I&amp;rsquo;m excited to learn about your own interests! My work is focused on statistics and its applications in health, including analysis of longitudinal or otherwise correlated data, missing data and measurement error, Bayesian methods, and general biostatistics.  I earned my doctorate in biostatistics at Harvard, and before that I completed an undergraduate double major in English and mathematics. In addition to my work and family activities (data entry at swim meets, ha!), I enjoy reading, cats, &lt;a href=&#34;https://store.stonemaiergames.com/products/wingspan&#34;&gt;Wingspan&lt;/a&gt;, and working outdoors (i.e., working on laptop on my porch overlooking the garden with a cup of black tea!).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://sta198f2021.github.io/website/authors/eli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/eli/</guid>
+      <description>&lt;p&gt;My name is Eli Feder, and my pronouns are he/him/his. I am a senior completing a B.S. in Statistical Science with a concentration in Data Science, a B.S. in Computer Science, and a minor in Economics. On campus, I am a member of two pre-professional organizations, &lt;a href=&#34;https://dukecatalyst.com&#34;&gt;Catalyst&lt;/a&gt; and &lt;a href=&#34;https://www.tamidatduke.org&#34;&gt;TAMID&lt;/a&gt;, and a Pre-Orientation Program, &lt;a href=&#34;https://studentaffairs.duke.edu/new-students/preorientation-programs/project-waves&#34;&gt;Project Waves&lt;/a&gt;. Outside of the classroom, I like to exercise, watch sports, explore nature, and play &lt;a href=&#34;https://www.catan.com&#34;&gt;Settlers of Catan&lt;/a&gt;. Looking forward to the semester!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://sta198f2021.github.io/website/authors/jackie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/jackie/</guid>
+      <description>&lt;p&gt;Hi everyone! My name is Jackie, and I am a first year in the Masters of Statistical Science (MSS) program. I studied Economics for my undergrad at Yale, and after graduating in 2019, I worked in the tech infrastructure department of a bank (i.e. working with developers to create applications for other developers at the bank, very meta I know). I’m interested in neuroscience, specifically in decision-making, but I’m excited to see how my interests evolve in the next two years. Outside of class, I love baking &amp;amp; watching basketball (mostly the NBA but excited to watch Duke games), and I’m excited to get back into the pool after a hiatus post-collegiate swimming.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://sta198f2021.github.io/website/authors/phuc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/phuc/</guid>
+      <description>&lt;p&gt;My name is Phuc Nguyen, and I use she/her pronouns. I&amp;rsquo;m a third-year Ph.D. candidate in the Department of Statistical Science working with Professor Amy Herring and Professor David Dunson. My research interest broadly includes Bayesian statistics, analysis of multivariate data, its applications in health research, and R package development. Before Duke, I got my B.S. in Applied Math and Computer Science from Macalester College and worked as a data scientist at a startup in Minneapolis for a brief period. In my free time, I enjoy cycling, gardening, and being in nature.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://sta198f2021.github.io/website/authors/admin/</link>
+      <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/admin/</guid>
+      <description>&lt;p&gt;Rigorous introduction to health data science using current applications in biomedical research, epidemiology, and health policy. Use modern statistical software to conduct reproducible data exploration, visualization, and analysis. Interpret and translate results for interdisciplinary researchers. Critically evaluate data-based claims, decisions, and policies. Includes exploratory data analysis, visualization, basics of probability and inference, predictive modeling and classification. This course focuses on the R computing language. No statistical or computing background is necessary.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
