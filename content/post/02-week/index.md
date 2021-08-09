@@ -48,6 +48,7 @@ title: 'Week 2 - Probability'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :open_book: | IMS: [Chp 2, Study Design; Chp 4, Sec 4.1-4.3 and 4.6; Chp 5, Sec 5.1-5.5](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :open_book: | OIS: [Chp 3](https://www.openintro.org/book/os/) or PG: Chp 6: Probability | **Required** |
 | :open_book: | Seeing Theory: [Chapters 1 and 2](https://seeing-theory.brown.edu/#secondPage) | **Required** |
 
 
