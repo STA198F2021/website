@@ -264,6 +264,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Do this week (not graded, just for practice, and very strongly recommended!)&lt;/em&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -273,11 +274,6 @@
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Do this week (not graded, just for practice, and very strongly recommended!)&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Practice 1&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary&#34;&gt;Basics of R and R Studio&lt;/a&gt;&lt;/td&gt;
