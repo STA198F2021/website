@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2020-07-08T00:00:00Z"
+date: "2021-07-08T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2020-07-08T00:00:00Z"
+lastmod: "2021-07-08T00:00:00Z"
 projects: []
 subtitle: 'Linear models for predicting numerical data from single and multiple variables :chart_with_upwards_trend:'
 summary: Linear models for predicting numerical data from single and multiple variables.
