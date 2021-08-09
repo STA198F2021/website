@@ -38,12 +38,13 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
-| *Do this week (not graded, just for practice!)* | | |
+| *Do this week (not graded, just for practice, and very strongly recommended!)* | | |
 | Practice 1 | [Basics of R and R Studio](http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary) |  |
 | Practice 2  | [Basics of R Markdown](http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown) |  |
 
 
-### Readings
+
+### Readings and Videos
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
@@ -51,6 +52,8 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
 | :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2; Chp 5, Sec 5.1-5.5](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :video: | [Meet the Toolkit: Programming](https://www.youtube.com/watch?v=mTAZLFcpnLI) | **Required** |
+| :video: | [Meet the Toolkit: Version Control and Collaboration](https://www.youtube.com/watch?v=124DQasLyNQ) | **Required ** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |

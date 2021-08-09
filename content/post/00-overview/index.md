@@ -63,23 +63,23 @@ d_cal %>%
   geom_text(
     data = d_cal %>% filter(is.na(due_type)),
     aes(label = day_short), color = "grey50", size = 2,
-    nudge_x = -0.08, nudge_y = 0.1, hjust = 0
+    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
   ) +
   geom_text(
     data = d_cal %>% filter(!is.na(due_type)),
     aes(label = day_short), color = "white", size = 2,
-    nudge_x = -0.08, nudge_y = 0.03, hjust = 0
+    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
   ) +
   # date
   geom_text(
     data = d_cal %>% filter(is.na(due_type)),
     aes(label = day_of_month), color = "grey50", size = 2,
-    nudge_x = 0.08, nudge_y = -0.03, hjust = 1
+    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
   ) +
   geom_text(
     data = d_cal %>% filter(!is.na(due_type)),
     aes(label = day_of_month), color = "white", size = 2,
-    nudge_x = 0.08, nudge_y = -0.03, hjust = 1
+    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
   ) +
   # colors
   scale_fill_manual(
@@ -112,3 +112,4 @@ d_cal %>%
   ) +
   coord_cartesian(xlim = c(-0.2, 1.03), clip = "off")
 ```
+

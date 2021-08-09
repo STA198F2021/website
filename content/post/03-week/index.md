@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-31T00:00:00Z"
 projects: []
-subtitle: 'Probability and discrete distributions :wrench:'
+subtitle: 'Probability; discrete distributions :wrench:'
 summary: More probability, discrete distributions
 title: 'Week 3 - Probability in Action'
 ---
@@ -22,9 +22,6 @@ title: 'Week 3 - Probability in Action'
 - Complete the [readings](/post/03-week/#readings)
 - Complete the [assignments](/post/03-week/#assignments)
 - (Optional) Complete the [Course feedback survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMFNaSjAxMDQyUDZHQk9ZOFMxQlZERDlMUC4u) (not graded)
-- (Optional) Participate in the Virtual exchange (extra credit)
-  - *Task details to be posted*
-  - Zoom call on Friday, 9 Oct, 19:00-20:00 UK time
 
 ### Videos
 

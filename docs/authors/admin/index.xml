@@ -37,12 +37,6 @@
 &lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/03-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/03-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) Complete the &lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMFNaSjAxMDQyUDZHQk9ZOFMxQlZERDlMUC4u&#34;&gt;Course feedback survey&lt;/a&gt; (not graded)&lt;/li&gt;
-&lt;li&gt;(Optional) Participate in the Virtual exchange (extra credit)
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Task details to be posted&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Zoom call on Friday, 9 Oct, 19:00-20:00 UK time&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
 &lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -280,7 +274,7 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Do this week (not graded, just for practice!)&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Do this week (not graded, just for practice, and very strongly recommended!)&lt;/em&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
@@ -296,7 +290,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
+&lt;h3 id=&#34;readings-and-videos&#34;&gt;Readings and Videos&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -325,6 +319,16 @@
 &lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/data-hello.html&#34;&gt;Chp 1, Sec 1.1 and 1.2; Chp 5, Sec 5.1-5.5&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;:video:&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=mTAZLFcpnLI&#34;&gt;Meet the Toolkit: Programming&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;:video:&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=124DQasLyNQ&#34;&gt;Meet the Toolkit: Version Control and Collaboration&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;**Required **&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
