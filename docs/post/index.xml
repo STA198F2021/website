@@ -5,26 +5,12 @@
     <link>https://sta198f2021.github.io/website/post/</link>
       <atom:link href="https://sta198f2021.github.io/website/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Sun, 08 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Posts</title>
       <link>https://sta198f2021.github.io/website/post/</link>
     </image>
-    
-    <item>
-      <title>Overview</title>
-      <link>https://sta198f2021.github.io/website/post/00-overview/</link>
-      <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/00-overview/</guid>
-      <description>
-&lt;script src=&#34;https://sta198f2021.github.io/website/post/00-overview/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, is not super unlikely this semester! If deadlines need to be adjusted due to COVID related reasons, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines but this might be difficult to ensure.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://sta198f2021.github.io/website/post/00-overview/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Week 15 - Project Presentations</title>
@@ -843,6 +829,105 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>https://sta198f2021.github.io/website/post/00-overview/</link>
+      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/00-overview/</guid>
+      <description>&lt;p&gt;The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, is not super unlikely this semester! If deadlines need to be adjusted due to COVID related reasons, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines but this might be difficult to ensure.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-{r&#34; data-lang=&#34;{r&#34;&gt;library(tidyverse)
+library(viridis)
+library(sugrrants)
+library(lubridate)
+
+d &amp;lt;- read_csv(&amp;quot;course-calendar.csv&amp;quot;) %&amp;gt;%
+  mutate(date = dmy(date))
+
+d_cal &amp;lt;- d %&amp;gt;%
+  frame_calendar(
+    x = 1, y = 1, date = date,
+    calendar = &amp;quot;weekly&amp;quot;, week_start = -1
+  ) %&amp;gt;%
+  mutate(
+    day_short = str_sub(day, 1, 1),
+    day_short = if_else(day == &amp;quot;Thursday&amp;quot;, &amp;quot;Th&amp;quot;, day_short),
+    day_short = if_else(day == &amp;quot;Saturday&amp;quot;, &amp;quot;Sa&amp;quot;, day_short),
+    day_short = if_else(day == &amp;quot;Sunday&amp;quot;, &amp;quot;Su&amp;quot;, day_short),
+    day_of_month = day(date),
+    month = month(date, label = TRUE, abbr = TRUE),
+    day_of_month = paste(month, day_of_month),
+    due_type = fct_relevel(due_type, &amp;quot;Homework&amp;quot;, &amp;quot;Quiz&amp;quot;, &amp;quot;Lab&amp;quot;, &amp;quot;Project&amp;quot;, &amp;quot;Feedback survey&amp;quot;, &amp;quot;Exam&amp;quot;)
+  )
+
+d_cal %&amp;gt;%
+  ggplot(aes(x = .x, y = .y)) +
+  geom_tile(aes(fill = due_type, alpha = mark_type), colour = &amp;quot;gray50&amp;quot;) +
+  # labels
+  geom_text(
+    data = d_cal %&amp;gt;% filter(mark_type == &amp;quot;Graded&amp;quot;),
+    aes(label = due_detail), color = &amp;quot;white&amp;quot;,
+    size = 3, fontface = &amp;quot;bold&amp;quot;
+  ) +
+  geom_text(
+    data = d_cal %&amp;gt;% filter(mark_type != &amp;quot;Graded&amp;quot;),
+    aes(label = due_detail), color = &amp;quot;white&amp;quot;,
+    size = 3, fontface = &amp;quot;bold&amp;quot;
+  ) +
+  # day
+  geom_text(
+    data = d_cal %&amp;gt;% filter(is.na(due_type)),
+    aes(label = day_short), color = &amp;quot;grey50&amp;quot;, size = 2,
+    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
+  ) +
+  geom_text(
+    data = d_cal %&amp;gt;% filter(!is.na(due_type)),
+    aes(label = day_short), color = &amp;quot;white&amp;quot;, size = 2,
+    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
+  ) +
+  # date
+  geom_text(
+    data = d_cal %&amp;gt;% filter(is.na(due_type)),
+    aes(label = day_of_month), color = &amp;quot;grey50&amp;quot;, size = 2,
+    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
+  ) +
+  geom_text(
+    data = d_cal %&amp;gt;% filter(!is.na(due_type)),
+    aes(label = day_of_month), color = &amp;quot;white&amp;quot;, size = 2,
+    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
+  ) +
+  # colors
+  scale_fill_manual(
+    values = c(
+      &amp;quot;Homework&amp;quot;         = &amp;quot;#8fada7&amp;quot;,
+      &amp;quot;Quiz&amp;quot;             = &amp;quot;#8A8A8A&amp;quot;,
+      &amp;quot;Lab&amp;quot;              = &amp;quot;#99B2DD&amp;quot;,
+      &amp;quot;Project&amp;quot;          = &amp;quot;#5A5D74&amp;quot;,
+      &amp;quot;Exam&amp;quot;     = &amp;quot;#e9d968&amp;quot;,
+      &amp;quot;Feedback survey&amp;quot;  = &amp;quot;#E9AFA3&amp;quot;
+    ),
+    na.translate = FALSE
+  ) +
+  # alpha
+  scale_alpha_manual(values = c(&amp;quot;Graded&amp;quot; = 1, &amp;quot;Not graded&amp;quot; = 0.8, &amp;quot;Exam&amp;quot; = 0.8), guide = &amp;quot;none&amp;quot;) +
+  # theme
+  theme_void() +
+  theme(
+    legend.position = &amp;quot;bottom&amp;quot;,
+    plot.caption = element_text(face = &amp;quot;italic&amp;quot;, colour = &amp;quot;gray50&amp;quot;, hjust = 1, vjust = 33)
+  ) +
+  labs(
+    fill = &amp;quot;&amp;quot;,
+    caption = &amp;quot;Course feedback surveys are not graded.&amp;quot;
+  ) +
+  geom_text(
+    data = d_cal %&amp;gt;% filter(day == &amp;quot;Monday&amp;quot;),
+    aes(y = .y, label = paste(&amp;quot;Week&amp;quot;, week)), x = -0.1,
+    hjust = 1, color = &amp;quot;grey50&amp;quot;
+  ) +
+  coord_cartesian(xlim = c(-0.2, 1.03), clip = &amp;quot;off&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>
