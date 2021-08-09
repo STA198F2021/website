@@ -49,9 +49,11 @@ Below are a list of data repositories that might be of interest to browse. You'r
 
 ### Deliverables
 
-1. Proposal     - due Frday, October 1, at 4:00pm
-1. Presentation - Wednesday, December 1, in class
-1. Write-up     - due Wednesday, December 1, at 10:00am
+1. Proposal     - due Monday, October 11, at 4:00pm
+2. Proposal revision     - due Thursday, October 21, at 4:00 pm (optional)
+3. Write-up     - due Wednesday, December 1, at 10:00am
+4. Presentation - Wednesday, December 1 or Friday, December 3, in class
+
 
 #### Proposal
 
@@ -79,13 +81,13 @@ print preview to confirm length.
 
 #### Presentation
 
-5 minutes maximum, and each team member should say something substantial. You can either present live during your workshop or pre-record and submit your video to be played during the workshop.
+5 minutes maximum, and each team member should say something substantial. You can either present live or pre-record and submit your video to be played during the presentation day.
 
 Prepare a slide deck using the template in your repo. This template uses a package called `xaringan`, and allows you to make presentation slides using R Markdown syntax. There isn't a limit to how many slides you can use, just a time limit (5 minutes total). Each team member should get a chance to speak during the presentation. Your presentation should not just be an account of everything you tried ("then we did this, then we did this, etc."), instead it should convey what choices you made, and why, and what you found.
 
 Before you finalize your presentation, make sure your chunks are turned off with `echo = FALSE`. 
 
-Presentation schedule: Presentations will take place during the last workshop of the semester. You can choose to do your presentation live or pre-record it. During your workshop you will watch presentations from other teams in your workshop and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
+Presentation schedule: Presentations will take place during the first week of December. You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
 
 #### Write-up
 

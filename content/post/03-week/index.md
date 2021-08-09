@@ -11,9 +11,9 @@ image:
   preview_only: true
 lastmod: "2021-07-31T00:00:00Z"
 projects: []
-subtitle: 'Data wrangling, joining, and tidying :wrench:'
-summary: Data wrangling, joining, and tidying.
-title: 'Week 3 - Wrangling and tidying data'
+subtitle: 'Probability and discrete distributions :wrench:'
+summary: More probability, discrete distributions
+title: 'Week 3 - Probability in Action'
 ---
 
 ### Tasks
