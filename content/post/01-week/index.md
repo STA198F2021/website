@@ -51,9 +51,9 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
-| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2; Chp 5, Sec 5.1-5.5](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
-| :video: | [Meet the Toolkit: Programming](https://www.youtube.com/watch?v=mTAZLFcpnLI) | **Required** |
-| :video: | [Meet the Toolkit: Version Control and Collaboration](https://www.youtube.com/watch?v=124DQasLyNQ) | **Required ** |
+| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :movie_camera: | [Meet the Toolkit: Programming](https://www.youtube.com/watch?v=mTAZLFcpnLI) | **Required** |
+| :movie_camera: | [Meet the Toolkit: Version Control and Collaboration](https://www.youtube.com/watch?v=124DQasLyNQ) | **Required** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |
