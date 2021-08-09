@@ -63,7 +63,7 @@ d_cal %>%
   geom_text(
     data = d_cal %>% filter(is.na(due_type)),
     aes(label = day_short), color = "grey50", size = 2,
-    nudge_x = -0.08, nudge_y = 0.03, hjust = 0
+    nudge_x = -0.08, nudge_y = 0.1, hjust = 0
   ) +
   geom_text(
     data = d_cal %>% filter(!is.na(due_type)),
