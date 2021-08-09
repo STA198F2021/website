@@ -6,7 +6,7 @@ active = true  # Activate this widget? true/false
 weight = 20  # Order that this section will appear.
 
 title = "Timetable"
-subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; office hours Tuesdays, Wednesdays, and Thursdays; labs due Wednesdays; quizzes due Wednesdays; homework due Fridays."
+subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; office hours Tuesdays, Wednesdays, and Thursdays; quizzes due Tuesdays; labs due Wednesdays; homework due Fridays."
 
 # Showcase important course info at a glance.
 # 

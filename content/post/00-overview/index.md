@@ -1,14 +1,22 @@
 ---
 authors:
 - admin
-date: "2020-09-13T00:00:00Z"
+date: "2021-08-08T00:00:00Z"
 draft: false
 featured: false
-lastmod: "2020-09-13T00:00:00Z"
+image:
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pNi5UJbCVHM)'
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2021-08-08T00:00:00Z"
 projects: []
+subtitle: 'Welcome to STA 198 / GLHLTH 298!'
 summary: This is a tentative course schedule. The flow of topics might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances.
 title: 'Overview'
 ---
+
+
 
 The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, is not super unlikely this semester! If deadlines need to be adjusted due to COVID related reasons, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines but this might be difficult to ensure.
 
@@ -34,7 +42,7 @@ d_cal <- d %>%
     day_of_month = day(date),
     month = month(date, label = TRUE, abbr = TRUE),
     day_of_month = paste(month, day_of_month),
-    due_type = fct_relevel(due_type, "Homework", "Quiz", "Lab", "Project", "Feedback survey", "Extra credit")
+    due_type = fct_relevel(due_type, "Homework", "Quiz", "Lab", "Project", "Feedback survey", "Exam")
   )
 
 d_cal %>%
@@ -42,12 +50,12 @@ d_cal %>%
   geom_tile(aes(fill = due_type, alpha = mark_type), colour = "gray50") +
   # labels
   geom_text(
-    data = d_cal %>% filter(mark_type == "Marked"),
+    data = d_cal %>% filter(mark_type == "Graded"),
     aes(label = due_detail), color = "white",
     size = 3, fontface = "bold"
   ) +
   geom_text(
-    data = d_cal %>% filter(mark_type != "Marked"),
+    data = d_cal %>% filter(mark_type != "Graded"),
     aes(label = due_detail), color = "white",
     size = 3, fontface = "bold"
   ) +
@@ -80,13 +88,13 @@ d_cal %>%
       "Quiz"             = "#8A8A8A",
       "Lab"              = "#99B2DD",
       "Project"          = "#5A5D74",
-      "Extra credit"     = "#e9d968",
+      "Exam"     = "#e9d968",
       "Feedback survey"  = "#E9AFA3"
     ),
     na.translate = FALSE
   ) +
   # alpha
-  scale_alpha_manual(values = c("Marked" = 1, "Not marked" = 0.8, "Extra credit" = 0.8), guide = FALSE) +
+  scale_alpha_manual(values = c("Graded" = 1, "Not graded" = 0.8, "Exam" = 0.8), guide = "none") +
   # theme
   theme_void() +
   theme(
@@ -95,7 +103,7 @@ d_cal %>%
   ) +
   labs(
     fill = "",
-    caption = "Homework 0, Lab 0, Quiz 0, and course feedback surveys are not marked."
+    caption = "Course feedback surveys are not graded."
   ) +
   geom_text(
     data = d_cal %>% filter(day == "Monday"),

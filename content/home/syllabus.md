@@ -40,11 +40,11 @@ Beyond the in class activities, you will be assigned regular homework assignment
 
 ### Quizzes
 
-Regular quizzes on Sakai will be used to ensure students are keeping up with the reading assignments. These quizzes will generally be due Wednesday mornings by 10:00 am and should be completed individually.
+Regular quizzes on Sakai will be used to ensure students are keeping up with the reading assignments. These quizzes will generally be due Tuesday evenings by 11:59 pm and should be completed individually. They will be added together and count towards the semester grade as a single homework.
 
 ### Final project
 
-You will be responsible for the completion of an open ended final project for this course, the goal of which is to tackle an "interesting" problem using the tools and techniques covered in this class. Additional details on the project will be provided as the course progresses. Each team's work will also be shared with and evaluated by at least one other team at an earlier stage in order to provide feedback. You must complete the final project and be in class (or on video) to present it. 
+You will be responsible for the completion of an open ended final project for this course, the goal of which is to tackle an "interesting" problem using the tools and techniques covered in this class. Additional details on the project will be provided as the course progresses. You must complete the final project and be in class (or on video) to present it to earn a project grade. 
 
 ### Teams 
 
@@ -58,11 +58,10 @@ Students are expected to make use of the provided GitHub repository as their cen
 
 Your overall course grade will be comprised of the following components, and their weights:
 
-- Homework: 15%
+- Homework and Quizzes: 15%
 - Labs: 15%
-- Quizzes: 10%
-- Project: 15%
-- Exams (10% exam 1; 15% exam 2; 20% final exam)
+- Project: 20%
+- Exams (10% exam 1; 15% exam 2; 25% final exam)
 
 A letter grade will be assigned as follows.
 
@@ -88,7 +87,7 @@ Regrade requests must be made within two days of when a report is returned. Thes
 
 ## Policies
 
-## Class attendance
+## Class attendance and etiquette
 
 Students are expected to attend class and labs in person, health permitting. Students with respiratory symptoms (or symptoms of other diseases communicable in a classroom setting) should stay home and watch class recordings.
 
@@ -168,6 +167,6 @@ I want to make sure that you learn everything you were hoping to learn from this
 
 - You *never* owe me personal information about your health (mental or physical), but you're always welcome to talk to me. If I can’t help, I likely know someone who can.
 
-- I want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis.
+- I want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during the semester.
 ]
 
