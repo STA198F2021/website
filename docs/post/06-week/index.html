@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Harvesting data from the web, writing functions, and iteration.">
+  <meta name="description" content="Learn about the normal distribution and its central role in formal evaluation of hypotheses and construction of confidence intervals">
 
   
   <link rel="alternate" hreflang="en-us" href="https://sta198f2021.github.io/website/post/06-week/">
@@ -110,14 +110,14 @@
   
   <meta property="og:site_name" content="STA 198 / GLHLTH 298">
   <meta property="og:url" content="https://sta198f2021.github.io/website/post/06-week/">
-  <meta property="og:title" content="Week 6 - Web scraping and programming  | STA 198 / GLHLTH 298">
-  <meta property="og:description" content="Harvesting data from the web, writing functions, and iteration."><meta property="og:image" content="https://sta198f2021.github.io/website/post/06-week/featured.jpg">
+  <meta property="og:title" content="Week 6 - Normal Distribution and Hypothesis Testing | STA 198 / GLHLTH 298">
+  <meta property="og:description" content="Learn about the normal distribution and its central role in formal evaluation of hypotheses and construction of confidence intervals"><meta property="og:image" content="https://sta198f2021.github.io/website/post/06-week/featured.jpg">
   <meta property="twitter:image" content="https://sta198f2021.github.io/website/post/06-week/featured.jpg"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2020-10-26T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2021-07-06T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2020-10-26T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-07-06T00:00:00&#43;00:00">
   
 
   
@@ -145,14 +145,14 @@
     "@type": "WebPage",
     "@id": "https://sta198f2021.github.io/website/post/06-week/"
   },
-  "headline": "Week 6 - Web scraping and programming ",
+  "headline": "Week 6 - Normal Distribution and Hypothesis Testing",
   
   "image": [
     "https://sta198f2021.github.io/website/post/06-week/featured.jpg"
   ],
   
-  "datePublished": "2020-10-26T00:00:00Z",
-  "dateModified": "2020-10-26T00:00:00Z",
+  "datePublished": "2021-07-06T00:00:00Z",
+  "dateModified": "2021-07-06T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -167,7 +167,7 @@
       "url": "https://sta198f2021.github.io/website/img/icon-512.png"
     }
   },
-  "description": "Harvesting data from the web, writing functions, and iteration."
+  "description": "Learn about the normal distribution and its central role in formal evaluation of hypotheses and construction of confidence intervals"
 }
 </script>
 
@@ -185,7 +185,7 @@
 
 
 
-  <title>Week 6 - Web scraping and programming  | STA 198 / GLHLTH 298</title>
+  <title>Week 6 - Normal Distribution and Hypothesis Testing | STA 198 / GLHLTH 298</title>
 
 </head>
 
@@ -568,10 +568,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>Week 6 - Web scraping and programming </h1>
+  <h1>Week 6 - Normal Distribution and Hypothesis Testing</h1>
 
   
-  <p class="page-subtitle">Harvesting data from the web, writing functions, and iteration 🕸️</p>
+  <p class="page-subtitle">Normal distribution, central limit theorem, and null hypothesis significance testing frameworkn 🕸️</p>
   
 
   
@@ -602,7 +602,7 @@
     
       
     
-    Mon, Oct 26, 2020
+    Tue, Jul 6, 2021
   </span>
   
 
@@ -649,206 +649,12 @@
     <div class="article-style">
       <h3 id="tasks">Tasks</h3>
 <ul>
-<li>Watch the <a href="/post/06-week/#videos">videos</a></li>
 <li>Complete the <a href="/post/06-week/#readings">readings</a></li>
 <li>Complete the <a href="/post/06-week/#assignments">assignments</a></li>
 <li>(Optional) Complete the <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYQkmofaddEJLg-Rh784Tz0RUMUhLSFM2WFJUS0pKTUtVQk5RSzhVRFNIQi4u">Course feedback survey</a> by 5pm on Friday, 30th October (not graded)</li>
 </ul>
-<h3 id="videos">Videos</h3>
-<p>You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube <a href="https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM">here</a> and on MediaHopper <a href="https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/">here</a>.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><div style="width:50px;text-align:center">No.</div></th>
-<th style="text-align:left"><div style="width:250px;text-align:left">Title</div></th>
-<th style="text-align:center"><div style="width:80px;text-align:center">YouTube</div></th>
-<th style="text-align:center"><div style="width:80px;text-align:center">MediaHopper</div></th>
-<th style="text-align:center"><div style="width:80px;text-align:center">Slides</div></th>
-<th style="text-align:center"><div style="width:80px;text-align:center">Length</div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">01</td>
-<td style="text-align:left">Keeping up with IDS: Week 6</td>
-<td style="text-align:center"><a href="https://youtu.be/eaW75u5P3Po"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+01+-+Keeping+up+with+IDS/1_063n7681"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d01-kuwids/w6-d01-kuwids.pdf"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">9:38</td>
-</tr>
-<tr>
-<td style="text-align:center">02</td>
-<td style="text-align:left">Web scraping</td>
-<td style="text-align:center"><a href="https://youtu.be/99Hkmfb2i80"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+02+-+Web+scraping/1_vxsk6ib7"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d02-web-scrape/w6-d02-scrape.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">14:25</td>
-</tr>
-<tr>
-<td style="text-align:center">03</td>
-<td style="text-align:left">Scraping top 250 movies on IMDB</td>
-<td style="text-align:center"><a href="https://youtu.be/YmKULNLsDsU"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+03+-+Scraping+IMDB+Top+250/1_5qf90v3o"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d03-top-250-imdb/w6-d03-top-250-imdb.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">24:15</td>
-</tr>
-<tr>
-<td style="text-align:center">04</td>
-<td style="text-align:left">Web scraping considerations</td>
-<td style="text-align:center"><a href="https://youtu.be/LONRJHMvSyU"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+04+-+Web+scraping+considerations/1_brmywhm0"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d04-considerations/w6-d04-considerations.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">8:54</td>
-</tr>
-<tr>
-<td style="text-align:center">05</td>
-<td style="text-align:left">AE: IMDB + Web scraping</td>
-<td style="text-align:center"><a href="https://youtu.be/PetWV5g1Xsc"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+05+-+AEA+IMDB+%2B+Web+scraping/1_sia7s04u"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">34:47</td>
-</tr>
-<tr>
-<td style="text-align:center">06</td>
-<td style="text-align:left">Functions</td>
-<td style="text-align:center"><a href="https://youtu.be/6KWlPhPMluE"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+06+-+Functions/1_jb8cw8s1"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d06-functions/w6-d06-functions.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">21:58</td>
-</tr>
-<tr>
-<td style="text-align:center">07</td>
-<td style="text-align:left">Iteration</td>
-<td style="text-align:center"><a href="https://youtu.be/x3UMny1fQhc"><span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+07+-+Iteration/1_70vyo0z9"><span style='color: #0A1E3F;'><i class='fas fa-file-video fa-lg'></i></span></a></td>
-<td style="text-align:center"><a href="https://ids-s1-20.github.io/slides/week-06/w6-d07-iteration/w6-d07-iteration.html"><span style='color: #4b5357;'><i class='fas fa-desktop fa-lg'></i></span></a></td>
-<td style="text-align:center">13:54</td>
-</tr>
-</tbody>
-</table>
-<h3 id="assignments">Assignments</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><div style="width:120px;text-align:left">Assignment</div></th>
-<th style="text-align:left"><div style="width:340px;text-align:left">Title</div></th>
-<th style="text-align:left"><div style="width:200px;text-align:left">Due</div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><em>Due this week</em></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Project</td>
-<td style="text-align:left"><a href="https://www.introds.org/#project">Proposal</a></td>
-<td style="text-align:left">Tue, 27 Oct, 16:00 UK</td>
-</tr>
-<tr>
-<td style="text-align:left">HW 02</td>
-<td style="text-align:left"><a href="https://ids-s1-20.github.io/homework/hw-02/hw-02-majors-legos.html">Majors + legos</a></td>
-<td style="text-align:left">Thur, 29 Oct, 16:00 UK</td>
-</tr>
-<tr>
-<td style="text-align:left">OQ 05</td>
-<td style="text-align:left"><a href="http://minecr.shinyapps.io/05-scrape-iterate">Scrape + iterate</a></td>
-<td style="text-align:left">Sun, 1 Nov, 23:59 UK</td>
-</tr>
-<tr>
-<td style="text-align:left"><em>Due next week</em></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Lab 04</td>
-<td style="text-align:left"><a href="https://ids-s1-20.github.io/labs/lab-04/lab-04-uoe-art.html">UoE Art Collection</a></td>
-<td style="text-align:left">Tue, 3 Nov, 16:00 UK</td>
-</tr>
-<tr>
-<td style="text-align:left">Feedback</td>
-<td style="text-align:left">Peer evaluation 02 (emailed via TEAMMATES)</td>
-<td style="text-align:left">Wed, 4 Nov, 16:00 UK</td>
-</tr>
-<tr>
-<td style="text-align:left">Project</td>
-<td style="text-align:left"><em>Proposal, take 2 (Optional)</em></td>
-<td style="text-align:left">Fri, 6 Nov, 16:00 UK</td>
-</tr>
-</tbody>
-</table>
 <h3 id="readings">Readings</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><div style="width:50px"></div></th>
-<th style="text-align:left"><div style="width:420px"></div></th>
-<th style="text-align:center"><div style="width:200px"></div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">📄</td>
-<td style="text-align:left"><a href="https://rvest.tidyverse.org/articles/selectorgadget.html">Selector Gadget</a></td>
-<td style="text-align:center"><strong>Required</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">📖</td>
-<td style="text-align:left">R4DS: <a href="https://r4ds.had.co.nz/functions.html">Chp 19, Functions</a></td>
-<td style="text-align:center"><strong>Required</strong></td>
-</tr>
-<tr>
-<td style="text-align:center">📖</td>
-<td style="text-align:left">R4DS: <a href="https://r4ds.had.co.nz/iteration.html">Chp 21, Iteration</a> - Only the following sections: 21.1, 21.2, 21.5.1, and 21.5.2</td>
-<td style="text-align:center"><strong>Optional</strong></td>
-</tr>
-</tbody>
-</table>
-<h3 id="code-along">Code-along</h3>
-<p>You can find starter code for this session on <a href="https://rstudio.cloud/">RStudio Cloud</a>, in the project titled <em>Code Along 06 - First Minister&rsquo;s COVID-19 Speeches</em>.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><div style="width:200px"></div></th>
-<th style="text-align:left"><div style="width:480px"></div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Recording</td>
-<td style="text-align:left"><a href="https://youtu.be/ioY_CHDZxi4"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a>       <a href="https://media.ed.ac.uk/media/IDS+-+Week+06+-+Code+along/1_kaonzufc"><span style="color: #0A1E3F;"><i class="fas fa-file-video fa-lg"></i></span></a></td>
-</tr>
-<tr>
-<td style="text-align:left">Session artifacts</td>
-<td style="text-align:left"><a href="https://github.com/ids-s1-20/code-along/blob/master/06-code-along/05-analyse.Rmd"><strong><code>.Rmd</code></strong></a>     <a href="https://github.com/ids-s1-20/code-along/blob/master/06-code-along/05-analyse.md"><strong><code>.md</code></strong></a>     <a href="https://github.com/ids-s1-20/code-along/blob/master/06-code-along/"><strong><code>.R</code></strong></a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="interactive-r-tutorials">Interactive R tutorials</h3>
-<p>The following are interactive R tutorials, designed to give you more practice with R. These are optional, but they will show up in your next homework assignment, so you should gain familiarity with it. If you&rsquo;re struggling with any of the topics covered this week, we strongly recommend you work through the interactive tutorials.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><div style="width:480px"></div></th>
-<th style="text-align:left"><div style="width:200px"></div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/">Money in US Politics</a></td>
-<td style="text-align:left">Related to HW 03</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://rstudio.cloud/learn/primers/6">Write functions</a> (Function basics, How to write a function, and Arguments)</td>
-<td style="text-align:left"><em>Optional</em></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://rstudio.cloud/learn/primers/5">Iterate</a> (Introduction to iteration, Map, and Map shortcuts)</td>
-<td style="text-align:left"><em>Optional</em></td>
-</tr>
-</tbody>
-</table>
+<h3 id="assignments">Assignments</h3>
 
     </div>
 

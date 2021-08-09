@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2021-07-31T00:00:00Z"
+date: "2021-07-03T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-07-31T00:00:00Z"
+lastmod: "2021-07-03T00:00:00Z"
 projects: []
 subtitle: 'Probability; discrete distributions :wrench:'
 summary: More probability, discrete distributions

@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2021-08-08T00:00:00Z"
+date: "2021-06-30T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-08-08T00:00:00Z"
+lastmod: "2021-06-30T00:00:00Z"
 projects: []
 subtitle: 'Welcome to STA 198 / GLHLTH 298!'
 summary: This is a tentative course schedule. The flow of topics might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances.
