@@ -26,7 +26,6 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
-|  Meet the course team | link here  | 
 | Welcome to IDS!       | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l01-welcome.html#1)  | 
 | First dataviz    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-ae01-your-turn-lifeexp-covid.html#1) | 
 | Data Visualization Start-Up      | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-01/w1-l02-ggplot2.html#1)  | 
@@ -51,7 +50,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 | :page_facing_up: | [Course syllabus](https://sta198f2021.github.io/website/) | **Required** | 
 | :open_book: | R4DS: [Chp 2, Introduction](https://r4ds.had.co.nz/explore-intro.html) | **Required** |
 | :open_book: | [R4DS::Chp 3 - Data visualisation](https://r4ds.had.co.nz/data-visualisation.html) | **Required** |
-| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
+| :open_book: | IMS: [Chp 1, Sec 1.1 and 1.2; Chp 5, Sec 5.1-5.5](https://openintro-ims.netlify.app/data-hello.html) | **Required** |
 | :page_facing_up: | [How to read an R help page (Section A.1.1)](https://socviz.co/appendix.html#a-little-more-about-r) | Optional | 
 | :page_facing_up: | [rOpenSci's Reproducibility Guide](https://ropensci.github.io/reproducibility-guide/sections/introduction/) | Optional |
 | :page_facing_up: | [1,500 scientists lift the lid on reproducibility](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970) | Optional |
