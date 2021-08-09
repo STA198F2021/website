@@ -6,7 +6,7 @@ draft: false
 featured: false
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pNi5UJbCVHM)'
-  focal_point: ""
+  focal_point: "Center"
   placement: 2
   preview_only: true
 lastmod: "2021-07-01T00:00:00Z"

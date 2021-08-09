@@ -5,7 +5,7 @@ date: "2021-07-15T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/A-NVHPka9Rk)'
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/K_VeavYEfdA)'
   focal_point: ""
   placement: 2
   preview_only: true
