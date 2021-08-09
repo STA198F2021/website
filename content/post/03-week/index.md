@@ -18,10 +18,9 @@ title: 'Week 3 - Probability in Action'
 
 ### Tasks
 
-- Watch the [videos](/post/03-week/#videos)
 - Complete the [readings](/post/03-week/#readings)
 - Complete the [assignments](/post/03-week/#assignments)
-- (Optional) Complete the [Course feedback survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMFNaSjAxMDQyUDZHQk9ZOFMxQlZERDlMUC4u) (not graded)
+
 
 
 
