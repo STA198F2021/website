@@ -22,7 +22,11 @@ title: 'Week 3 - Probability in Action'
 - Complete the [assignments](/post/03-week/#assignments)
 
 
+### Class Slides and Activities
 
+| <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
+|:---:|:---------------------|
+| Probability in Action    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-03/w3-l01-probinaction.html#1)  | 
 
 ### Assignments
 
