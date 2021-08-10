@@ -52,7 +52,7 @@ One thing to note is that the proportion of positive test results is quite high.
 
 ### Describing COVID Test Properties
 
-Last time we discussed properties of a mammogram for diagnosing breast cancer. In the breast cancer setting, we have well-established diagnostic procedures and a "gold standard" of diagnosis (surgery and pathological examination). For COVID, diagnostics are still evolving, and we lack a perfect diagnosis - in their FDA submission, InteliSwab was compared to a molecular assay (RT-PCR), which is not a perfect diagnostic measure (though we think it is very good).
+Last time we discussed properties of a mammogram for diagnosing breast cancer. In the breast cancer setting, we have well-established diagnostic procedures and a "gold standard" of diagnosis (surgery and pathological examination). For COVID, diagnostics are still evolving, and we lack a perfect diagnosis - in their FDA submission, InteliSwab was compared to a molecular assay (RT-PCR), which is not a perfect diagnostic measure (though we think it is very good). Without a perfect diagnosis as a reference, we aren't really sure about sensitivity and specificity.
 
 For this reason, instead of talking about **sensitivity** of the rapid test, we talk about **positive percent agreement**, and instead of talking about **specificity**, we talk about **negative percent agreement**, even though we calculate these quantities similarly.
 
@@ -112,6 +112,6 @@ Using these data, calculate the following probabilities. Let the event $A$ denot
 
 Suppose the probability of missingness conditional on race is the same in Alaska and Washington. However, proportionately more Alaska Native and Native American women live in Alaska, with racial distribution 71.7% white, 4% African American, 17.1% American Indian and Alaska Native, and 7.2% Asian.
 
-Consider a missing woman in Alaska. Use Bayes's Theorem to derive the probability that she is Alaska Native or American Indian, given that she is missing. How does this probability compare to the probability you calculated for Washington?
+Consider a missing woman in Alaska. Use Bayes' Theorem to derive the probability that she is Alaska Native or American Indian, given that she is missing. How does this probability compare to the probability you calculated for Washington?
 
 

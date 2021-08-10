@@ -29,7 +29,7 @@ title: 'Week 2 - Probability'
 | Visualizing Categorical Data     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l01-viz-num.html#1)  | 
 | Visualizing Numerical Data    |  [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l02-viz-cat.html#1) | 
 | Introduction to Probability     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l03-prob.html#1)  | 
-
+| Conditional Probability     | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-02/w2-l04-condprob.html#1)  | 
 
 
 
