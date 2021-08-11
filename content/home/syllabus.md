@@ -87,9 +87,11 @@ Regrade requests must be made within two days of when a report is returned. Thes
 
 ## Policies
 
-## Class attendance and etiquette
+### Class attendance and etiquette
 
 Students are expected to attend class and labs in person, health permitting. Students with respiratory symptoms (or symptoms of other diseases communicable in a classroom setting) should stay home and watch class recordings.
+
+If you need to miss class due to a [religious holiday](https://trinity.duke.edu/undergraduate/academic-policies/religious-holidays), [illness](https://trinity.duke.edu/undergraduate/academic-policies/illness), or [varsity athletics](https://trinity.duke.edu/undergraduate/academic-policies/athletic-varsity-participation) be sure to follow appropriate university policies (linked for convenience).
 
 ### Zoom expectations
 
@@ -146,6 +148,11 @@ All work is due on the stated due date. Due dates are there to help guide your p
     - Example: If a student misses both exam 1 and exam 2, the final exam grade will substitute for exam 2 (worth more points), and the exam 1 grade will be zero.
     - Example: If a student completes all three exams, and the final exam grade is higher than the grade for either exam 1 or exam 2, then the final exam grade will substitute for the prior exam grade in a manner that maximizes the student's score (because the exams have unequal weight in the final grade calculation, it may be preferable to use the final exam to substitute for the exam 2 grade due to its heavier weight, even if its score is slightly higher than the score on exam 1). If the final exam grade is lower than the grades on exam 1 or exam 2, no substitutions will be made.
     - Example: If a student misses the final exam, the course grade will be X unless the student is failing (in which case the course grade is F). If no acceptable explanation is presented to the academic dean's office within 48 hours of missing the exam, the course grade is F. If the exam absence is excused, the dean, Professor, and student make arrangements for a make-up examination as soon as possible.
+    
+### Accommodations
+
+Duke University is committed to providing equal access to students with documented disabilities. Students with disabilities may contact the [Student Disability Access Office (SDAO)](https://access.duke.edu/students) to ensure your access to this course and to the program. There you can engage in a confidential conversation about the process for requesting reasonable accommodations both in the classroom and in clinical settings. Students are encouraged to register with the SDAO as soon as they matriculate. Please note that accommodations are not provided retroactively. 
+
 
 
 ### Diversity & inclusion
