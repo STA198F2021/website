@@ -18,19 +18,19 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "keyboard"
   icon_pack = "fas"
   name = "Monday"
-  description = "Code along lab sessions <br>10:15-11:30am (Jackie+Chris) <br>1:45-3:00pm (Phuc+Eli)<br>or 5:15-6:30pm (Phuc+Eli)"  
+  description = "Code along lab sessions <br>10:15-11:30am, Perkins Link 087 <br> with Jackie and Chris <br>1:45-3:00pm, Perkins Link 079 <br> with Phuc and Eli <br>or 5:15-6:30pm, Perkins Link 078 <br> with Phuc and Eli"  
    
 [[feature]]
   icon = "comments"
   icon_pack = "far"
   name = "Tuesday"
-  description = "Prof. Herring hours - 1-2pm <br> Jackie hours - 2-3pm <br> Eli hours - 5-6pm"  
+  description = "Prof. Herring hours - 1-2pm <br> 208 Old Chem <br> Jackie hours - 2-3pm <br> Eli hours - 5-6pm"  
   
 [[feature]]
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "Class - 10:15-11:30am <br> Prof. Herring hours - 11:30am-12:30pm"  
+  description = "Class - 10:15-11:30am <br> Social Sciences 136 <br> Prof. Herring hours - 11:30am-12:30pm <br> 208 Old Chem"  
   
 [[feature]]
   icon = "comments"
@@ -42,5 +42,5 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "university"
   icon_pack = "fas"
   name = "Friday"
-  description = "Class - 10:15-11:30am"
+  description = "Class - 10:15-11:30am <br> Social Sciences 136"  
 +++
