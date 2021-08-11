@@ -104,16 +104,15 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="STA 198 / GLHLTH 298">
   <meta property="og:url" content="https://sta198f2021.github.io/website/post/00-overview/">
   <meta property="og:title" content="Overview | STA 198 / GLHLTH 298">
-  <meta property="og:description" content="This is a tentative course schedule. The flow of topics might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances."><meta property="og:image" content="https://sta198f2021.github.io/website/img/icon-192.png">
-  <meta property="twitter:image" content="https://sta198f2021.github.io/website/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="This is a tentative course schedule. The flow of topics might change slightly depending on how quickly / slowly it feels right to progress through them. However the deadlines for assignments will not change barring unexpected circumstances."><meta property="og:image" content="https://sta198f2021.github.io/website/post/00-overview/featured.jpg">
+  <meta property="twitter:image" content="https://sta198f2021.github.io/website/post/00-overview/featured.jpg"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2021-06-30T00:00:00&#43;00:00">
@@ -147,6 +146,10 @@
     "@id": "https://sta198f2021.github.io/website/post/00-overview/"
   },
   "headline": "Overview",
+  
+  "image": [
+    "https://sta198f2021.github.io/website/post/00-overview/featured.jpg"
+  ],
   
   "datePublished": "2021-06-30T00:00:00Z",
   "dateModified": "2021-06-30T00:00:00Z",
@@ -645,97 +648,8 @@
 
     <div class="article-style">
       <p>The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However, the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, may occur this semester! If deadlines need to be adjusted after the first day of class, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines, but this might be difficult to ensure.</p>
-<pre><code class="language-{r" data-lang="{r">library(tidyverse)
-library(viridis)
-library(sugrrants)
-library(lubridate)
+<p><img src="scheduleplot.png" alt=""></p>
 
-d &lt;- read_csv(&quot;course-calendar.csv&quot;) %&gt;%
-  mutate(date = dmy(date))
-
-d_cal &lt;- d %&gt;%
-  frame_calendar(
-    x = 1, y = 1, date = date,
-    calendar = &quot;weekly&quot;, week_start = -1
-  ) %&gt;%
-  mutate(
-    day_short = str_sub(day, 1, 1),
-    day_short = if_else(day == &quot;Thursday&quot;, &quot;Th&quot;, day_short),
-    day_short = if_else(day == &quot;Saturday&quot;, &quot;Sa&quot;, day_short),
-    day_short = if_else(day == &quot;Sunday&quot;, &quot;Su&quot;, day_short),
-    day_of_month = day(date),
-    month = month(date, label = TRUE, abbr = TRUE),
-    day_of_month = paste(month, day_of_month),
-    due_type = fct_relevel(due_type, &quot;Homework&quot;, &quot;Quiz&quot;, &quot;Lab&quot;, &quot;Project&quot;, &quot;Feedback survey&quot;, &quot;Exam&quot;)
-  )
-
-d_cal %&gt;%
-  ggplot(aes(x = .x, y = .y)) +
-  geom_tile(aes(fill = due_type, alpha = mark_type), colour = &quot;gray50&quot;) +
-  # labels
-  geom_text(
-    data = d_cal %&gt;% filter(mark_type == &quot;Graded&quot;),
-    aes(label = due_detail), color = &quot;white&quot;,
-    size = 3, fontface = &quot;bold&quot;
-  ) +
-  geom_text(
-    data = d_cal %&gt;% filter(mark_type != &quot;Graded&quot;),
-    aes(label = due_detail), color = &quot;white&quot;,
-    size = 3, fontface = &quot;bold&quot;
-  ) +
-  # day
-  geom_text(
-    data = d_cal %&gt;% filter(is.na(due_type)),
-    aes(label = day_short), color = &quot;grey50&quot;, size = 2,
-    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
-  ) +
-  geom_text(
-    data = d_cal %&gt;% filter(!is.na(due_type)),
-    aes(label = day_short), color = &quot;white&quot;, size = 2,
-    nudge_x = -0.08, nudge_y = 0.02, hjust = 0
-  ) +
-  # date
-  geom_text(
-    data = d_cal %&gt;% filter(is.na(due_type)),
-    aes(label = day_of_month), color = &quot;grey50&quot;, size = 2,
-    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
-  ) +
-  geom_text(
-    data = d_cal %&gt;% filter(!is.na(due_type)),
-    aes(label = day_of_month), color = &quot;white&quot;, size = 2,
-    nudge_x = 0.08, nudge_y = -0.01, hjust = 1
-  ) +
-  # colors
-  scale_fill_manual(
-    values = c(
-      &quot;Homework&quot;         = &quot;#8fada7&quot;,
-      &quot;Quiz&quot;             = &quot;#8A8A8A&quot;,
-      &quot;Lab&quot;              = &quot;#99B2DD&quot;,
-      &quot;Project&quot;          = &quot;#5A5D74&quot;,
-      &quot;Exam&quot;     = &quot;#e9d968&quot;,
-      &quot;Feedback survey&quot;  = &quot;#E9AFA3&quot;
-    ),
-    na.translate = FALSE
-  ) +
-  # alpha
-  scale_alpha_manual(values = c(&quot;Graded&quot; = 1, &quot;Not graded&quot; = 0.8, &quot;Exam&quot; = 0.8), guide = &quot;none&quot;) +
-  # theme
-  theme_void() +
-  theme(
-    legend.position = &quot;bottom&quot;,
-    plot.caption = element_text(face = &quot;italic&quot;, colour = &quot;gray50&quot;, hjust = 1, vjust = 33)
-  ) +
-  labs(
-    fill = &quot;&quot;,
-    caption = &quot;Course feedback surveys are not graded.&quot;
-  ) +
-  geom_text(
-    data = d_cal %&gt;% filter(day == &quot;Monday&quot;),
-    aes(y = .y, label = paste(&quot;Week&quot;, week)), x = -0.1,
-    hjust = 1, color = &quot;grey50&quot;
-  ) +
-  coord_cartesian(xlim = c(-0.2, 1.03), clip = &quot;off&quot;)
-</code></pre>
     </div>
 
     
