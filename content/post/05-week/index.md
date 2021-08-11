@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-05T00:00:00Z"
 projects: []
-subtitle: 'Visualizing Spatial Data :speech_bubble:'
+subtitle: 'Visualizing Spatial Data :world_map:'
 summary: Tips for effective visualization of spatial data
 title: 'Week 5 - Visualizaing Spatial Data Effectively'
 ---

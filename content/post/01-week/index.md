@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-01T00:00:00Z"
 projects: []
-subtitle: 'Welcome to STA 198 / GLHLTH 298!'
+subtitle: 'Welcome to STA 198 / GLHLTH 298! :sunrise_over_mountains:'
 summary: Intro
 title: 'Week 1 - Welcome to Global Health Data Science'
 ---

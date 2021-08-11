@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-03T00:00:00Z"
 projects: []
-subtitle: 'Probability; discrete distributions :wrench:'
+subtitle: 'Probability; discrete distributions :stars:'
 summary: More probability, discrete distributions
 title: 'Week 3 - Probability in Action'
 ---

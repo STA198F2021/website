@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-02T00:00:00Z"
 projects: []
-subtitle: 'Welcome to STA 198 / GLHLTH 298!'
+subtitle: 'Introduction to Probability :beginner:'
 summary: Intro
 title: 'Week 2 - Probability'
 ---
