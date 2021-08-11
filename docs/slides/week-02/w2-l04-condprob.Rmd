@@ -141,18 +141,170 @@ A typical screening mammogram has sensitivity of 85% and specificity of 90%.
 
 In this example, a 40 year old woman with a positive screening mammogram may wish to know her chances of having cancer. Several papers have shown that even doctors tend to strongly overestimate her chances of having cancer.
 
+We'll consider two ways to solve this problem: one way using Bayes' formula directly, and another based on a "hypothetical 10000" table, which applies known probabilities to a hypothetical population of 10,000 40 year old women.
+
+---
+
+## Hypothetical 10,000
+
+.pull-left[
+
+We really are still using Bayes' theorem here, but it is hidden behind the scenes.
+
+Here's what we know.
+
+1. The prevalance of breast cancer among 40 year old women is 1% or 0.01.
+2. The sensitivity of a screening mammogram for diagnosing cancer is 85% or 0.85.
+3. The specificity is 90% or 0.90.
+
+
+
+]
+
+.pull-right[
+Let's construct a 2x2 table comparing true cancer status and mammogram results in our hypothetical population of 10,000 women.
+
+| | Cancer | No Cancer | Total |
+|---|---:|---:|---:|
+| Mammo + | | | |
+| Mammo - | | | |
+| Total | | | 10000 |
+]
+
+
+---
+
+## Hypothetical Population
+
+.pull-left[
+
+1. The prevalance of breast cancer among 40 year old women is 1% or 0.01.
+2. The sensitivity of a screening mammogram for diagnosing cancer is 85% or 0.85.
+3. The specificity is 90% or 0.90.
+
+
+
+]
+
+.pull-right[
+
+Item 1 says the prevalence in this group is 1%, so then we expect to have $10000\times0.01=100$ cases and $10000\times0.99=9900$ cancer-free women.
+
+| | Cancer | No Cancer | Total |
+|---|---:|---:|---:|
+| Mammo + | | | |
+| Mammo - | | | |
+| Total | 100 | 9900 | 10000 |
+]
+
+
+---
+
+## Hypothetical Population
+
+
+.pull-left[
+
+<ol class="org-ol">
+<li value="2">The sensitivity of a screening mammogram for diagnosing cancer is 85% or 0.85.</li>
+<li value="3">The specificity is 90% or 0.90.</li>
+
+</ol>
+
+]
+
+.pull-right[
+
+Item 2 gives the sensitivity, so $P(\text{mammo +} \mid \text{cancer})=0.85$.  
+
+Thus in the group of 100 women with cancer, the mammogram should pick up $100\times0.85=85$ of them, and miss the remaining $100-85=15$.
+
+| | Cancer | No Cancer | Total |
+|---|---:|---:|---:|
+| Mammo + | 85 | | |
+| Mammo - | 15 | | |
+| Total | 100 | 9900 | 10000 |
+]
+
+
+---
+
+## Hypothetical Population
+
+.pull-left[
+
+
+<ol class="org-ol">
+<li value="3">The specificity is 90% or 0.90.</li>
+</ol>
+
+]
+
+.pull-right[
+
+Item 3 gives the specificity, so $P(\text{mammo -} \mid \text{no cancer})=0.90$.  
+
+Thus in the group of 9900 women without cancer, the mammogram should correctly identify $9900*0.90=8910$ of them as being cancer-free, and it will mistakenly identify $9900-8910=990$ as having cancer (false positives).
+
+| | Cancer | No Cancer | Total |
+|---|---:|---:|---:|
+| Mammo + | 85 | 990 | |
+| Mammo - | 15 | 8910 | |
+| Total | 100 | 9900 | 10000 |
+]
+
+---
+
+## Hypothetical Population
+
+.pull-left[
+
+Now we complete the table by filling in the row totals.
+
+]
+
+.pull-right[
+
+
+
+| | Cancer | No Cancer | Total |
+|---|---:|---:|---:|
+| Mammo + | 85 | 990 | 1075 |
+| Mammo - | 15 | 8910 | 8925 |
+| Total | 100 | 9900 | 10000 |
+
+At this point, it's easy to calculate the conditional probability of cancer given a positive mammogram as $\frac{85}{1075}=0.079$.
+
+]
+
+
+---
+
+
+## Bayes' Theorem in Action
+
+Alternatively, we could just use Bayes' Theorem directly.
+
+- Baseline probability of cancer $P(A)=0.01$ (prevalence)
+
+- She wants to know $P(A \mid B)$, or her chances of having cancer given that her mammogram is positive (also called **positive predictive value**).
+
+- Bayes' Theorem: $P(A \mid B)=\frac{P(B \mid A)P(A)}{P(B)}$.  
+
+- Sensitivity is $P(B \mid A)=0.85$. 
+
 ---
 
 ## Bayes' Theorem in Action
 
-- Baseline probability of cancer $P(A)=0.01$ (prevalence is 1 percent among women her age)
-- She wants to know $P(A \mid B)$, or her chances of having cancer given that her mammogram is positive (also called **positive predictive value**).
-- Bayes' Theorem: $P(A \mid B)=\frac{P(B \mid A)P(A)}{P(B)}$.  
-- Sensitivity of the screening mammogram is given as $P(B \mid A)=0.85$. 
 - How do we get $P(B)$?  We can get this using the law of total probability:  $P(B)=P(B \mid A)P(A) + P(B \mid \overline{A})P(\overline{A})$. 
-  - We can get $P(B \mid \overline{A})$ using the specificity $P(\overline{B} \mid \overline{A})$ and the fact that $P(\overline{B} \mid \overline{A})+P(B \mid \overline{A})=1$. The screening mammogram has specificity 90%, so $P(B \mid \overline{A})=1-0.9=0.1$. Then
+
+  - We can get $P(B \mid \overline{A})$ using the specificity $P(\overline{B} \mid \overline{A})=0.90$ and the fact that $P(\overline{B} \mid \overline{A})+P(B \mid \overline{A})=1$.  So $P(B \mid \overline{A})=1-0.9=0.1$.
+  
+  - Then
 $P(B)=P(B \mid A)P(A) + P(B \mid \overline{A})P(\overline{A})=0.85\times0.01+0.1\times0.99=0.1075$
-- Then $P(A \mid B)=P(B \mid A)P(A)/P(B)=(0.85*0.01)/0.1075=0.079$.
+
+- Then $P(A \mid B)=\frac{P(B \mid A)P(A)}{P(B)}=\frac{0.85*0.01}{0.1075}=0.079$.
 
 ---
 
@@ -167,6 +319,15 @@ Cancer would be confirmed or ruled out by subsequent testing, such as a diagnost
 ## You Try It!
 
 Most people who have a negative test result (e.g., mammogram looks good or COVID test negative) don't worry any longer about whether they really do have disease. Are they right not to worry? Suppose our 40 year old woman with a baseline 1% breast cancer risk instead had a negative (all clear) mammogram. What is the updated probability she has breast cancer given this test result?
+
+---
+
+## You Try It!
+
+For more practice, go back to the vaccine hesitancy example.  
+1. Calculate the percentage of each ethnic group in the population provided. We can view this as the **marginal probability** of each ethnicity in that population.
+
+2. Given that someone is vaccine hesitant, calculate the **conditional probability** that the person belongs to each ethnic group, in turn. This information would be useful in helping to target policies and outreach campaigns.
 
 
 
