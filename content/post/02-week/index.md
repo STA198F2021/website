@@ -12,7 +12,7 @@ image:
 lastmod: "2021-07-02T00:00:00Z"
 projects: []
 subtitle: 'Introduction to Probability :beginner:'
-summary: Intro
+summary: Learn the fundamentals of probability with a focus on its use in statistics
 title: 'Week 2 - Probability'
 ---
 

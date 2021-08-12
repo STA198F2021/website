@@ -105,7 +105,7 @@ d_cal %>%
   ) +
   labs(
     fill = "",
-    caption = "Course feedback surveys are not graded."
+    caption = ""
   ) +
   geom_text(
     data = d_cal %>% filter(day == "Monday"),

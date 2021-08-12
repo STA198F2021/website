@@ -24,7 +24,7 @@ The project is very open ended. You should create some kind of compelling visual
 
 ### Data
 
-In order for you to have the greatest chance of success with this project it is important that you choose a manageable data set. This means that the data should be readily accessible and large enough that multiple relationships can be explored. As such, your data set must have at least 50 observations and say 10-20 variables (exceptions can be made, but you must speak with me first). The variables in the data should include categorical variables, discrete numerical variables, and continuous numerical variables.
+In order for you to have the greatest chance of success with this project it is important that you choose a manageable data set. This means that the data should be readily accessible and large enough that multiple relationships can be explored. As such, your data set must have at least 50 observations and say 10-20 variables (exceptions can be made, but you must speak with me first). The variables in the data should include variables of multiple types (e.g., categorical and continuous).
 
 If you are using a data set that comes in a format that we haven't encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source. If you are having trouble ask for help before it is too late.
 
@@ -45,21 +45,24 @@ Below are a list of data repositories that might be of interest to browse. You'r
 - [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au)
 - [PRISM Data Archive Project](https://www.icpsr.umich.edu/icpsrweb/content/ICPSR/fenway.html)
 - [Harvard Dataverse](https://dataverse.harvard.edu/)
+- [United Nations Data](http://data.un.org/)
+- [United Nations Statistics Division](https://unstats.un.org/home/)
 - If you know of others, let me know, and we'll add here...
 
 ### Deliverables
 
-1. Proposal     - due Monday, October 11, at 4:00pm
-2. Proposal revision     - due Thursday, October 21, at 4:00 pm (optional)
-3. Write-up     - due Wednesday, December 1, at 10:00am
-4. Presentation - Wednesday, December 1 or Friday, December 3, in class
-
+1. Proposal     - due Friday, October 8, at 4:00pm
+2. Proposal revision     - due Monday, October 18, at 4:00 pm (optional)
+3. Write-up     - due Tuesday, November 17, at 11:59pm
+4. Presentation - Wednesday, November 17 or Friday, November 19, in class
 
 #### Proposal
 
+The purposes of the proposal are (1) to help you get started early with thinking about the project, reading relevant literature, and formulating your scientific questions, and (2) to ensure the data you wish to analyze, methods you wish to use, and scope of your analysis are feasible and set you up for success with your project.
+
 - Section 1 - Introduction: The introduction should introduce your general 
 research question and your data (where it came from, how it was collected, 
-what are the cases, what are the  variables, etc.).
+what are the cases, what are the  variables, etc.). The motivation for your research question should be clear, with citations to relevant literature as appropriate.
 
 - Section 2 - Data: Place your data in the `/data` folder, and add dimensions 
 and codebook to the README in that folder. Then print out the output of 
@@ -79,6 +82,7 @@ your hypothesized answer?
 Each section should be no more than 1 page (excluding figures). You can check a 
 print preview to confirm length. 
 
+
 #### Presentation
 
 5 minutes maximum, and each team member should say something substantial. You can either present live or pre-record and submit your video to be played during the presentation day.
@@ -87,13 +91,13 @@ Prepare a slide deck using the template in your repo. This template uses a packa
 
 Before you finalize your presentation, make sure your chunks are turned off with `echo = FALSE`. 
 
-Presentation schedule: Presentations will take place during the first week of December. You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
+Presentation schedule: Presentations will take place during the third week of November. You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
 
 #### Write-up
 
 Along with your presentation slides, we want you to provide a brief summary of your project in the README of your repository.
 
-This write-up, which you can also think of as an summary of your project, should provide information on the dataset you're using, your research question(s), your methodology, and your findings. 
+This write-up, which you can also think of as an summary of your project, should provide information on the dataset you're using, your research question(s), your methodology, and your findings.  Additional information will be provided closer to the project deadline regarding formatting and other tips.
 
 #### Repo organization
 
@@ -120,10 +124,10 @@ Style and format does count for this assignment, so please take the time to make
 
 Total                          | 100 pts
 -------------------------------|--------
-Proposal                       | 15 pts
+Proposal                       | 10 pts
 Presentation                   | 30 pts
-Write-up                       | 40 pts
-Reproducibility and organization | 15 pts
+Write-up                       | 50 pts
+Reproducibility and organization | 10 pts
 
 
 ### Criteria
