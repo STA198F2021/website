@@ -1,20 +1,26 @@
 ---
 authors:
 - admin
-date: "2021-07-15T00:00:00Z"
+date: "2021-07-13T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/K_VeavYEfdA)'
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/yPBHXvN3HII)'
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2021-07-15T00:00:00Z"
+lastmod: "2021-07-13T00:00:00Z"
 projects: []
-subtitle: 'Learn from your classmates! :eyes:'
-summary: Global Health Data Science Festival!
-title: 'Week 15 - Project Presentations'
+subtitle: 'Survival analysis and data science ethics'
+summary: Advanced topics
+title: 'Week 15 - Ethics and survival'
 ---
 
 ### Tasks
 
+- Complete the [assignments](/post/11-week/#assignments)
+- Complete the [readings](/post/11-week/#readings)
+
+### Assignments
+
+### Readings

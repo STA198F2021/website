@@ -13,10 +13,10 @@
     </image>
     
     <item>
-      <title>Week 15 - Project Presentations</title>
-      <link>https://sta198f2021.github.io/website/post/15-week/</link>
+      <title>Week 13 - Project Presentations</title>
+      <link>https://sta198f2021.github.io/website/post/13-week/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/15-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/13-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 </description>
     </item>
@@ -208,10 +208,10 @@
     </item>
     
     <item>
-      <title>Week 13 - Ethics and survival</title>
-      <link>https://sta198f2021.github.io/website/post/13-week/</link>
+      <title>Week 15 - Ethics and survival</title>
+      <link>https://sta198f2021.github.io/website/post/15-week/</link>
       <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/13-week/</guid>
+      <guid>https://sta198f2021.github.io/website/post/15-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
@@ -619,7 +619,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
+&lt;h3 id=&#34;assignments-and-labs&#34;&gt;Assignments and Labs&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -642,6 +642,11 @@
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Practice 2&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown&#34;&gt;Basics of R Markdown&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Lab 1&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;

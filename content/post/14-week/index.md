@@ -12,7 +12,7 @@ image:
 lastmod: "2021-07-14T00:00:00Z"
 projects: []
 subtitle: 'Are things looking worse for turkeys this year? :chart_with_upwards_trend:'
-summary: Survival analysis lab
+summary: Thanksgiving week
 title: 'Week 14 - Which turkeys will survive?'
 ---
 
