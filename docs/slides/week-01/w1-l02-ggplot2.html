@@ -55,7 +55,7 @@ ggplot(data = [dataset],
        mapping = aes(x = [x-variable], 
                      y = [y-variable])) +
    geom_xxx() +
-   other options
+  other options
 ```
 ]
 
@@ -109,6 +109,7 @@ ggplot(data = lifeexpwide2019,
                      color = worldbankregion)) +
   geom_point() +
   labs(title = "Life expectancy",
+       
        subtitle = "2019",
        x = "Female life expectancy", y = "Male life expectancy",
        color = "World Bank Region")

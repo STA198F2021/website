@@ -91,7 +91,7 @@ Prepare a slide deck using the template in your repo. This template uses a packa
 
 Before you finalize your presentation, make sure your chunks are turned off with `echo = FALSE`. 
 
-Presentation schedule: Presentations will take place during the third week of November. You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
+Presentation schedule: Presentations will take place during the third week of November (we may need to have some the Monday of Thanksgiving week). You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
 
 #### Write-up
 
