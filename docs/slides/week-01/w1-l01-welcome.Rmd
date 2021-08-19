@@ -141,30 +141,35 @@ class: middle
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.001.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.002.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.003.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.004.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.005.png")
+
 ```
 
 ---
@@ -172,24 +177,28 @@ knitr::include_graphics("img/data-science-cycle/data-science-cycle.005.png")
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.006.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.007.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="90%", fig.align="left"}
 knitr::include_graphics("img/data-science-cycle/data-science-cycle.009.png")
+
 ```
 
 ---
 
 ```{r echo=FALSE, out.width="65%", fig.align="left"}
 knitr::include_graphics("img/mengap.png")
+
 ```
 
 A study at Penn (Chen et al, 2008) found that men presenting at emergency departments with acute nontraumatic abdominal pain received painkillers more quickly than women. 
@@ -264,6 +273,7 @@ class: middle
 life <- readr::read_csv("lifeexp/lifeexpectancy_infant.csv")
 
 life
+
 ```
 
 ]
@@ -278,6 +288,7 @@ Take a `glimpse` at the data:
 
 ```{r}
 glimpse(life)
+
 ```
 
 ---
@@ -298,7 +309,9 @@ How many rows and columns does this dataset have?
 .pull-left[
 ```{r}
 nrow(life) # number of rows
+
 ncol(life) # number of columns
+
 dim(life)  # dimensions (row column)
 ```
 ]
@@ -328,8 +341,10 @@ What is causing the **outliers** at the bottom?
 ]
 
 ```{r fig.width = 8, warning = FALSE, echo=FALSE, out.width = "50%"}
+
 life %>%
-    ggplot(aes(x = year, y = lifeexp,shape=sex))+geom_point()+labs(title = "Life expectancy over time",
+  ggplot(aes(x = year, y =
+               lifeexp,shape=sex))+geom_point()+labs(title = "Life expectancy over time",
        x = "Year", y = "Life Expectancy (Years)") 
 ```
 
@@ -398,6 +413,7 @@ knitr::include_graphics("img/grammar-of-graphics.png")
 Let's subset to a few countries to de-clutter the plot.
 
 ```{r lifeexp, fig.width = 8, out.width = "50%"}
+
 life %>%
   filter(location %in% c("United States of America","Rwanda","China")) %>%
       ggplot(aes(x = year, y = lifeexp,shape=sex,color=location))+geom_point()
