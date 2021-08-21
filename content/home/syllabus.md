@@ -126,7 +126,7 @@ To uphold the [Duke Community Standard](https://studentaffairs.duke.edu/conduct/
 
 By enrolling in this course, you have agreed to abide by and uphold the provisions of the [Duke Community Standard](https://studentaffairs.duke.edu/conduct/about-us/duke-community-standard) as well as the policies specific to this course. Cheating or plagiarism on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate this Standard, and will not be tolerated; any violations will automatically result in a grade of 0 on the assignment, be reported to the [Office of Student Conduct](https://studentaffairs.duke.edu/conduct) for further action, and potentially a failing (F) course grade depending on the magnitude of the offense.
 
-Occasionally, data sets we are privileged to use in class may be confidential and cannot be distributed more broadly or without express permission from the data-granting sponsor. Any unauthorized dissemination *or further use* of these data sets beyond this class is a violation of the Duke Community Standard. 
+Occasionally, data sets we are privileged to use in class may be confidential and cannot be distributed more broadly or without express permission from the data-granting sponsor. If so, we will let you know; any unauthorized dissemination *or further use* of such data sets beyond this class is a violation of the Duke Community Standard. 
 
 **Reusing code**: You are welcome to use online resources (e.g. StackOverflow). If you use code from an outside source, either directly or as inspiration, you *must explicitly cite* where you obtained the code. Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism and a violation of the Duke Community Standard. 
 
@@ -138,7 +138,7 @@ All work is due on the stated due date. Due dates are there to help guide your p
 
 - **Late work policy:** Some assignments cannot be turned in late and some assignments can be turned in past the deadline with a late penalty:
   - Labs: No late work accepted
-  - Homework assignments: Late work accepted up to 3 days past the deadline (i.e. Monday after the deadline, 4pm), with 10% penalty for each day. Grading of late assignments may be delayed.
+  - Homework assignments: Late work accepted up to 3 days past the deadline (i.e. Monday after the deadline, 4pm), with 5% penalty for each day. Grading of late assignments may be delayed.
   - Project proposal: Late work accepted up to 4 days past the deadline, with 5% penalty for each day
   - Project re-proposal: No late work accepted (this is an optional assignment)
   - Project: No late work accepted 
