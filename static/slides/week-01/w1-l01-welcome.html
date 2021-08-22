@@ -380,9 +380,7 @@ What is causing the **outliers** at the bottom?
 
 
 ```r
-# we want to look at the bottom 5 values of life expectancy
-
-#(5 just in case some points are exactly the same)
+# we want to look at the bottom 5 values of life expectancy #(5 just in case some points are exactly the same)
 life %&gt;% top_n(-5,lifeexp)
 ```
 

@@ -365,9 +365,7 @@ $~~~~~~~$ Ok, ugly plot!  We'll break it down soon -- but first, the outliers...
 ---
 
 ```{r outliers}
-# we want to look at the bottom 5 values of life expectancy
-
-#(5 just in case some points are exactly the same)
+# we want to look at the bottom 5 values of life expectancy #(5 just in case some points are exactly the same)
 life %>% top_n(-5,lifeexp)
 ```
 
