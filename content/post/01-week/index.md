@@ -20,7 +20,7 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 - Complete the [readings](https://sta198f2021.github.io/website/post/01-week/#readings)
 - Complete the [assignments](https://sta198f2021.github.io/website/post/01-week/#assignments)
-- Complete the [Getting to Know You Survey](https://sakai.duke.edu)
+- Complete the [Getting to Know You Survey](https://sakai.duke.edu) (you'll need a GitHub user name first; see the video on version control and collaboration to walk through this)
 
 ### Class Slides and Activities
 
