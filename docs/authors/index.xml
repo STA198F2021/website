@@ -14,6 +14,15 @@
     
     <item>
       <title></title>
+      <link>https://sta198f2021.github.io/website/authors/alexandra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/authors/alexandra/</guid>
+      <description>&lt;p&gt;My name is Alexandra Lawrence, and my pronouns are she/her/hers. I am a junior completing a B.S. in Computer Science and B.S. in Statistical Science with a concentration in Data Science. Outside of class, I am a member of Devils en Pointe and Business Oriented Women, and I enjoy baking and paddle boarding in my free time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://sta198f2021.github.io/website/authors/amy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/authors/amy/</guid>
@@ -63,6 +72,7 @@
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/authors/admin/</guid>
       <description>&lt;p&gt;Rigorous introduction to health data science using current applications in biomedical research, epidemiology, and health policy. Use modern statistical software to conduct reproducible data exploration, visualization, and analysis. Interpret and translate results for interdisciplinary researchers. Critically evaluate data-based claims, decisions, and policies. Includes exploratory data analysis, visualization, basics of probability and inference, predictive modeling and classification. This course focuses on the R computing language. No statistical or computing background is necessary.&lt;/p&gt;
+&lt;p&gt;Check out our &lt;a href=&#34;https://www.introds.org/&#34;&gt;centralized resource page for intro data science courses&lt;/a&gt; for great tips and help throughout the course.&lt;/p&gt;
 </description>
     </item>
     
