@@ -1,7 +1,7 @@
 ---
 title: "Welcome to STA 198/GLHLTH 298!"
 subtitle: "<br><br> Introduction to Global Health Data Science"
-author: "[introds.org](https://introds.org/)"
+author: "[Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
@@ -105,7 +105,9 @@ A: We can discuss that over `r emo::ji("coffee")`.
 .center[
 [**Course Website**](https://sta198f2021.github.io/website/)
 ]
+
 ]
+(You can also get there through the Sakai syllabus link.)
 
 ---
 
@@ -115,22 +117,32 @@ class: middle
 
 ---
 
+.pull-left-wide[
 ```{r echo=FALSE, out.width="75%", fig.align="left"}
 knitr::include_graphics("img/excel.png")
 ```
-
+]
+.pull-right[ 
+We'll combine the ease of viewing in Excel with ...
+]
 ---
-
+.pull-left-wide[
 ```{r echo=FALSE, out.width="60%", fig.align="left"}
 knitr::include_graphics("img/r.png")
 ```
-
+]
+.pull-right[ 
+the rigor of the R programming language ...
+]
 ---
-
+.pull-left-wide[
 ```{r echo=FALSE, out.width="73%", fig.align="left"}
 knitr::include_graphics("img/rstudio.png")
 ```
-
+]
+.pull-right[
+in an integrated environment. To learn more, check out the [introductory video](https://www.youtube.com/watch?v=Q2QN1RpvLq8) for our computing toolkit.
+]
 ---
 
 class: middle
@@ -353,7 +365,9 @@ $~~~~~~~$ Ok, ugly plot!  We'll break it down soon -- but first, the outliers...
 ---
 
 ```{r outliers}
-# we want to look at the bottom 5 values of life expectancy (5 just in case some points are exactly the same)
+# we want to look at the bottom 5 values of life expectancy
+
+#(5 just in case some points are exactly the same)
 life %>% top_n(-5,lifeexp)
 ```
 
@@ -539,7 +553,7 @@ print(summdat,n=13)
 
 ## Visualizing the data
 
-```{r quartet-plot, echo = FALSE, out.width = "80%", fig.asp = 0.5}
+```{r quartet-plot, echo = FALSE, cache=TRUE, out.width = "80%", fig.asp = 0.5}
 
 ggplot(datasaurus_dozen, aes(x=x, y=y))+
   geom_point()+

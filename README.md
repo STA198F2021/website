@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a60484a5-49ef-4593-8579-caefac3f9bf1/deploy-status)](https://app.netlify.com/sites/introds-2020/deploys)
+
 
 # Introduction to Global Health Data Science
 

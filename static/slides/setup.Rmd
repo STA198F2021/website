@@ -63,7 +63,7 @@ layout: true
   
 <div class="my-footer">
 <span>
-<a href="https://introds.org" target="_blank">introds.org</a>
+<a href="https://sta198f2021.github.io/website/" target="_blank">Back to website</a>
 </span>
 </div> 
 

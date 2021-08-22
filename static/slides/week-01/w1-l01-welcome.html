@@ -3,7 +3,7 @@
   <head>
     <title>Welcome to STA 198/GLHLTH 298!</title>
     <meta charset="utf-8" />
-    <meta name="author" content="introds.org" />
+    <meta name="author" content="Website" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 
 # Welcome to STA 198/GLHLTH 298!
 ## <br><br> Introduction to Global Health Data Science
-### <a href="https://introds.org/">introds.org</a>
+### <a href="https://sta198f2021.github.io/website/">Website</a>
 ### <br> Prof. Amy Herring
 
 ---
@@ -31,7 +31,7 @@ layout: true
   
 &lt;div class="my-footer"&gt;
 &lt;span&gt;
-&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
 &lt;/span&gt;
 &lt;/div&gt; 
 
@@ -119,7 +119,9 @@ A: We can discuss that over ☕.
 .center[
 [**Course Website**](https://sta198f2021.github.io/website/)
 ]
+
 ]
+(You can also get there through the Sakai syllabus link.)
 
 ---
 
@@ -129,16 +131,26 @@ class: middle
 
 ---
 
+.pull-left-wide[
 &lt;img src="img/excel.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
-
+]
+.pull-right[ 
+We'll combine the ease of viewing in Excel with ...
+]
 ---
-
+.pull-left-wide[
 &lt;img src="img/r.png" width="60%" style="display: block; margin: auto auto auto 0;" /&gt;
-
+]
+.pull-right[ 
+the rigor of the R programming language ...
+]
 ---
-
+.pull-left-wide[
 &lt;img src="img/rstudio.png" width="73%" style="display: block; margin: auto auto auto 0;" /&gt;
-
+]
+.pull-right[
+in an integrated environment. To learn more, check out the [introductory video](https://www.youtube.com/watch?v=Q2QN1RpvLq8) for our computing toolkit.
+]
 ---
 
 class: middle
@@ -368,7 +380,9 @@ What is causing the **outliers** at the bottom?
 
 
 ```r
-# we want to look at the bottom 5 values of life expectancy (5 just in case some points are exactly the same)
+# we want to look at the bottom 5 values of life expectancy
+
+#(5 just in case some points are exactly the same)
 life %&gt;% top_n(-5,lifeexp)
 ```
 
