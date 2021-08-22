@@ -19,7 +19,6 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 ### Tasks
 
 - Complete the [readings](https://sta198f2021.github.io/website/post/01-week/#readings)
-- Complete the [assignments](https://sta198f2021.github.io/website/post/01-week/#assignments)
 - Complete the [Getting to Know You Survey](https://sakai.duke.edu) (you'll need a GitHub user name first; see the video on version control and collaboration to walk through this)
 
 ### Class Slides and Activities
@@ -32,16 +31,6 @@ title: 'Week 1 - Welcome to Global Health Data Science'
 
 
 
-
-
-### Assignments
-
-*Do this week (not graded, just for practice, and very strongly recommended!)*
-
-| <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
-|:---|:---|:---|
-| Practice 1 | [Basics of R and R Studio](http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary) |  |
-| Practice 2  | [Basics of R Markdown](http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown) |  |
 
 
 
