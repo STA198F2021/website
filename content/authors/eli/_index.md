@@ -8,6 +8,9 @@ social:
 - icon: envelope
   icon_pack: fas
   link: "mailto:eli.feder@duke.edu"
+- icon: github
+  icon_pack: fab
+  link: https://github.com/esfeder
 weight: 10
   
 # Organizational groups that you belong to (for People widget)
