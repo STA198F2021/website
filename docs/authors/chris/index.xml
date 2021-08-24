@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>STA 198 / GLHLTH 298</title>
+    <link>https://sta198f2021.github.io/website/authors/chris/</link>
+      <atom:link href="https://sta198f2021.github.io/website/authors/chris/index.xml" rel="self" type="application/rss+xml" />
+    <description>STA 198 / GLHLTH 298</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright>
+    <image>
+      <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
+      <title>STA 198 / GLHLTH 298</title>
+      <link>https://sta198f2021.github.io/website/authors/chris/</link>
+    </image>
+    
+  </channel>
+</rss>
