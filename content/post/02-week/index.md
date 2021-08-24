@@ -39,6 +39,7 @@ title: 'Week 2 - Probability'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Lab 1 |[Hello R!](https://sta198f2021.github.io/website/slides/week-02/lab-01-hello-r.html)| Wed., 9/1 |
+| Quiz | [Quiz 1](https://sakai.duke.edu) | Tuesday, 8/31 |
 
 
 ### Readings
