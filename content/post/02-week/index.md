@@ -41,7 +41,7 @@ title: 'Week 2 - Probability'
 | *Do this week (not graded, just for practice!)* | | |
 | Practice 1 | [Basics of R and R Studio](http://maths4.stat.duke.edu:3939/basics-of-r/#section-summary) |  |
 | Practice 2  | [Basics of R Markdown](http://maths4.stat.duke.edu:3939/basics-of-r-markdown/#section-what-is-r-markdown) |  |
-| Lab 1 | | |
+| Lab 1 |[Hello R!](https://sta198f2021.github.io/website/slides/week-02/lab-01-hello-r.html)| Wed., 9/1 |
 
 
 ### Readings
