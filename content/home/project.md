@@ -53,7 +53,7 @@ Below are a list of data repositories that might be of interest to browse. You'r
 
 1. Proposal     - due Friday, October 8, at 4:00pm
 2. Proposal revision     - due Monday, October 18, at 4:00 pm (optional)
-3. Write-up     - due Tuesday, November 17, at 11:59pm
+3. Write-up     - due Tuesday, November 16, at 11:59pm
 4. Presentation - Wednesday, November 17 or Friday, November 19, in class
 
 #### Proposal
