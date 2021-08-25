@@ -197,7 +197,7 @@ Make sure to commit and push all changed files so that your Git pane is cleared 
 
 # Data visualization and summary
 
-2.  Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+2.  Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. 
 
 Below is the code you will need to complete this exercise.
 Basically, the answer is already given, but you need to include relevant bits in your Rmd document and successfully knit it and view the results.

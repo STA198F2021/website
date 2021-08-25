@@ -1,0 +1,90 @@
+---
+title: "Welcome to STA 198 Labs!"
+date: "08.30.2021"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+## Introductions
+
+- Meet your TAs!
+- Introduce yourself!
+
+---
+
+## What to expect in lab 
+
+- Introduction to the lab assignment (~ 5 - 10 minutes, longer today)
+
+- Work on the lab assignment (individual today, but generally done in teams)
+
+- Lab instructions posted in the [schedule](https://sta198f2021.github.io/website/#schedul ) for each week on the course website.
+
+- Start each lab by finding your assignment repo in the [GitHub course organization](https://github.com/STA198F2021)
+  - This is where you will find the R Markdown document and data to get started
+  
+---
+
+## Tips
+
+- You do not have to finish the lab in class, they will always be due **Wednesday at 4:00pm**. One work strategy is to get through portions that you think will be most challenging (which initially might be the coding component) during lab when a TA can help you on the spot and leave the narrative writing until later.
+
+- Do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.
+
+---
+
+## Check: Do you have the lab-01 repo?
+
+- Go to the GitHub course organization: https://github.com/STA198F2021
+
+- You should see a repo with the prefix **lab-01-**
+
+- If you do not have this repo, please let your TAs know! 
+
+---
+
+class: middle, center
+
+# Demos
+
+---
+
+## Demos 
+
+**Follow along as your TA demonstrates the following:** 
+
+- Access RStudio using the class container
+- Configure Git using SSH 
+- Clone RStudio repo and start new project 
+- Knit document and produce PDF 
+- Update name in YAML 
+  - Knit, commit, push changes to GitHub 
+  - See updates in your GitHub repo
+  
+---
+
+class: middle 
+
+## You're now ready to complete the rest of lab!
+
+<br>
+
+## Please raise your hand if you need help as you work on the lab.
+  
