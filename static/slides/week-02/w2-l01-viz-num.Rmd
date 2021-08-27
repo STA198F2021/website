@@ -492,7 +492,7 @@ lifespan2019 %>%
 
 The distribution of population is highly skewed...
 
-```{r, out.width="80%"}
+```{r, out.width="50%"}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
     ggplot(aes(x = pop)) + #<<
@@ -506,7 +506,7 @@ lifespan2019 %>%
 
 Here we plot the natural logarithm of the population, due to the heavy skew (China, India). Now the outliers are the small locations.
 
-```{r, out.width="80%"}
+```{r, out.width="50%"}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
     ggplot(aes(x = log(pop))) + #<<
