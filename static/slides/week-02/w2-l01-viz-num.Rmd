@@ -207,7 +207,7 @@ lifespan2019 %>%
 ## Histograms and binwidth
 
 .panelset[
-.panel[.panel-name[binwidth = 1000]
+.panel[.panel-name[binwidth = 0.5]
 ```{r out.width = "40%"}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
@@ -215,7 +215,7 @@ lifespan2019 %>%
   geom_histogram(binwidth = 0.5) 
 ```
 ]
-.panel[.panel-name[binwidth = 5000]
+.panel[.panel-name[binwidth = 3]
 ```{r out.width = "40%"}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
@@ -223,7 +223,7 @@ lifespan2019 %>%
   geom_histogram(binwidth = 3) 
 ```
 ]
-.panel[.panel-name[binwidth = 20000]
+.panel[.panel-name[binwidth = 10]
 ```{r out.width = "40%"}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
