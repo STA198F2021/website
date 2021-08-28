@@ -59,7 +59,7 @@ country_data <- coronavirus %>%
     type == "death",
     country %in% countries
   ) %>%
-  # fix county labels for pretty plotting
+  # fix country labels for pretty plotting
   mutate(
     country = case_when(
       country == "United Kingdom" ~ "UK",

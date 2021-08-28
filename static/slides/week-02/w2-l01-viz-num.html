@@ -49,7 +49,7 @@ class: middle
 
 - Univariate data analysis - distribution of single variable
 - Bivariate data analysis - relationship between two variables
-- Multivariate data analysis - relationship between many variables at once, sometimes focusing on the relationship between two while conditioning for others
+- Multivariable/multivariate data analysis - relationship between many variables at once, sometimes focusing on the relationship between two while conditioning for others. (Often we reserve *multivariate* for multiple outcomes, and *multivariable* for multiple predictors.)
 
 ---
 
@@ -160,7 +160,7 @@ Consider a random variable `\(x_i\)` that is the estimated life expectancy for c
 
 - variance: average squared distance from mean
 
-- standard deviation (sd): square root of variance (on same scale as data), often estimated in a single sample as `\(\frac{\sum_{i=1}^n (x_i-\overline{x})^2}{n-1}\)` 
+- standard deviation (sd): square root of variance (on same scale as data). The sample variance `\(s^2\)` is estimated in a single sample as `\(\frac{\sum_{i=1}^n (x_i-\overline{x})^2}{n-1}\)` 
 
 - range: difference between highest and lowest values, e.g. `\(x_{(n)}-x_{(1)}\)`
 
@@ -184,9 +184,12 @@ Previously we viewed a scatterplot showing the relationship of life expectancy o
 ```r
 ggplot(lifeexpwide2019, aes(x = Female, y = Male)) +
   geom_point() +
-  labs(title = "Life expectancy",
-       subtitle = "2019",
-       x = "Female life expectancy", y = "Male life expectancy")
+  labs(
+    title = "Life expectancy",
+    subtitle = "2019",
+    x = "Female life expectancy",
+    y = "Male life expectancy"
+  )
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-3-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -206,8 +209,8 @@ class: middle
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_histogram() 
+  ggplot(aes(x = lifeexp)) +
+  geom_histogram() 
 ```
 
 ```
@@ -227,8 +230,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_histogram(binwidth = 0.5) 
+  ggplot(aes(x = lifeexp)) +
+  geom_histogram(binwidth = 0.5) 
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-5-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -238,8 +241,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_histogram(binwidth = 3) 
+  ggplot(aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3) 
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-6-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -249,8 +252,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_histogram(binwidth = 10) 
+  ggplot(aes(x = lifeexp)) +
+  geom_histogram(binwidth = 10) 
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-7-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -270,13 +273,11 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_histogram(binwidth = 3) +
-        labs(
-          x = "Female life expectancy (years)",
-          y = "Frequency",
-          title = "2019 Life Expectancy of Women"
-        )
+  ggplot(aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3) +
+  labs(x = "Female life expectancy (years)",
+       y = "Frequency",
+       title = "2019 Life Expectancy of Women")
 ```
 ]
 ]
@@ -294,15 +295,13 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp,
-*              fill = worldbankregion)) +
-      geom_histogram(binwidth = 3,
-*                    alpha = 0.5) +
-        labs(
-          x = "Female life expectancy (years)",
-          y = "Frequency",
-          title = "2019 Life Expectancy of Women"
-        )
+  ggplot(aes(x = lifeexp,
+*            fill = worldbankregion)) +
+  geom_histogram(binwidth = 3,
+*                alpha = 0.5) +
+  labs(x = "Female life expectancy (years)",
+       y = "Frequency",
+       title = "2019 Life Expectancy of Women")
 ```
 ]
 ]
@@ -320,16 +319,14 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp,
-               fill = worldbankregion)) + 
-      geom_histogram(binwidth = 3,
-                     alpha = 0.5) + 
-        labs(
-          x = "Female life expectancy (years)",
-          y = "Frequency",
-          title = "2019 Life Expectancy of Women"
-        ) +
-*       facet_wrap(~ worldbankregion, nrow=3)
+  ggplot(aes(x = lifeexp,
+             fill = worldbankregion)) +
+  geom_histogram(binwidth = 3,
+                 alpha = 0.5) +
+  labs(x = "Female life expectancy (years)",
+       y = "Frequency",
+       title = "2019 Life Expectancy of Women") +
+* facet_wrap( ~ worldbankregion, nrow = 3)
 ```
 ]
 ]
@@ -348,20 +345,16 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp,
-               fill = worldbankregion)) + 
-      geom_histogram(binwidth = 3,
-                     alpha = 0.5) + 
-        labs(
-          x = "Female life expectancy (years)",
-          y = "Frequency",
-          title = "2019 Life Expectancy of Women"
-        ) +
-        facet_wrap(~ worldbankregion, nrow=3) +
-          theme(
-            strip.background = element_blank(),
-            strip.text.x = element_blank()
-          )
+  ggplot(aes(x = lifeexp,
+             fill = worldbankregion)) +
+  geom_histogram(binwidth = 3,
+                 alpha = 0.5) +
+  labs(x = "Female life expectancy (years)",
+       y = "Frequency",
+       title = "2019 Life Expectancy of Women") +
+  facet_wrap( ~ worldbankregion, nrow = 3) +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_blank())
 ```
 ]
 ]
@@ -381,8 +374,8 @@ class: middle
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-*     geom_density()
+  ggplot(aes(x = lifeexp)) +
+* geom_density()
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
@@ -397,8 +390,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-*     geom_density(adjust = 0.5)
+  ggplot(aes(x = lifeexp)) +
+* geom_density(adjust = 0.5)
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-13-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -408,8 +401,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_density(adjust = 1)  #&lt;&lt; default bandwidth
+  ggplot(aes(x = lifeexp)) +
+  geom_density(adjust = 1)  #&lt;&lt; default bandwidth
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-14-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -419,8 +412,8 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-*     geom_density(adjust = 2)
+  ggplot(aes(x = lifeexp)) +
+* geom_density(adjust = 2)
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-15-1.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -440,13 +433,12 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_density(adjust = 1) + 
-*         labs(
-*         x = "Female life expectancy (years)",
-*         y = "Density",
-*         title = "2019 Life Expectancy of Women"
-*       )
+  ggplot(aes(x = lifeexp)) +
+  geom_density(adjust = 1) +
+* labs(
+*   x = "Female life expectancy (years)",
+*   y = "Density",
+*   title = "2019 Life Expectancy of Women")
 ```
 ]
 ]
@@ -464,15 +456,13 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp,
-*              fill = worldbankregion)) +
-      geom_density(adjust = 1) + 
-          labs( 
-          x = "Female life expectancy (years)", 
-          y = "Density", 
-          title = "2019 Life Expectancy of Women",
-*         fill = "Region"
-        ) 
+  ggplot(aes(x = lifeexp,
+*            fill = worldbankregion)) +
+  geom_density(adjust = 1) +
+  labs(x = "Female life expectancy (years)",
+       y = "Density",
+       title = "2019 Life Expectancy of Women",
+*      fill = "Region")
 ```
 ]
 ]
@@ -491,8 +481,8 @@ class: middle
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-*     geom_boxplot()
+  ggplot(aes(x = lifeexp)) +
+* geom_boxplot()
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/boxp-1.png" width="60%" style="display: block; margin: auto;" /&gt;
@@ -524,8 +514,8 @@ The distribution of population is highly skewed...
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-*   ggplot(aes(x = pop)) +
-      geom_boxplot()
+* ggplot(aes(x = pop)) +
+  geom_boxplot()
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /&gt;
@@ -540,8 +530,8 @@ Here we plot the natural logarithm of the population, due to the heavy skew (Chi
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-*   ggplot(aes(x = log(pop))) +
-      geom_boxplot()
+* ggplot(aes(x = log(pop))) +
+  geom_boxplot()
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /&gt;
@@ -559,17 +549,15 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp)) +
-      geom_boxplot() +
-*        labs(
-*         x = "Female life expectancy (years)",
-*         y = NULL,
-*         title = "2019 Life Expectancy of Women"
-          ) +
-*     theme(
-*         axis.ticks.y = element_blank(),
-*         axis.text.y = element_blank()
-*     )
+  ggplot(aes(x = lifeexp)) +
+  geom_boxplot() +
+* labs(
+*   x = "Female life expectancy (years)",
+*   y = NULL,
+    title = "2019 Life Expectancy of Women") + #&lt;&lt;)
+*   theme(
+*     axis.ticks.y = element_blank(),
+*     axis.text.y = element_blank())
 ```
 ]
 ]
@@ -587,15 +575,16 @@ lifespan2019 %&gt;%
 ```r
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
-    ggplot(aes(x = lifeexp,
-               y = worldbankregion)) +
-      geom_boxplot() +
-         labs( 
-          x = "Female life expectancy (years)",  
-*         y = NULL,
-          title = "2019 Life Expectancy of Women",
-          subtitle = "By region"
-          ) 
+  ggplot(aes(x = lifeexp,
+             y = worldbankregion)) +
+  geom_boxplot() +
+  labs(
+    x = "Female life expectancy (years)",
+    y = NULL,
+*  
+    title = "2019 Life Expectancy of Women",
+    subtitle = "By region"
+  ) 
 ```
 ]
 ]

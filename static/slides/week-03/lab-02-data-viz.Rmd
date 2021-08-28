@@ -55,12 +55,13 @@ We will be using tidyverse and viridis to make plots in R!
 ```{r load-packages, message = FALSE, echo = FALSE}
 library(tidyverse)
 library(viridis)
+library(scales)
 ```
 
 
 # WHO Tuberculosis Data
 
-The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013. These data are not in a tidy format, so we start with some data wrangling (more next week; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, `populationmil` (the population of the country in millions, so populationmil=1 indicates a population of one millionpeople), and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
+The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013. These data are not in a tidy format, so we start with some data wrangling (more next week; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
 
 ```{r datawrangle, echo=FALSE}
 who2 <- who %>%
@@ -100,7 +101,6 @@ whocollapse <- whoage %>%
 population$country=recode(population$country,"United States of America"="USA")
 
 whotbpop <- right_join(whocollapse,population)
-whotbpop$populationmil=whotbpop$population/1000000
 whotbpop$cases100000=whotbpop$cases/whotbpop$population*100000
 ```
 
@@ -109,7 +109,7 @@ lecture. Plots should include an informative title, axes should be labeled, and 
 
 Your assignment should have at least three meaningful commits.
 
-1. Make a histogram of the 2013 population (in millions) of the countries. Set the bin width at 100. Label your axes and give the plot a title. Does it appear that there are any outliers? If so, what are they?  Does the distribution appear to be symmetric or skewed?
+1. Make a histogram of the 2013 population of the countries. Set the bin width at 100,000,000. Label your axes and give the plot a title. Does it appear that there are any outliers? If so, what are they?  Does the distribution appear to be symmetric or skewed?
 
 
 
@@ -117,13 +117,14 @@ Your assignment should have at least three meaningful commits.
 ```{r ex1}
 whotbpop %>%
   filter(year == 2013) %>%
-    ggplot(aes(x = populationmil)) +
-      geom_histogram(binwidth=100) +
-        labs(
-          x = "Population (millions)",
-          y = "Number of Countries",
-          title = "2013 Population"
-        )
+    ggplot(aes(x = population)) +
+      geom_histogram(binwidth=100000000) +
+        scale_x_continuous(labels = label_comma()) +
+          labs(
+            x = "Population",
+            y = "Number of Countries",
+            title = "2013 Population"
+          )
 ```
 
 
@@ -150,7 +151,7 @@ whotbpop %>%
 
 *Before going to Exercise 3, now would be a good time to do your first knit and then commit and push.*
 
-3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. Generate a scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `populationmil`. Please label your axes and legend and give the plot a title. 
+3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. Generate a scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `population`. Please label your axes and legend and give the plot a title. 
 
 (Hint: if you would like to use the `viridis` palette, the line `scale_color_viridis(discrete=TRUE, option = "C", name = "State")` will be useful to your code.)
 
@@ -158,14 +159,22 @@ Describe what you observe in the plot. Do you observe the same pattern for every
 
 ```{r ex3}
 whotbpop %>%
-  filter(country %in% c("Uganda","Morocco","Japan","Peru","Pakistan","USA")) %>%
-    ggplot(aes(x = year, y = cases100000,color=country,size=populationmil)) +
-      geom_point() +
-        labs(title = "TB Cases by Population",
-          subtitle = "Selected Countries",
-          x = "Year", y = "TB Cases (per 100K)",
-          color="Country", size="Population (millions)"
-        ) 
+  filter(country %in% c("Uganda", "Morocco", "Japan", "Peru", "Pakistan", "USA")) %>%
+  ggplot(aes(
+    x = year,
+    y = cases100000,
+    color = country,
+    size = population
+  )) +
+  geom_point() +
+  labs(
+    title = "TB Cases by Population",
+    subtitle = "Selected Countries",
+    x = "Year",
+    y = "TB Cases (per 100K)",
+    color = "Country",
+    size = "Population"
+  ) 
 ```
 
 4. Now, examine the relationship between same two variables, with a separate facet for each of your six selected countries. You can drop the size aesthetic if you prefer. Be sure to label your axes. Which plot do you prefer? Briefly explain your choice.
@@ -214,64 +223,31 @@ whotbpop %>%
 ```
 
 
-6. Do some states have a higher percentage of their counties located in a metropolitan area? Please create a segmented bar chart with one bar per `state`, each bar going from 0 - 1, with the fill determined by whether the state is located in a metropolitan area. What do you notice?
+6. Does each country selected have similar age composition of its TB cases? Create a segmented bar chart with one bar per `country`, each bar going from 0 - 1, with the fill determined by the age category to which the cases belong. What do you notice? (Hint: check out the summary count data.)
 
-#Our data are already in summary format (total population and total cases, not one line per person in each country), so we need an extra step in creating a bar plot
+#Our data are already in summary format (total population and total cases, not one line per person in each country), so we need to let R know that when we create a bar plot, there is no need to summarize the data first (well use the stat="identity" option in geom_bar to let R know this).
 
+```{r stackedbar}
+whoage2 %>%
+  filter(country %in% c("Uganda", "USA", "Japan", "Peru", "Pakistan") &
+           year == 2013) %>%
+  ggplot(aes(x = country, y = cases)) +
+  geom_bar(aes(color = agecat, fill = agecat),
+           stat = "identity",
+           position = "fill")
 
-whoage2 %>% 
-  filter(country %in% c("Uganda","USA","Japan","Peru","Pakistan") & year == 2013) %>%
-  ggplot(aes(x = country, y=cases)) +
-    geom_bar(aes(color = agecat, fill = agecat), stat="identity", 
-             position = "fill"
-    )
+## summary case counts
+casecounts <- whoage2 %>%
+  filter(country %in% c("Uganda", "USA", "Japan", "Peru", "Pakistan") &
+           year == 2013) %>%
+  group_by(country,agecat) %>%
+  summarize(cases)
+```
+
 
 # here we note no data from older groups
-whoage2 %>% 
-  filter(country %in% c("Uganda","USA","Japan","Peru","Pakistan") & year == 2013) %>%
-  ggplot(aes(x = country, y=cases)) +
-    geom_bar(aes(color = agecat, fill = agecat), stat="identity", 
-             position = position_stack()
-    )
 
-
-
-
-```
-
-# Let's take a trip to the Midwest
-
-
-
-
-
-
-
-
-
-
-
-
-
-Note: you will want to begin with the data wrangling code below. We will learn more about this command next week, but I am providing this to help on this lab:
-```{r hint, eval = FALSE}
-midwest %>%
-  mutate(metro = ifelse(inmetro == 1, "Yes", "No")) %>%
-```
-
-*Before going to the last exercise, try knitting, committing, and pushing one more time.*
-
-7. Recreate the plot below. [This page](https://ggplot2.tidyverse.org/reference/ggtheme.html) will be helpful in determining the theme. The `size` of the points is 0.75. (Please note: the points are colored different shades of blue.)
-
-```{r ex-7, echo = FALSE}
-ggplot(data = midwest) + 
-  geom_point(mapping = aes(x = percprof, y = popdensity, color = percbelowpoverty), size = .75) + 
-  facet_wrap(~ state, nrow = 2) +
-  theme_bw() +
-  labs(title = "Do people with advanced degrees tend to live in denser counties?",
-       subtitle = "faceted by state",
-         x = "Percentage with a professional degree", y = "Population Density", color = "Percentage Below Poverty")
-```
+Reproduce a plot; also let them create interesting visualization of their own (extra credit?)
 
 # Submission
 

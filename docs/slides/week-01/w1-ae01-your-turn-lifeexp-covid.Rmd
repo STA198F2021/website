@@ -24,7 +24,7 @@ You have two options for this exercise:
 
 - Option 1: Life expectancy over time 
 
-- Option 2: COVID-19 fatality numbers across the globe
+- Option 2: COVID-19 fatality numbers across the globe (more complicated plot; if you want to warm up first, start with Option 1!)
 
 Pick one and complete it. Optionally, try the other one as well.
 
