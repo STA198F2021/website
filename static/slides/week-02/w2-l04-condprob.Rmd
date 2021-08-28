@@ -1,7 +1,7 @@
 ---
 title: "Conditional Probability"
 subtitle: "<br><br> Introduction to Global Health Data Science"
-author: "[GHDS](https://sta198f2021.github.io/website/)"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
