@@ -50,21 +50,21 @@ PDF file has the correct date. Stage, commit, and push your changes.
 
 # Packages
 
-We will be using tidyverse and viridis to make plots in R!
+We will be using tidyverse to make plots in R!
 
 ```{r load-packages, message = FALSE, echo = FALSE}
 library(tidyverse)
-library(viridis)
 library(scales)
 ```
 
 
 # WHO Tuberculosis Data
 
-The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013. These data are not in a tidy format, so we start with some data wrangling (more next week; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
+The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013, included in R's `tidyverse` package. These data are not in a tidy format, so we start with some data wrangling (more next week; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
 
-```{r datawrangle, echo=FALSE}
+```{r datawrangle, echo=FALSE, message=FALSE, warning=FALSE}
 who2 <- who %>%
+  # this first code block is splitting out sex and age groups
   pivot_longer(
     cols = new_sp_m014:newrel_f65, 
     names_to = "key", 
@@ -80,12 +80,12 @@ who2 <- who %>%
 
 who2$country=recode(who2$country, "United States of America" = "USA")
 
-
 whoage <- who2 %>%
   group_by(country,year,var,age) %>%
   summarize(casecount=sum(cases)) %>%
   ungroup()
 
+# making this prettier for printing purposes
 whoage$agecat=recode(whoage$age, `014` = "0-14", `1524` = "15-24", `2534` = "25-34", `3544` = "35-44", `4554` = "45-54", `5564` = "55-64", `65` = "65+" )
 
 whoage2 <- whoage %>%
@@ -100,6 +100,7 @@ whocollapse <- whoage %>%
 
 population$country=recode(population$country,"United States of America"="USA")
 
+# we'll learn about merging data sets soon
 whotbpop <- right_join(whocollapse,population)
 whotbpop$cases100000=whotbpop$cases/whotbpop$population*100000
 ```
@@ -112,83 +113,33 @@ Your assignment should have at least three meaningful commits.
 1. Make a histogram of the 2013 population of the countries. Set the bin width at 100,000,000. Label your axes and give the plot a title. Does it appear that there are any outliers? If so, what are they?  Does the distribution appear to be symmetric or skewed?
 
 
-
-
 ```{r ex1}
-whotbpop %>%
-  filter(year == 2013) %>%
-    ggplot(aes(x = population)) +
-      geom_histogram(binwidth=100000000) +
-        scale_x_continuous(labels = label_comma()) +
-          labs(
-            x = "Population",
-            y = "Number of Countries",
-            title = "2013 Population"
-          )
+  
 ```
 
 
-2. 
-
-Sometimes analysts use a *log transformation* in order to bring outliers in the right tail of a distribution closer to its center. Whether or not such a transformation is needed, make a histogram of the log (statisticians use log to indicate the natural log; in the rare cases we want the log base 10, we'll call it log$_{10}$) of the 2013 population of the countries (code to create the log population value is included). As before, label your axes and give the plot a title. Does it appear that there are any outliers in the new plot? If so, what are they?  Does the distribution appear to be symmetric or skewed? Briefly discuss when you might want to use the population histogram on the log scale versus when you might prefer using the original scale.
+2. Sometimes analysts use a *log transformation* in order to bring outliers in the right tail of a distribution closer to its center. Whether or not such a transformation is needed, make a histogram of the log (statisticians use log to indicate the natural log; in the rare cases we want the log base 10, we'll call it log$_{10}$) of the 2013 population of the countries (code to create the log population value is included). As before, label your axes and give the plot a title. Does it appear that there are any outliers in the new plot? If so, what are they?  Does the distribution appear to be symmetric or skewed? Briefly discuss when you might want to use the population histogram on the log scale versus when you might prefer using the original scale.
 
 
 
 ```{r ex2}
-##leave this command in there for them
-whotbpop$logpop=log(whotbpop$population)
-whotbpop %>%
-  filter(year == 2013) %>%
-    ggplot(aes(x = logpop)) +
-      geom_histogram() +
-        labs(
-          x = "Log(Population)",
-          y = "Number of countries",
-          title = "2013 Population (log scale)"
-        )
+
+whotbpop$logpop = log(whotbpop$population)
+
 ```
 
 
 *Before going to Exercise 3, now would be a good time to do your first knit and then commit and push.*
 
-3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. Generate a scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `population`. Please label your axes and legend and give the plot a title. 
-
-(Hint: if you would like to use the `viridis` palette, the line `scale_color_viridis(discrete=TRUE, option = "C", name = "State")` will be useful to your code.)
-
-Describe what you observe in the plot. Do you observe the same pattern for every country?
+3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. Generate a single scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `population`. Please label your axes and legend and give the plot a title. Describe what you observe in the plot. Do you observe the same pattern for every country?
 
 ```{r ex3}
-whotbpop %>%
-  filter(country %in% c("Uganda", "Morocco", "Japan", "Peru", "Pakistan", "USA")) %>%
-  ggplot(aes(
-    x = year,
-    y = cases100000,
-    color = country,
-    size = population
-  )) +
-  geom_point() +
-  labs(
-    title = "TB Cases by Population",
-    subtitle = "Selected Countries",
-    x = "Year",
-    y = "TB Cases (per 100K)",
-    color = "Country",
-    size = "Population"
-  ) 
+
 ```
 
-4. Now, examine the relationship between same two variables, with a separate facet for each of your six selected countries. You can drop the size aesthetic if you prefer. Be sure to label your axes. Which plot do you prefer? Briefly explain your choice.
+4. Now, examine the relationship between the same two variables, with a separate facet for each of your six selected countries. You can drop the size aesthetic if you prefer. Be sure to label your axes. Which plot do you prefer? Briefly explain your choice.
 
 ```{r ex4}
-whotbpop %>%
-  filter(country %in% c("Uganda","Morocco","Japan","Peru","Pakistan","USA")) %>%
-    ggplot(aes(x = year, y = cases100000)) +
-      geom_point() +
-        labs(title = "TB Cases by Population",
-          subtitle = "Selected Countries",
-          x = "Year", y = "TB Cases (per 100K)"
-        ) +
-        facet_wrap(~ country)
 
 ```
 
@@ -198,56 +149,59 @@ whotbpop %>%
 5. Do some years have more cases per 100,000 than others? Create side-by-side boxplots of `cases100000' for the years 2010, 2011, 2012, and 2013. Because of the global disparity in TB across countries, create a second plot using log(cases100000+1) instead of cases100000. (NOTE: we add 1 because some countries report 0 cases, and the log of 0 is undefined.) Code to create that new variable is included below. Briefly comment on what you notice. Is there much change in the distribution of the case rate per 100,000 over these four years?  
 
 ```{r ex5}
-whotbpop %>%
-    filter(year > 2009) %>%
-      ggplot(aes(x = cases100000)) +
-        geom_boxplot() +
-        labs(title = "TB Cases",
-            subtitle = "2010-2013",
-            x = "TB Cases per 100K Population", y = NULL
-             ) +
-      facet_wrap(~ year)
 
-###include this code
-whotbpop$logcase=log(whotbpop$cases100000+1)
-whotbpop %>%
-    filter(year > 2009) %>%
-      ggplot(aes(x = logcase)) +
-        geom_boxplot() +
-        labs(title = "TB Cases",
-            subtitle = "2010-2013",
-            x = "Log(TB Cases per 100K Population)", y = NULL
-             ) +
-      facet_wrap(~ year)
+whotbpop$logcase = log(whotbpop$cases100000 + 1)
 
 ```
 
 
-6. Does each country selected have similar age composition of its TB cases? Create a segmented bar chart with one bar per `country`, each bar going from 0 - 1, with the fill determined by the age category to which the cases belong. What do you notice? (Hint: check out the summary count data.)
+6. Does each country selected have similar age composition of its TB cases? Create a segmented bar chart with one bar per `country`, each bar going from 0 - 1, with the fill determined by the age category to which the cases belong. What do you notice? (Hint: check out the summary count data set, generated by the code below.)
 
-#Our data are already in summary format (total population and total cases, not one line per person in each country), so we need to let R know that when we create a bar plot, there is no need to summarize the data first (well use the stat="identity" option in geom_bar to let R know this).
+*Our data are already in summary format (total population and total cases, not one line per person in each country), so we need to let R know that when we create a bar plot, there is no need to summarize the data first (we'll use the stat="identity" option in geom_bar to let R know this, e.g. geom_bar(aes(values you want here),stat = "identity"), any other options you want).*
 
-```{r stackedbar}
-whoage2 %>%
-  filter(country %in% c("Uganda", "USA", "Japan", "Peru", "Pakistan") &
-           year == 2013) %>%
-  ggplot(aes(x = country, y = cases)) +
-  geom_bar(aes(color = agecat, fill = agecat),
-           stat = "identity",
-           position = "fill")
+```{r stackedbar, warning=FALSE, echo=FALSE, message=FALSE}
 
-## summary case counts
+## summary case counts (change for your countries)
 casecounts <- whoage2 %>%
   filter(country %in% c("Uganda", "USA", "Japan", "Peru", "Pakistan") &
            year == 2013) %>%
-  group_by(country,agecat) %>%
+  group_by(country, agecat) %>%
   summarize(cases)
 ```
 
+*Now would be a good time to knit, commit, and push, again.*
 
-# here we note no data from older groups
+7. Reproduce the plot below. HINT: the Hex color for Duke blue is #00539B.
 
-Reproduce a plot; also let them create interesting visualization of their own (extra credit?)
+```{r ex7, echo=FALSE, warning=FALSE}
+
+whotbpop %>%
+  filter(
+    country %in% c(
+      "Cambodia",
+      "Congo",
+      "Lesotho",
+      "Liberia",
+      "Namibia",
+      "Papua New Guinea",
+      "Sierra Leone",
+      "Zambia",
+      "Zimbabwe"
+    )
+  ) %>%
+  ggplot(aes(x = year, y = cases100000)) +
+  geom_point(color='#00539B') +
+  labs(
+    x = "Year",
+    y = "Cases per 100,000 Population",
+    title = "Tuberculosis Burden, 1995-2013",
+    subtitle = "Subset of WHO High TB Burden Countries"
+  ) +
+  facet_wrap(~ country, nrow = 3)
+
+```
+
+8. For extra credit (0-2 points), create your own innovative visualization of these data.
 
 # Submission
 
@@ -262,12 +216,14 @@ Once your work is finalized in your GitHub repo, you will submit it to Gradescop
 ## Grading
 Total: 50 pts
 
-- Exercise 1: 4 pts
+- Exercise 1: 6 pts
 - Exercise 2: 6 pts
-- Exercise 3: 4 pts
-- Exercise 4: 8 pts
+- Exercise 3: 6 pts
+- Exercise 4: 6 pts
 - Exercise 5: 6 pts
 - Exercise 6: 6 pts
-- Exercise 7: 8 pts
+- Exercise 7: 6 pts
 - Overall:  8 pts
-  - Overall includes the number of commits made, naming chunks, updating the name on the assignment to your name, and following tidyverse style (see: https://style.tidyverse.org/). 
+- Bonus: up to 2 additional points (over 50)
+
+  - Overall includes the number of commits made, naming chunks, updating the name on the assignment to your name, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
