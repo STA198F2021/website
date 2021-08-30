@@ -201,7 +201,7 @@ whotbpop %>%
 
 ```
 
-8. For extra credit (0-2 points), create your own innovative visualization of these data.
+8. For extra credit (0-2 points), create your own innovative visualization of these data. (Submitting a response indicates you are willing for us to share your bonus code with others in the class.)
 
 # Submission
 
