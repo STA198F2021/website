@@ -1,0 +1,137 @@
+---
+title: "Discrete Probability Distributions"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+```
+
+class: middle
+
+# Probability Distributions
+
+---
+
+### Probability Distributions
+
+When we learned how to find probabilities using basic principles, we focused on one particular outcome or event, like the probability of being a smoker. We now explore the bigger picture by exploring all possible values of a discrete random variable, along with their associated probabilities. This list of possible values and probabilities is called the *probability distribution* of the random variable.
+
+---
+
+### Why do we care about probability distributions?
+
+We need probability distributions to make statements about how
+likely an event may be. For example, suppose we are interested in
+comparing two groups of pancreatic cancer patients, with one
+group on the standard treatment and one group on an experimental
+new treatment. The statistical test we use to compare the two
+groups depends on the variable of interest $X$ and its probability
+distribution. One of you could define $X$ to be a 0/1 variable
+indicating whether each patient survives 1 year, and someone else
+could instead define X as the number of months a patient survives.
+In these two cases, each definition of $X$ has a different probability distribution, and you would use a different type of test for each case.
+
+---
+
+### Example: Y Chromosomes
+
+Consider Y chromosomes in the US population.  51.2% of births are to babies with Y chromosomes, and 48.8% of babies do not have Y chromosomes. Thus the probability of having a baby with a Y chromosome is 0.512.
+
+- The probability of an event is $\geq 0$ and $\leq 1$.
+
+- The sum of the probabilities of all possible events is exactly 1 (e.g., 0.512+0.488=1).
+
+---
+
+### Bernoulli Distribution
+
+Consider a dichotomous (two-level) random variable $Y$. By definition, $Y$ must assume one of two possible values, e.g.
+
+- failure or success
+- dead or alive
+- Duke student or not
+- current smoker or not
+- heads or tails (coin flip)
+
+A random variable of this type is known as a *Bernoulli* random variable, and we describe the probability of response using the parameter $\pi$. 
+
+The distribution is named for [Jacob Bernoulli](https://en.wikipedia.org/wiki/Jacob_Bernoulli), who was part of a famous family of mathematicians in Switzerland.
+
+---
+
+### Bernoulli random variable
+
+These variables are often coded so that $Y=1$ is called an *event* or *success*, $Y=0$ is called a *failure*, and $\pi$ is defined as the probability of a success. (This is not required, but you need to remember which level maps to $\pi$, and the other level then has probability $1-\pi$.)
+
+Examples:
+- Coin flip: let $Y=1$ if heads and $Y=0$ if tails, then $P(Y=1)=\pi=0.5$
+- Vegetarian in US: $Y=1$ if vegetarian and $Y=0$ if not, then $P(Y=1)=\pi=0.05$ and $P(Y=0)=1-\pi=1-0.05=0.95$
+- Vegetarian in India: $Y=1$ if vegetarian and $Y=0$ if not, then $P(Y=1)=\pi=0.31$ and $P(Y=0)=1-\pi=1-0.31=0.69$
+
+---
+
+### Bernoulli distribution
+
+- $Y$ takes value 1 with probability $\pi$ and value 0 with probability $1-\pi$
+- $P(Y=y)=\pi^y(1-\pi)^{1-y}$
+  - $P(Y=1)=\pi^1(1-\pi)^0=\pi$ as $x^0=1$ for any $x$
+  - $P(Y=0)=\pi^0(1-\pi)^1=1-\pi$
+- We don't really need all this formality as it's probably easier just to keep track of $\pi$ and $1-\pi$
+- However, we want to extend this to a more complex setting -- for example, in a randomly-selected group of 3 high school students, how surprising would it be to get 2 who have smoked e-cigarettes in the past month?
+
+---
+
+### Case Study: E-Cigarettes
+
+- The [CDC reports](https://www.cdc.gov/tobacco/data_statistics/fact_sheets/youth_data/tobacco_use/index.htm) that 19.6% of high school students have smoked e-cigarettes in the past 30 days. We'll round this to 20% for simplicity.
+- $P(Y=1)=P(Smoker)=\pi=0.2$ and $P(Y=0)=0.8$
+- Now suppose we randomly select two independent high school students and define a new random variable $X$ representing the number of smokers. X can take the values 0, 1, or 2. Let $Y_1$ be the smoking status of the first student ($Y_1=1$ if the student smokes) and $Y_2$ be the smoking status of the second student.
+
+.pull-left[
+Next we'll talk about how to get the *probability distribution* of $X$.
+
+]
+.pull-right[
+| $Y_1$ | $Y_2$ | $X$ | $P(X)$ |
+|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | |
+| 1 | 0 | 1 | |
+| 0 | 1 | 1 | |
+| 1 | 1 | 1 | |
+]
+
+---
+
+Let $A_1$ be the event that $Y_1=1$ and let $A_2$ be the event that $Y_2=1$. 
+
+Because the people are independent, then
+
+$$\begin{array}{ll}
+P(both smoke) & = P(A_1 \cup A_2) \\
+& = P(A_1) P(A_2 \mid A_1) \\
+& = P(A_1) P(A_2) \\
+& = \pi \times \pi = 0.2(0.2)=0.04.$$
+
+
+
+
+
+

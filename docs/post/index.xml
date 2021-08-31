@@ -558,10 +558,14 @@
 &lt;td style=&#34;text-align:center&#34;&gt;Probability in Action&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-03/w3-l01-probinaction.html#1&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Discrete Distributions&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-03/w4-l02-discretedistributions.html#1&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
+&lt;h3 id=&#34;readings-and-videos&#34;&gt;Readings and Videos&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -573,7 +577,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OIS: &lt;a href=&#34;https://www.openintro.org/book/os/&#34;&gt;Chapter 4, Section 4.3.1&lt;/a&gt; or PG: Chp 7, Sections 7.1-7.2&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;OIS: &lt;a href=&#34;https://www.openintro.org/book/os/&#34;&gt;Chapter 4, Sections 4.2.1 and  4.3.1&lt;/a&gt; or PG: Chp 7, Sections 7.1-7.2&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
