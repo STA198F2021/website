@@ -139,15 +139,347 @@ Let `\(A_1\)` be the event that `\(Y_1=1\)` and let `\(A_2\)` be the event that 
 
 Because the people are independent, then
 
-`$$\begin{array}{ll}
-P(both smoke) &amp; = P(A_1 \cup A_2) \\
-&amp; = P(A_1) P(A_2 \mid A_1) \\
-&amp; = P(A_1) P(A_2) \\
-&amp; = \pi \times \pi = 0.2(0.2)=0.04.$$`
+`$$\begin{aligned}
+P(Y_1=Y_2=1) &amp; = P(A_1 \cap A_2) \\
+ &amp; = P(A_1) P(A_2 \mid A_1) \\
+ &amp; = P(A_1) P(A_2) \\
+ &amp; = \pi \times \pi = 0.2(0.2)=0.04. \end{aligned}$$`
+
+---
+
+.pull-left[
+Now we can fill in the bottom row of the probability distribution of `\(X\)`.
+
+]
+.pull-right[
+| `\(Y_1\)` | `\(Y_2\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | |
+| 1 | 0 | 1 | |
+| 0 | 1 | 1 | |
+| 1 | 1 | 1 |  `\(0.02 \times 0.02 =0.04\)` |
+]
+
+---
+
+.pull-left[
+It's straightforward to fill in the rest of the table.
+]
+.pull-right[
+| `\(Y_1\)` | `\(Y_2\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | `\(0.8 \times 0.8 = 0.64\)` |
+| 1 | 0 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
+| 0 | 1 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
+| 1 | 1 | 1 | `\(0.2 \times 0.2 =0.04\)` |
+]
+
+---
 
 
+.pull-left[
+
+Recall our table:
+
+| `\(Y_1\)` | `\(Y_2\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | `\(0.8 \times 0.8 = 0.64\)` |
+| 1 | 0 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
+| 0 | 1 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
+| 1 | 1 | 1 | `\(0.2 \times 0.2 =0.04\)` |
+]
+.pull-right[
+We can clean up the table to get the probability distribution of `\(X\)`:
+
+| | | | |
+|:--:|:--:|:--:|:--:|
+| `\(X\)` | 0 | 1 | 2 |
+| `\(P(X=x)\)` | 0.64 | 0.32 | 0.04 |
+
+So if we randomly sample two US high schoolers, the probability that both are recent e-cig smokers is 0.04 (4% chance), the probability only one recently smoked is 0.32 (this can happen two ways -- either only the first smoked or only the second smoked), and the probability neither smoked e-cigs recently is 0.64.
+]
+
+---
+
+Now suppose we randomly sample 3 independent high school students!
+
+| `\(Y_1\)` | `\(Y_2\)` | `\(Y_3\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | 0 | |
+| 1 | 0 | 0 | 1 | |
+| 0 | 1 | 0 | 1 | |
+| 0 | 0 | 1 | 1 | |
+| 1 | 1 | 0 | 2 | |
+| 1 | 0 | 1 | 2 | |
+| 0 | 1 | 1 | 2 | |
+| 1 | 1 | 1 | 3 | |
+
+Better get started with the multiplication!
+
+---
+
+Because these are independent high school students, we can calculate the probabilities the same manner as before.
 
 
+| `\(Y_1\)` | `\(Y_2\)` | `\(Y_3\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | 0 | 0.8(0.8)(0.8)=0.512 |
+| 1 | 0 | 0 | 1 | 0.2(0.8)(0.8)=0.128 |
+| 0 | 1 | 0 | 1 | 0.8(0.2)(0.8)=0.128 |
+| 0 | 0 | 1 | 1 | 0.8(0.8)(0.2)=0.128 |
+| 1 | 1 | 0 | 2 | 0.2(0.2)(0.8)=0.032 |
+| 1 | 0 | 1 | 2 | 0.2(0.8)(0.2)=0.032 |
+| 0 | 1 | 1 | 2 | 0.8(0.2)(0.2)=0.032 |
+| 1 | 1 | 1 | 3 | 0.2(0.2)(0.2)=0.008 |
+
+The chance that 2 of 3 are recent e-cig smokers is 0.032+0.032+0.032=0.096 or 9.6%
+
+---
+
+.pull-left[
+| `\(Y_1\)` | `\(Y_2\)` | `\(Y_3\)` | `\(X\)` | `\(P(X)\)` |
+|:----:|:----:|:----:|:----:|:----:|
+| 0 | 0 | 0 | 0 | 0.8(0.8)(0.8)=0.512 |
+| 1 | 0 | 0 | 1 | 0.2(0.8)(0.8)=0.128 |
+| 0 | 1 | 0 | 1 | 0.8(0.2)(0.8)=0.128 |
+| 0 | 0 | 1 | 1 | 0.8(0.8)(0.2)=0.128 |
+| 1 | 1 | 0 | 2 | 0.2(0.2)(0.8)=0.032 |
+| 1 | 0 | 1 | 2 | 0.2(0.8)(0.2)=0.032 |
+| 0 | 1 | 1 | 2 | 0.8(0.2)(0.2)=0.032 |
+| 1 | 1 | 1 | 3 | 0.2(0.2)(0.2)=0.008 |
+]
+
+.pull-right[
+The probability distribution of `\(X\)`, the number of recent e-cig smokers out of three high school students, is now 
+ 
+| | | | | |
+|:--:|:--:|:--:|:--:|:---:|
+| `\(X\)` | 0 | 1 | 2 | 3|
+| `\(P(X=x)\)` | 0.512 | 0.384 | 0.096 | 0.008 |
+ 
+ ]
+
+---
+
+### Oh gosh, is she going to make us do this for 4 students?
+
+This is getting ridiculous!  Hopefully now you can see the need for a formula to simplify things. We can use the *binomial distribution* to describe these patterns in general.
+
+---
+
+### Binomial distribution
+
+The *binomial distribution* is used to give us the probability of `\(X\)` "successes" from a sequence of `\(n\)` independent Bernoulli trials. In our example, each student would be an independent Bernoulli trial (either an e-cig smoker, or not). This distribution involves three assumptions.
+
+- There is a fixed number `\(n\)` of Bernoulli trials, each of which results in one of two mutually-exclusive outcomes
+- The outcomes of the `\(n\)` trials are independent
+- The probability of success `\(\pi\)` is the same for each trial
+
+The distribution is `\(P(X=x)=\begin{pmatrix} n \\ x \end{pmatrix}\pi^x(1-\pi)^{n-x},\)` and it has mean `\(n\pi\)` and variance `\(n\pi(1-\pi)\)`.
+
+---
+
+### Binomial distribution
+
+`$$P(X=x)=\begin{pmatrix} n \\ x \end{pmatrix}\pi^x(1-\pi)^{n-x}$$`
+
+It's really not so bad!
+
+First, look at the second part, `\(\pi^x(1-\pi)^{n-x}\)`. This is just multiplying the right combination of `\(\pi\)` and `\(1-\pi\)` as in the previous tables.
+
+For example, if we want the probability of 3 e-cig smokers, `\(X=3\)`, the second part is just `\(\pi^x(1-\pi)^{n-x}=0.2^3(0.8)^0=0.008\)`, just as in the table.
+
+---
+
+### Binomial distribution
+
+`$$P(X=x)=\begin{pmatrix} n \\ x \end{pmatrix}\pi^x(1-\pi)^{n-x}$$`
+
+- If we want the probability of 2 e-cig smokers, `\(X=2\)`, the second part is just `\(\pi^x(1-\pi)^{n-x}=0.2^2(0.8)^{3-2}=0.032\)`, which is what we see in any single row in which we have two smokers and one non-smoker.
+
+- This is the probability of any one specific combination of 2 smokers and 1 nonsmoker. Then we need to figure out how many combinations of 2 smokers and 1 nonsmoker we could get.
+
+- The first part, `\(\begin{pmatrix}n \\x \end{pmatrix}\)`, accounts for all the possible ways in which we can have 2 smokers out of 3 people.
+
+---
+
+### Combinations
+
+The first part, `\(\begin{pmatrix} n \\ x \end{pmatrix}\)`, is pronounced "n choose x" and is called a *combination*. In this particular setting, it is also called the *binomial coefficient*. It is a formula for the number of ways to pick `\(x\)` subjects from a larger group of `\(n\)` and is defined as `$$\begin{pmatrix} n \\ x \end{pmatrix} = \frac{n!}{x!(n-x)!}.$$`
+
+What's n!?  Not hard either...n! (pronounced "n factorial") is just shorthand for the recursive multiplication `\(n!=n(n-1)(n-2)\cdots (1)\)`. So `\(3!=3(2)(1)=6\)`, `\(4!=4(3)(2)(1)=24\)`, and so forth. We define `\(0!=1\)`.
+
+How many ways can we pick 3 subjects from a group of 3?  (Ok, that's easy, there's just one way.) Using the binomial coefficient, we see it is `\(\begin{pmatrix}3 \\ 3 \end{pmatrix}=\frac{3!}{3!0!}=\frac{3(2)(1)}{3(2)(1)1}=1\)`.
+
+---
+
+### Combinations
+
+Going back to the table, we see there are 3 ways to pick 2 subjects from a group of 3 students.  
+
+We can also calculate `\(\begin{pmatrix}3 \\ 2 \end{pmatrix}=\frac{3!}{2!1!}=\frac{3(2)(1)}{(2)(1)(1)}=3\)`.
+
+---
+
+### Probability of getting 3 smokers in a group of 3 students
+
+Using the binomial distribution, the probability of getting 3 recent e-cig smokers in our sample of 3 students is
+
+
+`$$\begin{aligned}
+\begin{pmatrix} n \\ x \end{pmatrix}\pi^x(1-\pi)^{n-x} &amp; = \frac{n!}{x!(n-x)!}\pi^x(1-\pi)^{n-x} \\
+\begin{pmatrix} 3 \\ 3 \end{pmatrix}0.2^3(1-0.2)^{3-3} &amp; = \frac{3!}{3!(3-3)!}0.2^3(1-0.2)^{3-3} \\
+ &amp; \frac{3(2)(1)}{3(2)(1)1}0.2^3(0.8)^{0}=0.2^3 \\
+ &amp; = 0.008.
+ \end{aligned}$$`
+ 
+---
+
+### Distribution of e-cigarette smokers
+
+Let's use R to take a look at the distribution of the number of recent e-cig smokers in groups of varying size.  We can actually run a big experiment in R using the CDC estimate of the percentage of high schoolers who have smoked e-cigarettes in the past 30 days, 19.6%. Let's draw a single random sample of 1000 high schoolers with smoking probability 0.196. Our random variable `\(X\)` is now the number of smokers in this big sample.
+
+
+```r
+set.seed(121372) #in order to reproduce random draw
+# in R, what we called "n" is called size
+# R's "n" is the number of experiments to run
+rbinom(n=1,size=1000,prob=0.196)
+```
+
+```
+## [1] 208
+```
+
+In this case, we got `\(X=208\)` smokers, close to the expectation of `\(n\pi=1000(0.196)=196\)`.
+
+---
+
+Now suppose instead of taking a single random sample, we want to run our experiment 10 times.
+
+
+```r
+rbinom(n=10,size=1000,prob=0.196)
+```
+
+```
+##  [1] 197 186 220 179 174 199 189 188 182 193
+```
+
+We can see that for each of our 10 experiments, `\(X\)` is pretty close to its expectation (population mean) of 196.
+
+---
+
+If we run the experiment a very large number of times, we can get a good estimate of the distribution, which in this case is a binomial(n=1000,0.196) distribution.
+
+
+```r
+binomdata = data.frame(X = rbinom(1000000, 1000, 0.196))
+ggplot(binomdata, aes(x = X)) + 
+  geom_histogram(aes(y = ..density..)) +
+  labs(x = "Number of Smokers",
+       y = "Probability",
+       title = "Binomial(1000,0.196) distribution")
+```
+
+&lt;img src="w3-l02-discretedistributions_files/figure-html/binomdist-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### In Vitro Fertilization (IVF)
+
+Infertility is a global health problem that is inadequately addressed worldwide. Some estimates indicate up to 1-2% of conceptions in Western countries are through IVF.
+
+Suppose the average success (live birth) rate of this procedure per embryo is 35% (in reality, success rates depend on parental characteristics such as age). In the US and in many other countries, IVF is expensive and unlikely to be covered by insurance. Because of the expense, parents wish to minimize the needed number of IVF treatments (i.e., maximize the success rate of a given IVF attempt).
+
+---
+
+To maximize the success rate, specialists usually implant more than one embryo. We want to determine the optimum number of embryos to implant so that the likelihood of having at least one baby is high, but the likelihood of having triplets, quadruplets, or higher-order births is low. Suppose we prefer a singleton birth, twins are acceptable (though not without increased risk), and the risk of higher-order births should be kept to a minimum.  Assume the probability of each embryo surviving is independent of the others.
+
+---
+
+How do we address this mathematically? Let `\(Y\)` be the number of live births from a single IVF procedure that implants `\(n\)` embryos. Here's what we need to know.
+
+- Probability of having at least one baby, `\(P(Y \geq 1)\)`, which we want to be large
+
+- Probability of having triplets, quadruplets, or a higher-order birth, `\(P(Y&gt;2)\)`, which we want to be small
+
+---
+
+Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}\pi^y(1-\pi)^{n-y}\)`
+
+- `\(y\)` is the # of live births from `\(n\)` implanted embryos
+
+- `\(\pi=0.35\)` is the probability of a live birth
+
+- If we implant just 1 embryo, `\(n=1\)`. If we implant two embryos, `\(n=2\)`. Medical societies (e.g., American Society for Reproductive Medicine) have guidelines on the number of embryos to implant, ranging from 1-5, depending on embryo quality and the mother's age.
+
+- We can use the binomial distribution to find `\(P(Y \geq 1)\)` and `\(P(Y&gt;2)\)` for `\(n=1,2,3,4,5\)`
+
+---
+
+
+Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}\pi^y(1-\pi)^{n-y}\)`
+
+- Quick trick: `\(P(Y \geq 1) = 1-P(Y=0)\)` (you either have no live births, or one or more live births)
+
+- Similarly, `\(P(Y&gt;2)=1-P(Y=0)-P(Y=1)-P(Y=2)\)` if needed
+
+- In the easy case in which `\(n=1\)`, `\(P(Y \geq 1)=0.35\)` and `\(P(Y&gt;2)=0\)`
+
+---
+
+Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}0.35^y(1-0.35)^{n-y}\)`
+
+
+More generally,
+
+- `\(P(Y \geq 1)=1-P(Y=0)=1-\begin{pmatrix}n \\ 0 \end{pmatrix} 0.35^0 (0.65)^{n-0}=1-0.65^n\)`
+ 
+- 
+`$$\begin{aligned}
+P(Y&gt;2) &amp; = 1-P(Y=0)-P(Y=1)-P(Y=2) \\ 
+ &amp; = 1 - 0.65^n - \begin{pmatrix} n \\ 1 \end{pmatrix}0.35^1(0.65)^{n-1} - \begin{pmatrix} n \\ 2 \end{pmatrix}0.35^2(0.65)^{n-2} \\
+ &amp; = 1 - 0.65^n - n(0.35)(0.65)^{n-1} - \frac{n!}{2!(n-2)!}0.35^2(0.65)^{n-2} \\
+ &amp; = 1 - 0.65^n - n(0.35)(0.65)^{n-1} - \frac{n(n-1)}{2}0.35^2(0.65)^{n-2} \end{aligned}$$`
+
+---
+
+Thus we have
+
+- `\(P(Y\geq 1)=1-0.65^n\)`
+- `\(P(Y &gt; 2)=1 - 0.65^n - n(0.35)(0.65)^{n-1} - \frac{n(n-1)}{2}0.35^2(0.65)^{n-2}\)`
+
+If `\(n=5\)`, then we have
+
+- `\(P(Y\geq 1)=1-0.65^5=0.88\)` (good chances of a baby!)
+- `\(P(Y &gt; 2)=1 - 0.65^5 - 5(0.35)(0.65)^{5-1} - \frac{5(4)}{2}0.35^2(0.65)^{5-2}=0.24\)` (good chances of lots o' babies!)
+
+---
+
+
+Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}0.35^y(1-0.35)^{n-y}\)`
+
+| Embryos implanted (n) | P(at least 1 baby) | P(&gt;2 babies) |
+|:-------:|:-------:|:-------:|
+| 1 | 0.35 | 0 |
+| 2 | 0.58 | 0 |
+| 3 | 0.73 | 0.04 |
+| 4 | 0.82 | 0.13 |
+| 5 | 0.88 | 0.24|
+
+Using this table of probabilities, and keeping in mind our criteria, how many embryos would you implant, and why?
+
+---
+
+R has built-in functions for computing binomial probabilities that can save you a lot of work (especially when `\(n\)` is large)
+
+| Probability | R function | 
+|:-----:|:-----:|
+| `\(P(Y=y \mid \pi, n)\)` | dbinom(y,n,pi) |
+| `\(P(Y \leq y \mid \pi, n)\)` | pbinom(y,n,pi) |
+
+For the last row of the table on the prior slide, `\(n=5\)` and `\(\pi=0.35\)`. The probability of at least one baby, `\(P(Y \geq 1)=1-P(Y=0)\)` can be calculated using in R the code *1-dbinom(0,5,0.35)*.
 
 
     </textarea>
