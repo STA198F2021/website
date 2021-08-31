@@ -106,7 +106,7 @@ ggplot(gats, aes(x = CURRENTSMOKE)) +
 
 ---
 
-## Segmented bar plot
+## Stacked bar plot
 
 ```{r}
 ggplot(gats, aes(x = CURRENTSMOKE, 
@@ -171,6 +171,21 @@ ggplot(gats, aes(y = CURRENTSMOKE,
 ```
 ]
 ]
+
+---
+
+# Side-by-Side Bar Plot
+
+```{r sidebyside}
+ggplot(gats, aes(x = CURRENTSMOKE, 
+                  fill = GENDER)) + #<<
+  geom_bar(position=position_dodge())
+
+#ggplot(aes(x = agegroup, y = probcovid, fill = vaxstatus)) +
+#  geom_col(position = position_dodge(),) +
+
+
+```
 
 ---
 

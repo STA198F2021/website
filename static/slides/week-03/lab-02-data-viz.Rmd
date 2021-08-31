@@ -34,7 +34,7 @@ In case you need to generate again the public key, here is a reminder of the ste
 # Getting started
 
 Go to the course GitHub organization and locate your lab02 repository, which
-should have the prefix **lab02**. Copy the URL of the repository and clone in RStudio. If you have trouble, see last week's lab for step-by-step instructions.
+should have the prefix **lab-02**. Copy the URL of the repository and clone in RStudio. If you have trouble, see last week's lab for step-by-step instructions.
 
 Then, configure git so that RStudio can communicate with GitHub.
 
@@ -60,7 +60,7 @@ library(scales)
 
 # WHO Tuberculosis Data
 
-The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013, included in R's `tidyverse` package. These data are not in a tidy format, so we start with some data wrangling (more next week; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
+The World Health Organization publishes an annual global tuberculosis (TB) report, which describes an assessment of the TB epidemic as well as progress in prevention, diagnosis, and treatment. We consider data from the WHO on TB from 1995-2013, included in R's `tidyverse` package. These data are not in a tidy format, so we start with some data wrangling (more later; we will not show you that code for now), and we also combine these data with data on each country's population. We will work in lab with two resulting data sets.  One is the data set `whoage2`, which contains the variables `country`, `year`, `agecat` (age groups are 0-14, 15-24, 25-34, 35-44, 45-54, 55-64, and 65+), and `cases` (the case count). The other is the data set `whotbpop`, which contains the variables `country`, `year`, `cases`, `population`, and `cases100000` (cases per 100K population, calculated as cases divided by population times 100000).
 
 ```{r datawrangle, echo=FALSE, message=FALSE, warning=FALSE}
 who2 <- who %>%
@@ -118,7 +118,7 @@ Your assignment should have at least three meaningful commits.
 ```
 
 
-2. Sometimes analysts use a *log transformation* in order to bring outliers in the right tail of a distribution closer to its center. Whether or not such a transformation is needed, make a histogram of the log (statisticians use log to indicate the natural log; in the rare cases we want the log base 10, we'll call it log$_{10}$) of the 2013 population of the countries (code to create the log population value is included). As before, label your axes and give the plot a title. Does it appear that there are any outliers in the new plot? If so, what are they?  Does the distribution appear to be symmetric or skewed? Briefly discuss when you might want to use the population histogram on the log scale versus when you might prefer using the original scale.
+2. Sometimes analysts use a *log transformation* in order to bring outliers in the right tail of a distribution closer to its center. Whether or not such a transformation is needed, make a histogram of the log (statisticians use log to indicate the natural log; in the rare cases we want the log base 10, we'll call it $\log_{10}$) of the 2013 population of the countries (code to create the log population value is included). As before, label your axes and give the plot a title. Does it appear that there are any outliers in the new plot? If so, what are they?  Does the distribution appear to be symmetric or skewed? Briefly discuss when you might want to use the population histogram on the log scale versus when you might prefer using the original scale.
 
 
 
@@ -146,7 +146,7 @@ whotbpop$logpop = log(whotbpop$population)
 
 *Now would be a good time to knit, commit, and push, again.*
 
-5. Do some years have more cases per 100,000 than others? Create side-by-side boxplots of `cases100000' for the years 2010, 2011, 2012, and 2013. Because of the global disparity in TB across countries, create a second plot using log(cases100000+1) instead of cases100000. (NOTE: we add 1 because some countries report 0 cases, and the log of 0 is undefined.) Code to create that new variable is included below. Briefly comment on what you notice. Is there much change in the distribution of the case rate per 100,000 over these four years?  
+5. Do some years have more cases per 100,000 than others? Create side-by-side boxplots of `cases100000` for the years 2010, 2011, 2012, and 2013. Because of the global disparity in TB across countries, create a second plot using log(cases100000+1) instead of cases100000. (NOTE: we add 1 because some countries report 0 cases, and the log of 0 is undefined.) Code to create that new variable is included below. Briefly comment on what you notice. Is there much change in the distribution of the case rate per 100,000 over these four years?  
 
 ```{r ex5}
 
