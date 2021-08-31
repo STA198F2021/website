@@ -1,0 +1,84 @@
+---
+title: "Welcome to STA 198 Labs!"
+date: "09.06.2021"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+
+
+## What to expect in lab 
+
+- Introduction to the lab assignment (~ 5 - 10 minutes)
+
+- Work on the lab assignment (individual today, but generally done in teams)
+
+- Lab instructions posted in the [schedule](https://sta198f2021.github.io/website/#schedule) for each week on the course website.
+
+- Start each lab by finding your assignment repo in the [GitHub course organization](https://github.com/STA198F2021)
+  - This is where you will find the R Markdown document and data to get started
+  
+---
+
+
+## Check: Do you have the lab-02 repo?
+
+- Go to the GitHub course organization: https://github.com/STA198F2021
+
+- You should see a repo with the prefix **lab-02-**
+
+- If you do not have this repo, please let your TAs know! 
+
+---
+
+class: middle, center
+
+# Demos
+
+---
+
+## Demos 
+
+**Follow along as your TA demonstrates the following (next week we'll assume you've got it down!)** 
+
+- Access RStudio using the class container
+- Configure Git using SSH 
+- Clone RStudio repo and start new project 
+- Knit document and produce PDF 
+- Update name in YAML 
+  - Knit, commit, push changes to GitHub 
+  - See updates in your GitHub repo
+  
+---
+
+## Tips for today
+
+1. Don't worry about the data wrangling code; we'll get to that later in the course.
+
+2. [Learn more about ggplot2 color options!](http://sape.inf.usi.ch/quick-reference/ggplot2/colour)
+
+---
+
+class: middle 
+
+## You're now ready to complete the rest of lab!
+
+
+  

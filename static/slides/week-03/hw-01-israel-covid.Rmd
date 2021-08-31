@@ -1,0 +1,189 @@
+---
+title: "Homework #01: COVID in Israel"
+subtitle: "due Friday, September 10 at 4:00pm"
+output: 
+  tufte::tufte_html:
+    css: "sta199-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: true
+    toc_depth: 1
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+
+# Clone the repo & start new RStudio project (Lab 1 recap!)
+
+-   Go to the [**STA198F2021**](https://github.com/STA198F2021) organization on GitHub. Click on the repo with the prefix **hw-01**. It contains the starter documents you need to complete the lab.
+
+```{r clone-repo-link, echo = FALSE, fig.width = 5}
+```
+
+-   Click on the green **CODE** button, select **Use SSH** (this might already be selected by default, and if it is, you'll see the text **Clone with SSH**). Click on the clipboard icon to copy the repo URL.
+
+![How to Clone using SSH in GitHub](01/github-example.png)
+
+-   Go to <https://vm-manage.oit.duke.edu/containers> and login with your Duke NetID and Password.
+
+-   Click **STA198-199** to log into the Docker container.
+    You should now see the RStudio environment.
+
+-   Go to *File* $\rightarrow$ *New Project* $\rightarrow$ *Version Control* $\rightarrow$ *Git*.
+
+-   Copy and paste the URL of your assignment repo into the dialog box *Repository URL*. Again, please make sure to have *SSH* highlighted under *Clone* when you copy the address.
+
+![Version Control and Cloning Repo](01/github-example-2.png)
+
+-   Click *Create Project*, and the files from your GitHub repo will be displayed in the *Files* pane in RStudio.
+
+-   Open the template R Markdown file.
+    This is where you will write up your code and narrative for the lab.
+
+
+# Israeli COVID data
+
+The Israeli government in August reported that out of 515 people aged 12 and up hospitalized with severe COVID cases, 301 (58.4%) were fully-vaccinated (2 doses of the Pfizer vaccine). Subsequent chatter broke out on Twitter suggesting that the Pfizer vaccine efficacy in protecting against severe disease (based on prior studies, efficacy is around 95% in people under 75 and 91% in those 75 and up) is waning over time. In this homework, you will use the Israeli data on vaccinated and unvaccinated individuals (the partially vaccinated group is excluded from your data) to evaluate to what extent the Israeli government's data (as of August 15, 2021) indicate that vaccine efficacy is waning.
+
+Because vaccination rates in Israel increase with age, and risk of hospitalization also increases with age, age is a potential *confounder* of the true relationship between vaccination and hospitalization with severe COVID. Thus a principled analysis must be careful to account for age.
+
+First, let's read in the data from the file provided. The variables include `agegroup` (12-15, 16-19, 20-29, ..., 80-89, 90+), `vaxstatus`, `population` (number of people in Israel in each age and vaccination group), and `severe` (number of severe COVID cases requiring hospitalization in each age and vaccination group).
+
+```{r readdata, message=FALSE}
+library(readr)
+library(tidyverse)
+library(knitr)
+covid=readr::read_csv("israeli_data_long.csv")
+```
+
+
+
+1. Create a compelling visualization of vaccination rates by age group. Be sure to include a title and label axes nicely. Then, comment briefly on any trends, and provide point estimates (e.g., calculate percentages from the data) of the conditional probability of vaccination given a person's age is 12-15, and of the conditional probability of vaccination given a person's age is 90 or above.  HINT: lab 2 contains an example plot based on summary data; you can peek ahead or check out [this reference](https://stackoverflow.com/questions/59008974/why-is-stat-identity-necessary-in-geom-bar-in-ggplot) showing how *geom_col()* can be useful with summary data.
+
+```{r ex1, message=FALSE, warning=FALSE}
+# starter code to print out probabilities
+covidrate <- covid %>%
+  #the first three lines of code are just
+  #generating the vaccination rate for each age
+  #group in the data
+  group_by(agegroup, vaxstatus) %>%
+  summarise(n = sum(population)) %>%
+  mutate(rate = n / sum(n)) %>%
+  print()
+
+#starter code for plot
+covid %>%
+  #the first three lines of code are just
+  #generating the vaccination rate for each age 
+  #group in the data
+  group_by(agegroup, vaxstatus) %>%
+  summarise(n = sum(population)) %>%
+  mutate(rate = n / sum(n)) %>%
+  #here I assume we're just going to plot % vax
+  #and not plot % unvax
+  filter(vaxstatus == "vaccinated") 
+
+```
+
+2. Create a compelling visualization of the probability of severe disease by age group and vaccination status. Be sure to include a title and good labels. Compare these conditional probabilities to the probability of severe disease in the unvaccinated (collapsing over all age groups) and to the probability of severe disease in the vaccinated (collapsing over all age groups). Comment briefly on trends with age.
+
+```{r ex2}
+# starter code
+# suppress scientific notation 
+options(scipen=999)
+
+# to see the raw probabilities
+covid %>%
+  mutate(probcovid = severe / population) %>%
+  as.data.frame() %>%
+  print()
+
+#helpful code for summarizing over all ages by vax status
+risksummary <- covid %>%
+  group_by(vaxstatus) %>%
+  summarise(totpop = sum(population), totcovid = sum(severe)) %>%
+  mutate(prob = 1) %>% #edit to calculate correct answer
+  print()
+  
+```
+
+
+3.  The *relative risk (RR)* of severe COVID, comparing vaccinated to unvaccinated people, is defined as $RR=P(severe|vaccinated)/P(severe|unvaccinated)$, which is simply the ratio of conditional probabilities of severe COVID given vaccination status. The RR is used to calculate *vaccine efficacy (VE)*, which is given by $VE=1-RR$.  Calculate the vaccine efficacy for each age group, and provide an informative visualization showing the efficacy. How do the values from the Israeli data compare to studies that show VE=95% in those under 75 and 91% for adults aged 75+?  
+
+```{r ex3}
+
+#starter code gets you to the RR
+covidwide <- covid %>%
+  mutate(probcovid = severe / population) %>%
+  group_by(agegroup, vaxstatus) %>%
+  pivot_wider(id_cols = agegroup,
+              names_from = vaxstatus,
+              values_from = probcovid) %>%
+  mutate(RR = vaccinated / unvaccinated) 
+
+print(covidwide[,c("agegroup","RR")])
+
+
+
+```
+
+
+
+4. Suppose we're back in August, and you are advising a communications group within the State of Israel Ministry of Health on crafting their press release based on these data. You can include one data visualization in the press release. What type of visualization do you advise, and why?  Include your visualization here!
+
+# TikTok SciComm
+
+5. On July 31, Howie Hua [posted a TikTok video](https://twitter.com/howie_hua/status/1421502809862664197?lang=en) in which he stated that $P(vacc|infected)$ "cannot be reliable." In what sense is he correct, and in what sense is he incorrect?
+
+
+
+6. In the video, he mentions $P(vacc|infected)$ and $P(infected|vacc)$. Write the formula for Bayes' theorem to show how to go between these two conditional probabilities, and provide the values corresponding to the formula based on his sample data.
+
+
+
+::: {.commit}
+`r emo::ji("yarn")` `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` Knit and commit remaining changes, use the commit message "Done with hw 1!" and push.
+:::
+
+# Submission
+
+Once you are finished with the lab, you will submit the PDF document produced from your final *knit, commit, and push* to Gradescope. Be sure you clean up any "mess" in the output and file before submitting.
+
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a .pdf file to the Gradescope page by the submission deadline to be considered "on time".
+
+To submit your assignment:
+
+-   Go to <http://www.gradescope.com> and click *Log in* in the top right corner.
+
+-   Click *School Credentials* $\rightarrow$ *Duke NetID* and log in using your NetID credentials.
+
+-   Click on your *STA 198* course.
+
+-   Click on the assignment, and you'll be prompted to submit it.
+
+-   Mark the pages associated with each exercise, 1 - 4. All of the papers of your lab should be associated with at least one question (i.e., should be "checked").
+
+-   Select the first page of your .pdf submission to be associated with the *"Workflow"* section.
+
+# Grading (50 pts)
+
+<br>
+
+| Component | Points |
+|:----------|:-------|
+| Ex 1      | 8      |
+| Ex 2      | 8      |
+| Ex 3      | 8      |
+| Ex 4      | 8      |
+| Ex 5      | 6      |
+| Ex 6      | 6      |   
+| Workflow & formatting   | 6      |
+
+**Grading notes**:
+
+-   The "Workflow & formatting" grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages, labeling the code chunks, updating the name and date in the YAML, and in general having a neat report.
+
