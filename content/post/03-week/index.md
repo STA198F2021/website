@@ -29,7 +29,25 @@ title: 'Week 3 - Probability in Action'
 | Probability in Action    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-03/w3-l01-probinaction.html#1)  | 
 | Discrete Distributions  | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-03/w3-l02-discretedistributions.html#1)  | 
 
-### Assignments
+### Assignments and Labs
+
+
+### Assignments and Labs
+
+| <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
+|:---|:---|:---|
+| Quiz | [Quiz 1](https://sakai.duke.edu) | Tuesday, 9/7 |
+| Lab 2 |[Data Viz])| Wed., 9/8 |
+| HW 1 | [Science Communication] | Fri., 9/10 |
+
+
+
+<!---
+| Lab 2 |[Data Viz](https://sta198f2021.github.io/website/slides/week-03/lab-02-data-viz.html)| Wed., 9/8 |
+| HW 1 | [Science Communication](https://sta198f2021.github.io/website/slides/week-03/hw-01-israel-covid.html) | Fri., 9/10 |
+
+
+---!>
 
 ### Readings and Videos
 
