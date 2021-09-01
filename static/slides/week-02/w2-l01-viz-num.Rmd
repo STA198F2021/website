@@ -173,7 +173,7 @@ class: middle
 
 Previously we viewed a scatterplot showing the relationship of life expectancy of females to that of males in each location.
 
-```{r warning = FALSE,out.width="40%"}
+```{r warning = FALSE,out.width="35%"}
 ggplot(lifeexpwide2019, aes(x = Female, y = Male)) +
   geom_point() +
   labs(
@@ -350,6 +350,7 @@ class: middle
 
 ## Density plot
 
+.pull-left[
 ```{r}
 lifespan2019 %>%
   filter(sex == 'Female') %>%
@@ -358,7 +359,10 @@ lifespan2019 %>%
 
 
 ```
-
+]
+.pull-right[
+A *density function* is a function whose value at any given point can be interpreted as providing a relative likelihood of values.  That is, higher values of the density function indicate values of the random variable that are more likely to be observed.
+]
 ---
 
 ## Density plots and adjusting bandwidth
@@ -549,14 +553,13 @@ lifespan2019 %>%
 lifespan2019 %>%
   filter(sex == 'Female') %>%
   ggplot(aes(x = lifeexp,
-             y = worldbankregion)) +
+             y = worldbankregion)) + #<<
   geom_boxplot() +
   labs(
     x = "Female life expectancy (years)",
-    y = NULL,
-    #<<
+    y = NULL, 
     title = "2019 Life Expectancy of Women",
-    subtitle = "By region"
+    subtitle = "By region" #<<
   ) 
 
 ```

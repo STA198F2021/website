@@ -192,7 +192,7 @@ ggplot(lifeexpwide2019, aes(x = Female, y = Male)) +
   )
 ```
 
-&lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-3-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-3-1.png" width="35%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -371,6 +371,7 @@ class: middle
 
 ## Density plot
 
+.pull-left[
 
 ```r
 lifespan2019 %&gt;%
@@ -380,7 +381,10 @@ lifespan2019 %&gt;%
 ```
 
 &lt;img src="w2-l01-viz-num_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
-
+]
+.pull-right[
+A *density function* is a function whose value at any given point can be interpreted as providing a relative likelihood of values.  That is, higher values of the density function indicate values of the random variable that are more likely to be observed.
+]
 ---
 
 ## Density plots and adjusting bandwidth
@@ -577,14 +581,13 @@ lifespan2019 %&gt;%
 lifespan2019 %&gt;%
   filter(sex == 'Female') %&gt;%
   ggplot(aes(x = lifeexp,
-             y = worldbankregion)) +
+*            y = worldbankregion)) +
   geom_boxplot() +
   labs(
     x = "Female life expectancy (years)",
-    y = NULL,
-*  
+    y = NULL, 
     title = "2019 Life Expectancy of Women",
-    subtitle = "By region"
+*   subtitle = "By region"
   ) 
 ```
 ]

@@ -36,4 +36,5 @@ title: 'Week 3 - Probability in Action'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :open_book: | OIS: [Chapter 4, Sections 4.2.1 and  4.3.1](https://www.openintro.org/book/os/) or PG: Chp 7, Sections 7.1-7.2  | **Required** |
+| :open_book: | Seeing Theory: [Chapter 3](https://seeing-theory.brown.edu/probability-distributions/index.html)  | **Required** |
 

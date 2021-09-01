@@ -130,7 +130,7 @@ whotbpop$logpop = log(whotbpop$population)
 
 *Before going to Exercise 3, now would be a good time to do your first knit and then commit and push.*
 
-3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. Generate a scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `population`. Please label your axes and legend and give the plot a title. 
+3. Filter the data to include Pakistan, the USA, and four other countries of interest to you. You might want to save the filtered data to a separate dataset, as we'll work with them in subsequent exercises. Generate a scatterplot of `year` (x-axis) by TB cases per 100,000 population `cases100000` on the y-axis, with points colored by `country` and with size mapped to `population`. Please label your axes and legend and give the plot a title. 
 
 
 Describe what you observe in the plot. Do you observe the same pattern for every country?
