@@ -70,9 +70,9 @@ glimpse(gats)
 
 ---
 
-### Data
 
-## Selected variables
+
+### Selected variables
 
 <br>
 
