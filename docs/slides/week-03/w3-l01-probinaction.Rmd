@@ -1,6 +1,6 @@
 ---
 title: "Probability in Action"
-subtitle: "<br><br> Introduction to Data Science"
+subtitle: "<br><br> Introduction to Global Health Data Science"
 author: "[Back to Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
 output:

@@ -74,6 +74,8 @@ Consider Y chromosomes in the US population.  51.2% of births are to babies with
 
 - The sum of the probabilities of all possible events is exactly 1 (e.g., 0.512+0.488=1).
 
+- So the probability of having a baby without a Y chromosome is 0.488.
+
 ---
 
 ### Bernoulli Distribution
@@ -106,9 +108,13 @@ Examples:
 ### Bernoulli distribution
 
 - `\(Y\)` takes value 1 with probability `\(\pi\)` and value 0 with probability `\(1-\pi\)`
+
 - `\(P(Y=y)=\pi^y(1-\pi)^{1-y}\)`
-  - `\(P(Y=1)=\pi^1(1-\pi)^0=\pi\)` as `\(x^0=1\)` for any `\(x\)`
+
+  - `\(P(Y=1)=\pi^1(1-\pi)^0=\pi\)` (remember `\(x^0=1\)` for any `\(x\)`)
+  
   - `\(P(Y=0)=\pi^0(1-\pi)^1=1-\pi\)`
+  
 - We don't really need all this formality as it's probably easier just to keep track of `\(\pi\)` and `\(1-\pi\)`
 - However, we want to extend this to a more complex setting -- for example, in a randomly-selected group of 3 high school students, how surprising would it be to get 2 who have smoked e-cigarettes in the past month?
 
@@ -118,7 +124,7 @@ Examples:
 
 - The [CDC reports](https://www.cdc.gov/tobacco/data_statistics/fact_sheets/youth_data/tobacco_use/index.htm) that 19.6% of high school students have smoked e-cigarettes in the past 30 days. We'll round this to 20% for simplicity.
 - `\(P(Y=1)=P(Smoker)=\pi=0.2\)` and `\(P(Y=0)=0.8\)`
-- Now suppose we randomly select two independent high school students and define a new random variable `\(X\)` representing the number of smokers. X can take the values 0, 1, or 2. Let `\(Y_1\)` be the smoking status of the first student ($Y_1=1$ if the student smokes) and `\(Y_2\)` be the smoking status of the second student.
+- Now suppose we randomly select two independent high school students and define a new random variable `\(X\)` representing the number of smokers. X can take the values 0, 1, or 2. Let `\(Y_1\)` be the smoking status of the first student and `\(Y_2\)` be the smoking status of the second student, where `\(Y_j\)`=1 if student `\(j\)` smokes and takes value 0 otherwise.
 
 .pull-left[
 Next we'll talk about how to get the *probability distribution* of `\(X\)`.
@@ -130,7 +136,7 @@ Next we'll talk about how to get the *probability distribution* of `\(X\)`.
 | 0 | 0 | 0 | |
 | 1 | 0 | 1 | |
 | 0 | 1 | 1 | |
-| 1 | 1 | 1 | |
+| 1 | 1 | 2 | |
 ]
 
 ---
@@ -157,7 +163,7 @@ Now we can fill in the bottom row of the probability distribution of `\(X\)`.
 | 0 | 0 | 0 | |
 | 1 | 0 | 1 | |
 | 0 | 1 | 1 | |
-| 1 | 1 | 1 |  `\(0.02 \times 0.02 =0.04\)` |
+| 1 | 1 | 2 |  `\(0.02 \times 0.02 =0.04\)` |
 ]
 
 ---
@@ -171,7 +177,7 @@ It's straightforward to fill in the rest of the table.
 | 0 | 0 | 0 | `\(0.8 \times 0.8 = 0.64\)` |
 | 1 | 0 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
 | 0 | 1 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
-| 1 | 1 | 1 | `\(0.2 \times 0.2 =0.04\)` |
+| 1 | 1 | 2 | `\(0.2 \times 0.2 =0.04\)` |
 ]
 
 ---
@@ -186,7 +192,7 @@ Recall our table:
 | 0 | 0 | 0 | `\(0.8 \times 0.8 = 0.64\)` |
 | 1 | 0 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
 | 0 | 1 | 1 | `\(0.2 \times 0.8 = 0.16\)` |
-| 1 | 1 | 1 | `\(0.2 \times 0.2 =0.04\)` |
+| 1 | 1 | 2 | `\(0.2 \times 0.2 =0.04\)` |
 ]
 .pull-right[
 We can clean up the table to get the probability distribution of `\(X\)`:
@@ -205,14 +211,14 @@ Now suppose we randomly sample 3 independent high school students!
 
 | `\(Y_1\)` | `\(Y_2\)` | `\(Y_3\)` | `\(X\)` | `\(P(X)\)` |
 |:----:|:----:|:----:|:----:|:----:|
-| 0 | 0 | 0 | 0 | |
-| 1 | 0 | 0 | 1 | |
-| 0 | 1 | 0 | 1 | |
-| 0 | 0 | 1 | 1 | |
-| 1 | 1 | 0 | 2 | |
-| 1 | 0 | 1 | 2 | |
-| 0 | 1 | 1 | 2 | |
-| 1 | 1 | 1 | 3 | |
+| 0 | 0 | 0 | 0 |  |
+| 1 | 0 | 0 | 1 |  |
+| 0 | 1 | 0 | 1 |  |
+| 0 | 0 | 1 | 1 |  |
+| 1 | 1 | 0 | 2 |  |
+| 1 | 0 | 1 | 2 |  |
+| 0 | 1 | 1 | 2 |  |
+| 1 | 1 | 1 | 3 |  |
 
 Better get started with the multiplication!
 
@@ -297,7 +303,7 @@ For example, if we want the probability of 3 e-cig smokers, `\(X=3\)`, the secon
 
 - If we want the probability of 2 e-cig smokers, `\(X=2\)`, the second part is just `\(\pi^x(1-\pi)^{n-x}=0.2^2(0.8)^{3-2}=0.032\)`, which is what we see in any single row in which we have two smokers and one non-smoker.
 
-- This is the probability of any one specific combination of 2 smokers and 1 nonsmoker. Then we need to figure out how many combinations of 2 smokers and 1 nonsmoker we could get.
+  - This is the probability of any one specific combination of 2 smokers and 1 nonsmoker. Then we need to figure out how many combinations of 2 smokers and 1 nonsmoker we could get.
 
 - The first part, `\(\begin{pmatrix}n \\x \end{pmatrix}\)`, accounts for all the possible ways in which we can have 2 smokers out of 3 people.
 
@@ -339,11 +345,22 @@ Using the binomial distribution, the probability of getting 3 recent e-cig smoke
 
 Let's use R to take a look at the distribution of the number of recent e-cig smokers in groups of varying size.  We can actually run a big experiment in R using the CDC estimate of the percentage of high schoolers who have smoked e-cigarettes in the past 30 days, 19.6%. Let's draw a single random sample of 1000 high schoolers with smoking probability 0.196. Our random variable `\(X\)` is now the number of smokers in this big sample.
 
+In this experiment, how many smokers do we expect to see? 
+
+A binomial random variable has expectation (mean) `\(n\pi\)`, so we expect to see somewhere around 1000(0.196)=196 smokers.
+
+---
+
+### Distribution of e-cig smokers
+
 
 ```r
-set.seed(121372) #in order to reproduce random draw
+# If I want to reproduce my random draw exactly, I have to set
+# the seed.  Otherwise, I'll get a different random sample every time
+set.seed(121372) 
 # in R, what we called "n" is called size
 # R's "n" is the number of experiments to run
+# in this case, that's the # of samples of size 1000 to simulate
 rbinom(n=1,size=1000,prob=0.196)
 ```
 
@@ -375,6 +392,17 @@ If we run the experiment a very large number of times, we can get a good estimat
 
 ```r
 binomdata = data.frame(X = rbinom(1000000, 1000, 0.196))
+dim(binomdata)
+```
+
+```
+## [1] 1000000       1
+```
+
+---
+
+
+```r
 ggplot(binomdata, aes(x = X)) + 
   geom_histogram(aes(y = ..density..)) +
   labs(x = "Number of Smokers",
@@ -382,7 +410,7 @@ ggplot(binomdata, aes(x = X)) +
        title = "Binomial(1000,0.196) distribution")
 ```
 
-&lt;img src="w3-l02-discretedistributions_files/figure-html/binomdist-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w3-l02-discretedistributions_files/figure-html/plotbinomdata-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -394,15 +422,36 @@ Suppose the average success (live birth) rate of this procedure per embryo is 35
 
 ---
 
-To maximize the success rate, specialists usually implant more than one embryo. We want to determine the optimum number of embryos to implant so that the likelihood of having at least one baby is high, but the likelihood of having triplets, quadruplets, or higher-order births is low. Suppose we prefer a singleton birth, twins are acceptable (though not without increased risk), and the risk of higher-order births should be kept to a minimum.  Assume the probability of each embryo surviving is independent of the others.
+### Embryos
+
+.pull-left[
+Here's what embryos look like in the first days of life. Note that days are counted differently at the beginning in regular pregnancies and in IVF.  In a regular pregnancy, dating is done back to the first day of the last menstrual period (there is no good marker of conception). So on day 1 of pregnancy, a woman is not pregnant!  Typically ovulation is around day 14 of the cycle (and thus of pregnancy).
+
+In IVF, counting starts on the day the egg is fertilized (corresponding to around day 14 of a regular pregnancy if the sperm meets the egg right away after it is released!).
+]
+.pull-right[
+&lt;img src="embryo.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-How do we address this mathematically? Let `\(Y\)` be the number of live births from a single IVF procedure that implants `\(n\)` embryos. Here's what we need to know.
+### The Challenge
 
-- Probability of having at least one baby, `\(P(Y \geq 1)\)`, which we want to be large
+To maximize the success rate, specialists usually implant more than one embryo.
 
-- Probability of having triplets, quadruplets, or a higher-order birth, `\(P(Y&gt;2)\)`, which we want to be small
+We want to determine the optimum number of embryos to implant so that the likelihood of having at least one baby is high, but the likelihood of having triplets, quadruplets, or higher-order births is low.
+
+Suppose we prefer a singleton birth, twins are acceptable (though not without increased risk), and the risk of higher-order births should be kept to a minimum.  Assume the probability of each embryo surviving is independent of the others.
+
+
+---
+How do we address this mathematically? 
+
+- Let `\(Y\)` be the number of live births from a single IVF procedure that implants `\(n\)` embryos. Here's what we need to know.
+
+- Probability of having at least one baby is `\(P(Y \geq 1)\)`, which we want to be large
+
+- Probability of having triplets, quadruplets, or a higher-order birth is `\(P(Y&gt;2)\)`, which we want to be small
 
 ---
 
@@ -412,9 +461,11 @@ Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}\pi^y(1-\pi
 
 - `\(\pi=0.35\)` is the probability of a live birth
 
-- If we implant just 1 embryo, `\(n=1\)`. If we implant two embryos, `\(n=2\)`. Medical societies (e.g., American Society for Reproductive Medicine) have guidelines on the number of embryos to implant, ranging from 1-5, depending on embryo quality and the mother's age.
+- If we implant just 1 embryo, `\(n=1\)`. If we implant two embryos, `\(n=2\)`. Medical societies (e.g., American Society for Reproductive Medicine) have guidelines on the number of embryos to implant, ranging from 1-5, depending on embryo quality and the mother's age*.
 
 - We can use the binomial distribution to find `\(P(Y \geq 1)\)` and `\(P(Y&gt;2)\)` for `\(n=1,2,3,4,5\)`
+
+`\(^*\)` So technically, `\(\pi\)` depends on embryo quality and the mother's age. We'll learn how to accommodate this formally when we study logistic regression models; we ignore it for now.
 
 ---
 
@@ -434,11 +485,9 @@ Binomial distribution: `\(P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}0.35^y(1-0.
 
 More generally,
 
-- `\(P(Y \geq 1)=1-P(Y=0)=1-\begin{pmatrix}n \\ 0 \end{pmatrix} 0.35^0 (0.65)^{n-0}=1-0.65^n\)`
- 
-- 
 `$$\begin{aligned}
-P(Y&gt;2) &amp; = 1-P(Y=0)-P(Y=1)-P(Y=2) \\ 
+P(Y \geq 1) &amp; =1-P(Y=0)=1-\begin{pmatrix}n \\ 0 \end{pmatrix} 0.35^0 (0.65)^{n-0}=1-0.65^n \\
+ P(Y&gt;2) &amp; = 1-P(Y=0)-P(Y=1)-P(Y=2) \\ 
  &amp; = 1 - 0.65^n - \begin{pmatrix} n \\ 1 \end{pmatrix}0.35^1(0.65)^{n-1} - \begin{pmatrix} n \\ 2 \end{pmatrix}0.35^2(0.65)^{n-2} \\
  &amp; = 1 - 0.65^n - n(0.35)(0.65)^{n-1} - \frac{n!}{2!(n-2)!}0.35^2(0.65)^{n-2} \\
  &amp; = 1 - 0.65^n - n(0.35)(0.65)^{n-1} - \frac{n(n-1)}{2}0.35^2(0.65)^{n-2} \end{aligned}$$`
@@ -452,8 +501,8 @@ Thus we have
 
 If `\(n=5\)`, then we have
 
-- `\(P(Y\geq 1)=1-0.65^5=0.88\)` (good chances of a baby!)
-- `\(P(Y &gt; 2)=1 - 0.65^5 - 5(0.35)(0.65)^{5-1} - \frac{5(4)}{2}0.35^2(0.65)^{5-2}=0.24\)` (good chances of lots o' babies!)
+- `\(P(Y\geq 1)=1-0.65^5=0.88\)` (good chance of a baby!)
+- `\(P(Y &gt; 2)=1 - 0.65^5 - 5(0.35)(0.65)^{5-1} - \frac{5(4)}{2}0.35^2(0.65)^{5-2}=0.24\)` (good chance of lots o' babies!)
 
 ---
 
@@ -479,7 +528,7 @@ R has built-in functions for computing binomial probabilities that can save you 
 | `\(P(Y=y \mid \pi, n)\)` | dbinom(y,n,pi) |
 | `\(P(Y \leq y \mid \pi, n)\)` | pbinom(y,n,pi) |
 
-For the last row of the table on the prior slide, `\(n=5\)` and `\(\pi=0.35\)`. The probability of at least one baby, `\(P(Y \geq 1)=1-P(Y=0)\)` can be calculated using in R the code *1-dbinom(0,5,0.35)*.
+For the last row of the table on the prior slide, `\(n=5\)` and `\(\pi=0.35\)`. The probability of at least one baby, `\(P(Y \geq 1)=1-P(Y=0)\)` can be calculated using in R the code *1-dbinom(0,5,0.35)*, which yields the value 0.8839709.
 
 
     </textarea>

@@ -29,8 +29,6 @@ title: 'Week 3 - Probability in Action'
 | Probability in Action    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-03/w3-l01-probinaction.html#1)  | 
 | Discrete Distributions  | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-03/w3-l02-discretedistributions.html#1)  | 
 
-### Assignments and Labs
-
 
 ### Assignments and Labs
 
@@ -41,6 +39,13 @@ title: 'Week 3 - Probability in Action'
 | HW 1 | [Science Communication] | Fri., 9/10 |
 
 
+### Readings and Videos
+
+| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
+|:---:|:---|:---:|
+| :open_book: | OIS: [Chapter 4, Sections 4.2.1 and  4.3.1](https://www.openintro.org/book/os/) or PG: Chp 7, Sections 7.1-7.2  | **Required** |
+| :open_book: | Seeing Theory: [Chapter 3](https://seeing-theory.brown.edu/probability-distributions/index.html)  | **Required** |
+
 
 <!---
 | Lab 2 |[Data Viz](https://sta198f2021.github.io/website/slides/week-03/lab-02-data-viz.html)| Wed., 9/8 |
@@ -49,10 +54,4 @@ title: 'Week 3 - Probability in Action'
 
 ---!>
 
-### Readings and Videos
-
-| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
-|:---:|:---|:---:|
-| :open_book: | OIS: [Chapter 4, Sections 4.2.1 and  4.3.1](https://www.openintro.org/book/os/) or PG: Chp 7, Sections 7.1-7.2  | **Required** |
-| :open_book: | Seeing Theory: [Chapter 3](https://seeing-theory.brown.edu/probability-distributions/index.html)  | **Required** |
 
