@@ -56,7 +56,14 @@ Manipulating this formula, we get the **multiplicative rule of probability**: $P
 
 One more helpful rule is the **law of total probability**:
 
-$P(A)=P(A \mid B)P(B) + P(A \mid \overline{B})P(\overline{B}) = P(A \cap B)+P(A \cap \overline{B})$, which translates to the obvious statement that the probability that A occurs is equal to the sum of the probabilities that A occurs with B and that A occurs without B.
+$P(A)=P(A \mid B)P(B) + P(A \mid \overline{B})P(\overline{B}) = P(A \cap B)+P(A \cap \overline{B})$, which translates to the obvious statement that the probability that A occurs is equal to the sum of 
+Ethnicity
+Vaccine Hesitant
+Not Hesitant
+White British or Irish	1362	7368
+Other white background	71	199
+Mixed	55	115
+Asian or Asian British - Indiathe probabilities that A occurs with B and that A occurs without B.
 
 ---
 

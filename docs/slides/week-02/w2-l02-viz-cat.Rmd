@@ -181,9 +181,6 @@ ggplot(gats, aes(x = CURRENTSMOKE,
                   fill = GENDER)) + #<<
   geom_bar(position=position_dodge())
 
-#ggplot(aes(x = agegroup, y = probcovid, fill = vaxstatus)) +
-#  geom_col(position = position_dodge(),) +
-
 
 ```
 
