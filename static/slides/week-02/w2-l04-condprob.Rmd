@@ -1,7 +1,8 @@
 ---
 title: "Conditional Probability"
-subtitle: "<br><br> Introduction to Global Health Data Science"
-author: "[Course Website](https://sta198f2021.github.io/website/)"
+subtitle: "<br><br> Introduction to Data Science"
+#author: "[Course Website](https://sta198f2021.github.io/website/)"
+author: "[introds.org](https://introds.org)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
@@ -32,7 +33,7 @@ Often we wish to know the probabilty an event will occur given that another even
 
 For example, instead of the **marginal** probability of contracting COVID (regardless of vaccination status), we may wish to know the probability that someone will contract COVID given that they have been vaccinated, or the probability someone will contract COVID given that they have not been vaccinated. 
 
-These are examples of **conditional probability**. The conditional probability that someone is a smoker (A) given that they identify as female (B) is denoted $P(A|B)$.
+These are examples of **conditional probability**. The conditional probability that someone is a smoker (A) given that they identify as female (B) is denoted $P(A|B)$, which we say as "probability of A given B."
 
 ---
 
@@ -55,7 +56,7 @@ Manipulating this formula, we get the **multiplicative rule of probability**: $P
 
 One more helpful rule is the **law of total probability**:
 
-$P(A)=P(A \mid B)P(B) + P(A \mid \overline{B})P(\overline{B}) = P(A \cap B)+P(A \cap \overline{B})$, which translates to the obvious statement that the probabilities that A occurs is equal to the sum of the probability that A occurs with B and that A occurs without B.
+$P(A)=P(A \mid B)P(B) + P(A \mid \overline{B})P(\overline{B}) = P(A \cap B)+P(A \cap \overline{B})$, which translates to the obvious statement that the probability that A occurs is equal to the sum of the probabilities that A occurs with B and that A occurs without B.
 
 ---
 

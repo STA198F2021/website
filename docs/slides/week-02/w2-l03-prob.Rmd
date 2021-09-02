@@ -1,7 +1,8 @@
 ---
 title: "Probability"
-subtitle: "<br><br> Introduction to Global Health Data Science"
-author: "[Course Website](https://sta198f2021.github.io/website/)"
+subtitle: "<br><br> Introduction to Data Science"
+#author: "[Course Website](https://sta198f2021.github.io/website/)"
+author: "[introds.org](https://introds.org)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
@@ -90,9 +91,9 @@ Sample spaces depend on the research question.  For exploration of ABO blood typ
 
 ## Operations on Events
 
-- The **union** of A and B, denoted $A \cup B$, is the event that A, or B, or both A and B, occur. Here, $A \cup B$ is the event that a person identifies as female, or is a smoker, or both.
+- The **union** of A and B, denoted $A \cup B$, is the event that A, or B, or both A and B, occur. Here, $A \cup B$ is the event that a person is a smoker, or identifies as female, or both.
 
-- The **intersection** of A and B, denoted $A \cap B$, is the event that both A and B occur. Here $A \cap B$ is the event that a person both identifies as female and is a smoker. A and B are **disjoint** or **mutually exclusive** if $A \cap B = \emptyset$ (A and B can't occur simultaneously). That's clearly not the case for smoking and identifying as female!  
+- The **intersection** of A and B, denoted $A \cap B$, is the event that both A and B occur. Here $A \cap B$ is the event that a person both smokes and identifies as female. A and B are **disjoint** or **mutually exclusive** if $A \cap B = \emptyset$ (A and B can't occur simultaneously). That's clearly not the case for smoking and identifying as female!  
 
 - The **complement** of A, denoted $A^c$ or $\overline{A}$, is the event A does not occur (nonsmoker). $A$ and $\overline{A}$ are **mutually exclusive**. 
 
