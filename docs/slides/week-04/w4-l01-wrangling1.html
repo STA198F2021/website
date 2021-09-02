@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Wrangling I</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Wrangling I
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+# Main Ideas
+
+- Organizing our data according to a consistent set of "tidy" principles makes
+data easy to work with and leverages the ways `R` is effective.
+- Often we need to wrangle our data in order to extract meaning (including
+creating new variables, calculating summary statistics, subsetting data, etc).
+- Using only **seven key verbs** we can accomplish a wide variety of data 
+wrangling tasks.
+
+## Tidy Principles
+
+Tidy data have three related characteristics
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+3. Each value has its own cell.
+
+---
+
+## Rural and Urban Patterns of Global Obesity
+
+Obesity is a major risk factor for numerous non-communicable diseases, including diabetes, cardiovascular disease, hypertension, stroke, and some cancers. We consider data from an exercise developed by the [Johns Hopkins Open Case Studies Project](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/#Motivation) on average body mass index around the world.
+
+Body mass index (BMI) is calculated as weight in kg divided by the square of height in m:  `\(BMI=\frac{kg}{m^2}\)`. While it is not a perfect surrogate for adiposity (e.g., people may have a high BMI due to muscle mass rather than body fat), it is an easily-obtained surrogate that is related to health outcomes of interest.
+
+---
+
+## WHO Classification of BMI
+
+&lt;img src="whobmi.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Data
+
+Our data include summaries of BMI from 200 countries worldwide, both at the national level and in urban and rural areas separately, for the years 1985 and 2017, separately for men and women.
+
+---
+
+
+## Data Wrangling
+
+Often we need to wrangle our data to extract meaning. This includes calculating
+new variables, summary statistics, grouping by variables, renaming, reordering, 
+selecting subsets of data, filtering by various conditions, etc.
+
+We can accomplish a great deal of wrangling by learning just 
+**seven key verbs**. Each of these functions takes a data frame as input and 
+returns a data frame as output.
+
+- filter
+- arrange
+- select
+- slice
+- mutate
+- summarize
+- group_by
+
+
+---
+
+We first explore the data a bit. 
+
+
+```r
+load("BMI_long.Rdata")
+glimpse(BMI_long)
+```
+
+```
+## Rows: 2,400
+## Columns: 5
+## $ Country &lt;chr&gt; "Afghanistan", "Afghanistan", "Afghanistan", "A…
+## $ Sex     &lt;chr&gt; "Men", "Men", "Men", "Men", "Men", "Men", "Wome…
+## $ Region  &lt;chr&gt; "National", "Rural", "Urban", "National", "Rura…
+## $ Year    &lt;chr&gt; "1985", "1985", "1985", "2017", "2017", "2017",…
+## $ BMI     &lt;dbl&gt; 20.2, 19.7, 22.4, 22.8, 22.5, 23.6, 20.6, 20.1,…
+```
+
+```r
+names(BMI_long)
+```
+
+```
+## [1] "Country" "Sex"     "Region"  "Year"    "BMI"
+```
+
+```r
+head(BMI_long)
+```
+
+```
+## # A tibble: 6 x 5
+##   Country     Sex   Region   Year    BMI
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Afghanistan Men   National 1985   20.2
+## 2 Afghanistan Men   Rural    1985   19.7
+## 3 Afghanistan Men   Urban    1985   22.4
+## 4 Afghanistan Men   National 2017   22.8
+## 5 Afghanistan Men   Rural    2017   22.5
+## 6 Afghanistan Men   Urban    2017   23.6
+```
+
+The `head()` function returns "A tibble: 6 x 5" and then the first six rows of
+the `BMI_long` data. A **tibble** is a tweaked, opinionated version of the `R`
+data frame. 
+
+---
+
+There are a few differences a `tidyverse` tibble and an `R` data frame. We discuss two primary differences.
+
+First, a tibble provides more information than a data frame. When you print a tibble, 
+it will show the first ten rows and all of the columns that fit on the screen,
+along with the type of each column. Try this with the `BMI_long` data.
+
+You can 
+modify the number of rows and columns shown using the `print()` function options.
+
+Second, tibbles are somewhat more strict than data frames when it comes to 
+subsetting data.
+
+### `select()`
+
+The `select()` function picks off one or more columns by name.
+
+Let's say we want a dataset that only contains the variable BMI.
+
+
+```r
+select(BMI_long, BMI)
+```
+
+```
+## # A tibble: 2,400 x 1
+##     BMI
+##   &lt;dbl&gt;
+## 1  20.2
+## 2  19.7
+## 3  22.4
+## 4  22.8
+## 5  22.5
+## 6  23.6
+## # … with 2,394 more rows
+```
+
+---
+
+We can also use `select()` to exclude variables. Let's exclude `BMI` but
+keep all other variables.
+
+
+```r
+select(BMI_long, -BMI)
+```
+
+```
+## # A tibble: 2,400 x 4
+##   Country     Sex   Region   Year 
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1 Afghanistan Men   National 1985 
+## 2 Afghanistan Men   Rural    1985 
+## 3 Afghanistan Men   Urban    1985 
+## 4 Afghanistan Men   National 2017 
+## 5 Afghanistan Men   Rural    2017 
+## 6 Afghanistan Men   Urban    2017 
+## # … with 2,394 more rows
+```
+
+---
+
+We can also use `select()` to select a range of variables. Here, we select the 
+first three variables.
+
+
+```r
+select(BMI_long, Country:Region)
+```
+
+```
+## # A tibble: 2,400 x 3
+##   Country     Sex   Region  
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   
+## 1 Afghanistan Men   National
+## 2 Afghanistan Men   Rural   
+## 3 Afghanistan Men   Urban   
+## 4 Afghanistan Men   National
+## 5 Afghanistan Men   Rural   
+## 6 Afghanistan Men   Urban   
+## # … with 2,394 more rows
+```
+
+---
+
+### `arrange()`
+
+The `arrange()` function orders rows (observations) in specific ways. 
+
+Let's arrange the data by descending BMI, with large BMI values on top.
+
+
+```r
+arrange(BMI_long, desc(BMI))
+```
+
+```
+## # A tibble: 2,400 x 5
+##   Country        Sex   Region   Year    BMI
+##   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 American Samoa Women Urban    2017   35.4
+## 2 American Samoa Women National 2017   35.3
+## 3 American Samoa Women Rural    2017   35  
+## 4 Samoa          Women Urban    2017   34.7
+## 5 American Samoa Men   Rural    2017   34.6
+## 6 American Samoa Women Urban    1985   34.4
+## # … with 2,394 more rows
+```
+
+---
+
+Or with low BMI values on top.
+
+
+```r
+arrange(BMI_long, BMI)
+```
+
+```
+## # A tibble: 2,400 x 5
+##   Country     Sex   Region   Year    BMI
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Bangladesh  Women Rural    1985   17.7
+## 2 Bangladesh  Women National 1985   18.2
+## 3 Timor-Leste Women Rural    1985   18.2
+## 4 Viet Nam    Women Rural    1985   18.2
+## 5 Nepal       Women Rural    1985   18.3
+## 6 Ethiopia    Men   Rural    1985   18.4
+## # … with 2,394 more rows
+```
+
+---
+
+### The Pipe
+
+The pipe is a technique for passing information from one process to another. 
+
+
+```r
+BMI_long %&gt;%
+  arrange(desc(BMI)) %&gt;%
+  select(Country, BMI)
+```
+
+```
+## # A tibble: 2,400 x 2
+##   Country          BMI
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 American Samoa  35.4
+## 2 American Samoa  35.3
+## 3 American Samoa  35  
+## 4 Samoa           34.7
+## 5 American Samoa  34.6
+## 6 American Samoa  34.4
+## # … with 2,394 more rows
+```
+
+When reading code "in English", say "and then" whenever you see a pipe.
+
+---
+
+### `slice()`
+
+Slice selects rows based on their position.
+
+Here we slice off the first 5 rows of the `BMI_long` data.
+
+
+```r
+BMI_long %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 5
+##   Country     Sex   Region   Year    BMI
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Afghanistan Men   National 1985   20.2
+## 2 Afghanistan Men   Rural    1985   19.7
+## 3 Afghanistan Men   Urban    1985   22.4
+## 4 Afghanistan Men   National 2017   22.8
+## 5 Afghanistan Men   Rural    2017   22.5
+```
+
+---
+
+**Question:** What is the code chunk below accomplishing? Guess before running
+the code.
+
+
+```r
+BMI_long %&gt;%
+  arrange(desc(BMI)) %&gt;%
+  slice(1:5)
+```
+
+```
+## # A tibble: 5 x 5
+##   Country        Sex   Region   Year    BMI
+##   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 American Samoa Women Urban    2017   35.4
+## 2 American Samoa Women National 2017   35.3
+## 3 American Samoa Women Rural    2017   35  
+## 4 Samoa          Women Urban    2017   34.7
+## 5 American Samoa Men   Rural    2017   34.6
+```
+
+---
+
+To add comments to code, use the pound sign. This is helpful for debugging as 
+well - you can temporarily disable a line.
+
+**Question:** What will happen if you comment out the line containing 
+`arrange()` in the code chunk above? Try it.
+
+### `filter()`
+
+`filter()` selects rows satisfying certain conditions.
+
+We can use a single condition. Here we select all rows where the country is Iceland.
+
+
+```r
+BMI_long %&gt;%
+  filter(Country == "Iceland")
+```
+
+```
+## # A tibble: 12 x 5
+##   Country Sex   Region   Year    BMI
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Iceland Men   National 1985   24.8
+## 2 Iceland Men   Rural    1985   25.2
+## 3 Iceland Men   Urban    1985   24.8
+## 4 Iceland Men   National 2017   27.1
+## 5 Iceland Men   Rural    2017   27.3
+## 6 Iceland Men   Urban    2017   27.1
+## # … with 6 more rows
+```
+
+---
+
+We can use more than one condition. Here we select all rows where the 
+Country is Iceland and the year is 2017.
+
+
+```r
+BMI_long %&gt;%
+  filter(Country == "Iceland", Year == 2017)
+```
+
+```
+## # A tibble: 6 x 5
+##   Country Sex   Region   Year    BMI
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Iceland Men   National 2017   27.1
+## 2 Iceland Men   Rural    2017   27.3
+## 3 Iceland Men   Urban    2017   27.1
+## 4 Iceland Women National 2017   25.5
+## 5 Iceland Women Rural    2017   25.9
+## 6 Iceland Women Urban    2017   25.5
+```
+
+
+---
+
+More complex conditions are possible!
+
+**Question:** In plain English, what is the code below accomplishing?
+
+
+```r
+BMI_long %&gt;%
+  filter(Country %in% c("Iceland", "Ireland"),
+         Year == 2017 | Region == "National")
+```
+
+```
+## # A tibble: 16 x 5
+##   Country Sex   Region   Year    BMI
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Iceland Men   National 1985   24.8
+## 2 Iceland Men   National 2017   27.1
+## 3 Iceland Men   Rural    2017   27.3
+## 4 Iceland Men   Urban    2017   27.1
+## 5 Iceland Women National 1985   24.3
+## 6 Iceland Women National 2017   25.5
+## # … with 10 more rows
+```
+
+---
+
+The table of logical operators below will be helpful as you work with filtering.
+
+|operator | definition |
+|:----------|:--------|
+| `&lt;` |   is less than? |
+| `&lt;=` |   is less than or equal to? |
+| `&gt;` |   is greater than? |
+| `&gt;=` |   is greater than or equal to? |
+| `==` |   is exactly equal to? |
+| `!=` |   is not equal to? |
+| `x &amp; y` |   is x AND y? |
+| `x \| y` |   is x OR y? |
+| `is.na(x)` |   is x NA? |
+| `!is.na(x)` |   is x not NA? |
+| `x %in% y` |   is x in y? |
+| `!(x %in% y)` |   is x not in y? |
+| `!x` |   is not x? |
+
+
+The final operator only makes sense if `x` is logical (TRUE / FALSE).
+
+---
+
+### `mutate()`
+
+`mutate()` creates a new variable.
+
+In the code chunk below, we categorize BMI using the WHO classification.
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(
+    BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  select(BMI, bmiclass)
+```
+
+```
+## # A tibble: 2,400 x 2
+##     BMI bmiclass    
+##   &lt;dbl&gt; &lt;fct&gt;       
+## 1  20.2 Normal Range
+## 2  19.7 Normal Range
+## 3  22.4 Normal Range
+## 4  22.8 Normal Range
+## 5  22.5 Normal Range
+## 6  23.6 Normal Range
+## # … with 2,394 more rows
+```
+
+---
+
+Using `==` in the mutate creates a new variable `normal_range` that is TRUE if the BMI is in the normal range and FALSE if it is not.
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(
+    BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  mutate(normal_range = bmiclass == "Normal Range") %&gt;%
+  print()
+```
+
+```
+## # A tibble: 2,400 x 7
+##   Country     Sex   Region   Year    BMI bmiclass    normal_range
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;fct&gt;       &lt;lgl&gt;       
+## 1 Afghanistan Men   National 1985   20.2 Normal Ran… TRUE        
+## 2 Afghanistan Men   Rural    1985   19.7 Normal Ran… TRUE        
+## 3 Afghanistan Men   Urban    1985   22.4 Normal Ran… TRUE        
+## 4 Afghanistan Men   National 2017   22.8 Normal Ran… TRUE        
+## 5 Afghanistan Men   Rural    2017   22.5 Normal Ran… TRUE        
+## 6 Afghanistan Men   Urban    2017   23.6 Normal Ran… TRUE        
+## # … with 2,394 more rows
+```
+
+---
+
+**Question:** What do you think will happen if you take the mean of the 
+`normal_range` variable?
+
+---
+
+### `summarize()`
+
+`summarize` calculates summary statistics. It collapses rows into summary 
+statistics and removes columns irrelevant to the calculation.
+
+Be sure to name your columns!
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  mutate(normal_range = bmiclass == "Normal Range") %&gt;%
+  summarize(fracnormal = mean(normal_range))
+```
+
+```
+## # A tibble: 1 x 1
+##   fracnormal
+##        &lt;dbl&gt;
+## 1         NA
+```
+
+**Question:** The code chunk above returns an NA. What is going wrong? 
+
+
+---
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  mutate(normal_range = bmiclass == "Normal Range") %&gt;%
+  summarize(fracnormal = mean(normal_range,na.rm=TRUE))
+```
+
+```
+## # A tibble: 1 x 1
+##   fracnormal
+##        &lt;dbl&gt;
+## 1      0.513
+```
+
+---
+
+
+### `group_by()`
+
+`group_by()` is used for grouped operations. It's very powerful when paired with
+summarize to calculate summary statistics by group.
+
+Here we find the proportion of means that are in the normal range for each region.
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  mutate(normal_range = bmiclass == "Normal Range") %&gt;%
+  group_by(Region) %&gt;%
+  summarize(fracnormal = mean(normal_range,na.rm=TRUE))
+```
+
+```
+## # A tibble: 3 x 2
+##   Region   fracnormal
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 National      0.52 
+## 2 Rural         0.559
+## 3 Urban         0.462
+```
+
+---
+
+We can calculate more than one summary statistic in `summarize()`. In addition
+to the proportion normal for each region, let's find the maximum BMI in each region.
+
+
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(
+    BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  mutate(normal_range = bmiclass == "Normal Range") %&gt;%
+  group_by(Region) %&gt;%
+  summarize(
+    fracnormal = mean(normal_range, na.rm = TRUE),
+    max_BMI = max(BMI, na.rm = TRUE)
+  )
+```
+
+```
+## # A tibble: 3 x 3
+##   Region   fracnormal max_BMI
+##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;
+## 1 National      0.52     35.3
+## 2 Rural         0.559    35  
+## 3 Urban         0.462    35.4
+```
+
+---
+
+### `count()`
+
+`count` counts the unique values of one or more variables. It creates frequency
+tables.
+
+
+```r
+BMI_long %&gt;%
+  count(Year)
+```
+
+```
+## # A tibble: 2 x 2
+##   Year      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 1985   1200
+## 2 2017   1200
+```
+
+---
+
+**Question:** What is the code chunk below doing?
+
+
+```r
+BMI_long %&gt;%
+  count(Year) %&gt;%
+  mutate(prop = n / sum(n))
+```
+
+```
+## # A tibble: 2 x 3
+##   Year      n  prop
+##   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 1985   1200   0.5
+## 2 2017   1200   0.5
+```
+
+
+### Additional Resources
+
+- https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+- https://style.tidyverse.org/
+- https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

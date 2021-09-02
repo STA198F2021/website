@@ -21,6 +21,12 @@ title: 'Week 4 - Data wrangling'
 - Complete the [readings](/post/04-week/#readings)
 - Complete the [assignments](/post/04-week/#assignments)
 
-### Readings
+
+### Readings and Videos
+
+| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
+|:---:|:---|:---:|
+| :open_book: | R4DS: [Chapter 5, Data Transformation](https://r4ds.had.co.nz/transform.html)  | **Required** |
+
 
 ### Assignments
