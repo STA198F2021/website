@@ -1,8 +1,8 @@
 ---
 title: "Conditional Probability"
 subtitle: "<br><br> Introduction to Data Science"
-#author: "[Course Website](https://sta198f2021.github.io/website/)"
-author: "[introds.org](https://introds.org)"
+author: "[Course Website](https://sta198f2021.github.io/website/)"
+#author: "[introds.org](https://introds.org)"
 date: "<br> Prof. Amy Herring"
 output:
   xaringan::moon_reader:
