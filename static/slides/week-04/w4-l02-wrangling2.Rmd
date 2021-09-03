@@ -1,0 +1,221 @@
+---
+title: "Data Wrangling I"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+```
+---
+
+# Main Ideas
+- To answer questions with data, we often need to use related data from many 
+different datasets.
+- We can combine data from different sources using a well-chosen join function.
+
+# Coming Up
+
+- Homework #01 due Thursday 2-04 at 11:59 PM
+- Homework #02 assigned Thursday 2-04
+- Lab #03 tomorrow
+
+# Lecture Notes and Exercises
+
+Run the following code in the **console** to configure Git. Fill in your GitHub
+username and the email address associated with your GitHub account.
+
+```{r eval = FALSE}
+library(usethis)
+use_git_config(user.name= "your github username", user.email="your email")
+```
+
+```{r message = FALSE}
+library(tidyverse)
+```
+
+Instead of working with a single dataset, usually you will have to work with 
+many different related datasets. To answer research questions using related 
+datasets, we need to develop tools to join datasets together.
+
+There are many possible types of joins. All have the format 
+`something_join(x, y)`.
+
+- `inner_join()`: join all rows from `x` where there are matching values in `y`. 
+Return all combinations in case of multiple matches
+- `left_join()`: include all rows from `x`
+- `right_join()`: include all rows from `y`
+- `full_join()`: include all rows in `x` or `y`
+- `semi_join()`: return all rows from `x` with match in `y`
+- `anti_join()`: return all rows from `x` without a match in `y`
+
+```{r test-joins}
+x <- tibble(value = c(1, 2, 3),
+            xcol = c("x1", "x2", "x3"))
+y <- tibble(value = c(1, 2, 4),
+            ycol = c("y1", "y2", "y4"))
+x
+y
+```
+
+We will demonstrate each of the joins on these small, toy datasets. Check out
+the attached html file for gifs with animations of these joins.
+
+```{r inner-join}
+x
+y
+inner_join(x, y)
+```
+
+```{r left-join}
+x
+y
+left_join(x, y)
+```
+
+```{r right-join}
+x
+y
+right_join(x, y)
+```
+
+```{r full-join}
+x
+y
+full_join(x, y)
+```
+
+```{r semi-join}
+x
+y
+semi_join(x, y)
+```
+
+```{r anti-join}
+x
+y
+anti_join(x, y)
+```
+
+How do the join functions above know to join `x` and `y` by `value`? Examine the
+names to find out.
+
+```{r names}
+names(x)
+names(y)
+```
+
+We will again work with data from the `nycflights13` package.
+
+```{r load-flights-data}
+library(nycflights13)  
+```
+
+Examine the documentation for the datasets `airports`, `flights`, and `planes`.
+
+**Question:** How are these datasets related? Suppose you wanted to make a map
+of the route of every flight. What variables would you need from which 
+datasets?
+
+Airports has information on the location of the airports, flights has information on flights that took place and planes has information on aircrafts. You need the geographic location of the airports (from airports) and the path of flights (i.e., which airports were involved) from flights.
+
+Join flights to airports. Note these two datasets have no variables in common
+so we will have to specify the variable to join by using `by = `. Check out
+the documentation for more information.
+
+```{r flights-join}
+flights %>% 
+  left_join(airports, by = c("dest" = "faa"))
+```
+
+## Practice
+
+(1) Create a new dataset `dest_delays` with the median arrival delay for each 
+destination. Note this question does not require you to use joins.
+
+```{r make-dest-delays}
+dest_delays <- flights %>%
+  group_by(dest) %>%
+  summarise(delay = median(arr_delay, na.rm=TRUE))
+```
+
+(2) Create a new dataset by joining `dest_delays` and `airports`. Only include observations that have both delay and airport information. Note `dest_delays`
+and `flights` have no variables in common so you will need to specify the 
+variables to join using `by` as in the example above.
+
+```{r}
+dest_delays %>%
+  inner_join(airports, by = c("dest" = "faa"))
+```
+
+**Question:** Are all of the variables in `dest_delays` included in the new 
+dataset you created by joining `dest_delays` and `airports`? Use an appropriate join function to investigate this issue and determine what is going on here.
+
+There are 105 airports in the `dest_delays` dataset, but when we join to 
+airports there are only 101 airports. There are four airports in the 
+`dest_delays` data that are not matched in airports. Something weird is going
+on.
+
+We use an `anti_join` to help diagnose this issue. Recall `anti_join` returns
+all rows from `x` without a match in `y`, so it will return all rows in 
+`dest_delays` that don't have a match in `airports`.
+
+```{r }
+dest_delays %>%
+  anti_join(airports, by = c("dest" = "faa"))
+```
+
+A bit of googling reveals that these are airports in Puerto Rico (BQN, PSE, 
+SJU) and the U.S. Virgin Islands (STT).
+
+(3) Is there a relationship between the age of a plane and its delays? The plane tail number is given in the `tailnum` variable in the `flights` dataset. The year the plane was manufactured is given in the `year` variable in the `planes` dataset. 
+
+- Step #1: Start by finding the average arrival delay for each plane and store
+the resulting dataset in `plane_delays`.
+
+```{r step-1}
+plane_delays <- flights %>%
+  group_by(tailnum) %>%
+  summarise(delay = mean(arr_delay, na.rm=TRUE))
+```
+
+- Step #2: Join `plane_delays` to the `planes` data using an appropriate join
+and then use mutate to create an age variable. Note this data is from 2013.
+
+```{r step-2}
+plane_delays %>%
+  left_join(planes, by = "tailnum") %>%
+  mutate(age = 2013 - year)
+```
+
+- Step #3: Finally, create an effective visualization of the data.
+
+```{r step-3}
+plane_delays %>%
+  left_join(planes, by = "tailnum") %>%
+  mutate(age = 2013 - year) %>%
+  ggplot(aes(x = age, y = delay)) + 
+  geom_point() + 
+  geom_smooth() +
+  theme_minimal()
+```
+
+### Additional Resources
+
+- https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf

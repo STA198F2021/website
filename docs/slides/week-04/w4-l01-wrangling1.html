@@ -44,17 +44,23 @@ layout: true
 
 - Organizing our data according to a consistent set of "tidy" principles makes
 data easy to work with and leverages the ways `R` is effective.
+
 - Often we need to wrangle our data in order to extract meaning (including
 creating new variables, calculating summary statistics, subsetting data, etc).
+
 - Using only **seven key verbs** we can accomplish a wide variety of data 
 wrangling tasks.
+
+---
 
 ## Tidy Principles
 
 Tidy data have three related characteristics
 
 1. Each variable forms a column.
+
 2. Each observation forms a row.
+
 3. Each value has its own cell.
 
 ---
@@ -127,6 +133,11 @@ names(BMI_long)
 ## [1] "Country" "Sex"     "Region"  "Year"    "BMI"
 ```
 
+---
+
+
+
+
 ```r
 head(BMI_long)
 ```
@@ -160,6 +171,8 @@ modify the number of rows and columns shown using the `print()` function options
 
 Second, tibbles are somewhat more strict than data frames when it comes to 
 subsetting data.
+
+---
 
 ### `select()`
 
@@ -338,6 +351,34 @@ BMI_long %&gt;%
 the code.
 
 
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+BMI_long %&gt;%
+  arrange(desc(BMI)) %&gt;%
+  slice(1:5)
+```
+]
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 5 x 5
+##   Country        Sex   Region   Year    BMI
+##   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 American Samoa Women Urban    2017   35.4
+## 2 American Samoa Women National 2017   35.3
+## 3 American Samoa Women Rural    2017   35  
+## 4 Samoa          Women Urban    2017   34.7
+## 5 American Samoa Men   Rural    2017   34.6
+```
+]
+]
+
+---
+
+
+
 ```r
 BMI_long %&gt;%
   arrange(desc(BMI)) %&gt;%
@@ -361,7 +402,35 @@ To add comments to code, use the pound sign. This is helpful for debugging as
 well - you can temporarily disable a line.
 
 **Question:** What will happen if you comment out the line containing 
-`arrange()` in the code chunk above? Try it.
+`arrange()` in the previous code chunk? Try it.
+
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+BMI_long %&gt;%
+  #arrange(desc(BMI)) %&gt;%
+  slice(1:5)
+```
+]
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 5 x 5
+##   Country     Sex   Region   Year    BMI
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Afghanistan Men   National 1985   20.2
+## 2 Afghanistan Men   Rural    1985   19.7
+## 3 Afghanistan Men   Urban    1985   22.4
+## 4 Afghanistan Men   National 2017   22.8
+## 5 Afghanistan Men   Rural    2017   22.5
+```
+]
+]
+
+
+---
 
 ### `filter()`
 
@@ -451,7 +520,18 @@ The table of logical operators below will be helpful as you work with filtering.
 | `==` |   is exactly equal to? |
 | `!=` |   is not equal to? |
 | `x &amp; y` |   is x AND y? |
-| `x \| y` |   is x OR y? |
+| x `\(\mid\)` y |   is x OR y? |
+
+
+
+
+---
+
+
+The table of logical operators below will be helpful as you work with filtering.
+
+|operator | definition |
+|:----------|:--------|
 | `is.na(x)` |   is x NA? |
 | `!is.na(x)` |   is x not NA? |
 | `x %in% y` |   is x in y? |
@@ -463,17 +543,17 @@ The final operator only makes sense if `x` is logical (TRUE / FALSE).
 
 ---
 
+
 ### `mutate()`
 
-`mutate()` creates a new variable.
+`mutate()` creates a new variable. Here we categorize BMI using the WHO classification.
 
-In the code chunk below, we categorize BMI using the WHO classification.
-
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
-  mutate(bmiclass = cut(
-    BMI,
+  mutate(bmiclass = cut(BMI,
     breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
     labels = c(
       "Underweight",
@@ -487,6 +567,8 @@ BMI_long %&gt;%
   )) %&gt;%
   select(BMI, bmiclass)
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 2,400 x 2
@@ -500,11 +582,17 @@ BMI_long %&gt;%
 ## 6  23.6 Normal Range
 ## # … with 2,394 more rows
 ```
+]
+]
+
+
 
 ---
 
 Using `==` in the mutate creates a new variable `normal_range` that is TRUE if the BMI is in the normal range and FALSE if it is not.
 
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
@@ -524,6 +612,8 @@ BMI_long %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   print()
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 2,400 x 7
@@ -537,21 +627,18 @@ BMI_long %&gt;%
 ## 6 Afghanistan Men   Urban    2017   23.6 Normal Ran… TRUE        
 ## # … with 2,394 more rows
 ```
-
----
-
-**Question:** What do you think will happen if you take the mean of the 
-`normal_range` variable?
+]
+]
 
 ---
 
 ### `summarize()`
 
 `summarize` calculates summary statistics. It collapses rows into summary 
-statistics and removes columns irrelevant to the calculation.
+statistics and removes columns irrelevant to the calculation. Be sure to name your columns!
 
-Be sure to name your columns!
-
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
@@ -570,6 +657,8 @@ BMI_long %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   summarize(fracnormal = mean(normal_range))
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 1 x 1
@@ -577,12 +666,86 @@ BMI_long %&gt;%
 ##        &lt;dbl&gt;
 ## 1         NA
 ```
+]
+]
 
-**Question:** The code chunk above returns an NA. What is going wrong? 
+---
+
+**Question:** The code chunk returns an NA. What is going wrong? 
+
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+BMI_long %&gt;%
+  mutate(bmiclass = cut(BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = TRUE
+  )) %&gt;%
+  count(bmiclass) %&gt;%
+  group_by(bmiclass) 
+```
+]
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 6 x 2
+## # Groups:   bmiclass [6]
+##   bmiclass         n
+##   &lt;fct&gt;        &lt;int&gt;
+## 1 Underweight     10
+## 2 Normal Range  1223
+## 3 Overweight    1054
+## 4 Obese I         93
+## 5 Obese II         2
+## 6 &lt;NA&gt;            18
+```
+]
+]
+
+---
+Ahh, there were 18 missing values of the variable `bmiclass`!  First, let's check to be sure we didn't code that new variable incorrectly by seeing if the source varialbe, BMI, also has some missing values.
+
+
+
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+BMI_long %&gt;%
+  count(BMI=="NA")
+```
+]
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 2 x 2
+##   `BMI == "NA"`     n
+##   &lt;lgl&gt;         &lt;int&gt;
+## 1 FALSE          2382
+## 2 NA               18
+```
+
+OK great, so the problem was with the source variable. We can just drop those few NA's when we take the mean, so that we get the mean of the observed values.
+]
+]
 
 
 ---
 
+
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
@@ -601,6 +764,8 @@ BMI_long %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   summarize(fracnormal = mean(normal_range,na.rm=TRUE))
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 1 x 1
@@ -608,17 +773,18 @@ BMI_long %&gt;%
 ##        &lt;dbl&gt;
 ## 1      0.513
 ```
-
+]
+]
 ---
 
 
 ### `group_by()`
 
-`group_by()` is used for grouped operations. It's very powerful when paired with
-summarize to calculate summary statistics by group.
+`group_by()` is powerful when paired with
+summarize to calculate summary statistics by group. Here we find the proportion of means that are in the normal range for each region.
 
-Here we find the proportion of means that are in the normal range for each region.
-
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
@@ -638,6 +804,8 @@ BMI_long %&gt;%
   group_by(Region) %&gt;%
   summarize(fracnormal = mean(normal_range,na.rm=TRUE))
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 3 x 2
@@ -647,13 +815,15 @@ BMI_long %&gt;%
 ## 2 Rural         0.559
 ## 3 Urban         0.462
 ```
+]
+]
 
 ---
 
-We can calculate more than one summary statistic in `summarize()`. In addition
-to the proportion normal for each region, let's find the maximum BMI in each region.
+We can calculate more than one summary statistic in `summarize()`. 
 
-
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
@@ -674,9 +844,10 @@ BMI_long %&gt;%
   group_by(Region) %&gt;%
   summarize(
     fracnormal = mean(normal_range, na.rm = TRUE),
-    max_BMI = max(BMI, na.rm = TRUE)
-  )
+    max_BMI = max(BMI, na.rm = TRUE))
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 3 x 3
@@ -686,38 +857,23 @@ BMI_long %&gt;%
 ## 2 Rural         0.559    35  
 ## 3 Urban         0.462    35.4
 ```
-
----
-
-### `count()`
-
-`count` counts the unique values of one or more variables. It creates frequency
-tables.
-
-
-```r
-BMI_long %&gt;%
-  count(Year)
-```
-
-```
-## # A tibble: 2 x 2
-##   Year      n
-##   &lt;chr&gt; &lt;int&gt;
-## 1 1985   1200
-## 2 2017   1200
-```
+]
+]
 
 ---
 
 **Question:** What is the code chunk below doing?
 
+.panelset[
+.panel[.panel-name[Code]
 
 ```r
 BMI_long %&gt;%
   count(Year) %&gt;%
   mutate(prop = n / sum(n))
 ```
+]
+.panel[.panel-name[Output]
 
 ```
 ## # A tibble: 2 x 3
@@ -726,7 +882,10 @@ BMI_long %&gt;%
 ## 1 1985   1200   0.5
 ## 2 2017   1200   0.5
 ```
+]
+]
 
+---
 
 ### Additional Resources
 

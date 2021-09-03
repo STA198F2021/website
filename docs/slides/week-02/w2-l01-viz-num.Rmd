@@ -532,9 +532,6 @@ lifespan2019 %>%
     theme( #<<
       axis.ticks.y = element_blank(), #<<
       axis.text.y = element_blank()) #<<
-
-
-
 ```
 ]
 ]
