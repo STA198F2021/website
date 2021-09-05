@@ -35,7 +35,7 @@ title: 'Week 3 - Probability in Action'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Quiz | [Quiz 2](https://sakai.duke.edu) | Tuesday, 9/7 |
-| Lab 2 |[Data Viz]| Wed., 9/8 |
+| Lab 2 |[Data Viz](https://sta198f2021.github.io/website/slides/week-03/lab-02-data-viz.html)| Wed., 9/8 |
 | HW 1 | [Science Communication](https://sta198f2021.github.io/website/slides/week-03/hw-01-israel-covid.html) | Fri., 9/10 |
 
 
