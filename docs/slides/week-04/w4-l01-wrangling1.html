@@ -378,26 +378,6 @@ BMI_long %&gt;%
 ---
 
 
-
-```r
-BMI_long %&gt;%
-  arrange(desc(BMI)) %&gt;%
-  slice(1:5)
-```
-
-```
-## # A tibble: 5 x 5
-##   Country        Sex   Region   Year    BMI
-##   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
-## 1 American Samoa Women Urban    2017   35.4
-## 2 American Samoa Women National 2017   35.3
-## 3 American Samoa Women Rural    2017   35  
-## 4 Samoa          Women Urban    2017   34.7
-## 5 American Samoa Men   Rural    2017   34.6
-```
-
----
-
 To add comments to code, use the pound sign. This is helpful for debugging as 
 well - you can temporarily disable a line.
 
@@ -540,6 +520,8 @@ The table of logical operators below will be helpful as you work with filtering.
 
 
 The final operator only makes sense if `x` is logical (TRUE / FALSE).
+
+R denotes missing values by NA. Missing values can cause biased or misleading results in any analysis, and it is important to understand why values are missing before drawing conclusions from data, especially if the fraction of missing values is not very small.
 
 ---
 
@@ -709,11 +691,12 @@ BMI_long %&gt;%
 ## 5 Obese II         2
 ## 6 &lt;NA&gt;            18
 ```
+Ahh, count() is a very useful function!
 ]
 ]
 
 ---
-Ahh, there were 18 missing values of the variable `bmiclass`!  First, let's check to be sure we didn't code that new variable incorrectly by seeing if the source varialbe, BMI, also has some missing values.
+Ahh, there were 18 missing values of the variable `bmiclass`!  First, let's check to be sure we didn't code that new variable incorrectly by seeing if the source variable, BMI, also has some missing values.
 
 
 
@@ -736,13 +719,54 @@ BMI_long %&gt;%
 ## 2 NA               18
 ```
 
-OK great, so the problem was with the source variable. We can just drop those few NA's when we take the mean, so that we get the mean of the observed values.
+OK great, so the problem was with the source variable. We can just drop those few NA's when we take the mean, so that we get the mean of the observed values. In general, one would follow up on the NA values to understand why data were missing. What seems to be the issue here?
 ]
 ]
 
 
 ---
 
+Let's print all 18 variables and see if we can tell what's going on.
+
+
+```r
+BMI_long %&gt;%
+  filter(is.na(BMI)==TRUE) %&gt;%
+  print(n=18)
+```
+
+---
+
+
+```
+## # A tibble: 18 x 5
+##    Country               Sex   Region Year    BMI
+##    &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+##  1 Bermuda               Men   Rural  1985     NA
+##  2 Bermuda               Men   Rural  2017     NA
+##  3 Bermuda               Women Rural  1985     NA
+##  4 Bermuda               Women Rural  2017     NA
+##  5 China (Hong Kong SAR) Men   Rural  2017     NA
+##  6 China (Hong Kong SAR) Women Rural  2017     NA
+##  7 Nauru                 Men   Rural  1985     NA
+##  8 Nauru                 Men   Rural  2017     NA
+##  9 Nauru                 Women Rural  1985     NA
+## 10 Nauru                 Women Rural  2017     NA
+## 11 Singapore             Men   Rural  1985     NA
+## 12 Singapore             Men   Rural  2017     NA
+## 13 Singapore             Women Rural  1985     NA
+## 14 Singapore             Women Rural  2017     NA
+## 15 Tokelau               Men   Urban  1985     NA
+## 16 Tokelau               Men   Urban  2017     NA
+## 17 Tokelau               Women Urban  1985     NA
+## 18 Tokelau               Women Urban  2017     NA
+```
+
+This makes sense! Hong Kong, Singapore, Bermuda, and Nauru do not classify any of their population as rural; Tokelau does not classify any of its population as urban. 
+
+---
+
+Finally, let's get the proportion of values with mean BMI in the normal range.
 
 .panelset[
 .panel[.panel-name[Code]

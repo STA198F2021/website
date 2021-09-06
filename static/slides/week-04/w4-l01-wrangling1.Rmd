@@ -232,14 +232,6 @@ BMI_long %>%
 ---
 
 
-```{r arrange-slice2}
-BMI_long %>%
-  arrange(desc(BMI)) %>%
-  slice(1:5)
-```
-
----
-
 To add comments to code, use the pound sign. This is helpful for debugging as 
 well - you can temporarily disable a line.
 
@@ -334,6 +326,8 @@ The table of logical operators below will be helpful as you work with filtering.
 
 
 The final operator only makes sense if `x` is logical (TRUE / FALSE).
+
+R denotes missing values by NA. Missing values can cause biased or misleading results in any analysis, and it is important to understand why values are missing before drawing conclusions from data, especially if the fraction of missing values is not very small.
 
 ---
 
@@ -522,11 +516,12 @@ BMI_long %>%
   count(bmiclass) %>%
   group_by(bmiclass) 
 ```
+Ahh, count() is a very useful function!
 ]
 ]
 
 ---
-Ahh, there were 18 missing values of the variable `bmiclass`!  First, let's check to be sure we didn't code that new variable incorrectly by seeing if the source varialbe, BMI, also has some missing values.
+Ahh, there were 18 missing values of the variable `bmiclass`!  First, let's check to be sure we didn't code that new variable incorrectly by seeing if the source variable, BMI, also has some missing values.
 
 
 
@@ -544,13 +539,34 @@ BMI_long %>%
   count(BMI=="NA")
 ```
 
-OK great, so the problem was with the source variable. We can just drop those few NA's when we take the mean, so that we get the mean of the observed values.
+OK great, so the problem was with the source variable. We can just drop those few NA's when we take the mean, so that we get the mean of the observed values. In general, one would follow up on the NA values to understand why data were missing. What seems to be the issue here?
 ]
 ]
 
 
 ---
 
+Let's print all 18 variables and see if we can tell what's going on.
+
+```{r nainvestigate, eval=FALSE}
+BMI_long %>%
+  filter(is.na(BMI)==TRUE) %>%
+  print(n=18)
+```
+
+---
+
+```{r nainvestigate2, echo=FALSE}
+BMI_long %>%
+  filter(is.na(BMI)==TRUE) %>%
+  print(n=18)
+```
+
+This makes sense! Hong Kong, Singapore, Bermuda, and Nauru do not classify any of their population as rural; Tokelau does not classify any of its population as urban. 
+
+---
+
+Finally, let's get the proportion of values with mean BMI in the normal range.
 
 .panelset[
 .panel[.panel-name[Code]
