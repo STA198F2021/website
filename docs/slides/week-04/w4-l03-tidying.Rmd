@@ -1,0 +1,727 @@
+---
+title: "Tidying data"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+options(
+  dplyr.print_min = 10, 
+  dplyr.print_max = 10
+  )
+```
+
+class: middle
+
+# .hand[We...]
+
+.huge[.green[have]] .hand[data organised in a suboptimal manner for our analysis]
+
+.huge[.pink[want]] .hand[to reorganise the data to carry on with our analysis]
+
+
+This slide deck adapted from Data Science in a Box! 
+
+---
+
+Today we'll do the following:
+
+1. Learn how to `tidy` data
+
+2. Practice data tidying skills to reproduce a plot of presidential approval ratings
+
+3. Step back and review. We revisit the COVID example from week 1 and explore how those data were wrangled to create the plot.
+
+---
+
+## Data: Transparency in Medical Pricing
+
+The US Centers for Medicare and Medicaid Services now requires hospitals to [release pricing information to patients before providing services](https://www.healthaffairs.org/do/10.1377/hblog20200304.157067/full/). Hospitals have varied in how accessible they have made this data to consumers. For example, Duke Hospital refers patients [to a website](https://www.dukehealth.org/paying-for-care/what-duke-charges-services) that contains a .csv file, and it directs patients to [a financial counselor](https://www.dukehealth.org/paying-for-care/estimate-care-will-cost) to help get estimates (the .csv file is just a list and provides no information about how many procedures may be charged, etc).
+
+
+
+---
+
+## Data: Duke Medicare Prices
+
+```{r include=FALSE}
+patients <- read_csv("data/medcosts/patient_id.csv")
+prices <- read_csv("data/medcosts/prices.csv")
+```
+
+
+<br>
+
+.pull-left[
+### .green[We have...]
+```{r echo=FALSE}
+patients
+```
+]
+
+--
+.pull-right[
+### .pink[We want...]
+```{r echo=FALSE}
+patients %>%
+  pivot_longer(cols = proc_1:proc_3, names_to = "proc_no", values_to = "procedure")
+```
+]
+
+---
+
+## A grammar of data tidying
+
+.pull-left[
+```{r dplyr-part-of-tidyverse, echo=FALSE, out.width="60%", caption = "tidyr is part of the tidyverse"}
+include_graphics("img/tidyr-part-of-tidyverse.png")
+```
+]
+.pull-right[
+The goal of tidyr is to help you tidy your data via
+
+- pivoting for going between wide and long data
+- splitting and combining character columns
+- nesting and unnesting columns
+- clarifying how `NA`s should be treated
+]
+
+---
+
+class: middle
+
+# Pivoting data
+
+---
+
+## Not this...
+
+```{r echo=FALSE,out.width="70%"}
+include_graphics("img/pivot.gif")
+```
+
+---
+
+## but this!
+
+.center[
+```{r echo=FALSE, out.width="45%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/tidyr-longer-wider.gif")
+```
+]
+
+---
+
+## Wider vs. longer
+
+.pull-left[
+### .green[wider]
+more columns
+```{r echo=FALSE}
+patients
+```
+]
+
+--
+.pull-right[
+### .pink[longer]
+more rows
+```{r echo=FALSE}
+patients %>%
+  pivot_longer(cols = proc_1:proc_3, names_to = "proc_no", values_to = "procedure")
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, #<<
+  cols, 
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, #<<
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", #<<
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+- `values_to`: name of the column where data in pivoted variables go (character string)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", 
+  values_to = "value" #<<
+  )
+```
+]
+
+---
+
+## Patients $\rightarrow$ interventions
+
+```{r}
+interventions <- patients %>%
+  pivot_longer( #<<
+    cols = proc_1:proc_3,  # variables proc_1 to proc_3 #<<
+    names_to = "proc_no",  # column names -> new column called proc_no #<<
+    values_to = "procedure"     # values in columns -> new column called procedure #<<
+    ) #<<
+
+interventions
+```
+
+---
+
+## Why pivot?
+
+Most likely, because the next step of your analysis needs it
+
+--
+
+.pull-left[
+```{r}
+prices
+```
+]
+.pull-right[
+```{r}
+interventions %>%
+  left_join(prices) #<<
+```
+]
+
+---
+
+## Interventions $\rightarrow$ patients
+
+.pull-left-narrow[
+- `data` (as usual)
+- `names_from`: which column in the long format contains what should be column names in the wide format
+- `values_from`: which column in the long format contains what should be values in the new columns in the wide format
+]
+.pull-right-wide[
+```{r}
+interventions %>%
+  pivot_wider( #<<
+    names_from = proc_no, #<<
+    values_from = procedure #<<
+  ) #<<
+```
+]
+
+---
+
+class: middle
+
+# Case study: Approval Rating of President Trump
+
+---
+
+```{r echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/trump-approval.png")
+```
+
+.footnote[
+Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ratings/adults/)
+]
+
+---
+
+## Data
+
+```{r include=FALSE}
+trump <- read_csv("data/trump/trump.csv")
+```
+
+```{r}
+trump
+```
+
+---
+
+## Goal
+
+.pull-left-wide[
+```{r echo=FALSE, out.width="100%"}
+trump %>%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  ) %>%
+  ggplot(aes(x = date, y = rating_value, 
+             color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is President Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) 
+```
+]
+--
+.pull-right-narrow[
+**Aesthetic mappings:**  
+`r emo::ji("check")`  x = `date`  
+`r emo::ji("x")`      y = `rating_value`  
+`r emo::ji("x")`      color = `rating_type`
+
+**Facet:**  
+`r emo::ji("check")`  `subgroup` (Adults and Voters)
+]
+
+---
+
+## Pivot
+
+```{r output.lines=11}
+trump_longer <- trump %>%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  )
+
+trump_longer
+```
+
+---
+
+## Plot
+
+```{r fig.asp = 0.5}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup)
+```
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+```{r "trump-plot", fig.show="hide"}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + #<<
+  labs( #<<
+    x = "Date", y = "Rating", #<<
+    color = NULL, #<<
+    title = "How (un)popular is President Trump?", #<<
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", #<<
+    caption = "Source: FiveThirtyEight modeling estimates" #<<
+  ) #<<
+```
+]
+
+.panel[.panel-name[Plot]
+```{r ref.label="trump-plot", echo = FALSE, out.width="75%"}
+```
+]
+
+]
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+```{r "trump-plot-2", fig.show="hide"}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is President Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) 
+```
+]
+
+.panel[.panel-name[Plot]
+```{r ref.label="trump-plot-2", echo = FALSE, out.width="75%", fig.width=6}
+```
+]
+
+]
+
+---
+
+## Coronavirus Deaths
+
+First, we should call the libraries we used to make the plot during the first week of class. Because the `coronavirus` package is updated daily, we should re-install it to get the most up to date data.
+
+```{r load-packages, warning=FALSE, message=FALSE}
+library(devtools) #to install package from GitHub
+#reinstall coronavirus package to update #'s (they update daily)
+devtools::install_github("RamiKrispin/coronavirus")
+library(coronavirus)
+library(lubridate) #to facilitate working with dates
+library(glue) #we use in formatting the date
+library(scales) #use to control notation on axis scale
+library(ggrepel) #for writing names on plot
+```
+
+---
+
+## Recall the Data
+
+The data frame called `coronavirus` in the coronavirus package provides a daily summary of the Coronavirus (COVID-19) cases by country. Each row in the data frame represents a country (or, where relevant, state/province).  Note that the data provided in this package provides daily number of deaths, confirmed cases, and recovered cases. Today we will focus on the deaths. 
+
+We will start by making our selection for the countries we want to explore.
+
+---
+
+```{r select-countries}
+head(coronavirus) #recall variables
+countries <- c(
+  "China",
+  "France",
+  "United Kingdom",
+  "US",
+  "Turkey"
+)
+```
+
+---
+
+```{r prep-country-data, eval=TRUE, echo=FALSE}
+country_data <- coronavirus %>%
+  # filter for deaths in countries of interest
+  filter(
+    type == "death",
+    country %in% countries
+  ) %>%
+  # fix country labels for pretty plotting
+  mutate(
+    country = case_when(
+      country == "United Kingdom" ~ "UK",
+      TRUE ~ country
+    )
+  ) %>%
+  # calculate number of total cases for each country and date
+  group_by(country, date) %>%
+  summarise(tot_cases = sum(cases)) %>%
+  # arrange by date in ascending order
+  arrange(date) %>%
+  # record daily cumulative cases 
+  mutate(cumulative_cases = cumsum(tot_cases)) %>%
+  # only use days since the 10th confirmed death
+  filter(cumulative_cases > 9) %>%
+  # record days elapsed, end date, and end label
+  mutate(
+    days_elapsed = as.numeric(date - min(date)),
+    end_date     = if_else(date == max(date), TRUE, FALSE),
+    end_label    = if_else(end_date, country, NULL)
+  ) %>%
+  # ungroup
+  ungroup()
+```
+
+
+How did we wrangle those data?  First, we filtered to a smaller list of countries, edited long country names if needed, and summed all the deaths by country and date. For some countries like Canada on the previous slide, we have data on the provincial level, so we need to summarize to put data on the country level.
+
+```{r prep-country-data2, eval=FALSE}
+country_data <- coronavirus %>%
+  # filter for deaths in countries of interest
+  filter(
+    type == "death",
+    country %in% countries
+  ) %>%
+  # fix country labels for pretty plotting
+  mutate(
+    country = case_when(
+      country == "United Kingdom" ~ "UK",
+      TRUE ~ country
+    )
+  ) %>%
+  # calculate number of total cases for each country and date
+  group_by(country, date) %>%
+  summarise(tot_cases = sum(cases)) %>%
+```
+
+---
+
+Next, we ordered by date and calculated the cumulative case counts. Then, we excluded days before the 10th confirmed death due to irregularities in early reporting, and we converted calendar date to days elapsed.
+
+```{r prep-country-data3, eval=FALSE}
+  # arrange by date in ascending order
+  arrange(date) %>%
+  # record daily cumulative cases 
+  mutate(cumulative_cases = cumsum(tot_cases)) %>%
+  # only use days since the 10th confirmed death
+  filter(cumulative_cases > 9) %>%
+  # record days elapsed, end date, and end label
+  mutate(
+    days_elapsed = as.numeric(date - min(date)),
+    end_date     = if_else(date == max(date), TRUE, FALSE),
+    end_label    = if_else(end_date, country, NULL)
+  ) %>%
+  # ungroup
+  ungroup()
+```
+---
+
+
+
+We also need to take a note of the "as of date" for the data so that we can properly label our visualisation.
+
+```{r record-as-of-date}
+as_of_date <- country_data %>% 
+  summarise(max(date)) %>% 
+  pull()
+as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
+```
+
+These data are as of `r as_of_date_formatted`.
+
+---
+
+
+
+.panelset[
+.panel[.panel-name[Code]
+```{r visualise, warning=FALSE,eval=FALSE}
+ggplot(data = country_data,
+       mapping = aes(x = days_elapsed, 
+                     y = cumulative_cases, 
+                     color = country, 
+                     label = end_label)) +
+  geom_line(size = 0.7, alpha = 0.8) +
+  geom_point(data = country_data %>% filter(end_date)) +
+  geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
+  guides(color = FALSE) +
+  scale_color_viridis_d() +
+  scale_y_continuous(labels = label_comma()) +
+  theme_minimal() +
+  labs(
+    x = "Days since 10th confirmed death",
+    y = "Cumulative number of deaths",
+    title = "Cumulative deaths from COVID-19, selected countries",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+```{r visualise2, warning=FALSE,echo=FALSE}
+ggplot(data = country_data,
+       mapping = aes(x = days_elapsed, 
+                     y = cumulative_cases, 
+                     color = country, 
+                     label = end_label)) +
+  geom_line(size = 0.7, alpha = 0.8) +
+  geom_point(data = country_data %>% filter(end_date)) +
+  geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
+  guides(color = FALSE) +
+  scale_color_viridis_d() +
+  scale_y_continuous(labels = label_comma()) +
+  theme_minimal() +
+  labs(
+    x = "Days since 10th confirmed death",
+    y = "Cumulative number of deaths",
+    title = "Cumulative deaths from COVID-19, selected countries",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+
+]
+]
+
+---
+
+
+We might prefer a plot of daily deaths (here I filter to US - pick your own countries).
+
+.panelset[
+.panel[.panel-name[Code]
+```{r daily, warning=FALSE,eval=FALSE}
+country_data %>%
+  filter(country == "US") %>%
+  ggplot(aes(x = date,
+             y = tot_cases,
+             color = country,)) +
+  geom_line() +
+  labs(
+    x = "Date",
+    y = "Daily number of deaths",
+    title = "Daily US deaths from COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+```{r daily2, warning=FALSE,echo=FALSE}
+country_data %>%
+  filter(country == "US") %>%
+  ggplot(aes(x = date,
+             y = tot_cases,
+             color = country,)) +
+  geom_line() +
+  labs(
+    x = "Date",
+    y = "Daily number of deaths",
+    title = "Daily US deaths from COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+
+]
+]
+
+---
+
+Or of daily confirmed cases....
+
+```{r getconfirmed cases}
+confirmed_case_US <- coronavirus %>%
+  # filter for deaths in countries of interest
+  filter(
+    type == "confirmed",
+    country == "US"
+  ) %>%
+  # calculate number of total cases for each country and date
+  group_by(country, date) %>%
+  summarise(tot_cases = sum(cases)) %>%
+  # arrange by date in ascending order
+  arrange(date) %>%
+  # record daily cumulative cases 
+  mutate(cumulative_cases = cumsum(tot_cases)) %>%
+  # only use days since the 10th confirmed case
+  filter(cumulative_cases > 9) %>%
+  # record days elapsed, end date, and end label
+  mutate(
+    days_elapsed = as.numeric(date - min(date)),
+    end_date     = if_else(date == max(date), TRUE, FALSE),
+    end_label    = if_else(end_date, country, NULL)
+  ) %>%
+  # ungroup
+  ungroup()
+```
+
+---
+.panelset[
+.panel[.panel-name[Code]
+```{r plotconfirmed, warning=FALSE,eval=FALSE}
+confirmed_case_US %>%
+  ggplot(aes(x = date,
+             y = tot_cases)) +
+  geom_line() +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    x = "Date",
+    y = "Daily number of confirmed cases",
+    title = "Daily US Cases of COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+```{r dplotconfirmed2, warning=FALSE,echo=FALSE}
+confirmed_case_US %>%
+  ggplot(aes(x = date,
+             y = tot_cases)) +
+  geom_line() +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    x = "Date",
+    y = "Daily number of confirmed cases",
+    title = "Daily US Cases of COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+
+]
+]
+
+

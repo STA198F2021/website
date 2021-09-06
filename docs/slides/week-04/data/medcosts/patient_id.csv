@@ -1,0 +1,4 @@
+﻿ID,proc_1,proc_2,proc_3
+1,stent_nocomp,othercardio, 
+2,appendectomy, ,
+3,stent_comp,appendectomy,othercardio

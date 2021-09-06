@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidying data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tidying data
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# .hand[We...]
+
+.huge[.green[have]] .hand[data organised in a suboptimal manner for our analysis]
+
+.huge[.pink[want]] .hand[to reorganise the data to carry on with our analysis]
+
+
+This slide deck adapted from Data Science in a Box! 
+
+---
+
+Today we'll do the following:
+
+1. Learn how to `tidy` data
+
+2. Practice data tidying skills to reproduce a plot of presidential approval ratings
+
+3. Step back and review. We revisit the COVID example from week 1 and explore how those data were wrangled to create the plot.
+
+---
+
+## Data: Transparency in Medical Pricing
+
+The US Centers for Medicare and Medicaid Services now requires hospitals to [release pricing information to patients before providing services](https://www.healthaffairs.org/do/10.1377/hblog20200304.157067/full/). Hospitals have varied in how accessible they have made this data to consumers. For example, Duke Hospital refers patients [to a website](https://www.dukehealth.org/paying-for-care/what-duke-charges-services) that contains a .csv file, and it directs patients to [a financial counselor](https://www.dukehealth.org/paying-for-care/estimate-care-will-cost) to help get estimates (the .csv file is just a list and provides no information about how many procedures may be charged, etc).
+
+
+
+---
+
+## Data: Duke Medicare Prices
+
+
+
+
+&lt;br&gt;
+
+.pull-left[
+### .green[We have...]
+
+```
+## # A tibble: 3 x 4
+##      ID proc_1       proc_2       proc_3     
+##   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      
+## 1     1 stent_nocomp othercardio  &lt;NA&gt;       
+## 2     2 appendectomy &lt;NA&gt;         &lt;NA&gt;       
+## 3     3 stent_comp   appendectomy othercardio
+```
+]
+
+--
+.pull-right[
+### .pink[We want...]
+
+```
+## # A tibble: 9 x 3
+##      ID proc_no procedure   
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1     1 proc_1  stent_nocomp
+## 2     1 proc_2  othercardio 
+## 3     1 proc_3  &lt;NA&gt;        
+## 4     2 proc_1  appendectomy
+## 5     2 proc_2  &lt;NA&gt;        
+## 6     2 proc_3  &lt;NA&gt;        
+## 7     3 proc_1  stent_comp  
+## 8     3 proc_2  appendectomy
+## 9     3 proc_3  othercardio
+```
+]
+
+---
+
+## A grammar of data tidying
+
+.pull-left[
+&lt;img src="img/tidyr-part-of-tidyverse.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+The goal of tidyr is to help you tidy your data via
+
+- pivoting for going between wide and long data
+- splitting and combining character columns
+- nesting and unnesting columns
+- clarifying how `NA`s should be treated
+]
+
+---
+
+class: middle
+
+# Pivoting data
+
+---
+
+## Not this...
+
+&lt;img src="img/pivot.gif" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## but this!
+
+.center[
+&lt;img src="img/tidyr-longer-wider.gif" width="45%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Wider vs. longer
+
+.pull-left[
+### .green[wider]
+more columns
+
+```
+## # A tibble: 3 x 4
+##      ID proc_1       proc_2       proc_3     
+##   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      
+## 1     1 stent_nocomp othercardio  &lt;NA&gt;       
+## 2     2 appendectomy &lt;NA&gt;         &lt;NA&gt;       
+## 3     3 stent_comp   appendectomy othercardio
+```
+]
+
+--
+.pull-right[
+### .pink[longer]
+more rows
+
+```
+## # A tibble: 9 x 3
+##      ID proc_no procedure   
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1     1 proc_1  stent_nocomp
+## 2     1 proc_2  othercardio 
+## 3     1 proc_3  &lt;NA&gt;        
+## 4     2 proc_1  appendectomy
+## 5     2 proc_2  &lt;NA&gt;        
+## 6     2 proc_3  &lt;NA&gt;        
+## 7     3 proc_1  stent_comp  
+## 8     3 proc_2  appendectomy
+## 9     3 proc_3  othercardio
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+]
+.pull-right[
+
+```r
+pivot_longer(
+* data,
+  cols, 
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+* cols,
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+  cols, 
+* names_to = "name",
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+- `values_to`: name of the column where data in pivoted variables go (character string)
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", 
+* values_to = "value"
+  )
+```
+]
+
+---
+
+## Patients `\(\rightarrow\)` interventions
+
+
+```r
+interventions &lt;- patients %&gt;%
+* pivot_longer(
+*   cols = proc_1:proc_3,  # variables proc_1 to proc_3
+*   names_to = "proc_no",  # column names -&gt; new column called proc_no
+*   values_to = "procedure"     # values in columns -&gt; new column called procedure
+*   )
+
+interventions
+```
+
+```
+## # A tibble: 9 x 3
+##      ID proc_no procedure   
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1     1 proc_1  stent_nocomp
+## 2     1 proc_2  othercardio 
+## 3     1 proc_3  &lt;NA&gt;        
+## 4     2 proc_1  appendectomy
+## 5     2 proc_2  &lt;NA&gt;        
+## 6     2 proc_3  &lt;NA&gt;        
+## 7     3 proc_1  stent_comp  
+## 8     3 proc_2  appendectomy
+## 9     3 proc_3  othercardio
+```
+
+---
+
+## Why pivot?
+
+Most likely, because the next step of your analysis needs it
+
+--
+
+.pull-left[
+
+```r
+prices
+```
+
+```
+## # A tibble: 4 x 2
+##   procedure    medicare_price
+##   &lt;chr&gt;                 &lt;dbl&gt;
+## 1 stent_nocomp         15827.
+## 2 appendectomy         10717.
+## 3 othercardio          22591.
+## 4 stent_comp           31719.
+```
+]
+.pull-right[
+
+```r
+interventions %&gt;%
+* left_join(prices)
+```
+
+```
+## # A tibble: 9 x 4
+##      ID proc_no procedure    medicare_price
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;dbl&gt;
+## 1     1 proc_1  stent_nocomp         15827.
+## 2     1 proc_2  othercardio          22591.
+## 3     1 proc_3  &lt;NA&gt;                    NA 
+## 4     2 proc_1  appendectomy         10717.
+## 5     2 proc_2  &lt;NA&gt;                    NA 
+## 6     2 proc_3  &lt;NA&gt;                    NA 
+## 7     3 proc_1  stent_comp           31719.
+## 8     3 proc_2  appendectomy         10717.
+## 9     3 proc_3  othercardio          22591.
+```
+]
+
+---
+
+## Interventions `\(\rightarrow\)` patients
+
+.pull-left-narrow[
+- `data` (as usual)
+- `names_from`: which column in the long format contains what should be column names in the wide format
+- `values_from`: which column in the long format contains what should be values in the new columns in the wide format
+]
+.pull-right-wide[
+
+```r
+interventions %&gt;%
+* pivot_wider(
+*   names_from = proc_no,
+*   values_from = procedure
+* )
+```
+
+```
+## # A tibble: 3 x 4
+##      ID proc_1       proc_2       proc_3     
+##   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      
+## 1     1 stent_nocomp othercardio  &lt;NA&gt;       
+## 2     2 appendectomy &lt;NA&gt;         &lt;NA&gt;       
+## 3     3 stent_comp   appendectomy othercardio
+```
+]
+
+---
+
+class: middle
+
+# Case study: Approval Rating of President Trump
+
+---
+
+&lt;img src="img/trump-approval.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ratings/adults/)
+]
+
+---
+
+## Data
+
+
+
+
+```r
+trump
+```
+
+```
+## # A tibble: 2,702 x 4
+##    subgroup date       approval disapproval
+##    &lt;chr&gt;    &lt;date&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Voters   2020-10-04     44.7        52.2
+##  2 Adults   2020-10-04     43.2        52.6
+##  3 Adults   2020-10-03     43.2        52.6
+##  4 Voters   2020-10-03     45.0        51.7
+##  5 Adults   2020-10-02     43.3        52.4
+##  6 Voters   2020-10-02     44.5        52.1
+##  7 Voters   2020-10-01     44.1        52.8
+##  8 Adults   2020-10-01     42.7        53.3
+##  9 Adults   2020-09-30     42.2        53.7
+## 10 Voters   2020-09-30     44.2        52.7
+## # … with 2,692 more rows
+```
+
+---
+
+## Goal
+
+.pull-left-wide[
+&lt;img src="w4-l03-tidying_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+--
+.pull-right-narrow[
+**Aesthetic mappings:**  
+✅  x = `date`  
+❌      y = `rating_value`  
+❌      color = `rating_type`
+
+**Facet:**  
+✅  `subgroup` (Adults and Voters)
+]
+
+---
+
+## Pivot
+
+
+```r
+trump_longer &lt;- trump %&gt;%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  )
+
+trump_longer
+```
+
+```
+## # A tibble: 5,404 x 4
+##    subgroup date       rating_type rating_value
+##    &lt;chr&gt;    &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;
+##  1 Voters   2020-10-04 approval            44.7
+##  2 Voters   2020-10-04 disapproval         52.2
+##  3 Adults   2020-10-04 approval            43.2
+##  4 Adults   2020-10-04 disapproval         52.6
+##  5 Adults   2020-10-03 approval            43.2
+##  6 Adults   2020-10-03 disapproval         52.6
+##  7 Voters   2020-10-03 approval            45.0
+##  8 Voters   2020-10-03 disapproval         51.7
+...
+```
+
+---
+
+## Plot
+
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup)
+```
+
+&lt;img src="w4-l03-tidying_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+* scale_color_manual(values = c("darkgreen", "orange")) +
+* labs(
+*   x = "Date", y = "Rating",
+*   color = NULL,
+*   title = "How (un)popular is President Trump?",
+*   subtitle = "Estimates based on polls of all adults and polls of likely/registered voters",
+*   caption = "Source: FiveThirtyEight modeling estimates"
+* )
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="w4-l03-tidying_files/figure-html/unnamed-chunk-23-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is President Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) 
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="w4-l03-tidying_files/figure-html/unnamed-chunk-24-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+## Coronavirus Deaths
+
+First, we should call the libraries we used to make the plot during the first week of class. Because the `coronavirus` package is updated daily, we should re-install it to get the most up to date data.
+
+
+```r
+library(devtools) #to install package from GitHub
+#reinstall coronavirus package to update #'s (they update daily)
+devtools::install_github("RamiKrispin/coronavirus")
+library(coronavirus)
+library(lubridate) #to facilitate working with dates
+library(glue) #we use in formatting the date
+library(scales) #use to control notation on axis scale
+library(ggrepel) #for writing names on plot
+```
+
+---
+
+## Recall the Data
+
+The data frame called `coronavirus` in the coronavirus package provides a daily summary of the Coronavirus (COVID-19) cases by country. Each row in the data frame represents a country (or, where relevant, state/province).  Note that the data provided in this package provides daily number of deaths, confirmed cases, and recovered cases. Today we will focus on the deaths. 
+
+We will start by making our selection for the countries we want to explore.
+
+---
+
+
+```r
+head(coronavirus) #recall variables
+```
+
+```
+##         date province country     lat      long      type cases
+## 1 2020-01-22  Alberta  Canada 53.9333 -116.5765 confirmed     0
+## 2 2020-01-23  Alberta  Canada 53.9333 -116.5765 confirmed     0
+## 3 2020-01-24  Alberta  Canada 53.9333 -116.5765 confirmed     0
+## 4 2020-01-25  Alberta  Canada 53.9333 -116.5765 confirmed     0
+## 5 2020-01-26  Alberta  Canada 53.9333 -116.5765 confirmed     0
+## 6 2020-01-27  Alberta  Canada 53.9333 -116.5765 confirmed     0
+```
+
+```r
+countries &lt;- c(
+  "China",
+  "France",
+  "United Kingdom",
+  "US",
+  "Turkey"
+)
+```
+
+---
+
+
+
+
+How did we wrangle those data?  First, we filtered to a smaller list of countries, edited long country names if needed, and summed all the deaths by country and date. For some countries like Canada on the previous slide, we have data on the provincial level, so we need to summarize to put data on the country level.
+
+
+```r
+country_data &lt;- coronavirus %&gt;%
+  # filter for deaths in countries of interest
+  filter(
+    type == "death",
+    country %in% countries
+  ) %&gt;%
+  # fix country labels for pretty plotting
+  mutate(
+    country = case_when(
+      country == "United Kingdom" ~ "UK",
+      TRUE ~ country
+    )
+  ) %&gt;%
+  # calculate number of total cases for each country and date
+  group_by(country, date) %&gt;%
+  summarise(tot_cases = sum(cases)) %&gt;%
+```
+
+---
+
+Next, we ordered by date and calculated the cumulative case counts. Then, we excluded days before the 10th confirmed death due to irregularities in early reporting, and we converted calendar date to days elapsed.
+
+
+```r
+  # arrange by date in ascending order
+  arrange(date) %&gt;%
+  # record daily cumulative cases 
+  mutate(cumulative_cases = cumsum(tot_cases)) %&gt;%
+  # only use days since the 10th confirmed death
+  filter(cumulative_cases &gt; 9) %&gt;%
+  # record days elapsed, end date, and end label
+  mutate(
+    days_elapsed = as.numeric(date - min(date)),
+    end_date     = if_else(date == max(date), TRUE, FALSE),
+    end_label    = if_else(end_date, country, NULL)
+  ) %&gt;%
+  # ungroup
+  ungroup()
+```
+---
+
+
+
+We also need to take a note of the "as of date" for the data so that we can properly label our visualisation.
+
+
+```r
+as_of_date &lt;- country_data %&gt;% 
+  summarise(max(date)) %&gt;% 
+  pull()
+as_of_date_formatted &lt;- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
+```
+
+These data are as of Sun, Sep 5, 2021.
+
+---
+
+
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = country_data,
+       mapping = aes(x = days_elapsed, 
+                     y = cumulative_cases, 
+                     color = country, 
+                     label = end_label)) +
+  geom_line(size = 0.7, alpha = 0.8) +
+  geom_point(data = country_data %&gt;% filter(end_date)) +
+  geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
+  guides(color = FALSE) +
+  scale_color_viridis_d() +
+  scale_y_continuous(labels = label_comma()) +
+  theme_minimal() +
+  labs(
+    x = "Days since 10th confirmed death",
+    y = "Cumulative number of deaths",
+    title = "Cumulative deaths from COVID-19, selected countries",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+&lt;img src="w4-l03-tidying_files/figure-html/visualise2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+
+We might prefer a plot of daily deaths (here I filter to US - pick your own countries).
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+country_data %&gt;%
+  filter(country == "US") %&gt;%
+  ggplot(aes(x = date,
+             y = tot_cases,
+             color = country,)) +
+  geom_line() +
+  labs(
+    x = "Date",
+    y = "Daily number of deaths",
+    title = "Daily US deaths from COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+&lt;img src="w4-l03-tidying_files/figure-html/daily2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+Or of daily confirmed cases....
+
+
+```r
+confirmed_case_US &lt;- coronavirus %&gt;%
+  # filter for deaths in countries of interest
+  filter(
+    type == "confirmed",
+    country == "US"
+  ) %&gt;%
+  # calculate number of total cases for each country and date
+  group_by(country, date) %&gt;%
+  summarise(tot_cases = sum(cases)) %&gt;%
+  # arrange by date in ascending order
+  arrange(date) %&gt;%
+  # record daily cumulative cases 
+  mutate(cumulative_cases = cumsum(tot_cases)) %&gt;%
+  # only use days since the 10th confirmed case
+  filter(cumulative_cases &gt; 9) %&gt;%
+  # record days elapsed, end date, and end label
+  mutate(
+    days_elapsed = as.numeric(date - min(date)),
+    end_date     = if_else(date == max(date), TRUE, FALSE),
+    end_label    = if_else(end_date, country, NULL)
+  ) %&gt;%
+  # ungroup
+  ungroup()
+```
+
+---
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+confirmed_case_US %&gt;%
+  ggplot(aes(x = date,
+             y = tot_cases)) +
+  geom_line() +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    x = "Date",
+    y = "Daily number of confirmed cases",
+    title = "Daily US Cases of COVID-19",
+    subtitle = glue("Data as of", as_of_date_formatted, .sep = " "),
+    caption = "Source: github.com/RamiKrispin/coronavirus"
+  )
+```
+]
+.panel[.panel-name[Output]
+&lt;img src="w4-l03-tidying_files/figure-html/dplotconfirmed2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

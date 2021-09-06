@@ -36,6 +36,8 @@ class: middle
 
 .huge[.pink[want]] .hand[to bring them together]
 
+This slide deck adapted from Data Science in a Box!
+
 ---
 
 ```{r include=FALSE}
@@ -44,7 +46,7 @@ dates <- read_csv("data/scientists/dates.csv")
 works <- read_csv("data/scientists/works.csv")
 ```
 
-## Data: Women in science 
+## Data: Women in Science 
 
 Information on 10 women in science who changed the world
 
@@ -383,4 +385,5 @@ survey
     ]
     
   ]
+
 

@@ -41,6 +41,7 @@ The data frame called `coronavirus` in the coronavirus package provides a daily 
 We will start by making our selection for the countries we want to explore.
 
 ```{r select-countries}
+head(coronavirus)
 countries <- c(
   "China",
   "France",
@@ -71,7 +72,7 @@ country_data <- coronavirus %>%
   summarise(tot_cases = sum(cases)) %>%
   # arrange by date in ascending order
   arrange(date) %>%
-  # record daily cumulative cases as cumulative_cases
+  # record daily cumulative cases 
   mutate(cumulative_cases = cumsum(tot_cases)) %>%
   # only use days since the 10th confirmed death
   filter(cumulative_cases > 9) %>%
@@ -85,6 +86,8 @@ country_data <- coronavirus %>%
   ungroup()
 ```
 
+
+
 We also need to take a note of the "as of date" for the data so that we can properly label our visualisation.
 
 ```{r record-as-of-date}
@@ -96,9 +99,11 @@ as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_dat
 
 These data are as of `r as_of_date_formatted`.
 
+---
+
 ## Visualisation
 
-The following visualisation shows the number of cumulative cases vs. days elapsed since the 10th confirmed death in each country. The time span plotted for each country varies since some countries started seeing (and reporting) deaths from COVID-19 much later than others.
+The following visualization shows the number of cumulative cases vs. days elapsed since the 10th confirmed death in each country. The time span plotted for each country varies since some countries started seeing (and reporting) deaths from COVID-19 much later than others.
 
 ```{r visualise, warning=FALSE}
 ggplot(data = country_data,
