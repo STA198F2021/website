@@ -101,6 +101,8 @@ Craft a short press release on the InteliSwab at-home COVID test approval. In yo
 
 Caveat: The FDA study was not conducted on a random sample of the population but involved stratified sampling, with oversampling of presumed cases. The probability a negative InteliSwab test is "right" (assuming RT-PCR tells the truth) will depend on the background prevalence of COVID in the population, so you may wish to vary this quantity when doing your calculations to reflect a random sample in a realistic setting rather than the enriched population used by the company.
 
+So for example, try the calculations with the roughly 2% positive COVID tests from the week before last and again with last week's roughly 0.5% positive tests (assume these are RTPCR).
+
 
 ---
 
@@ -132,6 +134,7 @@ Using these data, calculate the following probabilities. Let the event `\(A\)` d
 - `\(P(B)\)`, the probability a women in Washington state is missing
 - `\(P(B \mid A)\)`, the probability a woman in Washington state is missing given that she is American Indian or Alaska Native
 - `\(P(B \mid \overline{A})\)`, the probability a woman in Washington state is missing given that she is not American Indian or Alaska Native
+- Relative risk of being missing given that you're AI/AN compared with all the other races, `\(RR=\frac{P(B \mid A)}{P(B \mid \overline{A})}\)`
 - `\(P(A \mid B)\)`, the probability a woman in Washington state is American Indian or Alaska Native given that a woman is missing
 
 ---
