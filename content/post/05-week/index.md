@@ -23,6 +23,13 @@ title: 'Week 5 - Visualizaing Spatial Data Effectively'
 - Complete the [assignments](/post/05-week/#assignments)
   - Especially work on the [project proposal](/#project)
 
-### Readings
+### Readings and Videos
+
+| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
+|:---:|:---|:---:|
+| :open_book: | R4DS: [Chapter 5, Data Transformation](https://r4ds.had.co.nz/transform.html)  | **Required** |
+| :open_book: | [Spatial Data in R](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html)  | **Recommended** |
+
+
 
 ### Assignments
