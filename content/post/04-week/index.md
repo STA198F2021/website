@@ -35,7 +35,7 @@ title: 'Week 4 - Data wrangling'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Quiz | [Quiz 3](https://sakai.duke.edu) | Tuesday, 9/14 |
-| Lab 3 |Probability and Teams| Wed., 9/15 |
+| Lab 3 | Probability and Teams | Wed., 9/15 |
 <!---| Lab 3 |[Probability and Teams](https://sta198f2021.github.io/website/slides/week-04/lab-03-prob-teams.html)| Wed., 9/15 | --->
 
 

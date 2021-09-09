@@ -24,7 +24,7 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "comments"
   icon_pack = "far"
   name = "Tuesday"
-  description = "Prof. Herring hours - 1-2pm <br> Zoom (link on Sakai) <br> Jackie hours - 2-3pm <br> Edge Project Room 2 <br> Eli hours - 5-6pm <br> Zoom (link on Sakai) <br> Chris hours - 8-9pm <br> Zoom (link on Sakai)"  
+  description = "Prof. Herring hours - 1-2pm <br> Zoom (link on Sakai) <br>  Eli hours - 4-5pm <br> Zoom (link on Sakai) <br> Jackie hours - 5-6pm <br> Edge Project Room 2 <br> Chris hours - 8-9pm <br> Zoom (link on Sakai)"  
   
 [[feature]]
   icon = "university"
