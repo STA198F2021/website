@@ -161,7 +161,7 @@ It's straightforward to fill in the rest of the table.
 |:----:|:----:|:----:|:----:|
 | 0 | 0 | 0 | $0.8 \times 0.8 = 0.64$ |
 | 1 | 0 | 1 | $0.2 \times 0.8 = 0.16$ |
-| 0 | 1 | 1 | $0.2 \times 0.8 = 0.16$ |
+| 0 | 1 | 1 | $0.8 \times 0.2 = 0.16$ |
 | 1 | 1 | 2 | $0.2 \times 0.2 =0.04$ |
 ]
 
@@ -176,7 +176,7 @@ Recall our table:
 |:----:|:----:|:----:|:----:|
 | 0 | 0 | 0 | $0.8 \times 0.8 = 0.64$ |
 | 1 | 0 | 1 | $0.2 \times 0.8 = 0.16$ |
-| 0 | 1 | 1 | $0.2 \times 0.8 = 0.16$ |
+| 0 | 1 | 1 | $0.8 \times 0.2 = 0.16$ |
 | 1 | 1 | 2 | $0.2 \times 0.2 =0.04$ |
 ]
 .pull-right[
@@ -209,7 +209,7 @@ Better get started with the multiplication!
 
 ---
 
-Because these are independent high school students, we can calculate the probabilities the same manner as before.
+Because these are independent high school students, we can calculate the probabilities in the same manner as before.
 
 
 | $Y_1$ | $Y_2$ | $Y_3$ | $X$ | $P(X)$ |
@@ -370,13 +370,12 @@ dim(binomdata)
 ```
 
 ---
-
 ```{r plotbinomdata}
 ggplot(binomdata, aes(x = X)) + 
-  geom_histogram(aes(y = ..density..)) +
+  geom_histogram() +
   labs(x = "Number of Smokers",
        y = "Probability",
-       title = "Binomial(1000,0.196) distribution")
+       title = "Binomial(1000,0.196) Distribution")
 ```
 
 ---
@@ -394,7 +393,7 @@ Suppose the average success (live birth) rate of this procedure per embryo is 35
 .pull-left[
 Here's what embryos look like in the first days of life. Note that days are counted differently at the beginning in regular pregnancies and in IVF.  In a regular pregnancy, dating is done back to the first day of the last menstrual period (there is no good marker of conception). So on day 1 of pregnancy, a woman is not pregnant!  Typically ovulation is around day 14 of the cycle (and thus of pregnancy).
 
-In IVF, counting starts on the day the egg is fertilized (corresponding to around day 14 of a regular pregnancy if the sperm meets the egg right away after it is released!).
+In IVF, counting starts on the day the egg is fertilized (corresponding to around day 14 of a regular pregnancy if the sperm meets the egg right away!).
 ]
 .pull-right[
 ```{r out.width="100%", echo=FALSE}
@@ -418,9 +417,9 @@ How do we address this mathematically?
 
 - Let $Y$ be the number of live births from a single IVF procedure that implants $n$ embryos. Here's what we need to know.
 
-- Probability of having at least one baby is $P(Y \geq 1)$, which we want to be large
+  - Probability of having at least one baby: $P(Y \geq 1)$, which we want to be large
 
-- Probability of having triplets, quadruplets, or a higher-order birth is $P(Y>2)$, which we want to be small
+  - Probability of having triplets, quadruplets, or a higher-order birth: $P(Y>2)$, which we want to be small
 
 ---
 
@@ -445,7 +444,9 @@ Binomial distribution: $P(Y=y)=\begin{pmatrix} n \\ y \end{pmatrix}\pi^y(1-\pi)^
 
 - Similarly, $P(Y>2)=1-P(Y=0)-P(Y=1)-P(Y=2)$ if needed
 
-- In the easy case in which $n=1$, $P(Y \geq 1)=0.35$ and $P(Y>2)=0$
+- In the easy case in which $n=1$, $P(Y \geq 1)=0.35$ and $P(Y>2)=0$*
+
+*OK, not quite, as it is still possible for a single implanted embryo to divide, yielding twins, but we'll assume that isn't happening for now, as it's not terribly common.
 
 ---
 
