@@ -374,8 +374,7 @@ dim(binomdata)
 ggplot(binomdata, aes(x = X)) + 
   geom_histogram() +
   labs(x = "Number of Smokers",
-       y = "Probability",
-       title = "Binomial(1000,0.196) Distribution")
+       title = "Binomial(1000000,0.196) Distribution")
 ```
 
 ---

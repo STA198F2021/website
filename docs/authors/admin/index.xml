@@ -535,6 +535,11 @@
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://r-spatial.org/r/2018/10/25/ggplot2-sf.html&#34;&gt;Spatial Data in R&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Recommended&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://slcladal.github.io/maps.html&#34;&gt;Displaying Geo-Spatial Data with R R&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Recommended&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
