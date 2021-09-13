@@ -27,7 +27,6 @@ title: 'Week 5 - Visualizaing Spatial Data Effectively'
 
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
-| :open_book: | R4DS: [Chapter 5, Data Transformation](https://r4ds.had.co.nz/transform.html)  | **Required** |
 | :movie_camera: | [Spatial Data](https://warpwire.duke.edu/w/Yw4GAA/) | **Required** |
 | :open_book: | [Spatial Data in R](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html)  | **Recommended** |
 | :open_book: | [Displaying Geo-Spatial Data with R R](https://slcladal.github.io/maps.html) | **Recommended** |
