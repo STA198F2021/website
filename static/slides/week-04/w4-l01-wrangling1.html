@@ -294,6 +294,30 @@ arrange(BMI_long, BMI)
 
 ---
 
+---
+
+Or by two factors...
+
+
+```r
+arrange(BMI_long, desc(Country), BMI)
+```
+
+```
+## # A tibble: 2,400 × 5
+##   Country  Sex   Region   Year    BMI
+##   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+## 1 Zimbabwe Men   Rural    1985   20.9
+## 2 Zimbabwe Men   National 1985   21.2
+## 3 Zimbabwe Men   Rural    2017   21.9
+## 4 Zimbabwe Men   Urban    1985   22.1
+## 5 Zimbabwe Men   National 2017   22.3
+## 6 Zimbabwe Men   Urban    2017   23.3
+## # … with 2,394 more rows
+```
+
+---
+
 ### The Pipe
 
 The pipe is a technique for passing information from one process to another. 
@@ -530,11 +554,12 @@ R denotes missing values by NA. Missing values can cause biased or misleading re
 
 `mutate()` creates a new variable. Here we categorize BMI using the WHO classification.
 
-.panelset[
-.panel[.panel-name[Code]
+Here's our code:
+
+
 
 ```r
-BMI_long %&gt;%
+ BMI_long %&gt;%
   mutate(bmiclass = cut(BMI,
     breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
     labels = c(
@@ -549,8 +574,10 @@ BMI_long %&gt;%
   )) %&gt;%
   select(BMI, bmiclass)
 ```
-]
-.panel[.panel-name[Output]
+---
+
+Here's the output!
+
 
 ```
 ## # A tibble: 2,400 × 2
@@ -564,12 +591,10 @@ BMI_long %&gt;%
 ## 6  23.6 Normal Range
 ## # … with 2,394 more rows
 ```
-]
-]
-
 
 
 ---
+
 
 Using `==` in the mutate creates a new variable `normal_range` that is TRUE if the BMI is in the normal range and FALSE if it is not.
 
@@ -589,7 +614,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   print()
@@ -634,7 +659,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   summarize(fracnormal = mean(normal_range))
@@ -671,7 +696,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   count(bmiclass) %&gt;%
   group_by(bmiclass) 
@@ -684,11 +709,11 @@ BMI_long %&gt;%
 ## # Groups:   bmiclass [6]
 ##   bmiclass         n
 ##   &lt;fct&gt;        &lt;int&gt;
-## 1 Underweight     10
-## 2 Normal Range  1223
-## 3 Overweight    1054
-## 4 Obese I         93
-## 5 Obese II         2
+## 1 Underweight      7
+## 2 Normal Range  1185
+## 3 Overweight    1091
+## 4 Obese I         96
+## 5 Obese II         3
 ## 6 &lt;NA&gt;            18
 ```
 Ahh, count() is a very useful function!
@@ -783,7 +808,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   summarize(fracnormal = mean(normal_range,na.rm=TRUE))
@@ -795,7 +820,7 @@ BMI_long %&gt;%
 ## # A tibble: 1 × 1
 ##   fracnormal
 ##        &lt;dbl&gt;
-## 1      0.513
+## 1      0.497
 ```
 ]
 ]
@@ -822,7 +847,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   group_by(Region) %&gt;%
@@ -835,9 +860,9 @@ BMI_long %&gt;%
 ## # A tibble: 3 × 2
 ##   Region   fracnormal
 ##   &lt;chr&gt;         &lt;dbl&gt;
-## 1 National      0.52 
-## 2 Rural         0.559
-## 3 Urban         0.462
+## 1 National      0.506
+## 2 Rural         0.541
+## 3 Urban         0.446
 ```
 ]
 ]
@@ -862,7 +887,7 @@ BMI_long %&gt;%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %&gt;%
   mutate(normal_range = bmiclass == "Normal Range") %&gt;%
   group_by(Region) %&gt;%

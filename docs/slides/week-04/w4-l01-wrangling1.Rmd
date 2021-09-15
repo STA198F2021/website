@@ -181,6 +181,16 @@ arrange(BMI_long, BMI)
 
 ---
 
+---
+
+Or by two factors...
+
+```{r arrange-desc-country-BMI-asc}
+arrange(BMI_long, desc(Country), BMI)
+```
+
+---
+
 ### The Pipe
 
 The pipe is a technique for passing information from one process to another. 
@@ -336,9 +346,33 @@ R denotes missing values by NA. Missing values can cause biased or misleading re
 
 `mutate()` creates a new variable. Here we categorize BMI using the WHO classification.
 
-.panelset[
-.panel[.panel-name[Code]
+Here's our code:
+
+
 ```{r calc-categories, eval = FALSE, warning = FALSE}
+
+ BMI_long %>%
+  mutate(bmiclass = cut(BMI,
+    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
+    labels = c(
+      "Underweight",
+      "Normal Range",
+      "Overweight",
+      "Obese I",
+      "Obese II",
+      "Obese III"
+    ),
+    right = FALSE #intervals [a,b)
+  )) %>%
+  select(BMI, bmiclass)
+
+```
+---
+
+Here's the output!
+
+```{r calc-categories2, echo=FALSE, warning = FALSE}
+
 BMI_long %>%
   mutate(bmiclass = cut(BMI,
     breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
@@ -354,31 +388,10 @@ BMI_long %>%
   )) %>%
   select(BMI, bmiclass)
 ```
-]
-.panel[.panel-name[Output]
-```{r calc-categories2, echo=FALSE, warning = FALSE}
-BMI_long %>%
-  mutate(bmiclass = cut(
-    BMI,
-    breaks = c(-Inf, 18.5, 25, 30, 35, 40, Inf),
-    labels = c(
-      "Underweight",
-      "Normal Range",
-      "Overweight",
-      "Obese I",
-      "Obese II",
-      "Obese III"
-    ),
-    right = TRUE
-  )) %>%
-  select(BMI, bmiclass)
-```
-]
-]
-
 
 
 ---
+
 
 Using `==` in the mutate creates a new variable `normal_range` that is TRUE if the BMI is in the normal range and FALSE if it is not.
 
@@ -397,7 +410,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   print()
@@ -417,7 +430,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   print()
@@ -446,7 +459,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   summarize(fracnormal = mean(normal_range))
@@ -465,7 +478,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   summarize(fracnormal = mean(normal_range))
@@ -492,7 +505,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   count(bmiclass) %>%
   group_by(bmiclass) 
@@ -511,7 +524,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   count(bmiclass) %>%
   group_by(bmiclass) 
@@ -582,7 +595,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   summarize(fracnormal = mean(normal_range,na.rm=TRUE))
@@ -601,7 +614,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   summarize(fracnormal = mean(normal_range,na.rm=TRUE))
@@ -630,7 +643,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   group_by(Region) %>%
@@ -650,7 +663,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   group_by(Region) %>%
@@ -678,7 +691,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE
   )) %>%
   mutate(normal_range = bmiclass == "Normal Range") %>%
   group_by(Region) %>%
