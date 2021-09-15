@@ -179,7 +179,7 @@ Or with low BMI values on top.
 arrange(BMI_long, BMI)
 ```
 
----
+
 
 ---
 
