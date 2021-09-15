@@ -350,7 +350,7 @@ BMI_long %>%
       "Obese II",
       "Obese III"
     ),
-    right = TRUE
+    right = FALSE #intervals [a,b)
   )) %>%
   select(BMI, bmiclass)
 ```
