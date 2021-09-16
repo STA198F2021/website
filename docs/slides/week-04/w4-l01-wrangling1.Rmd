@@ -748,6 +748,18 @@ BMI_long %>%
 
 ---
 
+### distinct()
+
+One more nifty command is the `distinct` command in R, which eliminates duplicate rows.
+
+```{r distinct}
+age <- as_tibble(c(1,1,1,2,3))
+age
+distinct(age)
+```
+
+---
+
 ### Additional Resources
 
 - https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf

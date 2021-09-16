@@ -285,7 +285,7 @@ interventions %>%
 
 class: middle
 
-# Case study: Approval Rating of President Trump
+# Line Graph Case Study: Approval Rating of President Trump
 
 ---
 
