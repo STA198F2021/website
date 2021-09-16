@@ -28,6 +28,7 @@ title: 'Week 5 - Visualizaing Spatial Data Effectively'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :movie_camera: | [Spatial Data](https://warpwire.duke.edu/w/Yw4GAA/) | **Required** |
+| :movie_camera: | [Working with Dates and Other Data Classes](https://www.youtube.com/watch?v=dozvSVQcqqg) | **Required** |
 | :open_book: | [Spatial Data in R](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html)  | **Recommended** |
 | :open_book: | [Displaying Geo-Spatial Data with R R](https://slcladal.github.io/maps.html) | **Recommended** |
 
