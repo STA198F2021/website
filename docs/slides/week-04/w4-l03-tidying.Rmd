@@ -549,13 +549,14 @@ Next, we ordered by date and calculated the cumulative case counts. Then, we exc
 
 
 
-We also need to take a note of the "as of date" for the data so that we can properly label our visualisation.
+We also need to take a note of the "as of date" for the data so that we can properly label our visualization.
 
 ```{r record-as-of-date}
 as_of_date <- country_data %>% 
   summarise(max(date)) %>% 
   pull()
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
+
 ```
 
 These data are as of `r as_of_date_formatted`.
