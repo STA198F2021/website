@@ -556,6 +556,7 @@ as_of_date <- country_data %>%
   summarise(max(date)) %>% 
   pull()
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
+
 ```
 
 These data are as of `r as_of_date_formatted`.
