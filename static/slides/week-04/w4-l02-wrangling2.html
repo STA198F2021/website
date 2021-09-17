@@ -653,55 +653,54 @@ survey
   
 .panelset[
     
-  .panel[.panel-name[In MyChart]
+.panel[.panel-name[In MyChart]
+
+```r
+  enrollment %&gt;% 
+*   left_join(survey, by = "id")
+```
+
+```
+## # A tibble: 3 × 4
+##      id name.x         name.y         clinic                     
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;                      
+## 1     1 Cruella de Vil &lt;NA&gt;           &lt;NA&gt;                       
+## 2     2 Shere Khan     Cruella de Vil Plastic and Reconstructive…
+## 3     3 Shan Yu        Shere Khan     Urology
+```
+]
     
-    ```r
-    enrollment %&gt;% 
-    * left_join(survey, by = "id")
-    ```
+.panel[.panel-name[Survey missing]
+
+```r
+enrollment %&gt;% 
+* anti_join(survey, by = "id")
+```
+
+```
+## # A tibble: 1 × 2
+##      id name          
+##   &lt;dbl&gt; &lt;chr&gt;         
+## 1     1 Cruella de Vil
+```
+]
+.panel[.panel-name[MyChart not activated]
+
+```r
+survey %&gt;% 
+* anti_join(enrollment, by = "id")
+```
+
+```
+## # A tibble: 2 × 3
+##      id name       clinic                      
+##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                       
+## 1     4 Scar       Cognitive Behavioral Therapy
+## 2     5 Maleficent Oncology
+```
+]
     
-    ```
-    ## # A tibble: 3 × 4
-    ##      id name.x         name.y         clinic                     
-    ##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;                      
-    ## 1     1 Cruella de Vil &lt;NA&gt;           &lt;NA&gt;                       
-    ## 2     2 Shere Khan     Cruella de Vil Plastic and Reconstructive…
-    ## 3     3 Shan Yu        Shere Khan     Urology
-    ```
-    ]
-    
-  .panel[.panel-name[Survey missing]
-    
-    ```r
-    enrollment %&gt;% 
-    * anti_join(survey, by = "id")
-    ```
-    
-    ```
-    ## # A tibble: 1 × 2
-    ##      id name          
-    ##   &lt;dbl&gt; &lt;chr&gt;         
-    ## 1     1 Cruella de Vil
-    ```
-    ]
-    
-  .panel[.panel-name[MyChart not activated]
-    
-    ```r
-    survey %&gt;% 
-    * anti_join(enrollment, by = "id")
-    ```
-    
-    ```
-    ## # A tibble: 2 × 3
-    ##      id name       clinic                      
-    ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                       
-    ## 1     4 Scar       Cognitive Behavioral Therapy
-    ## 2     5 Maleficent Oncology
-    ```
-    ]
-    
-  ]
+]
 
 
     </textarea>

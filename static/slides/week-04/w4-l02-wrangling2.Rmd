@@ -363,27 +363,26 @@ survey
   
 .panelset[
     
-  .panel[.panel-name[In MyChart]
-    ```{r}
-    enrollment %>% 
-      left_join(survey, by = "id") #<<
-    ```
-    ]
+.panel[.panel-name[In MyChart]
+```{r}
+  enrollment %>% 
+    left_join(survey, by = "id") #<<
+```
+]
     
-  .panel[.panel-name[Survey missing]
-    ```{r}
-    enrollment %>% 
-      anti_join(survey, by = "id") #<<
-    ```
-    ]
+.panel[.panel-name[Survey missing]
+```{r}
+enrollment %>% 
+  anti_join(survey, by = "id") #<<
+```
+]
+.panel[.panel-name[MyChart not activated]
+```{r}
+survey %>% 
+  anti_join(enrollment, by = "id") #<<
+```
+]
     
-  .panel[.panel-name[MyChart not activated]
-    ```{r}
-    survey %>% 
-      anti_join(enrollment, by = "id") #<<
-    ```
-    ]
-    
-  ]
+]
 
 
