@@ -35,13 +35,30 @@ layout: true
 
 ---
 
+## Overview of tidy functions
+
+- pipe operator - used to link functions together 
+- filter() - used to filter a dataframe by values of a variable
+- select() - select columns 
+- mutate() - create a new column or overwrite an existing one
+- group_by() - create groups based on values of a column
+- summarise() - calculate specified summary statistic over a group(s) 
+- pivot_wider() - each row has multiple observations for a certain group
+- pivot_longer() - each row is a completely unique observation
+- etc. 
+
+[R4DS](https://r4ds.had.co.nz/introduction.html) is your best friend!! You can 
+search for keywords and it will suggest pages that explain the functions
+
+Time for a quick demo!
+
+---
 
 
 ## Getting Started
 
 Log in to GitHub to determine your team number and members for Lab 4.
 
-- Introduce yourself.
 - Find a one hour block of time outside of class that you can use to work on the
 lab / project if needed. You may not need to use this, but it is good to have it
 in reserve. Tools like [Doodle](https://doodle.com/en/)
@@ -51,6 +68,15 @@ and [When2Meet](https://www.when2meet.com/) are helpful.
 ---
 
 # Merge conflicts
+
+
+```
+## Warning: package 'tibble' was built under R version 4.1.1
+```
+
+```
+## Warning: package 'forcats' was built under R version 4.1.1
+```
 
 &lt;img src="04/merge-no-conflict.png" width="60%" style="display: block; margin: auto;" /&gt;
 
@@ -128,8 +154,6 @@ content in the Rmd file before proceeding to the exercises.
 
 
 ```r
-library(tidyverse)
-
 life &lt;- readr::read_csv("04/lifeexpectancy_infant.csv")
 
 names(life)
@@ -194,7 +218,7 @@ ggplot(data=world) +
   geom_sf()
 ```
 
-&lt;img src="lab04slides_files/figure-html/firstworldplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/firstworldplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -209,7 +233,7 @@ ggplot(data = world) +
        title = "World Map")
 ```
 
-&lt;img src="lab04slides_files/figure-html/worldmap-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmap-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -223,7 +247,7 @@ ggplot(data = world) +
   labs(title = "World Map")
 ```
 
-&lt;img src="lab04slides_files/figure-html/eurocentric-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/eurocentric-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -237,7 +261,7 @@ ggplot(data = world) +
   labs(title = "World Map")
 ```
 
-&lt;img src="lab04slides_files/figure-html/asiacentric-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/asiacentric-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -253,7 +277,7 @@ ggplot(data = world) +
        title = "World Map")
 ```
 
-&lt;img src="lab04slides_files/figure-html/worldmapblue-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmapblue-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -272,7 +296,7 @@ ggplot(data = world) +
        title = "World Map")
 ```
 
-&lt;img src="lab04slides_files/figure-html/worldmappop-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmappop-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 Pretty nifty!  
 

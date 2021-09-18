@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lab 4: Spatial Data and Merge Conflicts</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lab 4: Spatial Data and Merge Conflicts
+### 09.20.2021
+
+---
+
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+## Overview of tidy functions
+
+- pipe operator - used to link functions together 
+- filter() - used to filter a dataframe by values of a variable
+- select() - select columns 
+- mutate() - create a new column or overwrite an existing one
+- group_by() - create groups based on values of a column
+- summarise() - calculate specified summary statistic over a group(s) 
+- pivot_wider() - each row has multiple observations for a certain group
+- pivot_longer() - each row is a completely unique observation
+- etc. 
+
+[R4DS](https://r4ds.had.co.nz/introduction.html) is your best friend!! You can 
+search for keywords and it will suggest pages that explain the functions
+
+Time for a quick demo!
+
+---
+
+
+## Getting Started
+
+Log in to GitHub to determine your team number and members for Lab 4.
+
+- Find a one hour block of time outside of class that you can use to work on the
+lab / project if needed. You may not need to use this, but it is good to have it
+in reserve. Tools like [Doodle](https://doodle.com/en/)
+and [When2Meet](https://www.when2meet.com/) are helpful.
+- Determine how your group will communicate (email, text, slack, discord, etc).
+
+---
+
+# Merge conflicts
+
+
+```
+## Warning: package 'tibble' was built under R version 4.1.1
+```
+
+```
+## Warning: package 'forcats' was built under R version 4.1.1
+```
+
+&lt;img src="04/merge-no-conflict.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+You may have seen this already through the course of your collaboration last 
+week in Lab 03. When two collaborators make changes to a file and push the file 
+to their repository, git merges these two files.
+
+---
+
+&lt;img src="04/merge-conflict.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+If these two files have conflicting content on the same line, git will produce a
+**merge conflict**. Merge conflicts need to be resolved manually, as they 
+require a human intervention:
+
+---
+
+&lt;img src="04/merge-conflict-identifiers.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+To resolve the merge conflict, decide if you want to keep only your text/code, 
+the text/code on GitHub, or incorporate changes from both sets. Delete the 
+conflict markers `&lt;&lt;&lt;&lt;&lt;&lt;&lt;`, `=======`, `&gt;&gt;&gt;&gt;&gt;&gt;&gt;` and make the changes you want 
+in the final merge.
+
+---
+
+**Assign numbers 1, 2, and 3 to each of your team members** (if only 2 team 
+members, members 1-2 can share the work of 3). Go through the following steps in detail, 
+which simulate a merge conflict. Completing this exercise will be part of the 
+lab grade.
+
+---
+
+## Resolving a merge conflict
+
+**Step 1**: *Everyone* clone your team lab and open the Rmd file.
+
+*Member 3* should look at the group’s repo on GitHub to ensure that the other members’ files are pushed to GitHub after every step.
+
+
+**Step 2**: *Member 1* should change the team name to your team name. 
+            Knit, commit, and push.
+
+**Step 3**: *Member 2* should change the team name to something different 
+            (i.e., not your team name). Knit, commit, and push.
+
+Member 2 should get an error on the attempted push.
+
+---
+
+Pull and review the document with the merge conflict. Member 2 should display 
+and read the error to the entire team. A merge conflict occurred because 
+Member 2 edited the same part of the document as Member 1. Resolve the conflict 
+with whichever name you want to keep (please keep your real team name), 
+then knit, commit with a message that clearly states you fixed the merge conflict, and push again.
+
+
+
+**Step 4**: *Member 3* verifies the commit shows the merge conflict on GitHub. Then Member 3 writes some narrative below the last code chunk
+            in your Rmd file. Knit, commit, and push.
+
+This time, no merge conflicts should occur, since you edited a different part of
+the document from Members 1 and 2. Member 3 should display 
+and read the message to the entire team.
+
+
+
+Everyone pull and delete the narrative. All team members should have the same
+content in the Rmd file before proceeding to the exercises.
+
+---
+
+
+## Packages and Data
+
+
+```r
+life &lt;- readr::read_csv("04/lifeexpectancy_infant.csv")
+
+names(life)
+```
+
+```
+## [1] "location" "sex"      "year"     "lifeexp"
+```
+---
+
+## R packages
+
+The R packages `ggplot2` and `sf` (for "simple features") have made it relatively straightforward to make great spatial maps. We'll use these packages along with `rnaturalearth` and `rnaturalearthdata` to access free spatial mapping tools for world maps. You'll need to install these yourself before proceeding.
+
+---
+
+
+```r
+# install.packages("rnaturalearth") 
+# install.packages("rnaturalearthdata")
+# install.packages("sf")
+# install.packages("rgeos") # needed to pull countries for plot 
+# ggplot2 is part of the tidyverse, so we don't have to call it
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(scales)
+# the classic dark-on-light theme for ggplot2 is nice for maps
+theme_set(theme_bw())
+# world contains the country information for plotting in addition to a lot of other information about the countries
+world &lt;- ne_countries(scale = "medium", returnclass = "sf")
+names(world)
+```
+
+```
+##  [1] "scalerank"  "featurecla" "labelrank"  "sovereignt"
+##  [5] "sov_a3"     "adm0_dif"   "level"      "type"      
+##  [9] "admin"      "adm0_a3"    "geou_dif"   "geounit"   
+## [13] "gu_a3"      "su_dif"     "subunit"    "su_a3"     
+## [17] "brk_diff"   "name"       "name_long"  "brk_a3"    
+## [21] "brk_name"   "brk_group"  "abbrev"     "postal"    
+## [25] "formal_en"  "formal_fr"  "note_adm0"  "note_brk"  
+## [29] "name_sort"  "name_alt"   "mapcolor7"  "mapcolor8" 
+## [33] "mapcolor9"  "mapcolor13" "pop_est"    "gdp_md_est"
+## [37] "pop_year"   "lastcensus" "gdp_year"   "economy"   
+## [41] "income_grp" "wikipedia"  "fips_10"    "iso_a2"    
+## [45] "iso_a3"     "iso_n3"     "un_a3"      "wb_a2"     
+## [49] "wb_a3"      "woe_id"     "adm0_a3_is" "adm0_a3_us"
+## [53] "adm0_a3_un" "adm0_a3_wb" "continent"  "region_un" 
+## [57] "subregion"  "region_wb"  "name_len"   "long_len"  
+## [61] "abbrev_len" "tiny"       "homepart"   "geometry"
+```
+
+---
+
+Now let's get started!  
+
+
+```r
+ggplot(data=world) +
+  geom_sf()
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/firstworldplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+OK, that's the world (or one projection of it!). Let's dress up the map a bit. 
+
+
+```r
+ggplot(data = world) +
+    geom_sf() +
+    labs(x = "Longitude",
+       y = "Latitude",
+       title = "World Map")
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmap-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+The standard projection is a Mercator projection, with latitude and longitude at right angles. As you can see, this distorts the size of land masses at the poles. The ETRS89 Lambert Azimuthal Equal-Area projection is focused instead on Europe and Africa and does not force the map into a rectangular shape.
+
+
+```r
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(crs = st_crs(3035)) +
+  labs(title = "World Map")
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/eurocentric-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+We could also center our map on Asia.
+
+
+```r
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(crs = st_crs(8859)) +
+  labs(title = "World Map")
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/asiacentric-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+We can color the world Duke blue...
+
+
+```r
+ggplot(data = world) +
+    geom_sf(color="black", fill="#00539B") +
+    labs(x = "Longitude",
+       y = "Latitude",
+       title = "World Map")
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmapblue-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+but perhaps it's more informative to use color to convey information. In this plot, color is mapped to the square root of population (you can remove trans="sqrt" to see why the square root is used).
+
+
+```r
+ggplot(data = world) +
+  geom_sf(aes(fill = pop_est)) +
+  scale_fill_viridis_c(option = "plasma", #color scheme
+                       trans = "sqrt", #map color to sqrt(pop_est)
+                       labels = label_comma()) + #avoid 1e9 notation
+  labs(x = "Longitude",
+       y = "Latitude",
+       fill = "Population",
+       title = "World Map")
+```
+
+&lt;img src="lab04slides_jd_edits[89]_files/figure-html/worldmappop-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+Pretty nifty!  
+
+---
+
+class: middle 
+
+## You're now ready to complete the rest of lab!
+
+&lt;br&gt;
+
+## Please raise your hand if you need help as you work on the lab.
+  
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

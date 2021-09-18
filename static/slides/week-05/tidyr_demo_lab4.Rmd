@@ -1,0 +1,117 @@
+---
+title: "TidyR Demo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+# package that has flight data
+library(nycflights13)
+(df <- nycflights13::flights)
+```
+
+## pipe operator 
+```{r}
+# in base R, we typically have to assign an object for each function 
+# for example, if we only wanted carrier and airtime and then wanted to make cairtime in terms of hours, we would have to do this:
+(new_df <- df[, c("carrier", "air_time")])
+new_df$air_time_hr <- new_df$air_time / 60
+new_df
+
+# with the pipe operator, we can easily combine those two operations into connected lines of code with no intermediate object needed
+df %>%
+  select(carrier, air_time) %>%
+  mutate(air_time_hr = air_time / 60)
+
+# if we just want to see the result, this is fine, but if we want to save it as a new dataframe we need to assign it to something else 
+# either option below works
+
+df %>%
+  select(carrier, air_time) %>%
+  mutate(air_time_hr = air_time / 60) -> new_df
+
+new_df <- df %>%
+  select(carrier, air_time) %>%
+  mutate(air_time_hr = air_time / 60)
+```
+
+## filter
+```{r}
+# say we only want the flights who had a departure delay (dep_delay > 0)
+df %>%
+  filter(dep_delay > 0)
+
+# if it's just one line of code we can write it like this 
+filter(df, dep_delay > 0)
+```
+
+```{r, eval=FALSE}
+
+# but we can't do it like this 
+df %>%
+  filter(df, dep_delay > 0)
+  
+```
+
+
+## select
+```{r}
+# select multiple columns
+df %>%
+  select(carrier, air_time)
+
+# by column number (not recommended)
+df %>%
+  select(1:3)
+
+# 'deselect' columns 
+df %>%
+  select(-carrier)
+```
+
+
+## mutate
+```{r}
+# make a new column 
+df %>%
+  mutate(miles_per_min = distance/air_time)
+
+# write over existing 
+df %>%
+  mutate(origin = "NYC")
+```
+
+## group by / summarise
+```{r}
+# say we want to see how many flights per day 
+# for multiple groups, order matters 
+# when you summarise, you aggregate over the last group (takes off one group) - notice the groups box at the tops of the output 
+
+(df %>%
+  group_by(year, month, day) %>%
+  summarise(daily = n()) -> daily)
+
+(daily %>%
+  summarise(monthy = n()) -> monthly)
+
+(monthly %>%
+  summarise(annual = n()))
+```
+
+
+## pivoting
+```{r}
+# making small test df to work with
+(df %>%
+  select(carrier, flight, air_time) %>%
+  filter(carrier == "UA", flight %in% c(1545, 1714,1696)) %>%
+   slice(1:3) -> new_df)
+
+(wide_df <- pivot_wider(new_df, names_from = flight, values_from = air_time))
+(pivot_longer(wide_df, cols = c(`1545`, `1714`, `1696`), names_to = 'flight_num', values_to = 'time_in_air'))
+
+```
+
+

@@ -33,5 +33,12 @@ title: 'Week 5 - Visualizaing Spatial Data Effectively'
 | :open_book: | [Displaying Geo-Spatial Data with R R](https://slcladal.github.io/maps.html) | **Recommended** |
 
 
+### Assignments and Labs
 
-### Assignments
+| <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
+|:---|:---|:---|
+| Quiz | [Quiz 4](https://sakai.duke.edu) | Tuesday, 9/21 |
+| Lab 4 |[Spatial Data and Merge Conflicts](https://sta198f2021.github.io/website/slides/week-05/lab-04-spatial-conflict.html)| Wed., 9/22 |
+| Lab 4 |[Tidyverse Tips: Review!](https://sta198f2021.github.io/website/slides/week-05/tidyr_demo_lab4.html)|  |
+| Lab 4 |[Slide Deck](https://sta198f2021.github.io/website/slides/week-05/lab04slides_jd_edits.html)|  |
+

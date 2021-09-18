@@ -16,15 +16,33 @@ output:
 
 
 ```{r child = "setup.Rmd"}
+
 ```
 
+## Overview of tidy functions
+
+- pipe operator - used to link functions together 
+- filter() - used to filter a dataframe by values of a variable
+- select() - select columns 
+- mutate() - create a new column or overwrite an existing one
+- group_by() - create groups based on values of a column
+- summarise() - calculate specified summary statistic over a group(s) 
+- pivot_wider() - each row has multiple observations for a certain group
+- pivot_longer() - each row is a completely unique observation
+- etc. 
+
+[R4DS](https://r4ds.had.co.nz/introduction.html) is your best friend!! You can 
+search for keywords and it will suggest pages that explain the functions
+
+Time for a quick demo!
+
+---
 
 
 ## Getting Started
 
 Log in to GitHub to determine your team number and members for Lab 4.
 
-- Introduce yourself.
 - Find a one hour block of time outside of class that you can use to work on the
 lab / project if needed. You may not need to use this, but it is good to have it
 in reserve. Tools like [Doodle](https://doodle.com/en/)
@@ -35,7 +53,8 @@ and [When2Meet](https://www.when2meet.com/) are helpful.
 
 # Merge conflicts
 
-```{r fig.margin=TRUE, eval=TRUE, echo=FALSE, results='show'}
+```{r fig.margin=TRUE, eval=TRUE, echo=FALSE, results='show',warning=FALSE}
+library(tidyverse)
 knitr::include_graphics("04/merge-no-conflict.png")
 ```
 
@@ -116,7 +135,7 @@ content in the Rmd file before proceeding to the exercises.
 ## Packages and Data
 
 ```{r calltidy, message=FALSE, warning=FALSE}
-library(tidyverse)
+
 
 life <- readr::read_csv("04/lifeexpectancy_infant.csv")
 
@@ -174,7 +193,7 @@ ggplot(data = world) +
 
 The standard projection is a Mercator projection, with latitude and longitude at right angles. As you can see, this distorts the size of land masses at the poles. The ETRS89 Lambert Azimuthal Equal-Area projection is focused instead on Europe and Africa and does not force the map into a rectangular shape.
 
-```{r eurocentric, out.width="30%"}
+```{r eurocentric, out.width="50%"}
 ggplot(data = world) +
   geom_sf() +
   coord_sf(crs = st_crs(3035)) +
