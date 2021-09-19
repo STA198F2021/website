@@ -21,7 +21,6 @@ title: 'Week 5 - Visualizaing Spatial Data Effectively'
 
 - Complete the [readings](/post/05-week/#readings)
 - Complete the [assignments](/post/05-week/#assignments)
-  - Especially work on the [project proposal](/#project)
 
 ### Readings and Videos
 
