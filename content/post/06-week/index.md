@@ -11,7 +11,7 @@ image:
   preview_only: true
 lastmod: "2021-07-06T00:00:00Z"
 projects: []
-subtitle: 'Normal distribution, central limit theorem, and null hypothesis significance testing frameworkn :spider_web:'
+subtitle: 'Normal distribution, central limit theorem, and null hypothesis significance testing framework :spider_web:'
 summary: Learn about the normal distribution and its central role in formal evaluation of hypotheses and construction of confidence intervals
 title: 'Week 6 - Normal Distribution and Hypothesis Testing'
 ---
@@ -20,8 +20,31 @@ title: 'Week 6 - Normal Distribution and Hypothesis Testing'
 
 - Complete the [readings](/post/06-week/#readings)
 - Complete the [assignments](/post/06-week/#assignments)
-- (Optional) Complete the [Course feedback survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYQkmofaddEJLg-Rh784Tz0RUMUhLSFM2WFJUS0pKTUtVQk5RSzhVRFNIQi4u) by 5pm on Friday, 30th October (not graded)
+- (Optional but highly encouraged) Complete the [Course feedback survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYQkmofaddEJLg-Rh784Tz0RUMUhLSFM2WFJUS0pKTUtVQk5RSzhVRFNIQi4u) by 5pm on Friday, October 1st (not graded)
 
-### Readings
+### Class Slides and Activities
 
-### Assignments
+| <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
+|:---:|:---------------------|
+| Normal (Gaussian) Distribution    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l01-gaussian.html#1)  | 
+| Central Limit Theorem    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l02-clt.html#1)  | 
+
+### Readings and Videos
+
+| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
+|:---:|:---|:---:|
+| :open_book: | [OpenIntro Chapter 4.1: The Normal Distribution ](https://www.openintro.org/book/os/) | **Required** |
+| :open_book: | [OpenIntro Chapter 5: Foundations for Inference ](https://www.openintro.org/book/os/) | **Required** |
+| :open_book: | [IMS Chapter 13: Inference with Mathematical Models](https://openintro-ims.netlify.app/foundations-mathematical.html) | **Highly Recommended** |
+
+
+
+
+### Assignments and Labs
+
+| <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
+|:---|:---|:---|
+| Quiz | [Quiz 5](https://sakai.duke.edu) | Tuesday, 9/28 |
+| Lab 5 |[Data Wrangling and Mercury in the Amazon]()| Wed., 9/29 |
+
+

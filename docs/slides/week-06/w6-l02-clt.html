@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Distribution of the Sample Mean</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Distribution of the Sample Mean
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+## Main ideas
+
+- Understand the Central Limit Theorem (CLT) and how to use the result
+
+- Create confidence intervals for the population mean using a CLT-based
+  approach
+  
+- Create confidence intervals for the population proportion using a CLT-based
+  approach
+  
+---
+  
+### Packages
+
+
+```r
+library(tidyverse)
+library(infer)
+```
+
+---
+
+### Central Limit Theorem
+
+The *central limit theorem* says that for any distribution with a well-defined mean and variance, the distribution of *means* for a sample of size `\(n\)` is approximately normal. This result has strong implications in many areas of statistics, including in construction of confidence intervals and in hypothesis testing.
+
+---
+
+### Population and Samples
+
+.pull-left[
+- Statistical inference is the act of generalizing from a sample to a population with an estimated degree of uncertainty
+- We want to know about *parameters* in a population
+- We calculate *statistics* in our sample to learn about parameters
+]
+.pull-right[
+
+&lt;img src="img/popsample.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+### Parameters and Statistics 
+
+It is imperative to understand the difference between statistics and parameters.
+
+|   | **Parameters** | **Statistics** |
+|:----|:------:|:------:|
+| Source | Population | Sample |
+| Calculated? | No | Yes |
+| Example notation | `\(\mu, \sigma, \pi\)` | `\(\overline{x}, s, p, \hat{\mu}, \hat{\sigma}, \hat{\pi}\)` |
+
+---
+
+### Parameters and Statistics
+
+.pull-left[
+&lt;img src="img/plato.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+Still confused about parameters and statistics? Let's talk Plato instead. Plato presented his famous **Allegory of
+the Cave** in *The Republic*. It may be
+helpful think of parameters as Platonic
+forms and the statistics we calculate as
+the shadows on the wall of the cave.
+Here is a short video clip describing this
+allegory: [Allegory of the Cave
+Claymation](https://www.youtube.com/watch?v=E4XXItJYFKA)
+]
+
+---
+
+### Sampling Distribution of the Mean
+
+Suppose we have an infinitely large population and do the following.
+
+1. Take a sample of size `\(n\)` and calculate its mean `\(\overline{x}_1\)`
+2. Take a second sample of the same size and calculate its mean `\(\overline{x}_2\)`
+3. Repeat this many times to get a dataset of sample means `\(\overline{x}_1, \overline{x}_2, \ldots\)`
+
+What is the distribution of the *statistics* `\(\overline{x}_1, \overline{x}_2, \overline{x}_3, \ldots\)`?
+
+---
+
+### Test case: Binomial data
+
+In a seminar on the COVID epidemic in India, Professor Bhramar Mukherjee noted that 67% of the population there has been infected.  Define the variable `\(X\)` to take value 1 if a randomly sampled Indian resident has been infected, and let it be 0 otherwise.
+
+- The random variable `\(X\)` is Bernoulli. A Bernoulli random variable has mean `\(\pi\)` and variance `\(\pi(1-\pi)\)`. Here `\(\pi=0.67\)`.
+- If we take a random sample, the average `\(\overline{x}=\hat{\pi}\)` is an *estimate* of this probability (it's just the fraction of 1's)
+- If we take repeated samples of Indian residents and compute the proportion with prior infection in each, what values will we see?  Will we get 0.67 each time?
+
+---
+
+### Simulation: Prior Infections
+
+Recall we did this back when we were graphing categorical data! Here, we generate one thousand samples from a Binomial with `\(\pi\)`=0.67 and different values of `\(n\)`, and then we graph the result.
+
+
+
+
+```r
+binomdata = tibble(
+  X=c(rbinom(n=1000,10,.67),
+      rbinom(n=1000,100,.67),
+      rbinom(n=1000,1000,.67)),
+  N=c(rep(10,1000),rep(100,1000),
+      rep(1000,1000)),pihat=X/N)
+```
+This code generates 1000 samples from a binomial `\(n=10\)`, `\(\pi=0.67\)` distribution, 1000 samples from a binomial `\(n=100\)`, `\(\pi=0.67\)` distribution, and 1000 samples from a binomial `\(n=1000\)`, `\(\pi=0.67\)` distribution. The vector `\(X\)` contains the count `\(x\)` in each sample, and the vector `\(N\)` contains the sample size (so is 10 for the first 1000 entries, 100 for the second 1000, and so forth). We estimate `\(\pi\)` as `\(\hat{\pi}=\frac{x}{n}\)` in each sample.
+
+---
+
+.pull-left[
+
+```r
+head(binomdata)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;       X     N pihat
+#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     8    10   0.8
+#&gt; 2     6    10   0.6
+#&gt; 3     6    10   0.6
+#&gt; 4     6    10   0.6
+#&gt; 5     5    10   0.5
+#&gt; 6     6    10   0.6
+```
+]
+
+.pull-right[
+
+```r
+tail(binomdata)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;       X     N pihat
+#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   664  1000 0.664
+#&gt; 2   680  1000 0.68 
+#&gt; 3   683  1000 0.683
+#&gt; 4   641  1000 0.641
+#&gt; 5   651  1000 0.651
+#&gt; 6   675  1000 0.675
+```
+]
+
+
+
+---
+
+
+```r
+binomdata %&gt;%
+ggplot(aes(x = pihat, fill = as.factor(N))) + 
+  geom_density() +
+  labs(x = "Mean Fraction with Prior Infection",
+       title = "1000 Samples of Size N with pi=0.67",
+       fill = "Sample Size")
+```
+
+How does the variability of the sampling distribution depend on the size of our random samples over which the mean is calculated (the binomial "n")?
+
+---
+
+### Plotted samples
+
+&lt;img src="w6-l02-clt_files/figure-html/plotbinom2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+
+### Central Limit Theorem
+
+The *Central Limit Theorem* says that for a population with mean `\(\mu\)` and standard deviation `\(\sigma\)`, the important three properties of the distribution of sample averages `\(\bar{x}\)` hold:
+- The mean of the sampling distribution is identical to the population mean `\(\mu\)`.
+- The standard deviation of the distribution of the sample averages is `\(\frac{\sigma}{\sqrt{n}}\)`, called the *standard error* of the mean.
+- For `\(n\)` large enough (in the limit as `\(n \rightarrow \infty\)`), the shape of the sampling distribution is approximately normal (Gaussian)
+
+[See the CLT in Action!](http://demonstrations.wolfram.com/SamplingDistributionOfTheSampleMean/)
+
+Note for our Bernoulli example, `\(\mu=\pi\)` and `\(\sigma=\sqrt{\pi(1-\pi)}\)`
+
+
+---
+
+### How Large is Large Enough for `\(n\)`?
+
+For binomial data, one rule of thumb is that you want the 
+sample size `\(n\)` to be large enough that `\(n \pi&gt;10\)` and `\(n(1- \pi)&gt;10\)`.
+
+---
+
+### Wait, that variable was binomial!
+
+The Central Limit Theorem tells us that the *sample averages* are normally distributed if we have enough data.  This result holds even if our original variables (here, we started with 0/1 indicators of prior infection) are not normally distributed.
+
+---
+
+
+### Distribution of the sample mean
+
+
+
+Knowing the distribution of the sample statistic `\(\bar{X}\)` can help us
+
+- estimate a population parameter as point estimate `\(\pm\)` margin of error, where 
+  the margin of error is comprised of a measure of how confident we want to be 
+  and the sample statistic's variability.
+
+- test for a population parameter by evaluating how likely it is to obtain the
+  observed sample statistic when assuming that the null hypothesis is true, as 
+  this probability will depend on the sampling distribution's variability.
+  
+---
+
+## Normal Distribution
+
+When necessary conditions are met, we can also use inference methods based on the 
+CLT. Then the CLT tells us that `\(\bar{X}\)` approximately has the distribution 
+`\(N\left(\mu, \left(\sigma/\sqrt{n}\right)^2\right)\)`. That is,
+
+`$$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$`
+
+   
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

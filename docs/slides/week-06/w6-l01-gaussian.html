@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Normal (Gaussian) Distribution</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Normal (Gaussian) Distribution
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+### Normal Distribution
+
+In this slide deck, we explore the *normal distribution*, one of the primary inferential tools in statistical science! 
+
+The normal distribution is commonly called the *Gaussian distribution* after [Carl Friedrich Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), who wrote down the equations governing it in the early 1800's. It is also sometimes referred to as a *bell curve*.
+
+---
+
+### Feet!
+
+At the risk of having you forever associate the normal distribution with stinky feet, thinking about shoe sizes is a nice formulation for the Gaussian distribution.
+
+Mickle et al (2010 *Footwear Science*) showed the following bimodal distribution of shoe sizes in the US. 
+
+&lt;img src="img/bimodalshoes.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Note that standard shoe sizes are discrete.
+
+---
+
+### Shoe Sizes
+
+These data are from a slightly different sample than the one used by Mickle. Let `\(X\)` represent shoe size for mens' shoes. Here is a (hypothetical) distribution of shoe sizes from a random sample of 10,000 wearers of men's shoes.
+
+&lt;img src="w6-l01-gaussian_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Shoe Sizes
+
+
+If we want to know the probability that a customer coming into a store wants a man's shoe size smaller than 9, we just add up the heights of the bars for shoe sizes 8.5 and smaller. We can do this for shoe sizes in any range and tabulate the full discrete distribution of shoe sizes.
+
+
+&lt;img src="w6-l01-gaussian_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Smaller Shoes
+
+.pull-left[
+
+```
+##  xcat    n percent
+##   6.0    7  0.0007
+##   6.5   19  0.0019
+##   7.0   31  0.0031
+##   7.5   85  0.0085
+##   8.0  167  0.0167
+##   8.5  345  0.0345
+##   9.0  526  0.0526
+##   9.5  827  0.0827
+##  10.0  985  0.0985
+##  10.5 1310  0.1310
+##  11.0 1341  0.1341
+```
+]
+.pull-right[
+
+```
+##  xcat    n percent
+##  11.5 1288  0.1288
+##  12.0 1058  0.1058
+##  12.5  829  0.0829
+##  13.0  542  0.0542
+##  13.5  321  0.0321
+##  14.0  161  0.0161
+##  14.5  100  0.0100
+##  15.0   35  0.0035
+##  15.5   13  0.0013
+##  16.0    7  0.0007
+##  16.5    3  0.0003
+```
+]
+
+The probability of a random men's shoe wearer having a shoe size less than 9 in this population is 0.0654.
+
+What is the probability of shoe size 10-11.5?
+---
+
+### Continuous Distributions
+
+Now suppose we could get *really* well-fitting shoes, using quarter sizes (9, 9.25, 9.5, 9.75, ...) or even tenth sizes (9, 9.1, 9.2, ...), or shoes specifically made to fit your feet perfectly.  As the number of sizes increases, the bar width becomes more narrow, and the graph approaches a smooth curve.  We will use these smooth curves to describe the probability distributions of continuous random variables (e.g. a shoe size could be 9.50032), concentrating on the *normal distribution*.  The normal distribution below has mean `\(\mu=11\)` and standard deviation `\(\sigma=1.5\)`. (*We'll think of these units as inches for now, but note that except right around 11, there is not a perfect mapping from shoe sizes to length in inches.*)
+
+.pull-left[
+&lt;img src="w6-l01-gaussian_files/figure-html/normal-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+The *probability density curve* can be used to get the probability of any range of continuous shoe sizes we would like to investigate.
+]
+---
+
+&lt;img src="w6-l01-gaussian_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+For example, we can calculate probabilities under the normal distribution, such as the probability a continuous shoe size is less than 9 (the shaded area).
+
+---
+
+### Continuous Probability Distributions
+
+- Density curves, like histograms, can have a wide variety of shapes.  The area under a density curve is always 1.
+  - How do you find the area of interest in a plot?
+  - Calculus! `$$Pr(a \leq X \leq b)=\text{area between a and b below the curve}=\int_a^b f(x)dx$$` where `\(f(x)\)` represents the density curve
+  - While you will need to know calculus for courses like STA 240, for STA 198/ GLHLTH 298, we can rely on R to provide the probabilities we need.
+- We will see density curves for several important distributions -- normal, `\(t\)`, `\(\chi^2\)`, and `\(F\)` random variables (coming this fall!)
+
+---
+
+### Normal Distribution
+
+For the normal distribution, `$$f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left\{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\right\},$$`
+where the mean is given by `\(\mu\)`, the variance by `\(\sigma^2\)`, and the standard deviation by `\(\sigma\)`.  The notation `\(N(\mu,\sigma^2)\)` is often used.
+
+
+Also called the Gaussian distribution or bell curve, this distribution is symmetric.
+
+---
+
+### Normal Distribution
+
+&lt;img src="img/normals.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+Which of these normal distributions has the biggest mean?  standard deviation?
+
+---
+### Standard Deviation Rule for the Normal Distribution
+
+A useful rule for normal distributions is that roughly 68% of the area under the curve is within one standard deviation `\(\sigma\)` of the mean, 95% is within `\(2\sigma\)`, and 99.7% is within `\(3\sigma\)`.
+
+&lt;img src="img/normalsd.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+The symmetry of the normal distribution also allows us to calculate the probability of values falling in the tails:
+
+&lt;img src="img/normtail.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+5% of the data are further than two standard deviations, 2 `\(\sigma\)`, from the mean, 2.5% in each tail.
+
+---
+
+.pull-left[
+&lt;img src="img/foot5.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+For our shoe size distribution, normal with mean 11 and standard deviation 1.5, often denoted `\(N(\mu=11,\sigma^2=1.5^2)\)`, what is the probability of sizes between 8 and 14?
+
+What is the probability that a randomly chosen US male will have a (continuous) shoe size greater than 12.5 inches?
+
+
+What is the probability that a randomly chosen US male will have a (continuous) shoe size greater than 13 inches?
+ 
+]
+---
+
+### Z-scores
+
+How many standard deviations above the mean is a size 13?  
+- Recall `\(\mu=11\)` and `\(\sigma=1.5\)`
+- 13 is 2 inches above the mean
+- 2 inches is `\(\frac{2}{1.5}=1.33\)` standard deviations
+- `\(\frac{13-11}{1.5}=1.33\)` is known as a *z-score*
+
+Z-scores are used in many health settings, including
+- Evaluating health effects related to body mass index (BMI)
+- Measuring child growth (height-for-age, weight-for-age, weight-for-height, BMI-for-age) and identifying malnourished children
+- Testing safety of food, water, and environmental samples
+- Reporting bone density scan results
+
+---
+
+The *z-score* is a standardized normal variable that tells us now many standard deviations above (positive z-scores) or below (negative z-scores) the mean our original value (13 inch size) is.  That is, `$$z=\frac{x-\mu}{\sigma}=\frac{\text{value - mean}}{\text{standard deviation}}.$$`
+
+
+The z-score for the 12.5 inch size is `\(\frac{12.5-11}{1.5}=1\)`. 
+
+---
+
+When we standardize by finding z-scores, we change the normal distribution by moving the location (mean moves to zero) and changing the scale (so the standard deviation is one), but the *relative* position of our size 13 (or 1.33 standard deviation) remains the same relative to the rest of the distribution.
+ 
+
+.pull-left[
+&lt;img src="img/foot7.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+&lt;img src="img/foot8.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+ The distribution of the z-scores is known as the *standard normal distribution*.  Here are a few important reference points for this distribution.
+
+&lt;img src="img/stdnorm1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/stdnorm2.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;img src="img/stdnorm3.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;img src="img/stdnorm4.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;img src="img/stdnorm5.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+A *standard normal table* allows you to calculate values based on the standard normal distribution.  It tells you how much area is under the normal curve to the *left* of the specified value (lower tail area). Sometimes the table shows the complement of this probability (upper or right tail area). Because the standard normal distribution is symmetric with mean zero, `\(Pr(Z \leq 0)=0.5\)`.
+
+
+&lt;img src="img/cumprob.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+With modern computing, we don't need to rely on these tables to get the desired probabilities, but you often find them in the back of statistics textbooks.
+
+---
+
+&lt;img src="img/normaltable.png" width="60%" style="display: block; margin: auto;" /&gt;
+What is the probability of a shoe size bigger than 13 (z-score 1.33)?
+---
+
+&lt;img src="img/normalcurveupper.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+What is the probability of a shoe size bigger than 13 (z-score 1.33)?
+
+---
+
+### Using R to calculate normal probabilities
+
+Just like we used the `pbinom` command to calculate `\(P(Y \leq y \mid \pi, n)\)` for binomial data, we can use `pnorm` to calculate `\(P(Y \leq y \mid \mu=0, \sigma^2=1)\)` for standard normal data.  For example, to get the probability of a shoe size bigger than 13 (z=1.33), we just take the complement of the probability of a shoe size less than or equal to 13, which is given by `1-pnorm(1.33)` yielding the value 0.0917591.
+
+We can even just have R calculate the z-score for us using the code `1-pnorm(13,mean=11,sd=1.5)`, which yields the value 0.0912112 (more accurate due to lack of rounding).
+
+---
+
+
+### Probabilities between two values
+
+&lt;img src="img/stdnorm6.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+To get the probability that a random wearer of men's shoes would wear a size between 10 and 12, we just take `pnorm(12,mean=11,sd=1.5)-pnorm(10,mean=11,sd=1.5)` to get the value 0.4950149.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
