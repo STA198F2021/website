@@ -34,7 +34,7 @@ title: 'Week 6 - Normal Distribution and Hypothesis Testing'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :open_book: | [OpenIntro Chapter 4.1: The Normal Distribution ](https://www.openintro.org/book/os/) | **Required** |
-| :open_book: | [OpenIntro Chapter 5: Foundations for Inference ](https://www.openintro.org/book/os/) | **Required** |
+| :open_book: | [OpenIntro Chapter 5, Sections 5.1 and 5.2: Foundations for Inference ](https://www.openintro.org/book/os/) | **Required** |
 | :open_book: | [IMS Chapter 13: Inference with Mathematical Models](https://openintro-ims.netlify.app/foundations-mathematical.html) | **Highly Recommended** |
 
 
