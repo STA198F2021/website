@@ -24,6 +24,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
                       comment = "#>", highlight = TRUE,
                       fig.align = "center")
+library(tidyverse)
+library(tidymodels)
+library(infer)
 ```
 
 ## Main ideas
@@ -36,6 +39,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
 - Create confidence intervals for the population proportion using a CLT-based
   approach
   
+  
+Note: bootstrapping notes are based on Data Science in a Box!
 ---
   
 ### Packages
@@ -125,7 +130,7 @@ In a seminar on the COVID epidemic in India, Professor Bhramar Mukherjee noted t
 
 ### Simulation: Prior Infections
 
-Recall we did this back when we were graphing categorical data! Here, we generate one thousand samples from a Binomial with $\pi$=0.67 and different values of $n$, and then we graph the result.
+Recall we did this back when we were graphing categorical data! Here, we generate one thousand samples from a Binomial with $\pi$=0.67 and different values of $n$. (Remember R's n is different from ours.)
 
 
 
@@ -201,6 +206,8 @@ Note for our Bernoulli example, $\mu=\pi$ and $\sigma=\sqrt{\pi(1-\pi)}$
 For binomial data, one rule of thumb is that you want the 
 sample size $n$ to be large enough that $n \pi>10$ and $n(1- \pi)>10$.
 
+So if $\pi$ is around a half, you need fewer samples than if $\pi$ is close to the boundaries of 0 or 1.
+
 ---
 
 ### Wait, that variable was binomial!
@@ -230,8 +237,641 @@ Knowing the distribution of the sample statistic $\bar{X}$ can help us
 
 When necessary conditions are met, we can also use inference methods based on the 
 CLT. Then the CLT tells us that $\bar{X}$ approximately has the distribution 
-$N\left(\mu, \left(\sigma/\sqrt{n}\right)^2\right)$. That is,
+$N\left(\mu, \left(\sigma/\sqrt{n}\right)^2\right)$, where $\sigma$ is the standard deviation of the variable of interest. So for a Bernoulli distribution, $\sigma=\sqrt{\pi(1-\pi)}$. Then
 
 $$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$
 
-   
+---
+
+### Lead in Flint, MI
+
+From April 25, 2014 to October 15, 2015, the water supply source for Flint, MI was switched to the Flint River from the Detroit water system. Without corrosion inhibitors, the Flint River water, which is high in chloride, caused lead from aging pipes to leach into the water supply. We have data from Flint collected as part of a citizen-science project involving Virginia Tech researchers.
+
+```{r echo=FALSE}
+knitr::include_graphics("img/flintdetroit.jpg")
+```
+
+---
+
+### Forms of Statistical Inference
+
+- *Point estimation*: estimating an unknown parameter using a single number calculated from the sample data
+  - Based on the ENDES sample survey of Peruvian children $<12$ years of age, 30% had accessed oral health services in the prior six months
+- *Interval estimation*: estimating an unknown parameter using an interval or range of values that is likely to cover the true population value
+  - We estimate 28-32% of children $<12$ years of age in Peru accessed oral health services in the prior six months
+- *Hypothesis testing*: checking whether sample data provide evidence against some claim made about the population
+  - We evaluated the hypothesis that family wealth
+was unrelated to accessing dental health services in the prior 6 months in children $<12$ years old. In our sample the proportion of wealthy children receiving preventive dental services by this age was roughly twice that of poor children, providing evidence against this hypothesis.
+
+---
+
+### Flint 
+
+The EPA action level for lead in public water supplies is 15 ppb. Suppose that the truth is that 20% of Flint homes have lead levels higher than this. If we collected water from a random sample of homes, we might not be surprised to find that 19% or 21% of our samples had lead levels over 15 ppb.  What if we found 22%?  25%?  30%?  We would like to have some understanding of the *margin of error* to get a good idea of the plausible range of values.
+
+The idea behind *interval estimation* is to provide a plausible range of values, which can also be useful in the interpretation of a single point estimate.
+
+---
+
+### What is a Confidence Interval?
+
+A confidence interval provides a range of reasonable values that are intended to contain the parameter of interest with a certain degree of confidence. It often takes the form
+
+point estimate $\pm$ margin of error 
+
+and is written
+
+(point estimate - margin of error, point estimate + margin of error).
+
+```{r echo=FALSE,out.width="45%"}
+knitr::include_graphics("img/ci2.png")
+```
+
+
+---
+
+### Moving towards confidence intervals
+
+
+From the Central Limit Theorem, $$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$  or for the Bernoulli case, $$Z = \frac{\bar{X} - \pi}{\frac{\sqrt{\pi(1-\pi}}{\sqrt{n}}} \sim N(0, 1)$$ 
+
+Based on properties of the standard normal distribution, $$P(-1.96 < Z < 1.96)=0.95.$$
+
+Let's substitute for $Z$ and rearrange the equation. 
+---
+
+$$P\left(-1.96 < \frac{\bar{X} - \pi}{\frac{\sigma}{\sqrt{n}}}<1.96\right)=0.95$$
+$$P\left(-1.96\frac{\sigma}{\sqrt{n}}<\bar{X} - \pi<1.96\frac{\sigma}{\sqrt{n}}\right)=0.95$$
+
+$$P\left(-1.96\frac{\sigma}{\sqrt{n}}-\bar{X}< - \pi<1.96\frac{\sigma}{\sqrt{n}}-\bar{X}\right)=0.95$$
+ $$P\left(1.96\frac{\sigma}{\sqrt{n}}+\bar{X} \geq  \pi \geq -1.96\frac{\sigma}{\sqrt{n}}+\bar{X}\right)=0.95$$
+
+$$P\left(\bar{X}-1.96\frac{\sigma}{\sqrt{n}} \leq  \pi \leq \bar{X} + 1.96\frac{\sigma}{\sqrt{n}}\right)=0.95$$
+
+---
+
+This gives us a *95% confidence interval* for $\pi$ of $\left(\bar{X}-1.96\frac{\sigma}{\sqrt{n}}, \bar{X}+1.96\frac{\sigma}{\sqrt{n}} \right)$.
+
+Be careful when interpreting this interval.
+- If we select a number m of random samples from the
+population and use them calculate m different confidence
+intervals for $\pi$, then approximately 95% of the intervals would
+cover the true population proportion $\pi$, and 5% would not.
+- Sometimes people interpret the interval by saying that they are 95% confident that the interval covers the true proportion. 
+- We don't know whether any one interval is in the 95% that
+would cover the mean, or the 5% that would not. (Sorry. I
+know that's what everyone wants. This is one reason Bayesian inference is nice!)
+- WRONG: There is a 95% chance that $\pi$ lies in the confidence interval. $\pi$ is either in the interval, or it is not, and we don't know which. Again, sorry.
+- [Seeing Theory](https://seeing-theory.brown.edu/frequentist-inference/index.html#section2) has a great interactive applet regarding confidence intervals.
+---
+
+### Confidence Intervals
+
+```{r echo=FALSE}
+knitr::include_graphics("img/ci.png")
+```
+
+---
+
+### Confidence Level
+
+While 95% confidence intervals are the most common, it is simple to generate other intervals, for example 99% intervals. The only change is that you replace the z-score 1.96 (cuts off 2.5% in each tail) with the z-score that cuts off the appropriate amount (0.5% in each tail for a 99% interval). So the general formula is
+
+$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$
+
+for a $100(1-\alpha)$% confidence interval. Here the notation $z_{\frac{\alpha}{2}$
+
+indicates the z-score that cuts off the upper 100 $\times \frac{\alpha}{2}$% of the
+distribution. So if $\alpha = 0.05$, you have a 95% interval using
+$z_{\frac{\alpha}{2}} = 1.96$.
+
+
+
+For a 99% interval, you need the z-score that cuts off the upper 0.005 of the distribution, which is 2.58.
+
+---
+
+### Confidence Intervals
+
+We can use the interval for $\mu$ given by 
+$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$ under the following conditions when $\sigma$ does not need to be estimated separately from $\mu$; this is the case for the Bernoulli distribution, where $\mu=\pi$ and $\sigma=\sqrt{\pi(1-\pi)}$.
+
+- when our random variable $X$ is known to be normally distributed
+- when $X$ may not be normally distributed, but when our sample size is large
+
+We do not want to use this type of interval when our sample size is small and $X$ is not normal.
+
+---
+
+### Try it out: Flint Data
+
+Let's calculate the estimated proportion of homes in Flint with lead levels over 15 ppb along with a 95% confidence interval for the proportion.
+
+```{r readflint}
+library(readxl)
+library(glue)
+flint=read_excel("data/Flint-Samples.xlsx",sheet=1)
+flint=rename(flint, "Pb_initial"="Pb Bottle 1 (ppb) - First Draw")
+res.glue <- flint %>%
+  mutate(Pbover15 = Pb_initial > 15) %>%
+  summarize(propover15 = mean(Pbover15),
+            n.lead = n()) %>%
+  mutate(
+    se.lead = sqrt(propover15 * (1 - propover15)) / sqrt(n.lead),
+    lower.ci.lead = propover15 - qnorm(1 - (0.05 / 2)) * se.lead,
+    upper.ci.lead = propover15 + qnorm(1 - (0.05 / 2)) * se.lead
+  ) 
+ci.glue=glue("({round(res.glue$lower.ci.lead,2)}, {round(res.glue$upper.ci.lead,2)})") 
+```
+
+In our sample, `r round(100*res.glue$propover15,0)`% of homes had lead levels over 15 ppb, with a 95% confidence interval for the proportion of homes with high lead of (`r ci.glue`).
+
+---
+
+### Confidence Interval Width
+
+$$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$
+
+For a given $z_{\frac{\alpha}{2}}$, confidence intervals that are more narrow indicate greater certainty in estimated values. As you can see from the formula, the way to get more narrow intervals is to increase $n$, the sample size.
+
+---
+
+### Practice
+
+In a recent study of 50 randomly selected statistics students, they
+were asked the number of hours per week they spend studying for
+their statistics classes. The results were used to estimate the mean
+time for all statistics students with 90%, 95% and 99% confidence
+intervals. These were (not necessarily in the same order):
+$$(7.5, 8.5) ~~~ (7.6, 8.4) ~~~(7.7, 8.3).$$
+
+Which interval is which?
+
+---
+
+### One-sided versus two-sided intervals
+
+Sometimes, but not often, we want only an upper limit or a lower
+limit for the population mean. These are call one-sided intervals.  A standard confidence interval is two-sided.
+
+One example of this would be in a non-inferiority clinical trial for a generic version of a popular pharmaceutical product (we don't expect the generic drug to work better, but we do expect it to be just as good or at least very close). One-sided intervals are constructed only on one side and use $z_\alpha$ instead of $z_{\frac{\alpha}{2}}$, which makes them more narrow on the side of interest. They should be used with great caution and only in situations in which they are clearly warranted (i.e., seek guidance of a statistician!).
+
+---
+
+### Sigma Unknown
+
+The interval $$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$ requires an estimate of $\sigma$. In the Bernoulli case, we only estimate one parameter ($\pi$) which then gives us both the mean $\mu=\pi$ and $\sigma=\sqrt{\pi(1-\pi)}$. In the normal case, we need to use the data to get a separate estimate of $\sigma$.
+
+If you have taken statistics before, you may remember using $s=\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2$, the sample standard deviation, to estimate $\sigma$. This is generally a good estimate!  
+
+HOWEVER...
+
+---
+
+### Sigma Unknown
+
+If we estimate $\sigma$ using $s$, then 
+- we can't use the central limit theorem the same way
+- and if $X$ is not exactly normal, we can't use $z$-scores
+
+Most of the time, we don't know $\sigma$ and need to estimate it!
+
+---
+
+### What do you do when $\sigma$ is unknown, anyway?
+
+
+
+```{r echo=FALSE, out.width="30%"}
+knitr::include_graphics("img/guinness.png")
+```
+
+---
+
+### No, seriously!
+
+.pull-left[
+While working for Guinness
+Brewery in Dublin, William Sealy
+Gosset published a paper on the
+t distribution, which became
+known as Student's t distribution
+(he published under "Student"
+because the brewery didn't allow
+him to use his own name).
+```{r echo=FALSE,out.width="30%"}
+knitr::include_graphics("img/guinness.png")
+```
+
+]
+.pull-right[
+- He used the new distribution
+to determine how large a
+sample of persons to use in
+taste-testing beer! Guinness worried competitors would steal their secret if he published under his own name.
+- The t distribution is
+appropriate for constructing
+a confidence interval for the
+mean when we need to
+account for the additional
+variability due to estimating $\sigma$ in addition to $\mu$
+]
+
+---
+
+### Student's t distribution
+
+.pull-left[
+-The t distribution looks a lot like
+the normal except that it has fatter
+tails
+- The fatter tails lead to wider
+confidence intervals, which
+acknowledge our extra uncertainty
+because we had to estimate $\sigma$
+instead of using its true value
+- As the sample size gets bigger, the
+t distribution looks more and more
+like the normal distribution, and t-scores and z-scores become quite similar
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/normalt.png")
+```
+]
+
+---
+
+### Student's t distribution
+
+
+The t distribution has a property called *degrees of freedom*,
+abbreviated *df*. The degrees of freedom measure the amount of
+information available in the data to estimate $\sigma$ and thus give us
+information about how reliable our estimate $s$ is. The random
+variable $$t=\frac{\bar{X}-\mu}{\frac{s}{\sqrt{n}}}$$
+has a Student's t distribution with n-1 degrees of freedom,
+represented using the notation $t_{n-1}$. The df are $n-1$ instead of $n$
+because we lose 1 df by estimating the sample mean with $\bar{x}$. For
+each possible df, there is a different t distribution, with the t
+distribution looking more like the normal as $n$ gets large and $s$ gets
+to be a better and better estimate of $\sigma$.
+
+---
+
+### Confidence Interval with $\sigma$ Unknown
+
+When $\sigma$ is unknown, we use the interval
+
+
+$$\left(\bar{X}-t_{n-1,\frac{\alpha}{2}}\frac{s}{\sqrt{n}}, \bar{X}+t_{n-1,\frac{\alpha}{2}}\frac{s}{\sqrt{n}} \right)$$ 
+
+
+---
+
+### Calculating a Confidence Interval for Flint Lead
+
+Now we calculate a 95% confidence interval for the mean lead levels in Flint water. Because we need to estimate the standard deviation, we'll use a t-based confidence interval.
+
+```{r flintmeanci}
+res.glue.2 <- flint %>%
+  summarize(meanPb = mean(Pb_initial),
+            var.lead = var(Pb_initial),
+            n.lead = n()) %>%
+  mutate(
+    se.lead = sqrt(var.lead/n.lead),
+    lower.ci.lead = meanPb - qt(1 - (0.05 / 2),n.lead-1) * se.lead,
+    upper.ci.lead = meanPb + qt(1 - (0.05 / 2),n.lead-1) * se.lead
+  ) 
+ci.glue.2=glue("({round(res.glue.2$lower.ci.lead,2)}, {round(res.glue.2$upper.ci.lead,2)})") 
+```
+
+In our sample, the estimated mean lead level in initial water samples was `r round(res.glue.2$meanPb,2)` ppb, with a 95% confidence interval for the mean of  (`r ci.glue.2`).
+
+---
+
+### Seriously?
+
+Ok, that was a lot of work. There's a quick way to get it too.
+
+```{r tttest}
+t.test(flint$Pb_initial)
+```
+
+We'll learn more about the t test soon.
+
+---
+
+### Bootstrapping
+
+Bootstrapping is a simple, intuitive statistical procedure that can
+be used to obtain estimates of standard errors or confidence
+intervals. For example, consider a 95% confidence interval for the
+median. The distribution of the sample median is complex and
+does not allow simple calculation of the 95% CI.
+The idea behind the bootstrap is to take repeated samples, with
+replacement, from our sample, and use those to approximate the
+distribution of quantities of interest in the sample.
+
+---
+
+### Bootstrapped Confidence Interval
+
+Calculating a bootstrapped confidence interval is quick and easy using R.  The basic scheme is as follows.
+
+1. Take a bootstrap sample - a random sample taken with replacement from the original sample, of the same size as the original sample
+2. Calculate the bootstrap statistic - a statistic such as mean, median, proportion, slope, etc. computed on the bootstrap samples
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - a distribution of bootstrap statistics
+4. Calculate the bounds of the XX% confidence interval as the middle XX% of the bootstrap distribution 
+
+---
+
+# Bootstrapping with tidymodels
+
+
+
+---
+
+## Generate bootstrap means
+
+```{r eval=FALSE}
+flint %>%
+  # specify the variable of interest
+  specify(response = Pb_initial)
+```
+
+---
+
+## Generate bootstrap means
+
+```{r eval=FALSE}
+flint %>%
+  # specify the variable of interest
+  specify(response = Pb_initial)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+```
+
+---
+
+## Generate bootstrap means
+
+```{r eval=FALSE}
+flint %>%
+  # specify the variable of interest
+  specify(response = Pb_initial)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## Generate bootstrap means
+
+```{r include=FALSE}
+set.seed(12132021)
+```
+
+```{r}
+# save resulting bootstrap distribution
+boot_flintmean <- flint %>%
+  # specify the variable of interest
+  specify(response = Pb_initial) %>%
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %>%
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## The bootstrap sample
+
+.question[
+How many observations are there in `boot_flintmean`? What does each observation represent?
+]
+
+```{r}
+boot_flintmean
+```
+
+---
+
+## Visualize the bootstrap distribution
+
+```{r}
+ggplot(data = boot_flintmean, mapping = aes(x = stat)) +
+  geom_histogram() +
+  labs(title = "Bootstrap distribution of means",
+       x = "Means of Each Bootstrap Sample")
+```
+
+---
+
+## Calculate the confidence interval
+
+A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution.
+
+```{r}
+boot_flintmean %>%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+---
+
+## Visualize the confidence interval
+
+```{r include=FALSE}
+# for using these values later
+lower_bound <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.025)) %>% pull() %>% round()
+upper_bound <- boot_flintmean %>% summarize(upper_bound = quantile(stat, 0.975)) %>% pull() %>% round()
+```
+
+```{r echo=FALSE, out.width="70%"}
+ggplot(data = boot_flintmean, mapping = aes(x = stat)) +
+  geom_histogram() +
+  geom_vline(xintercept = c(lower_bound, upper_bound), color = "#A7D5E8", size = 2) +
+  labs(title = "Bootstrap distribution of means",
+       subtitle = "and 95% confidence interval",
+       x = "Means of Each Bootstrap Sample")
+```
+
+---
+
+## Interpret the confidence interval
+
+.question[
+The 95% confidence interval for the mean lead levels of initial water samples from Flint is (`r lower_bound`, `r upper_bound`). Which of the following is the correct interpretation of this interval?
+
+**(a)** 95% of the time the mean lead level in this sample is between `r lower_bound` and `r upper_bound` ppb.
+
+**(b)** 95% of all water samples in Flint have lead levels between `r lower_bound` and `r upper_bound` ppb.
+
+**(c)** We are 95% confident that the mean lead level in Flint is between `r lower_bound` and `r upper_bound` ppb.
+
+**(d)** We are 95% confident that the mean lead level in this sample is between `r lower_bound` and `r upper_bound` ppb.
+]
+
+---
+
+class: middle
+
+# Accuracy vs. precision
+
+---
+
+## Confidence level
+
+**We are 95% confident that ...**
+
+- Suppose we took many samples from the original population and built a 95% confidence interval based on each sample.
+- Then about 95% of those intervals would contain the true population parameter.
+
+---
+
+## Commonly used confidence levels
+
+.question[
+Which line (orange dash/dot, blue dash, green dot) represents which confidence level?
+]
+
+```{r echo=FALSE}
+l90 <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.05)) %>% round(2) %>% pull()
+u90 <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.95)) %>% round(2) %>% pull()
+
+l99 <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.005)) %>% round(2) %>% pull()
+u99 <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.995)) %>% round(2) %>% pull()
+
+ggplot(data = boot_flintmean, mapping = aes(x = stat)) +
+  geom_histogram() +
+  geom_vline(xintercept = c(lower_bound, upper_bound), color = "#A7D5E8", lty = 2, size = 2) +
+  geom_vline(xintercept = c(l90, u90), color = "chartreuse4", lty = 3, size = 2) +
+  geom_vline(xintercept = c(l99, u99), color = "orange", lty = 6, size = 2) +
+  labs(title = "Bootstrap distribution of means",
+       subtitle = "and various confidence intervals",
+       x = "Means")
+```
+
+---
+
+## Precision vs. accuracy
+
+.question[
+If we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?
+]
+
+--
+
+```{r echo=FALSE, out.width="60%"}
+knitr::include_graphics("img/garfield.png")
+```
+
+--
+
+.question[
+How can we get best of both worlds -- high precision and high accuracy?
+]
+
+---
+
+## Changing confidence level
+
+.question[
+How would you modify the following code to calculate a 90% confidence interval? 
+How would you modify it for a 99% confidence interval?
+]
+
+```{r eval=FALSE}
+flint %>%
+  specify(response = Pb_initial)
+  generate(reps = 15000, type = "bootstrap")
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean") %>%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+---
+
+
+
+
+### Now Let's Get CI for the Median
+
+```{r bootmedian}
+boot_flintmedian <- flint %>%
+  # specify the variable of interest
+  specify(response = Pb_initial) %>%
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %>%
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "median")
+```
+
+---
+
+```{r medianviz}
+ggplot(data = boot_flintmedian, mapping = aes(x = stat)) +
+  geom_histogram() +
+  labs(title = "Bootstrap distribution of medians",
+       x = "Medians of Each Bootstrap Sample")
+
+```
+
+---
+
+```{r calcbounds}
+boot_flintmedian %>%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+---
+
+```{r finalize}
+lower_bound <-
+  boot_flintmedian %>% summarize(lower_bound = quantile(stat, 0.025)) %>% pull() %>% round()
+upper_bound <-
+  boot_flintmedian %>% summarize(upper_bound = quantile(stat, 0.975)) %>% pull() %>% round()
+```
+
+---
+
+```{r plotmed}
+ggplot(data = boot_flintmedian, mapping = aes(x = stat)) +
+  geom_histogram() +
+  geom_vline(xintercept = c(lower_bound, upper_bound), color = "#A7D5E8", size = 2) +
+  labs(title = "Bootstrap distribution of medians",
+       subtitle = "and 95% confidence interval",
+       x = "Medians of Each Bootstrap Sample")
+
+```
+
+---
+## Mean $>>$ Median
+
+Wow, those medians are so much smaller than the means! Perhaps we should have started with a little visualization of the raw data.
+
+```{r dataviz}
+flint %>%
+  ggplot(aes(x = Pb_initial)) +
+  geom_histogram() +
+  labs(title = "Initial Pb Levels")
+
+```
+
+Ahh, this distribution is highly skewed. What is a better measure of the center of the distribution?
+
+---
+
+## Recap
+
+- Sample statistic $\ne$ population parameter, but if the sample is good, it can be a good estimate
+- We report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population
+- Since we can't continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability
+- We can do this for any sample statistic:
+  - For a mean: `calculate(stat = "mean")`
+  - For a median: `calculate(stat = "median")`

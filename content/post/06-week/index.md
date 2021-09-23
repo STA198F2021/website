@@ -27,7 +27,7 @@ title: 'Week 6 - Normal Distribution and Hypothesis Testing'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 | Normal (Gaussian) Distribution    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l01-gaussian.html#1)  | 
-| Central Limit Theorem    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l02-clt.html#1)  | 
+| Central Limit Theorem and Confidence Intervals   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l02-clt.html#1)  | 
 
 ### Readings and Videos
 
