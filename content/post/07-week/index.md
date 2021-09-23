@@ -11,9 +11,9 @@ image:
   preview_only: true
 lastmod: "2021-07-07T00:00:00Z"
 projects: []
-subtitle: 'Use of the bootstrap to obtain confidence intervals and construct hypothesis tests'
-summary: Use of the bootstrap to obtain confidence intervals and construct hypothesis tests
-title: 'Week 7 - Bootstrap Inferential Methods'
+subtitle: 'CLT and Bootstrap methods'
+summary: 'Hypothesis testing using CLT and bootstrap'
+title: 'Week 7 - Hypothesis Testing'
 ---
 
 ### Tasks

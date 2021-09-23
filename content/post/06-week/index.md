@@ -11,9 +11,9 @@ image:
   preview_only: true
 lastmod: "2021-07-06T00:00:00Z"
 projects: []
-subtitle: 'Normal distribution, central limit theorem, and null hypothesis significance testing framework :spider_web:'
+subtitle: 'Normal distribution, central limit theorem, and confidence intervals :spider_web:'
 summary: Learn about the normal distribution and its central role in formal evaluation of hypotheses and construction of confidence intervals
-title: 'Week 6 - Normal Distribution and Hypothesis Testing'
+title: 'Week 6 - Normal Distribution and Confidence Intervals'
 ---
 
 ### Tasks
@@ -27,7 +27,7 @@ title: 'Week 6 - Normal Distribution and Hypothesis Testing'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 | Normal (Gaussian) Distribution    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l01-gaussian.html#1)  | 
-| Central Limit Theorem and Confidence Intervals   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l02-clt.html#1)  | 
+| Distribution of the Sample Mean and Confidence Intervals  | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-06/w6-l02-clt.html#1)  | 
 
 ### Readings and Videos
 
