@@ -1,0 +1,105 @@
+---
+title: "Homework #02: Baby Boom or Baby Bust?"
+subtitle: "due Friday, October 1 at 4:00pm"
+output: 
+  tufte::tufte_html:
+    css: "sta199-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: true
+    toc_depth: 1
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+
+# Clone the repo & start new RStudio project 
+
+-   Go to the [**STA198F2021**](https://github.com/STA198F2021) organization on GitHub. Click on the repo with the prefix **hw-02**. It contains the starter documents you need to complete the homework.
+
+
+
+# Baby Boom or Baby Bust?
+
+[Philip Cohen of the University of Maryland](https://osf.io/preprints/socarxiv/qwxz3/) reported that the U.S.\ experienced a decline of 3.8% in births in 2020 relative to 2019. Because the decline in December was 8%, Dr. Cohen suggests that we may be experiencing a "baby bust" related to COVID-19, given that dramatic social restrictions began in the U.S.\ in March 2020 (counting back 9 months from December).
+
+The file `monthly births.xlsx` contains data on the number of births each month from January 2016 through June 2021 (not all months are available for all places) for a variety of countries (Denmark, Finland, Italy, Japan, the Netherlands, Spain, Sweden, and the U.S.) and a subset of U.S.\ states, along with one Canadian province. We will explore these data with assessment of a possible "baby bust" in mind. One challenge in making this assessment is that demographers have documented a general decline in the birth rate in some areas in recent years, so it is important to explore a "baby bust" in the context of a more broad-scale decline unrelated to the epidemic.
+
+Variables in the data set, which is essentially a convenience sample of geographical units with fairly accessible information, include the following.
+
+- `year`
+- `month` (coded 1-12)
+- `geo` (geographic unit, e.g. country, state, or province)
+- `place` name of geographic unit
+- `births` count of births
+- `daysinmo` number of days in year-month combination
+- `permday` calculated as `births/daysinmo*30.45` to make it easier to see trends over months with differing numbers of days; this standardizes the number of births to a "standard" month of 30.45 days
+
+For this analysis, the primary outcome of interest is the standardized count of births by month and year (`permday`).
+
+1. First, we will compare births in 2020 and 2021 to average monthly births in 2016-2019. Create a new data set that contains the `births` data along with a new column of monthly averages for each `place` and `month` from 2016-2019. Then create a new variable, `ratio`, that is constructed as the ratio of births in any given month, year, and place, based on the variable `permday` to the relevant monthly average over 2016-2019 (for the month and place, using `permday`). Show your code in your response. What is this ratio for the entire United States for December 2020?
+
+The starter code below reads the data from the Excel spreadsheet and formats the date variable.
+
+```{r getstarted, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+births <- read_excel("monthly births.xlsx",sheet=1)
+
+#you can start with this to work with dates
+#  mutate(date=ymd(yyyymmdd)) 
+#  mutate(monthnames = factor(month.abb[month], levels = month.abb)) 
+
+```
+
+
+2. Now create two plots that compare the ratios of monthly births in 2020 and 2021 (where data are available), separately, to the monthly averages over the years 2016-2019. Use nice labels in both plots (e.g., no numbers representing the months).  In the first plot, use faceting to show a separate frame for each of the 8 countries in the data set, and in each facet distinguish the years 2020 and 2021 from each other using different colors.  The second plot should accomplish the same goal but should focus on the states and province in the data.  Comment on the trends you see in the data.
+
+
+3. In order to explore general trends in births over time, now create a line graph separately for each country (but not states or the province) in the data set, showing the count of births by month, with color used to distinguish the lines for each year separately (2016, 2017, etc.).  Comment on (a) seasonality in birth patterns for each country, (b) general trends across years in birth patterns and counts for each country, and (c) whether there appears to be evidence for a disruption of the birth pattern in each country due to COVID-19.
+
+
+4. Bonus: fun visuals! Feel free to submit an *innovative* and *informative* visual for up to 2 bonus points. Visual submission indicates your willingness for your code to be shared (with acknowledgement) in the solution sketch.
+
+
+# Submission
+
+Once you are finished with the lab, you will submit the PDF document produced from your final *knit, commit, and push* to Gradescope.
+
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a .pdf file to the Gradescope page by the submission deadline to be considered "on time".
+
+To submit your assignment:
+
+-   Go to <http://www.gradescope.com> and click *Log in* in the top right corner.
+
+-   Click *School Credentials* $\rightarrow$ *Duke NetID* and log in using your NetID credentials.
+
+-   Click on your *STA 198* course.
+
+-   Click on the assignment, and you'll be prompted to submit it.
+
+-   Mark the pages associated with each exercise. All of the papers of your lab should be associated with at least one question (i.e., should be "checked").
+
+-   Select the first page of your .pdf submission to be associated with the *"Workflow"* section.
+
+# Grading (50 pts)
+
+<br>
+
+| Component | Points |
+|:----------|:-------|
+| Ex 1      | 16      |
+| Ex 2      | 14     |
+| Ex 3      | 18      |
+| Workflow & formatting   | 2      |
+| Bonus     | +2     |
+
+**Grading notes**:
+
+-   The "Workflow & formatting" grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages, labeling the code chunks, updating the name and date in the YAML, and in general having a neat report. The homework score in Sakai will show 52 points, but note I will re-scale when averaging grades so that 50/52 will be considered 100% and the bonus a "true" bonus. 
+

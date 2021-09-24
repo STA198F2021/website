@@ -44,6 +44,7 @@ title: 'Week 6 - Normal Distribution and Confidence Intervals'
 
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
+| Homework 2 | [Baby Boom or Baby Bust?](https://sta198f2021.github.io/website/slides/week-06/hw-02-baby-bust.html) | Friday, 10/1 |
 | Quiz | [Quiz 5](https://sakai.duke.edu) | Tuesday, 9/28 |
 | Lab 5 |[Data Wrangling and Mercury in the Amazon]()| Wed., 9/29 |
 
