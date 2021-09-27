@@ -2978,15 +2978,16 @@
     <div class="col-12 col-lg-8">
       <h2 id="tldr">TL;DR</h2>
 <p>Pick a global health data set &hellip;</p>
-<p>&hellip;and do something informative with it. That is your final project in a nutshell. More details below.</p>
+<p>&hellip;and do something informative with it. You will work in teams of 2-3 people of your own choosing. That is your final project in a nutshell. More details below.</p>
 <h2 id="may-be-too-long-but-please-do-read">May be too long, but please do read</h2>
 <p>The final project for this class will consist of analysis on a data set of your own choosing. The data set may already exist, or you may collect your own data using a survey or by conducting an experiment. You can choose the data based on your interests or based on work in other courses or research projects. The goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (and beyond, if you like) and apply them to a novel data set in a meaningful way.</p>
 <p>The goal is not to do an exhaustive data analysis i.e., do not calculate every statistic and procedure you have learned for every variable, but rather let me know that you are proficient at asking meaningful questions and answering them with results of data analysis, that you are proficient in using R, and that you are proficient at interpreting and presenting the results. Focus on methods that help you begin to answer your research questions. You do not have to apply every statistical procedure we learned. Also, critique your own methods and provide suggestions for improving your analysis. Issues pertaining to the reliability and validity of your data, and appropriateness of the statistical analysis should be discussed here.</p>
-<p>The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (<code>tidyverse</code>) is required. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R.</p>
+<p>The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (<code>tidyverse</code>) is recommended. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R.</p>
 <h3 id="data">Data</h3>
 <p>In order for you to have the greatest chance of success with this project it is important that you choose a manageable data set. This means that the data should be readily accessible and large enough that multiple relationships can be explored. As such, your data set must have at least 50 observations and say 10-20 variables (exceptions can be made, but you must speak with me first). The variables in the data should include variables of multiple types (e.g., categorical and continuous).</p>
 <p>If you are using a data set that comes in a format that we haven&rsquo;t encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source. If you are having trouble ask for help before it is too late.</p>
 <p><strong>Note on reusing data sets from class:</strong> Do not reuse data sets used in examples, homework assignments, or labs in the class.</p>
+<p><strong>The data you use must be able to be shared publicly.</strong> Students will be allowed to post their projects after the end of the course on their own GitHub repos in order to be competitive for summer internships and other opportunities. You will not be able to use data for the project that cannot be posted online for public viewing.</p>
 <p>Below are a list of data repositories that might be of interest to browse. You&rsquo;re not limited to these resources, and in fact you&rsquo;re encouraged to venture beyond them. But you might find something interesting there:</p>
 <ul>
 <li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
@@ -3007,11 +3008,12 @@
 <li>If you know of others, let me know, and we&rsquo;ll add here&hellip;</li>
 </ul>
 <h3 id="deliverables">Deliverables</h3>
-<ol>
-<li>Proposal     - due Friday, October 8, at 4:00pm</li>
+<ol start="0">
+<li>Team membership - due Friday, October 8 in class</li>
+<li>Proposal     - due Monday, October 11, at 11:59 pm</li>
 <li>Proposal revision     - due Monday, October 18, at 4:00 pm (optional)</li>
 <li>Write-up     - due Tuesday, November 16, at 11:59pm</li>
-<li>Presentation - Wednesday, November 17 or Friday, November 19, in class</li>
+<li>Presentation - Wednesday, November 17 or Friday, November 19, in class (possibly some Monday, November 22 in class)</li>
 </ol>
 <h4 id="proposal">Proposal</h4>
 <p>The purposes of the proposal are (1) to help you get started early with thinking about the project, reading relevant literature, and formulating your scientific questions, and (2) to ensure the data you wish to analyze, methods you wish to use, and scope of your analysis are feasible and set you up for success with your project.</p>
@@ -3041,23 +3043,23 @@ your hypothesized answer?</li>
 </ul>
 </li>
 </ul>
-<p>Each section should be no more than 1 page (excluding figures). You can check a
+<p>The project proposal can be no more than 3 pages. You can check a
 print preview to confirm length.</p>
 <h4 id="presentation">Presentation</h4>
 <p>5 minutes maximum, and each team member should say something substantial. You can either present live or pre-record and submit your video to be played during the presentation day.</p>
 <p>Prepare a slide deck using the template in your repo. This template uses a package called <code>xaringan</code>, and allows you to make presentation slides using R Markdown syntax. There isn&rsquo;t a limit to how many slides you can use, just a time limit (5 minutes total). Each team member should get a chance to speak during the presentation. Your presentation should not just be an account of everything you tried (&ldquo;then we did this, then we did this, etc.&quot;), instead it should convey what choices you made, and why, and what you found.</p>
 <p>Before you finalize your presentation, make sure your chunks are turned off with <code>echo = FALSE</code>.</p>
-<p>Presentation schedule: Presentations will take place during the third week of November (we may need to have some the Monday of Thanksgiving week). You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.</p>
+<p>Presentation schedule: Presentations will take place during the third week of November (we may have some the Monday of Thanksgiving week). You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.</p>
 <h4 id="write-up">Write-up</h4>
-<p>Along with your presentation slides, we want you to provide a brief summary of your project in the README of your repository.</p>
-<p>This write-up, which you can also think of as an summary of your project, should provide information on the dataset you&rsquo;re using, your research question(s), your methodology, and your findings.  Additional information will be provided closer to the project deadline regarding formatting and other tips.</p>
+<p>Along with your presentation slides, we want you to provide a summary of your project in report form.</p>
+<p>This write-up, which you can also think of as an summary of your project, should provide information on the dataset you&rsquo;re using, your research question(s), your methodology, and your findings. Think of it as filling out your project proposal with all the interesting details.  Additional information will be provided closer to the project deadline regarding formatting and other tips. The page limit of this write-up is 10 pages, including figures and references.</p>
 <h4 id="repo-organization">Repo organization</h4>
 <p>The following folders and files in your project repository:</p>
 <ul>
 <li><code>presentation.Rmd</code> + <code>presentation.html</code>: Your presentation slides</li>
-<li><code>README.md</code>: Your write-up</li>
+<li><code>report.Rmd</code> + <code>report.html</code>: Your write-up</li>
 <li><code>/data/*</code>: Your dataset in csv or RDS format, in the <code>/data</code> folder.</li>
-<li><code>/proposal</code>: Your proposal from earlier in the semester</li>
+<li><code>/proposal/</code>: Your proposal from earlier in the semester</li>
 </ul>
 <p>Style and format does count for this assignment, so please take the time to make sure everything looks good and your data and code are properly formated.</p>
 <h2 id="tips">Tips</h2>

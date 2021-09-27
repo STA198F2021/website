@@ -12,7 +12,7 @@ subtitle = "Showcase your inner data scientist"
 
 Pick a global health data set ...
 
-...and do something informative with it. That is your final project in a nutshell. More details below.
+...and do something informative with it. You will work in teams of 2-3 people of your own choosing. That is your final project in a nutshell. More details below.
 
 ## May be too long, but please do read
 
@@ -20,7 +20,7 @@ The final project for this class will consist of analysis on a data set of your 
 
 The goal is not to do an exhaustive data analysis i.e., do not calculate every statistic and procedure you have learned for every variable, but rather let me know that you are proficient at asking meaningful questions and answering them with results of data analysis, that you are proficient in using R, and that you are proficient at interpreting and presenting the results. Focus on methods that help you begin to answer your research questions. You do not have to apply every statistical procedure we learned. Also, critique your own methods and provide suggestions for improving your analysis. Issues pertaining to the reliability and validity of your data, and appropriateness of the statistical analysis should be discussed here.
 
-The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is required. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. 
+The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is recommended. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. 
 
 ### Data
 
@@ -29,6 +29,8 @@ In order for you to have the greatest chance of success with this project it is 
 If you are using a data set that comes in a format that we haven't encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source. If you are having trouble ask for help before it is too late.
 
 **Note on reusing data sets from class:** Do not reuse data sets used in examples, homework assignments, or labs in the class.
+
+**The data you use must be able to be shared publicly.** Students will be allowed to post their projects after the end of the course on their own GitHub repos in order to be competitive for summer internships and other opportunities. You will not be able to use data for the project that cannot be posted online for public viewing.
 
 Below are a list of data repositories that might be of interest to browse. You're not limited to these resources, and in fact you're encouraged to venture beyond them. But you might find something interesting there:
 
@@ -51,10 +53,11 @@ Below are a list of data repositories that might be of interest to browse. You'r
 
 ### Deliverables
 
-1. Proposal     - due Friday, October 8, at 4:00pm
+0. Team membership - due Friday, October 8 in class
+1. Proposal     - due Monday, October 11, at 11:59 pm
 2. Proposal revision     - due Monday, October 18, at 4:00 pm (optional)
 3. Write-up     - due Tuesday, November 16, at 11:59pm
-4. Presentation - Wednesday, November 17 or Friday, November 19, in class
+4. Presentation - Wednesday, November 17 or Friday, November 19, in class (possibly some Monday, November 22 in class)
 
 #### Proposal
 
@@ -79,7 +82,7 @@ question(s). (You can update these later as you work on your project.)
   -  What results from these specific statistical methods are needed to support 
 your hypothesized answer?
 
-Each section should be no more than 1 page (excluding figures). You can check a 
+The project proposal can be no more than 3 pages. You can check a 
 print preview to confirm length. 
 
 
@@ -91,22 +94,22 @@ Prepare a slide deck using the template in your repo. This template uses a packa
 
 Before you finalize your presentation, make sure your chunks are turned off with `echo = FALSE`. 
 
-Presentation schedule: Presentations will take place during the third week of November (we may need to have some the Monday of Thanksgiving week). You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
+Presentation schedule: Presentations will take place during the third week of November (we may have some the Monday of Thanksgiving week). You can choose to do your presentation live or pre-record it. During class you will watch presentations from other teams and provide feedback in the form of peer evaluations. The presentation line-up will be generated randomly.
 
 #### Write-up
 
-Along with your presentation slides, we want you to provide a brief summary of your project in the README of your repository.
+Along with your presentation slides, we want you to provide a summary of your project in report form.
 
-This write-up, which you can also think of as an summary of your project, should provide information on the dataset you're using, your research question(s), your methodology, and your findings.  Additional information will be provided closer to the project deadline regarding formatting and other tips.
+This write-up, which you can also think of as an summary of your project, should provide information on the dataset you're using, your research question(s), your methodology, and your findings. Think of it as filling out your project proposal with all the interesting details.  Additional information will be provided closer to the project deadline regarding formatting and other tips. The page limit of this write-up is 10 pages, including figures and references.
 
 #### Repo organization
 
 The following folders and files in your project repository:
 
 * `presentation.Rmd` + `presentation.html`: Your presentation slides
-* `README.md`: Your write-up
+* `report.Rmd` + `report.html`: Your write-up
 * `/data/*`: Your dataset in csv or RDS format, in the `/data` folder.
-* `/proposal`: Your proposal from earlier in the semester
+* `/proposal/`: Your proposal from earlier in the semester
 
 Style and format does count for this assignment, so please take the time to make sure everything looks good and your data and code are properly formated.
 
