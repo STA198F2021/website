@@ -11,20 +11,31 @@ image:
   preview_only: true
 lastmod: "2021-07-07T00:00:00Z"
 projects: []
-subtitle: 'CLT and Bootstrap methods'
+subtitle: 'Hypothesis Testing'
 summary: 'Hypothesis testing using CLT and bootstrap'
-title: 'Week 7 - Hypothesis Testing'
+title: 'Week 7 - Evaluating Hypotheses'
 ---
 
 ### Tasks
 
-- Complete the [assignments](/post/07-week/#assignments)
 - Complete the [readings](/post/07-week/#readings)
-- (Optional) Submit your project re-proposal by 16:00 on Friday, 6 November
+- Form your project team by Friday, October 8
 
-Use of the bootstrap to obtain confidence intervals and construct hypothesis tests
 
-### Assignments
 
-### Readings
+### Class Slides and Activities
+
+| <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
+|:---:|:---------------------|
+| Data Wrangling I    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-04/w4-l01-wrangling1.html#1)  | 
+
+### Readings and Videos
+
+| <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
+|:---:|:---|:---:|
+| :open_book: | [OpenIntro Chapter 5, Section 5.3: Foundations for Inference ](https://www.openintro.org/book/os/) | **Required** |
+| :movie_camera: | [Dance of the P-Values](https://www.youtube.com/watch?v=5OL1RqHrZQ8&app=desktop) | **Required** |
+| :open_book: | [ASA Statement on P-Values: Press Release ](https://www.amstat.org/newsroom/pressreleases/P-ValueStatement.pdf) | **Required** |
+| :open_book: | [Nature Article on P-Values](http://www.nature.com/news/scientific-method-statistical-errors-1.14700) | **Highly Recommended** |
+
 

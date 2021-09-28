@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hypothesis Testing</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Hypothesis Testing
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+## Main ideas
+
+-- Understand Null Hypothesis Significance Testing Framework
+
+-- Understand use and misuse of p-values
+
+-- Learn about testing errors and how to minimize their probability
+
+
+---
+  
+### Packages
+
+
+```r
+library(tidyverse)
+library(infer)
+library(readxl)
+```
+
+---
+
+### Example: Honor Court
+
+Suppose a case of suspected cheating is brought to a university Honor Court.  There are two opposing claims.
+
+**Student:**  I did not cheat on the exam.
+**Professor:**  The student did cheat on the exam.
+
+This Honor Court assumes students are innocent until proven guilty.  The professor must provide evidence to support their claim. They explain that they had two different versions of the exam and that the student on three separate problems used numbers from the *other* version of the exam.  (oops)
+
+
+---
+
+### Example: Honor Court
+
+The honor court members agree that this would be *extremely unlikely* if it were true that the student did not cheat.  They agree that the professor's evidence is very strong and conclude that the student did cheat on the exam.  
+
+---
+
+### Hypothesis Testing Framework
+
+
+Steps in hypothesis testing:
+
+- Start with two claims about the population (often about the value of a population parameter or about some potential association between two variables in the population).  Call them claim 1 and claim 2.
+
+- Choose a sample, draft an analysis plan, collect data, and summarize data
+
+- Figure out how likely it is to see data like what we got, if claim 1 is true.
+
+- If our data would have been unlikely if claim 1 were true, then we reject claim 1 and deem claim 2 worthy of further study.  Otherwise, we cannot reject claim 1.
+
+---
+
+### Example: Ultra Low Dose Contraceptives
+
+A certain ultra-low dose oral contraceptive pill is supposed to contain 0.02 mg of estrogen. If the dose is higher, the user may risk side effects better avoided, and if the dose is lower, the user may get pregnant.  The manufacturer wishes to check whether the mean concentration in a large shipment is the needed 0.02 mg or not.  A random sample of `\(n=50\)` pills is tested, and the sample mean concentration is 0.017 mg with a sample standard deviation of 0.008 mg.
+
+Let's go through the hypothesis testing paradigm.
+
+---
+
+- State the claims
+  - **Claim 1**: The shipment is consistent with a population mean of 0.02 mg estrogen.
+  
+  - **Claim 2**: The shipment is not consistent with a population mean of 0.02 mg estrogen.
+  
+- Choose sample, design analysis plan, collect, and analyze data
+  - Plan is to sample 50 pills at random and use a one-sample t-test to evaluate whether they are consistent with a population with mean 0.2 mg estrogen
+  - 50 pills were sampled with a sample mean `\(\bar{x}=0.017\)` and sample standard deviation `\(s=0.008\)`
+
+---
+
+- Assess likelihood of our data, or more extreme results, if Claim 1 is true
+  - We'll learn how to do this shortly, but for now assume the probability of getting a result like ours (or even more extreme) is just 0.01 if Claim 1 is true.
+  
+- Conclusion:  that's pretty unlikely.  We'll reject Claim 1 and assume this warrants further investigation -- the manufacturing procedure may not be consistent with one that produces pills at the required 0.02 mg dose, and further evaluation is needed to verify the dosage is sufficient to prevent breakthrough pregnancies.
+
+---
+
+.pull-left-wide[Now, suppose the probability was relatively large, say 0.50 instead of 0.01.  In this case, we would *fail to reject* Claim 1 and state that we do not have evidence to disprove Claim 1.  We would not say that evidence leads us to accept Claim 1, though.  This is a subtle but important difference. We assumed claim 1 was true before we did our calculation, and thus we calculated a probability about data like ours or more extreme than ours under that assumption (and not a probability of whether claim 1 was true directly).
+]
+.pull-right-narrow[
+The concept is the same as that in the US judicial system -- we might find someone "not guilty," but we would not proclaim them "innocent."
+]
+&lt;img src="img/catchalk.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Hypothesis Testing Steps (Again!)
+
+1. State Claim 1 and Claim 2.  Claim 1 states "nothing unusual is happening" and Claim 2 challenges it.
+
+2. Finalize data collection and analysis plans, collect relevant data, and summarize it.
+
+3. Assess how surprising it would be to see data like that, or even more extreme data, *if Claim 1 is really true*.
+
+4. Draw conclusions.
+
+---
+
+### Details: Step 1
+
+Step 1 is to state Claim 1 and Claim 2.
+
+- Claim 1 is called the *null hypothesis* or `\(H_0\)`.  It states that there is no change from the status quo or no relationship.
+
+- Claim 2 is called the *alternative hypothesis* or `\(H_A\)`.  It states that there is something going on or some relationship.  Usually, `\(H_A\)` is what we want to check or what we really think may be going on.
+
+---
+
+### Example: Ultra Low Dose Contraception
+
+Step 1 is to state Claim 1 and Claim 2.
+
+- `\(H_0\)`:  The pills are consistent with a population that has mean 0.02 mg estrogen.
+
+- `\(H_A\)`:  The pills are not consistent with a population that has mean 0.02 mg estrogen.
+
+
+---
+
+### Practice with Step 1
+
+What are `\(H_0\)` and `\(H_A\)` in each case?
+
+1. Researchers would like to know whether a new intervention for informing children in developing countries of their HIV status is associated with different mental health quality of life. 
+
+2. Researchers would like to know if lead levels in the water from Flint exceed the EPA action level of 15 ppb.
+
+3. The WHO would like to know if the prevalence of the delta variant this month is the same as last month.
+
+---
+
+
+### Details: Step 2
+
+Step 2 is to make a plan for data collection and analysis, take a sample, and summarize the data.  We will return to this topic, but the choice of summary statistic will depend on the type of data (e.g., categorical or continuous) as well as the distribution of the data. 
+
+---
+
+### Details: Step 3
+
+
+Step 3 involves assessing the evidence in our data by calculating the probability of getting data like ours, or more extreme than ours, if `\(H_0\)` is actually true.  This **conditional probability** will be based on our data summary statistic from Step 2.  This conditional probability is often called a *p-value*.
+
+Technically, the probability of getting "data like ours, or more extreme than ours" is the probability of getting a specific test statistic based on the data, or one more extreme.  (That is, the same data can yield multiple p-values or confidence intervals depending on which test is used.)
+
+---
+
+### P-Value
+
+Note that the p-value is a conditional probability, the probability of getting data like ours or more extreme data given that `\(H_0\)` is true, and it conditions on our null hypothesis being true.  It does not provide direct information on the probability that `\(H_0\)` is true given our data.
+
+---
+
+### "Sidedness" of tests
+
+Typically, hypothesis tests are *two-sided*, meaning that we are looking for any difference from a hypothesized value, whether smaller or larger.  Sometimes, it is appropriate to conduct a *one-sided* test. For example, in the Flint data, we may only be concerned if lead levels in the Flint water are higher than the EPA action level. 
+
+One-sided tests are rare, and even in the Flint case it would be typical to see two-sided tests and confidence intervals presented.
+
+
+---
+
+Illustration of p-value from one-sided hypothesis test
+
+&lt;img src="img/pvaluefigure.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+For a two-sided test, the p-value is doubled, but `\(\alpha\)` is unchanged.
+
+---
+
+### Details: Step 4
+
+Step 4 is drawing conclusions based on our test results.  Generally, we reject Claim 1 when the likelihood of seeing our data (or more extreme data) when Claim 1 is true would be relatively small.  Often, we consider a cutpoint (also called a significance level or `\(\alpha\)` level) of `\(\alpha=0.05\)` as defining the p-value as "small."  Using 0.05 as a cutpoint means that when the null hypothesis is true, we would expect to make the wrong decision only 5% of the time.   When the p-value `\(&lt;\alpha\)` you often see results described as "statistically significant."
+
+
+
+When the p-value is `\(&gt; \alpha\)` then we say we have insufficient evidence to reject Claim 1.  Sometimes people interpret p-values in the rough range of `\((\alpha, 2\alpha)\)` as marginally significant (so for `\(\alpha=0.05\)` that range would be `\(0.05-0.10\)`), but this is not recommended.
+
+
+
+---
+
+Common sense should also be used in drawing conclusions.  For example, if there is a very strong body of evidence in favor of the alternative hypothesis and you see `\(p=0.06\)`, you wouldn't necessarily use your results to refute all the prior work in an area.  This is one reason confidence intervals are often used in place of hypothesis tests.
+
+---
+
+### Example: Workplace Equity
+
+An employer subscribes to an "equal opportunity" policy, stating it hires employees with children and employees without children equally often in managerial positions.  Suppose the current hiring pool is half applicants with children and half applicants without children, with both groups equally well-qualified.  The data you have are the last three hires, all of which were applicants without children.  How do you carry out a hypothesis test?
+
+---
+
+### Trial by Jury Analogy
+
+
+&lt;img src="img/murderkitty.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
+
+A cat is on trial.  Did it commit the crime?  Evidence is presented as part of the trial by jury.
+
+|  | Truly Innocent   | Truly Guilty |
+|:------|:------:|:---------:|
+| Jury: Not Guilty | `\(\checkmark\)` | ☠️ |
+| Jury: Guilty | ☠️  | `\(\checkmark\)` | 
+
+---
+
+During the trial, we assume the cat is innocent unless it is proven guilty.  The right decisions are finding an innocent feline "not guilty" and convicting a guilty cat.   We could make two mistakes:  we could wrongly convict an innocent kitty, or we could declare a guilty cat "not guilty."
+
+---
+
+Let's translate into a hypothesis testing framework.  Suppose we wish to test that the population mean equals some value, say `\(\mu_0\)`.
+
+Test of `\(H_0:  \mu=\mu_0\)`
+
+
+|  | Truly `\(\mu=\mu_0\)`   | Truly `\(\mu\neq\mu_0\)` |
+|:------|:------:|:---------:|
+| Decision: Do Not Reject `\(H_0\)` | `\(\checkmark\)` | ☠️ |
+| Decision: Reject `\(H_0\)` | ☠️  | `\(\checkmark\)` | 
+
+Type I error:  rejecting `\(H_0\)` when it is really true
+
+
+Type II error:  not rejecting `\(H_0\)` when it is false
+
+
+Notice these are also conditional probabilities and can be linked to the false positive and false negative rates of our test procedure if we think of it as a screening test.
+
+
+---
+
+### Possible Errors
+
+No test is perfect! Here are some potential errors we could make using this paradigm, also called the *Null Hypothesis Significance Testing (NHST)* paradigm.
+
+
+- `\(\alpha\)` is the probability of making a Type I error.  These errors, which involve incorrectly changing the status quo, are typically viewed as more severe than Type II errors.  The most common value is `\(\alpha=0.05\)`, though typically smaller values are used when multiple tests are being carried out.  
+
+- The probability of making a Type II error is `\(\beta\)`, which is related to the *power* of the test, given by `\(1-\beta\)`.  `\(\beta\)` can also vary but is typically larger, say 0.20 (80% power) or 0.10 (90% power)
+- The *power* of the test is the probability of rejecting `\(H_0\)` when `\(H_0\)` is indeed false.  
+
+---
+
+### Hypothesis Testing About the Mean
+
+1. Hypothesize a value, `\(\mu_0\)`, and set up `\(H_0\)` and `\(H_A\)`
+
+2. Take a random sample of size `\(n\)` and calculate summary statistics (e.g., sample mean and variance)
+
+3. Is it **likely** that the sample, or one even more extreme, came from a population with mean `\(\mu_0\)` (with `\(\alpha=0.05\)`)?
+
+4. Draw conclusions
+
+---
+
+### Null and Alternative Hypotheses About the Mean
+
+We set up the hypotheses to cover *all* the possibilities for `\(\mu\)` and consider three possibilities.
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+One-sided tests are pretty rare. 
+
+---
+
+### Null and Alternative Hypotheses About a Proportion
+We set up the hypotheses to cover *all* the possibilities for `\(\pi\)` and consider three possibilities.
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\pi=\pi_0\)` | `\(\pi \neq \pi_0\)` |
+| One-sided | `\(\pi&gt;\pi_0\)` | `\(\pi \leq \pi_0\)` |
+| One-sided | `\(\pi&lt;\pi_0\)` | `\(\pi \geq \pi_0\)` |
+
+One-sided tests are pretty rare. 
+
+---
+
+### Two-Sided Hypothesis Tests
+
+To conduct the hypothesis test, we use what we learned about the sampling distribution of the sample mean `\(\bar{X}\)`.  If the underlying population is normally distributed (or `\(n\)` is pretty large), then the random variable `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}$$` has a `\(t_{n-1}\)` distribution, and we can use a *t-test* of our hypothesis by using software (R `t.test`).
+
+For a test of a proportion, where we don't have to estimate a separate variance parameter, we would use a z-statistic and compare to a `\(N(0,1)\)` distribution (R `prop.test`).
+
+---
+
+### Behind the Scenes
+
+You will almost always use software to calculate the test statistic and p-value, but it is important to understand the big concepts behind the scenes.
+
+First, think about our test statistic `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$`
+
+- `\(\bar{X}-\mu_0\)` makes sense, because we want to look at how far our sample mean is from the hypothesized population mean
+
+- Whether `\(\bar{X}-\mu_0\)` is big depends on the standard deviation.  For example, a difference of `\(\bar{X}-\mu_0=1\)` is a small difference if we are looking at weight in g but huge for height in m.  This is why we standardize the difference by dividing by the *estimated* SD of the mean, so `\(t\)` is a measure of how many SDs apart `\(\mu_0\)` and `\(\bar{X}\)` are from each other
+
+---
+
+### Behind the Scenes
+
+Think about our test statistic `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$`
+
+- When our test statistic `\(t\)` is big and our data are approximately normal (or `\(n\)` is large), our data are not consistent with data from a population with mean `\(\mu_0\)`
+  - Problem: our data might be unlikely under `\(H_A\)` as well (our test will not tell us that!)
+  
+- When our test statistic `\(t\)`  is small (and our data are approximately normal or `\(n\)` is large), then our data do not refute the null hypothesis.
+
+---
+
+### Getting the p-value: 2-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *two-sided* test, the p-value is the probability of seeing a t statistic with absolute value as big as, or larger than, what we saw in our data.
+
+&lt;img src="img/tdisttwotail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+
+### Getting the p-value: 1-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *one-sided* test with `\(H_0: \mu \geq \mu_0\)`, the p-value is the probability of seeing a t statistic with value the same size, or smaller than, what we saw in our data.
+
+&lt;img src="img/tdistlefttail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+
+### Getting the p-value: 1-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *one-sided* test with `\(H_0: \mu \leq \mu_0\)`, the p-value is the probability of seeing a t statistic with value the same size, or larger than, what we saw in our data.
+
+&lt;img src="img/tdistrighttail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+---
+
+### Warning about 1-sided tests
+
+The choice between a one-sided and a two-sided test can be highly controversial because a one-sided test will have a p-value that is half that of the corresponding two-sided test, due to the symmetry of the `\(t\)` distribution.  Sometimes a scientist will (unethically) choose a one-sided test on nonscientific grounds.  To protect against this, some journal editors are extremely reluctant to publish studies using one-sided tests.
+
+---
+
+### Are One-Sided Tests Underutilized?
+
+Usually, you have a pretty good idea what will happen (you do have to get money using some justification!).  In this case, why not always do one-sided tests?
+
+---
+
+### CAST Study
+
+Example:  CAST (Cardiac Arrhythmia Suppression Trial)
+- New generation of antiarrhythmic agents strongly believed to have fewer side effects with much greater efficacy
+- Due to strength of this belief, one-sided test was designed
+
+- Recruitment was difficult because many physicians refused to randomize their patients when chance of NOT getting the new drugs was 50%
+  - The trial showed new generation drugs associated with 4x the mortality as status quo
+  - P-value was 0.0003 in the wrong direction (i.e., new drug worse), but with a one-sided test that direction is part of the null hypothesis of "status quo"
+  - Fortunately the Data Safety and Monitoring Board stopped the trial quickly
+
+---
+
+# P-Values
+
+---
+
+### P-value Defined
+
+The *p-value* is the conditional probability, under the assumption of no effect or no difference, `\(H_0\)`, of obtaining a result equal to or more extreme than what was actually observed.
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers think a p-value of 0.05 means the null hypothesis has a probability of only 5%.  This is wrong!
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers will see `\(p=0.05\)` and state that there is a 95% or greater chance that the null hypothesis is incorrect.  This is wrong!
+
+A p-value is calculated *assuming* that `\(H_0\)` is true.  It cannot be used to tell us how likely it is that assumption is correct.
+
+---
+
+### Hypothesis Testing Paradigm
+
+The paradigm of hypothesis testing tries to limit the overall number of incorrect decisions over the long run.  While we of course want to know if any one study is showing us something real, or a type I or type II error, the paradigm does not give us the tools to determine this.
+
+---
+
+### What DO You Do with a P-value, Then?
+
+Ideally, you evaluate a p-value in light of other information, such as a proposed biological mechanism, supporting evidence in the literature, size and quality of the study, and size of the purported effect.
+
+In addition, when you interpret a p-value, be sure you are aware of other important factors that can inflate the false positive rate, e.g. multiple tests, "hidden" multiple tests (e.g., testing most appropriate form of covariate or for an interaction or other model selection procedures), changes to sample size, etc.
+
+---
+
+### I'm Nervous about P-values.  What Alternatives are There?
+
+- Many researchers prefer confidence intervals, which better represent the range of effects that are "compatible with the data"
+
+- They are sometimes used as a hypothesis test (i.e., reporting results as significant when confidence interval does not include null value) and share many of the properties of p-values we have discussed
+
+- Like p-values, confidence intervals do not offer a mechanism to unite external evidence with that provided by the study at hand
+
+- *Bayesian methods* can be used to incorporate current study results with prior knowledge in order to provide a probability a hypothesis is true conditional on the current data (Bayes' theorem can get us what we want to know!)
+---
+### Correspondence between Hypothesis Tests and Confidence Intervals
+
+We can also examine a confidence interval to decide whether a proposed value for the population mean is reasonable.
+
+Suppose we are testing `\(H_0:  \mu=\mu_0\)` versus `\(H_A:  \mu \neq \mu_0\)` using a significance level of `\(\alpha=0.05\)`.   An alternative way to do this is to construct a 95% confidence interval for `\(\mu\)` and use the following decision rule.
+- If `\(\mu_0\)` falls outside the confidence interval, reject `\(H_0\)`
+- If `\(\mu_0\)` falls inside the confidence interval, do not reject `\(H_0\)`
+
+We may not want to make a binary decision but instead present a confidence interval and provide discussion
+
+---
+
+
+### Lead in Flint, MI
+
+From April 25, 2014 to October 15, 2015, the water supply source for Flint, MI was switched to the Flint River from the Detroit water system. Without corrosion inhibitors, the Flint River water, which is high in chloride, caused lead from aging pipes to leach into the water supply. We have data from Flint collected as part of a citizen-science project involving Virginia Tech researchers.
+
+&lt;img src="img/flintdetroit.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Back to Flint
+
+Let's conduct an `\(\alpha=0.05\)` t-test of `\(H_0: \mu=15\)` versus `\(H_A: \mu \neq 15\)`.
+
+
+```r
+flint=read_excel("data/Flint-Samples.xlsx",sheet=1)
+flint=rename(flint, "Pb_initial"="Pb Bottle 1 (ppb) - First Draw")
+t.test(flint$Pb_initial, estimate=15)
+```
+
+```
+#&gt; 
+#&gt; 	One Sample t-test
+#&gt; 
+#&gt; data:  flint$Pb_initial
+#&gt; t = 8.1284, df = 270, p-value = 1.58e-14
+#&gt; alternative hypothesis: true mean is not equal to 0
+#&gt; 95 percent confidence interval:
+#&gt;   8.067422 13.224563
+#&gt; sample estimates:
+#&gt; mean of x 
+#&gt;  10.64599
+```
+
+The null value 15 is not in our CI, and the p-value is quite small.  We have evidence to reject the null hypothesis, and fortunately the mean lead level appears to be less than 15.
+
+---
+
+# Bootstrapping
+
+---
+
+### Bootstrapping
+
+We can use a bootstrap procedure in hypothesis testing, similar to the one we used to calculate a confidence interval.  
+
+First, let's simulate the null distribution -- what we expect to see if the mean is 15.
+
+
+```r
+set.seed(1234)
+null_dist &lt;- flint %&gt;%
+  specify(response = Pb_initial) %&gt;%
+  hypothesize(null = "point", mu = 15) %&gt;%
+  generate(reps = 10000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+```
+
+---
+
+### Visualize Null Distribution
+
+
+```r
+visualize(null_dist) +
+  labs(x = "Sample means", y = "Count", 
+       title = "Simulated null distribution")
+```
+
+&lt;img src="w7-l01-testing_files/figure-html/visualnull-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+Let's add our sample mean to this distribution and shade the p-value.
+
+
+```r
+x_bar &lt;- flint %&gt;%
+  summarize(mean_Pb=mean(Pb_initial))
+
+visualize(null_dist) +
+  shade_p_value(obs_stat = x_bar, 
+                direction = "two-sided") +
+  labs(x = "Sample means", y = "Count")
+```
+
+&lt;img src="w7-l01-testing_files/figure-html/sampmean-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+ 
+Notice our sample mean of 10.65 is below the mass of this distribution. 
+
+What is your conclusion?
+
+---
+
+Now suppose instead we wanted to test `\(H_0: \mu=10\)`. In this case, we would get a different result:
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w7-l01-testing_files/figure-html/unnamed-chunk-9-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+Now the p-value, corresponding to the shaded area, is quite large.
+]
+.panel[.panel-name[Code]
+
+
+```r
+null_dist_10 &lt;- flint %&gt;%
+  specify(response = Pb_initial) %&gt;%
+  hypothesize(null = "point", mu = 10) %&gt;%
+  generate(reps = 10000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+
+visualize(null_dist_10) +
+  shade_p_value(obs_stat = x_bar, 
+                direction = "two-sided") +
+  labs(x = "Sample means", y = "Count")
+```
+]
+]
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
