@@ -32,6 +32,8 @@ If you are using a data set that comes in a format that we haven't encountered i
 
 **The data you use must be able to be shared publicly.** Students will be allowed to post their projects after the end of the course on their own GitHub repos in order to be competitive for summer internships and other opportunities. You will not be able to use data for the project that cannot be posted online for public viewing.
 
+**You cannot make substantial changes to the proposed data set or questions of interest after the proposal revision deadline.**  
+
 Below are a list of data repositories that might be of interest to browse. You're not limited to these resources, and in fact you're encouraged to venture beyond them. But you might find something interesting there:
 
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
