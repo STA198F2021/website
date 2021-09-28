@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hypothesis Testing</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Hypothesis Testing
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+## Main ideas
+
+-- Learn one-sample test of mean
+
+-- Learn one-sample test of proportions
+
+
+---
+  
+### Packages
+
+
+```r
+library(tidyverse)
+library(infer)
+library(readxl)
+```
+
+---
+
+
+### Hypothesis Testing Framework
+
+
+Steps in hypothesis testing:
+
+- Start with two claims about the population (often about the value of a population parameter or about some potential association between two variables in the population).  Call them claim 1 and claim 2.
+
+- Choose a sampling strategy, draft an analysis plan, collect data, and summarize data
+
+- Figure out how likely it is to see data like what we got, if claim 1 is true.
+
+- If our data would have been unlikely if claim 1 were true, then we reject claim 1 and deem claim 2 worthy of further study.  Otherwise, we cannot reject claim 1.
+
+---
+
+
+
+
+### Hypothesis Testing About the Mean
+
+1. Hypothesize a value, `\(\mu_0\)`, and set up `\(H_0\)` and `\(H_A\)`
+
+2. Take a random sample of size `\(n\)` and calculate summary statistics (e.g., sample mean and variance)
+
+3. Is it **likely** that the sample, or one even more extreme, came from a population with mean `\(\mu_0\)`?
+
+4. Draw conclusions
+
+---
+
+### Null and Alternative Hypotheses About the Mean
+
+We set up the hypotheses to cover *all* the possibilities for `\(\mu\)` and consider three possibilities.
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+One-sided tests are pretty rare. 
+
+---
+
+### Null and Alternative Hypotheses About a Proportion
+We set up the hypotheses to cover *all* the possibilities for `\(\pi\)` and consider three possibilities.
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\pi=\pi_0\)` | `\(\pi \neq \pi_0\)` |
+| One-sided | `\(\pi&gt;\pi_0\)` | `\(\pi \leq \pi_0\)` |
+| One-sided | `\(\pi&lt;\pi_0\)` | `\(\pi \geq \pi_0\)` |
+
+One-sided tests are pretty rare. 
+
+---
+
+### Two-Sided Hypothesis Tests
+
+To conduct the hypothesis test, we use what we learned about the sampling distribution of the sample mean `\(\bar{X}\)`.  If the underlying population is normally distributed (or `\(n\)` is pretty large), then the random variable `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}$$` has a `\(t_{n-1}\)` distribution, and we can use a *t-test* of our hypothesis by using software (R `t.test`).  This test is called the *one sample t-test*.
+
+For a test of a proportion, where we don't have to estimate a separate variance parameter, we could use a z-statistic and compare to a `\(N(0,1)\)` distribution or even better the exact binomial distribution itself (R `binom.test`).
+
+---
+
+### Behind the Scenes
+
+You will almost always use software to calculate the test statistic and p-value, but it is important to understand the big concepts behind the scenes.
+
+First, think about our test statistic `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$`
+
+- `\(\bar{X}-\mu_0\)` makes sense, because we want to look at how far our sample mean is from the hypothesized population mean
+
+- Whether `\(\bar{X}-\mu_0\)` is big depends on the standard deviation.  For example, a difference of `\(\bar{X}-\mu_0=1\)` is a small difference if we are looking at weight in g but huge for height in m.  This is why we standardize the difference by dividing by the *estimated* SD of the mean, so `\(t\)` is a measure of how many SDs apart `\(\mu_0\)` and `\(\bar{X}\)` are from each other
+
+---
+
+### Behind the Scenes
+
+Think about our test statistic `$$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$`
+
+- When our test statistic `\(t\)` is big and our data are approximately normal (or `\(n\)` is large), our data are not consistent with data from a population with mean `\(\mu_0\)`
+  - Problem: our data might be unlikely under `\(H_A\)` as well (our test will not tell us that!)
+  
+- When our test statistic `\(t\)`  is small (and our data are approximately normal or `\(n\)` is large), then our data do not refute the null hypothesis.
+
+---
+
+### Getting the p-value: 2-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *two-sided* test, the p-value is the probability of seeing a t statistic with absolute value as big as, or larger than, what we saw in our data.
+
+&lt;img src="img/tdisttwotail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+
+### Getting the p-value: 1-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *one-sided* test with `\(H_0: \mu &gt; \mu_0\)`, the p-value is the probability of seeing a t statistic with value the same size, or smaller than, what we saw in our data.
+
+&lt;img src="img/tdistlefttail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+
+### Getting the p-value: 1-sided test
+
+.pull-left-narrow[
+
+|  | `\(H_0\)`  | `\(H_A\)`|
+|:------|:------:|:---------:|
+| Two-sided | `\(\mu=\mu_0\)` | `\(\mu \neq \mu_0\)` |
+| One-sided | `\(\mu&gt;\mu_0\)` | `\(\mu \leq \mu_0\)` |
+| One-sided | `\(\mu&lt;\mu_0\)` | `\(\mu \geq \mu_0\)` |
+
+
+
+]
+.pull-right-wide[
+
+For a *one-sided* test with `\(H_0: \mu &lt; \mu_0\)`, the p-value is the probability of seeing a t statistic with value the same size, or larger than, what we saw in our data.
+
+&lt;img src="img/tdistrighttail.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+---
+
+### Warning about 1-sided tests
+
+The choice between a one-sided and a two-sided test can be highly controversial because a one-sided test will have a p-value that is half that of the corresponding two-sided test, due to the symmetry of the `\(t\)` distribution.  Sometimes a scientist will (unethically) choose a one-sided test on nonscientific grounds.  To protect against this, some journal editors are extremely reluctant to publish studies using one-sided tests.
+
+---
+
+### Are One-Sided Tests Underutilized?
+
+Usually, you have a pretty good idea what will happen (you do have to get research funding using some justification!).  In this case, why not always do one-sided tests?
+
+---
+
+### CAST Study
+
+Example:  CAST (Cardiac Arrhythmia Suppression Trial)
+- New generation of antiarrhythmic agents strongly believed to have fewer side effects with much greater efficacy
+- Due to strength of this belief, one-sided test was selected
+
+- Recruitment was difficult because many physicians refused to randomize their patients when chance of NOT getting the new drugs was 50%
+  - The trial showed new generation drugs associated with 4x the mortality as status quo
+  - P-value was 0.0003 in the wrong direction (i.e., new drug worse), but with a one-sided test that direction is part of the null hypothesis of "status quo"
+  - Fortunately the Data Safety and Monitoring Board stopped the trial quickly
+
+---
+
+# P-Values
+
+---
+
+### P-value Defined
+
+The *p-value* is the conditional probability, under the assumption of no effect or no difference, `\(H_0\)`, of obtaining a result equal to or more extreme than what was actually observed.
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers think a p-value of 0.05 means the null hypothesis has a probability of only 5%.  This is wrong!
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers will see `\(p=0.05\)` and state that there is a 95% or greater chance that the null hypothesis is incorrect.  This is wrong!
+
+A p-value is calculated *assuming* that `\(H_0\)` is true.  It cannot be used to tell us how likely it is that assumption is correct.
+
+---
+
+### Hypothesis Testing Paradigm
+
+The paradigm of hypothesis testing tries to limit the overall number of incorrect decisions over the long run.  While we of course want to know if any one study is showing us something real, or a type I or type II error, the paradigm does not give us the tools to determine this.
+
+---
+
+### What DO You Do with a P-value, Then?
+
+Ideally, you evaluate a p-value in light of other information, such as a proposed biological mechanism, supporting evidence in the literature, size and quality of the study, and size of the purported effect.
+
+In addition, when you interpret a p-value, be sure you are aware of other important factors that can inflate the false positive rate, e.g. multiple tests, "hidden" multiple tests (e.g., testing most appropriate form of covariate or for an interaction or other model selection procedures), changes to sample size, etc.
+
+---
+
+### I'm Nervous about P-values.  What Alternatives are There?
+
+- Many researchers prefer confidence intervals, which better represent the range of effects that are "compatible with the data"
+
+- They are sometimes used as a hypothesis test (i.e., reporting results as significant when confidence interval does not include null value) and share many of the properties of p-values we have discussed
+
+- Like p-values, confidence intervals do not offer a mechanism to unite external evidence with that provided by the study at hand
+
+- *Bayesian methods* can be used to incorporate current study results with prior knowledge in order to provide a probability a hypothesis is true conditional on the current data (Bayes' theorem can get us what we want to know!)
+---
+### Correspondence between Hypothesis Tests and Confidence Intervals
+
+We can also examine a confidence interval to decide whether a proposed value for the population mean is reasonable.
+
+Suppose we are testing `\(H_0:  \mu=\mu_0\)` versus `\(H_A:  \mu \neq \mu_0\)` using a significance level of `\(\alpha=0.05\)`.   An alternative way to do this is to construct a 95% confidence interval for `\(\mu\)` and use the following decision rule.
+- If `\(\mu_0\)` falls outside the confidence interval, reject `\(H_0\)`
+- If `\(\mu_0\)` falls inside the confidence interval, do not reject `\(H_0\)`
+
+We may not want to make a binary decision but instead present a confidence interval and provide discussion
+
+---
+
+
+### Lead in Flint, MI
+
+From April 25, 2014 to October 15, 2015, the water supply source for Flint, MI was switched to the Flint River from the Detroit water system. Without corrosion inhibitors, the Flint River water, which is high in chloride, caused lead from aging pipes to leach into the water supply. We have data from Flint collected as part of a citizen-science project involving Virginia Tech researchers.
+
+&lt;img src="img/flintdetroit.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Back to Flint
+
+Let's conduct an `\(\alpha=0.05\)` t-test of `\(H_0: \mu=15\)` versus `\(H_A: \mu \neq 15\)`.
+
+
+```r
+flint=read_excel("data/Flint-Samples.xlsx",sheet=1)
+flint=rename(flint, "Pb_initial"="Pb Bottle 1 (ppb) - First Draw")
+t.test(flint$Pb_initial, mu=15)
+```
+
+```
+#&gt; 
+#&gt; 	One Sample t-test
+#&gt; 
+#&gt; data:  flint$Pb_initial
+#&gt; t = -3.3244, df = 270, p-value = 0.001009
+#&gt; alternative hypothesis: true mean is not equal to 15
+#&gt; 95 percent confidence interval:
+#&gt;   8.067422 13.224563
+#&gt; sample estimates:
+#&gt; mean of x 
+#&gt;  10.64599
+```
+
+The null value 15 is not in our CI, and the p-value is quite small.  We have evidence to reject the null hypothesis, and fortunately the mean lead level appears to be less than 15.
+
+---
+
+# Bootstrapping
+
+---
+
+### Bootstrapping
+
+We can use a bootstrap procedure in hypothesis testing, similar to the one we used to calculate a confidence interval.  
+
+First, let's simulate the null distribution -- what we expect to see if the mean is 15.
+
+
+```r
+set.seed(1234)
+null_dist &lt;- flint %&gt;%
+  specify(response = Pb_initial) %&gt;%
+  hypothesize(null = "point", mu = 15) %&gt;%
+  generate(reps = 10000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+```
+
+---
+
+### Visualize Null Distribution
+
+
+```r
+visualize(null_dist) +
+  labs(x = "Sample means", y = "Count", 
+       title = "Simulated null distribution")
+```
+
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/visualnull-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+Let's add our sample mean to this distribution and shade the p-value.
+
+
+```r
+x_bar &lt;- flint %&gt;%
+  summarize(mean_Pb=mean(Pb_initial))
+
+visualize(null_dist) +
+  shade_p_value(obs_stat = x_bar, 
+                direction = "two-sided") +
+  labs(x = "Sample means", y = "Count")
+```
+
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/sampmean-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+ 
+Notice our sample mean of 10.65 is below the mass of this distribution. 
+
+What is your conclusion?
+
+---
+
+Now suppose instead we wanted to test `\(H_0: \mu=10\)`. In this case, we would get a different result:
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+Now the p-value, corresponding to the shaded area, is quite large.
+]
+.panel[.panel-name[Code]
+
+
+```r
+null_dist_10 &lt;- flint %&gt;%
+  specify(response = Pb_initial) %&gt;%
+  hypothesize(null = "point", mu = 10) %&gt;%
+  generate(reps = 10000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+
+visualize(null_dist_10) +
+  shade_p_value(obs_stat = x_bar, 
+                direction = "two-sided") +
+  labs(x = "Sample means", y = "Count")
+```
+]
+]
+
+---
+
+### Testing proportions
+
+Suppose we wish to test the null hypothesis that 20% of Flint households have water with lead levels over 15 ppb, versus the alternative that this percentage is not 20%.
+
+While we could use the Central Limit Theorem here, we actually have an even better option in R -- we can carry out this test based on the (exact) binomial distribution. With the binomial distribution, we don't have to worry about the sample size or rules of thumb for our test to be accurate. The Central Limit Theorem-based methods became very popular when computers were less powerful, but now we can use *exact* tests much more easily, even when large combinatorial calculations are involved.
+
+This exact binomial test works in the same manner as the test we used earlier for fairness in hiring -- but we can avoid doing it by hand using `binom.test` (you can go back and check that result!).
+
+---
+
+
+
+
+```r
+flintprop&lt;-flint %&gt;%
+  mutate(Pbover15 = Pb_initial &gt; 15) %&gt;%
+  summarize(countover15 = sum(Pbover15=="TRUE"),
+            n.lead = n(),phat=countover15/n.lead) 
+binom.test(flintprop$countover15,flintprop$n.lead,p=0.20)
+```
+
+```
+#&gt; 
+#&gt; 	Exact binomial test
+#&gt; 
+#&gt; data:  flintprop$countover15 and flintprop$n.lead
+#&gt; number of successes = 45, number of trials = 271, p-value
+#&gt; = 0.172
+#&gt; alternative hypothesis: true probability of success is not equal to 0.2
+#&gt; 95 percent confidence interval:
+#&gt;  0.1237721 0.2158079
+#&gt; sample estimates:
+#&gt; probability of success 
+#&gt;              0.1660517
+```
+---
+
+We can also explore this using simulation.  For binary data, we can draw random samples from a Bernoulli distribution with probability of success equal to the value of `p` given in the code.
+
+
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+.panel[.panel-name[Code]
+
+
+```r
+null_dist_20 &lt;- flint %&gt;%
+  mutate(Pbover15 = Pb_initial &gt; 15) %&gt;%
+  specify(response = Pbover15, success= "TRUE") %&gt;%
+  hypothesize(null = "point", p = 0.2) %&gt;%
+  generate(reps = 10000, type = "draw") %&gt;%
+  calculate(stat = "prop")
+
+visualize(null_dist_20) +
+  shade_p_value(obs_stat = flintprop$phat, 
+                direction = "two-sided") +
+  labs(x = "Sample proportions", y = "Count")
+```
+]
+]
+
+---
+
+# Try it out!
+
+---
+
+### Flint Lead
+
+Public health officials often recommend that residents who have lead in their drinking water run the water for 45 seconds to 2 minutes (called "flushing") to remove as much lead from the drinking water as possible.
+
+In our data, we have two measures taken after flushing the pipes -- one after 45 seconds, and one after two minutes.
+
+The *paired t-test* is useful in situations like this one, where we have an initial measure as well as follow-up measures.  We can simply subtract two measures to obtain a "difference" measure and then carry out a regular one-sample t-test.
+
+---
+
+Create two new variables, calculated as (1) initial lead concentration minus the lead concentration after 45 seconds of flushing, and (2) initial lead concentration minus the lead concentration after 2 minutes of flushing.  Then conduct two hypothesis tests: in each case, your goal is to evaluate whether the *paired differences* are 0.   Interpret your results in terms of lead levels before and after flushing. Include useful graphical displays to supplement your test and interpretation.
+
+---
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

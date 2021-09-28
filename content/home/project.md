@@ -34,8 +34,12 @@ If you are using a data set that comes in a format that we haven't encountered i
 
 **You cannot make substantial changes to the proposed data set or questions of interest after the proposal revision deadline.**  
 
-Below are a list of data repositories that might be of interest to browse. You're not limited to these resources, and in fact you're encouraged to venture beyond them. But you might find something interesting there:
+Below are a list of data repositories or related events that might be of interest to browse. You're not limited to these resources, and in fact you're encouraged to venture beyond them. But you might find something interesting there:
 
+- [UN World Data Forum: Oct 3-7!](https://unstats.un.org/unsd/undataforum/)
+- [UN Sustainable Development Goals Indicators Database](https://unstats.un.org/sdgs/unsdg)
+- [United Nations Data](http://data.un.org/)
+- [United Nations Statistics Division](https://unstats.un.org/home/)
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 - [Global Health Data Exchange](http://ghdx.healthdata.org/ihme_data)
 - [WHO Data Collections](https://www.who.int/data/collections)
@@ -49,8 +53,6 @@ Below are a list of data repositories that might be of interest to browse. You'r
 - [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au)
 - [PRISM Data Archive Project](https://www.icpsr.umich.edu/icpsrweb/content/ICPSR/fenway.html)
 - [Harvard Dataverse](https://dataverse.harvard.edu/)
-- [United Nations Data](http://data.un.org/)
-- [United Nations Statistics Division](https://unstats.un.org/home/)
 - If you know of others, let me know, and we'll add here...
 
 ### Deliverables
