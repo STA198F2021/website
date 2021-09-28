@@ -20,7 +20,7 @@ The final project for this class will consist of analysis on a data set of your 
 
 The goal is not to do an exhaustive data analysis i.e., do not calculate every statistic and procedure you have learned for every variable, but rather let me know that you are proficient at asking meaningful questions and answering them with results of data analysis, that you are proficient in using R, and that you are proficient at interpreting and presenting the results. Focus on methods that help you begin to answer your research questions. You do not have to apply every statistical procedure we learned. Also, critique your own methods and provide suggestions for improving your analysis. Issues pertaining to the reliability and validity of your data, and appropriateness of the statistical analysis should be discussed here.
 
-The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is recommended. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. 
+The project is very open ended. You should create some kind of compelling visualization(s) of these data in R. There is no limit on what tools or packages you may use, but sticking to packages we learned in class (`tidyverse`) is recommended. You do not need to visualize all of the data at once. A single high quality visualization will receive a much higher grade than a large number of poor quality visualizations. Also pay attention to your presentation. Neatness, coherency, and clarity will count. All analyses must be done in RStudio, using R. References must be cited, including (known) prior analyses of the data.
 
 ### Data
 
@@ -128,8 +128,8 @@ Style and format does count for this assignment, so please take the time to make
 Total                          | 100 pts
 -------------------------------|--------
 Proposal                       | 10 pts
-Presentation                   | 30 pts
-Write-up                       | 50 pts
+Presentation                   | 10 pts
+Write-up                       | 70 pts
 Reproducibility and organization | 10 pts
 
 

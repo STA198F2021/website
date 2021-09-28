@@ -858,7 +858,7 @@ ggplot(data = boot_flintmedian, mapping = aes(x = stat)) +
 
 Wow, those medians are so much smaller than the means! Perhaps we should have started with a little visualization of the raw data.
 
-```{r dataviz}
+```{r dataviz, out.width="50%"}
 flint %>%
   ggplot(aes(x = Pb_initial)) +
   geom_histogram() +

@@ -27,7 +27,7 @@ title: 'Week 7 - Evaluating Hypotheses'
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
-| Data Wrangling I    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-04/w4-l01-wrangling1.html#1)  | 
+| Hypothesis Testing    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-07/w7-l01-testing.html)  | 
 
 ### Readings and Videos
 

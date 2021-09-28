@@ -237,11 +237,14 @@ sample size `\(n\)` to be large enough that `\(n \pi&gt;10\)` and `\(n(1- \pi)&g
 
 So if `\(\pi\)` is around a half, you need fewer samples than if `\(\pi\)` is close to the boundaries of 0 or 1.
 
+
 ---
 
 ### Wait, that variable was binomial!
 
 The Central Limit Theorem tells us that the *sample averages* are normally distributed if we have enough data.  This result holds even if our original variables (here, we started with 0/1 indicators of prior infection) are not normally distributed.
+
+In statistics, there's generally more than one way to do things!  While the Central Limit Theorem gives us a great approximation, we'll also learn how to use an exact method later.
 
 ---
 
@@ -912,7 +915,7 @@ flint %&gt;%
   labs(title = "Initial Pb Levels")
 ```
 
-&lt;img src="w6-l02-clt_files/figure-html/dataviz-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w6-l02-clt_files/figure-html/dataviz-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 Ahh, this distribution is highly skewed. What is a better measure of the center of the distribution?
 

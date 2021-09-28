@@ -620,7 +620,7 @@ visualize(null_dist_10) +
 
 Suppose we wish to test the null hypothesis that 20% of Flint households have water with lead levels over 15 ppb, versus the alternative that this percentage is not 20%.
 
-While we could use the Central Limit Theorem here, we actually have an even better option in R -- we can carry out this test based on the (exact) binomial distribution. With the binomial distribution, we don't have to worry about the sample size or rules of thumb for our test to be accurate.
+While we could use the Central Limit Theorem here, we actually have an even better option in R -- we can carry out this test based on the (exact) binomial distribution. With the binomial distribution, we don't have to worry about the sample size or rules of thumb for our test to be accurate. The Central Limit Theorem-based methods became very popular when computers were less powerful, but now we can use *exact* tests much more easily, even when large combinatorial calculations are involved.
 
 ---
 
@@ -630,10 +630,24 @@ While we could use the Central Limit Theorem here, we actually have an even bett
 flintprop<-flint %>%
   mutate(Pbover15 = Pb_initial > 15) %>%
   summarize(countover15 = sum(Pbover15=="TRUE"),
-            n.lead = n()) 
+            n.lead = n(),phat=countover15/n.lead) 
 binom.test(flintprop$countover15,flintprop$n.lead,p=0.20)
 ```
 ---
-Note the test statistic given here, `X-squared`, refers to a $\chi^2$ test, and the particular $\chi^2$ test here is obtaining by taking $z^2$ from our prior normal distribution test derivation. It turns out that the square of a N(0,1) random variable follows a $\chi^2$ distribution with one degree of freedom.
+
+We can also explore this using simulation.  For binary data, the `infer` function doesn't accommodate bootstrapping, but we can draw random samples from a Bernoulli distribution with probability of success equal to the value of `p` given in the code.
+
+```{r simbinom}
+null_dist3 <- flint %>%
+  mutate(Pbover15 = Pb_initial > 15) %>%
+  specify(response = Pbover15, success= "TRUE") %>%
+  hypothesize(null = "point", p = 0.2) %>%
+  generate(reps = 10000, type = "draw") %>%
+  calculate(stat = "prop")
+
+visualize(null_dist3) +
+  shade_p_value(obs_stat = flintprop$phat, 
+                direction = "two-sided") +
+  labs(x = "Sample proportions", y = "Count")
 
 

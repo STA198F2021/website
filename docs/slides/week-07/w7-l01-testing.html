@@ -634,8 +634,61 @@ visualize(null_dist_10) +
 ]
 ]
 
+---
+
+### Testing proportions
+
+Suppose we wish to test the null hypothesis that 20% of Flint households have water with lead levels over 15 ppb, versus the alternative that this percentage is not 20%.
+
+While we could use the Central Limit Theorem here, we actually have an even better option in R -- we can carry out this test based on the (exact) binomial distribution. With the binomial distribution, we don't have to worry about the sample size or rules of thumb for our test to be accurate. The Central Limit Theorem-based methods became very popular when computers were less powerful, but now we can use *exact* tests much more easily, even when large combinatorial calculations are involved.
+
+---
 
 
+
+
+```r
+flintprop&lt;-flint %&gt;%
+  mutate(Pbover15 = Pb_initial &gt; 15) %&gt;%
+  summarize(countover15 = sum(Pbover15=="TRUE"),
+            n.lead = n(),phat=countover15/n.lead) 
+binom.test(flintprop$countover15,flintprop$n.lead,p=0.20)
+```
+
+```
+#&gt; 
+#&gt; 	Exact binomial test
+#&gt; 
+#&gt; data:  flintprop$countover15 and flintprop$n.lead
+#&gt; number of successes = 45, number of trials = 271, p-value
+#&gt; = 0.172
+#&gt; alternative hypothesis: true probability of success is not equal to 0.2
+#&gt; 95 percent confidence interval:
+#&gt;  0.1237721 0.2158079
+#&gt; sample estimates:
+#&gt; probability of success 
+#&gt;              0.1660517
+```
+---
+
+We can also explore this using simulation.  For binary data, the `infer` function doesn't accommodate bootstrapping, but we can draw random samples from a Bernoulli distribution with probability of success equal to the value of `p` given in the code.
+
+
+```r
+null_dist3 &lt;- flint %&gt;%
+  mutate(Pbover15 = Pb_initial &gt; 15) %&gt;%
+  specify(response = Pbover15, success= "TRUE") %&gt;%
+  hypothesize(null = "point", p = 0.2) %&gt;%
+  generate(reps = 10000, type = "draw") %&gt;%
+  calculate(stat = "prop")
+
+visualize(null_dist3) +
+  shade_p_value(obs_stat = flintprop$phat, 
+                direction = "two-sided") +
+  labs(x = "Sample proportions", y = "Count")
+```
+
+&lt;img src="w7-l01-testing_files/figure-html/simbinom-1.png" width="60%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
