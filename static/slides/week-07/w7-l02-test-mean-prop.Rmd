@@ -155,11 +155,10 @@ Think about our test statistic $$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$
 | One-sided | $\mu<\mu_0$ | $\mu \geq \mu_0$ |
 
 
-
 ]
 .pull-right-wide[
 
-For a *two-sided* test, the p-value is the probability of seeing a t statistic with absolute value as big as, or larger than, what we saw in our data.
+For a *two-sided* test, the p-value is the probability of seeing a t statistic with absolute value as big as, or larger than, what we saw in our data. Recall $$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$
 
 ```{r echo=FALSE,out.width="50%"}
 knitr::include_graphics("img/tdisttwotail.png")
@@ -182,10 +181,11 @@ knitr::include_graphics("img/tdisttwotail.png")
 
 
 
+
 ]
 .pull-right-wide[
 
-For a *one-sided* test with $H_0: \mu > \mu_0$, the p-value is the probability of seeing a t statistic with value the same size, or smaller than, what we saw in our data.
+For a *one-sided* test with $H_0: \mu > \mu_0$, the p-value is the probability of seeing a t statistic with value the same size, or smaller than, what we saw in our data. Recall $$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$
 
 ```{r echo=FALSE,out.width="50%"}
 knitr::include_graphics("img/tdistlefttail.png")
@@ -211,11 +211,14 @@ knitr::include_graphics("img/tdistlefttail.png")
 ]
 .pull-right-wide[
 
-For a *one-sided* test with $H_0: \mu < \mu_0$, the p-value is the probability of seeing a t statistic with value the same size, or larger than, what we saw in our data.
+For a *one-sided* test with $H_0: \mu < \mu_0$, the p-value is the probability of seeing a t statistic with value the same size, or larger than, what we saw in our data. Recall $$t=\frac{\bar{X}-\mu_0}{\frac{s}{\sqrt{n}}}.$$
+
 
 ```{r echo=FALSE,out.width="50%"}
 knitr::include_graphics("img/tdistrighttail.png")
 ```
+
+
 ]
 ---
 
@@ -231,78 +234,20 @@ Usually, you have a pretty good idea what will happen (you do have to get resear
 
 ---
 
-### CAST Study
+### CAST (Cardiac Arrhythmia Suppression Trial)
 
-Example:  CAST (Cardiac Arrhythmia Suppression Trial)
 - New generation of antiarrhythmic agents strongly believed to have fewer side effects with much greater efficacy
+
 - Due to strength of this belief, one-sided test was selected
 
 - Recruitment was difficult because many physicians refused to randomize their patients when chance of NOT getting the new drugs was 50%
+
   - The trial showed new generation drugs associated with 4x the mortality as status quo
-  - P-value was 0.0003 in the wrong direction (i.e., new drug worse), but with a one-sided test that direction is part of the null hypothesis of "status quo"
-  - Fortunately the Data Safety and Monitoring Board stopped the trial quickly
+  
+  - P-value was 0.0003 in the wrong direction (i.e., new drug worse), but with a one-sided test that direction is part of the null hypothesis of *status quo*, so you don't reject the null
+  
+  - Fortunately the **Data Safety and Monitoring Board** stopped the trial quickly
 
----
-
-class: middle
-
-# P-Values
-
----
-
-### P-value Defined
-
-The *p-value* is the conditional probability, under the assumption of no effect or no difference, $H_0$, of obtaining a result equal to or more extreme than what was actually observed.
-
----
-
-### Incorrect P-Value Interpretations
-
-Many researchers think a p-value of 0.05 means the null hypothesis has a probability of only 5%.  This is wrong!
-
----
-
-### Incorrect P-Value Interpretations
-
-Many researchers will see $p=0.05$ and state that there is a 95% or greater chance that the null hypothesis is incorrect.  This is wrong!
-
-A p-value is calculated *assuming* that $H_0$ is true.  It cannot be used to tell us how likely it is that assumption is correct.
-
----
-
-### Hypothesis Testing Paradigm
-
-The paradigm of hypothesis testing tries to limit the overall number of incorrect decisions over the long run.  While we of course want to know if any one study is showing us something real, or a type I or type II error, the paradigm does not give us the tools to determine this.
-
----
-
-### What DO You Do with a P-value, Then?
-
-Ideally, you evaluate a p-value in light of other information, such as a proposed biological mechanism, supporting evidence in the literature, size and quality of the study, and size of the purported effect.
-
-In addition, when you interpret a p-value, be sure you are aware of other important factors that can inflate the false positive rate, e.g. multiple tests, "hidden" multiple tests (e.g., testing most appropriate form of covariate or for an interaction or other model selection procedures), changes to sample size, etc.
-
----
-
-### I'm Nervous about P-values.  What Alternatives are There?
-
-- Many researchers prefer confidence intervals, which better represent the range of effects that are "compatible with the data"
-
-- They are sometimes used as a hypothesis test (i.e., reporting results as significant when confidence interval does not include null value) and share many of the properties of p-values we have discussed
-
-- Like p-values, confidence intervals do not offer a mechanism to unite external evidence with that provided by the study at hand
-
-- *Bayesian methods* can be used to incorporate current study results with prior knowledge in order to provide a probability a hypothesis is true conditional on the current data (Bayes' theorem can get us what we want to know!)
----
-### Correspondence between Hypothesis Tests and Confidence Intervals
-
-We can also examine a confidence interval to decide whether a proposed value for the population mean is reasonable.
-
-Suppose we are testing $H_0:  \mu=\mu_0$ versus $H_A:  \mu \neq \mu_0$ using a significance level of $\alpha=0.05$.   An alternative way to do this is to construct a 95% confidence interval for $\mu$ and use the following decision rule.
-- If $\mu_0$ falls outside the confidence interval, reject $H_0$
-- If $\mu_0$ falls inside the confidence interval, do not reject $H_0$
-
-We may not want to make a binary decision but instead present a confidence interval and provide discussion
 
 ---
 
@@ -425,11 +370,16 @@ This exact binomial test works in the same manner as the test we used earlier fo
 
 
 
-```{r proptest}
+```{r proptestsetup}
 flintprop<-flint %>%
   mutate(Pbover15 = Pb_initial > 15) %>%
   summarize(countover15 = sum(Pbover15=="TRUE"),
             n.lead = n(),phat=countover15/n.lead) 
+flintprop
+```
+
+---
+```{r proptest}
 binom.test(flintprop$countover15,flintprop$n.lead,p=0.20)
 ```
 ---
@@ -481,9 +431,31 @@ The *paired t-test* is useful in situations like this one, where we have an init
 
 ---
 
+### Paired t-test
+
+Samples are often paired for a variety of reasons
+
+- Measurements are taken on a single subject at two distinct points in time (e.g., baseline and follow-up)
+
+- Subjects may be matched so that members of each pair are as much alike as possible with respect to important characteristics like age and gender (e.g., matched case-control study)
+
+Pairing can control for unwanted sources of variation that might otherwise influence the results of a comparison.  Matching within subject (e.g., baseline and follow-up) is a powerful way to eliminate subject-specific factors.  
+
+---
+
+What if you use an unpaired test for paired data?
+
+- You will get the same estimates of the means
+
+- If the pairs have positive correlation (almost always the case if you paired correctly), the unpaired estimate of the variance will be larger than the paired estimate.  This means the paired test has greater power.
+
+---
+
 Create two new variables, calculated as (1) initial lead concentration minus the lead concentration after 45 seconds of flushing, and (2) initial lead concentration minus the lead concentration after 2 minutes of flushing.  Then conduct two hypothesis tests: in each case, your goal is to evaluate whether the *paired differences* are 0.   Interpret your results in terms of lead levels before and after flushing. Include useful graphical displays to supplement your test and interpretation.
 
 ---
+
+
 
 ### Two-sample tests of the mean
 
@@ -500,6 +472,7 @@ knitr::include_graphics("img/meansindependent.png")
 ]
 .pull-right[
 An alternative would be to obtain paired or matched samples and test the equality of means $\mu_1$ and $\mu_2$.  Matching could be by person (e.g., before and after measures) or could be a pair of individuals who belong together in another way (e.g., same date of birth in same hospital, married partners).
+
 ```{r echo=FALSE}
 knitr::include_graphics("img/meanspaired.png")
 ```
@@ -533,7 +506,9 @@ $$H_A:  \mu_{MALE}-\mu_{FEMALE}\neq 0$$
 
 ---
 
-The researcher enrolled 239 subjects and obtained complete data on 205, with 85 males and 120 females in the complete data sample.  Analyzing the data, we obtain $\bar{x}_{MALE}=13.33$, $\bar{x}_{FEMALE}=10.73$, $s_{MALE}=4.02$, $s_{FEMALE}=4.25$.
+The researcher enrolled 239 subjects and obtained complete data on 205, with 85 males and 120 females in the complete data sample.  
+
+Analyzing the data, we obtain $\bar{x}_{MALE}=13.33$, $\bar{x}_{FEMALE}=10.73$, $s_{MALE}=4.02$, $s_{FEMALE}=4.25$.
 
 Recall: 1=only personality, 25=only looks
 
@@ -565,11 +540,16 @@ Based on both the test and the 95% confidence interval, we have evidence to reje
 ---
 
 ### Analysis Limitations and Sensitivity Analysis
+
 - 34 observations (14% of those enrolled) have missing responses
 - Because 120 women and 85 men responded, it may be the case that more men than women failed to respond (if all 34 missing observations were from men, would have balanced sample of 120 women and 119 men)
 - Perhaps many men failed to respond because they valued personality more than looks (but maybe did not want to admit it)
 - In this case it would be possible for these men's responses to overturn the result (in fact having a mean score for men lower than that for women is mathematically possible for this percentage of missing data)
 - Be cautious about results of hypothesis testing in the presence of missing data
+
+
+
+
 
 
 

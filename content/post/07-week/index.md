@@ -28,6 +28,7 @@ title: 'Week 7 - Evaluating Hypotheses'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 | Hypothesis Testing    | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-07/w7-l01-testing.html)  | 
+| Hypothesis Testing about the Mean and Proportions   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-07/w7-l02-test-mean-prop.html)  | 
 
 ### Readings and Videos
 
