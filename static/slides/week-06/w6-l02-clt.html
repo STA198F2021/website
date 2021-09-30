@@ -321,7 +321,7 @@ and is written
 ### Moving towards confidence intervals
 
 
-From the Central Limit Theorem, `$$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$`  or for the Bernoulli case, `$$Z = \frac{\bar{X} - \pi}{\frac{\sqrt{\pi(1-\pi}}{\sqrt{n}}} \sim N(0, 1)$$` 
+From the Central Limit Theorem, `$$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$`  or for the Bernoulli case, `$$Z = \frac{\bar{X} - \pi}{\frac{\sqrt{\pi(1-\pi)}}{\sqrt{n}}} \sim N(0, 1)$$` 
 
 Based on properties of the standard normal distribution, `$$P(-1.96 &lt; Z &lt; 1.96)=0.95.$$`
 
@@ -413,7 +413,7 @@ res.glue &lt;- flint %&gt;%
 ci.glue=glue("({round(res.glue$lower.ci.lead,2)}, {round(res.glue$upper.ci.lead,2)})") 
 ```
 
-In our sample, 17% of homes had lead levels over 15 ppb, with a 95% confidence interval for the proportion of homes with high lead of ((0.12, 0.21)).
+In our sample, 17% of homes had lead levels over 15 ppb, with a 95% confidence interval for the proportion of homes with high lead of (0.12, 0.21).
 
 ---
 
@@ -449,7 +449,7 @@ One example of this would be in a non-inferiority clinical trial for a generic v
 
 ### Sigma Unknown
 
-The interval `$$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$` requires an estimate of `\(\sigma\)`. In the Bernoulli case, we only estimate one parameter ($\pi$) which then gives us both the mean `\(\mu=\pi\)` and `\(\sigma=\sqrt{\pi(1-\pi)}\)`. In the normal case, we need to use the data to get a separate estimate of `\(\sigma\)`.
+The interval `$$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$` requires an estimate of `\(\sigma\)`. In the Bernoulli case, we only estimate one parameter `\(\pi\)`, which then gives us both the mean `\(\mu=\pi\)` and `\(\sigma=\sqrt{\pi(1-\pi)}\)`. In the normal case, we need to use the data to get a separate estimate of `\(\sigma\)`.
 
 If you have taken statistics before, you may remember using `\(s=\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2\)`, the sample standard deviation, to estimate `\(\sigma\)`. This is generally a good estimate!  
 
@@ -534,7 +534,7 @@ information available in the data to estimate `\(\sigma\)` and thus give us
 information about how reliable our estimate `\(s\)` is. The random
 variable `$$t=\frac{\bar{X}-\mu}{\frac{s}{\sqrt{n}}}$$`
 has a Student's t distribution with n-1 degrees of freedom,
-represented using the notation `\(t_{n-1}\)`. The df are `\(n-1\)` instead of `\(n\)`
+represented using the notation `\(t_{n-1}\)`. The df are `\(n-1\)` instead of the sample size `\(n\)`
 because we lose 1 df by estimating the sample mean with `\(\bar{x}\)`. For
 each possible df, there is a different t distribution, with the t
 distribution looking more like the normal as `\(n\)` gets large and `\(s\)` gets
@@ -570,7 +570,7 @@ res.glue.2 &lt;- flint %&gt;%
 ci.glue.2=glue("({round(res.glue.2$lower.ci.lead,2)}, {round(res.glue.2$upper.ci.lead,2)})") 
 ```
 
-In our sample, the estimated mean lead level in initial water samples was 10.65 ppb, with a 95% confidence interval for the mean of  ((8.07, 13.22)).
+In our sample, the estimated mean lead level in initial water samples was 10.65 ppb, with a 95% confidence interval for the mean of  (8.07, 13.22).
 
 ---
 
@@ -624,6 +624,8 @@ Calculating a bootstrapped confidence interval is quick and easy using R.  The b
 4. Calculate the bounds of the XX% confidence interval as the middle XX% of the bootstrap distribution 
 
 ---
+
+
 
 # Bootstrapping with tidymodels
 
@@ -680,8 +682,8 @@ flint %&gt;%
 boot_flintmean &lt;- flint %&gt;%
   # specify the variable of interest
   specify(response = Pb_initial) %&gt;%
-  # generate 15000 bootstrap samples
-  generate(reps = 15000, type = "bootstrap") %&gt;%
+  # generate 100000 bootstrap samples
+  generate(reps = 100000, type = "bootstrap") %&gt;%
   # calculate the mean of each bootstrap sample
   calculate(stat = "mean")
 ```
@@ -701,16 +703,16 @@ boot_flintmean
 
 ```
 #&gt; Response: Pb_initial (numeric)
-#&gt; # A tibble: 15,000 × 2
+#&gt; # A tibble: 100,000 × 2
 #&gt;   replicate  stat
 #&gt;       &lt;int&gt; &lt;dbl&gt;
-#&gt; 1         1  9.97
-#&gt; 2         2  9.54
-#&gt; 3         3  9.97
-#&gt; 4         4 10.3 
-#&gt; 5         5  9.70
-#&gt; 6         6 11.2 
-#&gt; # … with 14,994 more rows
+#&gt; 1         1  9.46
+#&gt; 2         2 10.4 
+#&gt; 3         3 10.5 
+#&gt; 4         4  9.31
+#&gt; 5         5 13.4 
+#&gt; 6         6 10.6 
+#&gt; # … with 99,994 more rows
 ```
 
 ---
@@ -744,7 +746,7 @@ boot_flintmean %&gt;%
 #&gt; # A tibble: 1 × 2
 #&gt;   lower upper
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1  8.28  13.4
+#&gt; 1  8.25  13.4
 ```
 
 ---
@@ -760,15 +762,15 @@ boot_flintmean %&gt;%
 ## Interpret the confidence interval
 
 .question[
-The 95% confidence interval for the mean lead levels of initial water samples from Flint is (8, 13). Which of the following is the correct interpretation of this interval?
+The 95% confidence interval for the mean lead levels of initial water samples from Flint is (8.2502751, 13.3879632). Which of the following is the correct interpretation of this interval?
 
-**(a)** 95% of the time the mean lead level in this sample is between 8 and 13 ppb.
+**(a)** 95% of the time the mean lead level in this sample is between 8.2502751 and 13.3879632 ppb.
 
-**(b)** 95% of all water samples in Flint have lead levels between 8 and 13 ppb.
+**(b)** 95% of all water samples in Flint have lead levels between 8.2502751 and 13.3879632 ppb.
 
-**(c)** We are 95% confident that the mean lead level in Flint is between 8 and 13 ppb.
+**(c)** We are 95% confident that the mean lead level in Flint is between 8.2502751 and 13.3879632 ppb.
 
-**(d)** We are 95% confident that the mean lead level in this sample is between 8 and 13 ppb.
+**(d)** We are 95% confident that the mean lead level in this sample is between 8.2502751 and 13.3879632 ppb.
 ]
 
 ---
@@ -791,7 +793,7 @@ class: middle
 ## Commonly used confidence levels
 
 .question[
-Which line (orange dash/dot, blue dash, green dot) represents which confidence level?
+Which line (orange dash/dot, blue dash, green dot) represents which confidence level? Options: 90%, 95%, 99%.
 ]
 
 &lt;img src="w6-l02-clt_files/figure-html/unnamed-chunk-20-1.png" width="60%" style="display: block; margin: auto;" /&gt;

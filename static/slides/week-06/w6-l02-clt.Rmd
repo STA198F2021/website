@@ -296,7 +296,7 @@ knitr::include_graphics("img/ci2.png")
 ### Moving towards confidence intervals
 
 
-From the Central Limit Theorem, $$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$  or for the Bernoulli case, $$Z = \frac{\bar{X} - \pi}{\frac{\sqrt{\pi(1-\pi}}{\sqrt{n}}} \sim N(0, 1)$$ 
+From the Central Limit Theorem, $$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0, 1)$$  or for the Bernoulli case, $$Z = \frac{\bar{X} - \pi}{\frac{\sqrt{\pi(1-\pi)}}{\sqrt{n}}} \sim N(0, 1)$$ 
 
 Based on properties of the standard normal distribution, $$P(-1.96 < Z < 1.96)=0.95.$$
 
@@ -389,7 +389,7 @@ res.glue <- flint %>%
 ci.glue=glue("({round(res.glue$lower.ci.lead,2)}, {round(res.glue$upper.ci.lead,2)})") 
 ```
 
-In our sample, `r round(100*res.glue$propover15,0)`% of homes had lead levels over 15 ppb, with a 95% confidence interval for the proportion of homes with high lead of (`r ci.glue`).
+In our sample, `r round(100*res.glue$propover15,0)`% of homes had lead levels over 15 ppb, with a 95% confidence interval for the proportion of homes with high lead of `r ci.glue`.
 
 ---
 
@@ -425,7 +425,7 @@ One example of this would be in a non-inferiority clinical trial for a generic v
 
 ### Sigma Unknown
 
-The interval $$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$ requires an estimate of $\sigma$. In the Bernoulli case, we only estimate one parameter ($\pi$) which then gives us both the mean $\mu=\pi$ and $\sigma=\sqrt{\pi(1-\pi)}$. In the normal case, we need to use the data to get a separate estimate of $\sigma$.
+The interval $$\left(\bar{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}, \bar{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \right)$$ requires an estimate of $\sigma$. In the Bernoulli case, we only estimate one parameter $\pi$, which then gives us both the mean $\mu=\pi$ and $\sigma=\sqrt{\pi(1-\pi)}$. In the normal case, we need to use the data to get a separate estimate of $\sigma$.
 
 If you have taken statistics before, you may remember using $s=\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2$, the sample standard deviation, to estimate $\sigma$. This is generally a good estimate!  
 
@@ -516,7 +516,7 @@ information available in the data to estimate $\sigma$ and thus give us
 information about how reliable our estimate $s$ is. The random
 variable $$t=\frac{\bar{X}-\mu}{\frac{s}{\sqrt{n}}}$$
 has a Student's t distribution with n-1 degrees of freedom,
-represented using the notation $t_{n-1}$. The df are $n-1$ instead of $n$
+represented using the notation $t_{n-1}$. The df are $n-1$ instead of the sample size $n$
 because we lose 1 df by estimating the sample mean with $\bar{x}$. For
 each possible df, there is a different t distribution, with the t
 distribution looking more like the normal as $n$ gets large and $s$ gets
@@ -551,7 +551,7 @@ res.glue.2 <- flint %>%
 ci.glue.2=glue("({round(res.glue.2$lower.ci.lead,2)}, {round(res.glue.2$upper.ci.lead,2)})") 
 ```
 
-In our sample, the estimated mean lead level in initial water samples was `r round(res.glue.2$meanPb,2)` ppb, with a 95% confidence interval for the mean of  (`r ci.glue.2`).
+In our sample, the estimated mean lead level in initial water samples was `r round(res.glue.2$meanPb,2)` ppb, with a 95% confidence interval for the mean of  `r ci.glue.2`.
 
 ---
 
@@ -590,6 +590,8 @@ Calculating a bootstrapped confidence interval is quick and easy using R.  The b
 4. Calculate the bounds of the XX% confidence interval as the middle XX% of the bootstrap distribution 
 
 ---
+
+
 
 # Bootstrapping with tidymodels
 
@@ -636,7 +638,7 @@ flint %>%
 ## Generate bootstrap means
 
 ```{r include=FALSE}
-set.seed(12132021)
+set.seed(1213)
 ```
 
 ```{r}
@@ -644,8 +646,8 @@ set.seed(12132021)
 boot_flintmean <- flint %>%
   # specify the variable of interest
   specify(response = Pb_initial) %>%
-  # generate 15000 bootstrap samples
-  generate(reps = 15000, type = "bootstrap") %>%
+  # generate 100000 bootstrap samples
+  generate(reps = 100000, type = "bootstrap") %>%
   # calculate the mean of each bootstrap sample
   calculate(stat = "mean")
 ```
@@ -691,8 +693,8 @@ boot_flintmean %>%
 
 ```{r include=FALSE}
 # for using these values later
-lower_bound <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.025)) %>% pull() %>% round()
-upper_bound <- boot_flintmean %>% summarize(upper_bound = quantile(stat, 0.975)) %>% pull() %>% round()
+lower_bound <- boot_flintmean %>% summarize(lower_bound = quantile(stat, 0.025)) %>% pull() 
+upper_bound <- boot_flintmean %>% summarize(upper_bound = quantile(stat, 0.975)) %>% pull() 
 ```
 
 ```{r echo=FALSE, out.width="70%"}
@@ -740,7 +742,7 @@ class: middle
 ## Commonly used confidence levels
 
 .question[
-Which line (orange dash/dot, blue dash, green dot) represents which confidence level?
+Which line (orange dash/dot, blue dash, green dot) represents which confidence level? Options: 90%, 95%, 99%.
 ]
 
 ```{r echo=FALSE}
