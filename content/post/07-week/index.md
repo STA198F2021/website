@@ -19,7 +19,7 @@ title: 'Week 7 - Evaluating Hypotheses'
 ### Tasks
 
 - Complete the [readings](/post/07-week/#readings)
-- Form your project team by Friday, October 8
+- Form your project team by Friday, October 8 and let me know the members!
 
 
 

@@ -91,12 +91,12 @@ Let's go through the hypothesis testing paradigm.
 ---
 
 - State the claims
-  - **Claim 1**: The shipment is consistent with a population mean of 0.02 mg estrogen.
+  - **Claim 1**: The shipment is consistent with a population mean of 0.02 mg estrogen.  $H_0: \mu=0.02$
   
-  - **Claim 2**: The shipment is not consistent with a population mean of 0.02 mg estrogen.
+  - **Claim 2**: The shipment is not consistent with a population mean of 0.02 mg estrogen.  $H_A: \mu \neq 0.02$
   
 - Choose sampling strategy, design analysis plan, collect, and analyze data
-  - Plan is to sample 50 pills at random and use a one-sample t-test to evaluate whether they are consistent with a population with mean 0.2 mg estrogen
+  - Plan is to sample 50 pills at random and use a one-sample t-test to evaluate whether they are consistent with a population with mean 0.02 mg estrogen
   - 50 pills were sampled with a sample mean $\bar{x}=0.017$ and sample standard deviation $s=0.008$
 
 ---
@@ -184,6 +184,71 @@ Technically, the probability of getting "data like ours, or more extreme than ou
 ### P-Value
 
 Note that the p-value is a conditional probability, the probability of getting data like ours or more extreme data given that $H_0$ is true, and it conditions on our null hypothesis being true.  It does not provide direct information on the probability that $H_0$ is true given our data.
+
+
+
+---
+
+class: middle
+
+# P-Values
+
+---
+
+### P-value Defined
+
+The *p-value* is the conditional probability, under the assumption of no effect or no difference, $H_0$, of obtaining a result equal to or more extreme than what was actually observed.
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers think a p-value of 0.05 means the null hypothesis has a probability of only 5%.  This is wrong!
+
+---
+
+### Incorrect P-Value Interpretations
+
+Many researchers will see $p=0.05$ and state that there is a 95% or greater chance that the null hypothesis is incorrect.  This is wrong!
+
+A p-value is calculated *assuming* that $H_0$ is true.  It cannot be used to tell us how likely it is that assumption is correct.
+
+---
+
+### Hypothesis Testing Paradigm
+
+The paradigm of hypothesis testing tries to limit the overall number of incorrect decisions over the long run.  While we of course want to know if any one study is showing us something real, or a type I or type II error, the paradigm does not give us the tools to determine this.
+
+---
+
+### What DO You Do with a P-value, Then?
+
+Ideally, you evaluate a p-value in light of other information, such as a proposed biological mechanism, supporting evidence in the literature, size and quality of the study, and size of the purported effect.
+
+In addition, when you interpret a p-value, be sure you are aware of other important factors that can inflate the false positive rate, e.g. multiple tests, "hidden" multiple tests (e.g., testing most appropriate form of covariate or for an interaction or other model selection procedures), changes to sample size, etc.
+
+---
+
+### I'm Nervous about P-values.  What Alternatives are There?
+
+- Many researchers prefer confidence intervals, which better represent the range of effects that are "compatible with the data"
+
+- They are sometimes used as a hypothesis test (i.e., reporting results as significant when confidence interval does not include null value) and share many of the properties of p-values we have discussed
+
+- Like p-values, confidence intervals do not offer a mechanism to unite external evidence with that provided by the study at hand
+
+- *Bayesian methods* can be used to incorporate current study results with prior knowledge in order to provide a probability a hypothesis is true conditional on the current data (Bayes' theorem can get us what we want to know!)
+---
+### Correspondence between Hypothesis Tests and Confidence Intervals
+
+We can examine a confidence interval to decide whether a proposed value for the population mean is reasonable.
+
+Suppose we are testing $H_0:  \mu=0.02$ versus $H_A:  \mu \neq 0.02$ using a significance level of $\alpha=0.05$.   An alternative way to do this is to construct a 95% confidence interval for $\mu$ and use the following decision rule.
+- If $0.02$ falls outside the confidence interval, reject $H_0$
+- If $0.02$ falls inside the confidence interval, do not reject $H_0$
+
+We may not want to make a binary decision but instead present a confidence interval and provide discussion
+
 
 ---
 

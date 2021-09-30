@@ -328,6 +328,8 @@ know that's what everyone wants. This is one reason Bayesian inference is nice!)
 - [Seeing Theory](https://seeing-theory.brown.edu/frequentist-inference/index.html#section2) has a great interactive applet regarding confidence intervals.
 ---
 
+class: middle
+
 ### Confidence Intervals
 
 ```{r echo=FALSE}

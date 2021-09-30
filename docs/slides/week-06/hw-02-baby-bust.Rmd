@@ -56,7 +56,7 @@ births <- read_excel("monthly births.xlsx",sheet=1)
 ```
 
 
-2. Now create two plots that compare the ratios of monthly births in 2020 and 2021 (where data are available), separately, to the monthly averages over the years 2016-2019. Use nice labels in both plots (e.g., no numbers representing the months).  In the first plot, use faceting to show a separate frame for each of the 8 countries in the data set, and in each facet distinguish the years 2020 and 2021 from each other using different colors.  The second plot should accomplish the same goal but should focus on the states and province in the data.  Comment on the trends you see in the data.
+2. Now create two plots that show the ratios of monthly births for 2020 vs 2016-2019 and 2021 vs 2016-2019 (where data are available), separately. Use nice labels in both plots (e.g., no numbers representing the months).  In the first plot, use faceting to show a separate frame for each of the 8 countries in the data set, and in each facet distinguish the years 2020 and 2021 from each other using different colors.  The second plot should accomplish the same goal but should focus on the states and province in the data.  Comment on the trends you see in the data.
 
 
 3. In order to explore general trends in births over time, now create a line graph separately for each country (but not states or the province) in the data set, showing the count of births by month, with color used to distinguish the lines for each year separately (2016, 2017, etc.).  Comment on (a) seasonality in birth patterns for each country, (b) general trends across years in birth patterns and counts for each country, and (c) whether there appears to be evidence for a disruption of the birth pattern in each country due to COVID-19.
