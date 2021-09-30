@@ -533,6 +533,8 @@ If the variances are unequal, the degrees of freedom are difficult to derive, an
 tsum.test(mean.x=13.33, s.x=4.02, n.x=85,
           mean.y=10.73, s.y=4.25, n.y=120,
           var.equal=FALSE)
+# If we had a variable with the ratings, say y, and then a variable for gender, instead of summary data, we would use the following code
+# t.test(y~gender,var.equal=FALSE)
 ```
 
 Based on both the test and the 95% confidence interval, we have evidence to reject the null hypothesis that males and females place the same emphasis on looks and personality. In this population, it appears that females place more emphasis on personality than males.
