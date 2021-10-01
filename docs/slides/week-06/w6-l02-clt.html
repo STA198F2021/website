@@ -682,8 +682,8 @@ flint %&gt;%
 boot_flintmean &lt;- flint %&gt;%
   # specify the variable of interest
   specify(response = Pb_initial) %&gt;%
-  # generate 100000 bootstrap samples
-  generate(reps = 100000, type = "bootstrap") %&gt;%
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %&gt;%
   # calculate the mean of each bootstrap sample
   calculate(stat = "mean")
 ```
@@ -703,7 +703,7 @@ boot_flintmean
 
 ```
 #&gt; Response: Pb_initial (numeric)
-#&gt; # A tibble: 100,000 × 2
+#&gt; # A tibble: 15,000 × 2
 #&gt;   replicate  stat
 #&gt;       &lt;int&gt; &lt;dbl&gt;
 #&gt; 1         1  9.46
@@ -712,7 +712,7 @@ boot_flintmean
 #&gt; 4         4  9.31
 #&gt; 5         5 13.4 
 #&gt; 6         6 10.6 
-#&gt; # … with 99,994 more rows
+#&gt; # … with 14,994 more rows
 ```
 
 ---
@@ -746,7 +746,7 @@ boot_flintmean %&gt;%
 #&gt; # A tibble: 1 × 2
 #&gt;   lower upper
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1  8.25  13.4
+#&gt; 1  8.30  13.4
 ```
 
 ---
@@ -762,15 +762,15 @@ boot_flintmean %&gt;%
 ## Interpret the confidence interval
 
 .question[
-The 95% confidence interval for the mean lead levels of initial water samples from Flint is (8.2502751, 13.3879632). Which of the following is the correct interpretation of this interval?
+The 95% confidence interval for the mean lead levels of initial water samples from Flint is (8.3034369, 13.419074). Which of the following is the correct interpretation of this interval?
 
-**(a)** 95% of the time the mean lead level in this sample is between 8.2502751 and 13.3879632 ppb.
+**(a)** 95% of the time the mean lead level in this sample is between 8.3034369 and 13.419074 ppb.
 
-**(b)** 95% of all water samples in Flint have lead levels between 8.2502751 and 13.3879632 ppb.
+**(b)** 95% of all water samples in Flint have lead levels between 8.3034369 and 13.419074 ppb.
 
-**(c)** We are 95% confident that the mean lead level in Flint is between 8.2502751 and 13.3879632 ppb.
+**(c)** We are 95% confident that the mean lead level in Flint is between 8.3034369 and 13.419074 ppb.
 
-**(d)** We are 95% confident that the mean lead level in this sample is between 8.2502751 and 13.3879632 ppb.
+**(d)** We are 95% confident that the mean lead level in this sample is between 8.3034369 and 13.419074 ppb.
 ]
 
 ---

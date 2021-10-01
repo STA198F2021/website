@@ -646,8 +646,8 @@ set.seed(1213)
 boot_flintmean <- flint %>%
   # specify the variable of interest
   specify(response = Pb_initial) %>%
-  # generate 100000 bootstrap samples
-  generate(reps = 100000, type = "bootstrap") %>%
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %>%
   # calculate the mean of each bootstrap sample
   calculate(stat = "mean")
 ```
