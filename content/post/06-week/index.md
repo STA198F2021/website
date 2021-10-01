@@ -20,7 +20,7 @@ title: 'Week 6 - Normal Distribution and Confidence Intervals'
 
 - Complete the [readings](/post/06-week/#readings)
 - Complete the [assignments](/post/06-week/#assignments)
-- (Optional but highly encouraged) Complete the [Course feedback survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYQkmofaddEJLg-Rh784Tz0RUMUhLSFM2WFJUS0pKTUtVQk5RSzhVRFNIQi4u) by 5pm on Friday, October 1st (not graded)
+
 
 ### Class Slides and Activities
 
