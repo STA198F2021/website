@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to Modelling</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Modelling
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+class: middle
+
+# What is a model?
+
+---
+
+## Modelling
+
+- Use models to explain the relationship between variables and to make predictions
+- For now we will focus on **linear** models (but remember there are *many* *many* other types of models too!)
+
+.pull-left[
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+---
+
+class: middle
+
+# Data: Artisanal and Small-Scale Gold Mining in the Peruvian Amazon
+
+---
+
+## Mercury and Assets
+
+Are wealthier individuals less likely to have high mercury exposures?
+
+Today we will explore the relationship between levels of mercury in hair and an index measuring socio-economic position as a function of household assets. Note that asset-based indices are not at all a perfect proxy and may perform poorly, particularly in low income countries (the World Bank classifies Peru as an upper-middle income country). 
+
+Because the scale of this variable  is not easily interpreted, we will convert it to standard deviation units by subtracting the means and dividing by the standard deviation (like getting a z-score). Then a one-unit increase in the variable is a one standard deviation increase.
+
+---
+  
+### Packages and Data Manipulation
+
+
+
+```r
+library(tidyverse)
+library(tidymodels)
+library(readr)
+mercury &lt;- readr::read_csv("mercury_reg.csv")
+mercury &lt;-
+  mercury %&gt;%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %&gt;%
+  #another variable we may use later
+  mutate(form_min_sc=scale(FM_buffer)) %&gt;%
+  #so I don't have to remember coding
+  mutate(sex,sex_cat=ifelse(sex==1,"Male","Female")) %&gt;%
+  mutate(native,native_cat=ifelse(native==1,"Native","Non-native")) 
+```
+
+---
+
+Recall the distribution of hair mercury in ppm is skewed.
+
+
+```r
+ggplot(data = mercury, aes(x = exp(lhairHg))) +
+  geom_histogram() +
+  labs(x = "Mercury (ppm)", y = NULL)
+```
+
+&lt;img src="w8-l01-intro-model_files/figure-html/origunits-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(data = mercury, aes(x = lhairHg)) +
+  geom_histogram() +
+  labs(x = "Mercury (log ppm)", y = NULL)
+```
+
+&lt;img src="w8-l01-intro-model_files/figure-html/xform-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Because the models we will discuss to start prefer data that are approximately normally distributed, we will work with the log of hair mercury concentrations.
+
+---
+
+In our model, we will use assets to *predict* our *response variable*, the log of hair mercury concentrations. The regression model does not require predictors to follow any specific distributions, which is a good thing here!
+
+
+```r
+ggplot(data = mercury, aes(x = assets_sc)) +
+  geom_histogram() +
+  labs(x = "Assets (standardized)", y = NULL)
+```
+
+&lt;img src="w8-l01-intro-model_files/figure-html/assetshist-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+---
+
+## Models as functions
+
+- We can represent relationships between variables using **functions**
+- A function is a mathematical concept: the relationship between an output and one or more inputs
+  - Plug in the inputs and receive back the output
+  - Example: The formula `\(y = 3x + 7\)` is a function with input `\(x\)` and output `\(y\)`. If `\(x\)` is `\(5\)`, `\(y\)` is `\(22\)`, `\(y = 3 \times 5 + 7 = 22\)`
+
+---
+
+
+## Hair mercury as a function of assets
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha=.1) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Hair mercury as a function of assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+  )
+```
+]
+]
+
+---
+
+
+
+## With no error bars
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha=.1) +
+  geom_smooth(method = "lm", 
+*             se = FALSE) +
+  labs(
+    title = "Hair mercury as a function of assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+  )
+```
+]
+]
+---
+
+## With different cosmetic choices...
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha=.1) +
+  geom_smooth(method = "lm", se = FALSE,
+*             color = "#8E2C90", linetype = "dashed", size = 3) +
+  labs(
+    title = "Hair mercury as a function of assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+  )
+```
+]
+]
+
+---
+
+## Using a different smoother: GAM
+
+
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha=.1) +
+* geom_smooth(method = "gam",
+              se = FALSE, color = "#8E2C90") +
+  labs(
+    title = "Hair mercury as a function of assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+  )
+```
+]
+]
+
+---
+
+
+## Vocabulary
+
+- **Response variable:** Variable whose behavior or variation you are trying to understand, on the y-axis
+
+--
+- **Explanatory variables:** Other variables that you want to use to explain the variation in the response, on the x-axis
+
+--
+- **Predicted value:** Output of the **model function**
+  - The model function gives the typical (expected) value of the response variable *conditioning* on the explanatory variables
+  
+--
+- **Residuals:** A measure of how far each case is from its predicted value (based on a particular model)
+  - Residual = Observed value - Predicted value
+  - Tells how far above/below the expected value each case is
+
+---
+
+
+## Residuals
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+.small[
+
+```r
+hg_asset_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(lhairHg ~ assets_sc, data = mercury)
+
+hg_asset_fit_tidy &lt;- tidy(hg_asset_fit$fit) 
+hg_asset_fit_aug  &lt;- augment(hg_asset_fit$fit) %&gt;%
+  mutate(res_cat = ifelse(.resid &gt; 0, TRUE, FALSE))
+
+ggplot(data = hg_asset_fit_aug) +
+  geom_point(aes(x = assets_sc, y = lhairHg, color = res_cat)) +
+  geom_line(aes(x = assets_sc, y = .fitted), size = 0.75, color = "#8E2C90") + 
+  labs(
+    title = "Hair mercury by assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+  ) +
+  guides(color = FALSE) +
+  scale_color_manual(values = c("#260b27", "#e6b0e7")) +
+  geom_text(aes(x = -2, y = 5), label = "Positive residual", color = "#e6b0e7", hjust = 0, size = 8) +
+  geom_text(aes(x = 0, y = -5), label = "Negative residual", color = "#260b27", hjust = 0, size = 8)
+```
+]
+]
+]
+
+
+---
+
+## Multiple explanatory variables
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-narrow[
+.question[
+How, if at all, does the relationship between hair mercury and household assets of individuals vary by whether or not they live in a town classified as native?
+]
+]
+.pull-right-wide[
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Hair mercury as a function of assets, by village type",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)",
+    color = "NULL"
+  ) +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Extending regression lines
+
+The prior lines were nice in that they did not extrapolate beyond the range of observed data. Extrapolation beyond the range of data observed is quite risky and is generally best avoided, though sometimes the goal is to do so (e.g., weather forecasting, election prediction).
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l01-intro-model_files/figure-html/unnamed-chunk-10-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method = "lm",
+              se = FALSE,
+*             fullrange = TRUE) +
+  labs(
+    title = "Hair mercury as a function of assets, by village type",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)",
+    color = "NULL"
+  )  +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Models - upsides and downsides
+
+- Models can sometimes reveal patterns that are not evident in a graph of the data. This is a great advantage of modeling over simple visual inspection of data. 
+- There is a real risk, however, that a model is imposing structure that is not really there on the scatter of data, just as people imagine animal shapes in the stars. A skeptical approach is always warranted.
+
+---
+
+## Variation around the model...
+
+is just as important as the model, if not more!  
+
+*Statistics is the explanation of variation in the context of what remains unexplained.*
+
+- The scatter suggests that there might be other factors that account for large parts of variability in hair mercury levels, or perhaps just that randomness plays a big role.
+- Adding more explanatory variables to a model can sometimes usefully reduce the size of the scatter around the model. (We'll talk more about this later.)
+
+---
+
+## How do we use models?
+
+- Explanation: Characterize the relationship between `\(y\)` and `\(x\)` via *slopes* for numerical explanatory variables or *differences* for categorical explanatory variables
+- Prediction: Plug in `\(x\)`, get the predicted `\(y\)`
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,483 @@
+---
+title: "Model Fitting and Interpretation"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>",
+  highlight = TRUE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(tidymodels)
+library(ggtext)
+library(knitr)
+library(kableExtra)
+options(dplyr.print_min = 10, dplyr.print_max = 6)
+```
+class: middle
+
+# Models with numeric explanatory variables
+
+---
+
+class: middle
+
+# Data: Artisanal and Small-Scale Gold Mining in the Peruvian Amazon
+
+---
+
+## Mercury and Assets
+
+Are mercury concentrations in hair related to household socioeconomic position, as measured by assets?
+
+```{r packages}
+library(tidyverse)
+library(tidymodels)
+library(readr)
+mercury <- readr::read_csv("mercury_reg.csv")
+mercury <-
+  mercury %>%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %>%
+  #another variable we may use later
+  mutate(form_min_sc=scale(FM_buffer)) %>%
+  #so I don't have to remember coding
+  mutate(sex,sex_cat=ifelse(sex==1,"Male","Female")) %>%
+  mutate(native,native_cat=ifelse(native==1,"Native","Non-native")) 
+```
+
+---
+## Goal: Predict mercury from assets
+
+$$\widehat{y}_{i} = \beta_0 + \beta_1 \times x_{i}$$
+Here $y_i$ represents log hair mercury for subject $i$ and $x_i$ represents standardized household income.
+```{r hg_asset_plot, echo=FALSE, warning=FALSE}
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(
+    title = "Hair mercury as a function of assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair Mercury (log ppm)"
+  )
+```
+
+
+---
+
+```{r out.width="98%", echo=FALSE}
+knitr::include_graphics("img/tidymodels.png")
+```
+
+---
+
+## Step 1: Specify model
+
+```{r}
+linear_reg()
+```
+
+---
+
+## Step 2: Set model fitting *engine*
+
+```{r}
+linear_reg() %>%
+  set_engine("lm") # lm: linear model
+```
+
+---
+
+## Step 3: Fit model & estimate parameters
+
+... using **formula syntax**
+
+```{r fit-model}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc, data = mercury)
+```
+
+---
+
+## A closer look at model output
+
+```{r ref.label="fit-model", echo=FALSE}
+```
+
+.large[
+$$\widehat{y}_{i} = 0.2795 - 0.3577 \times x_{i}$$
+]
+
+---
+
+## A tidy look at model output
+
+```{r}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc, data = mercury) %>%
+  tidy()
+```
+UPDATE UPDATE
+.large[
+$$\widehat{y}_{i} = 0.2795 - 0.3577 \times x_{i}$$
+]
+
+---
+
+## Slope and intercept
+
+.large[
+$$\widehat{y}_{i} = 0.2795 - 0.3577 \times x_{i}$$
+]
+
+--
+
+- **Slope:** For each standard deviation increase in assets, the log hair mercury level is expected to be lower, on average, by 0.3577 log ppm.
+
+
+
+- perhaps not a very useful statement given the scale
+
+
+- **Intercept:** Individuals with household assets at the mean level are expected to have hair mercury concentrations of 0.2795 log ppm, on average
+
+---
+class: middle
+
+# Models with log transformation
+
+---
+
+## Working with logs
+
+- Subtraction and logs: $log(a) − log(b) = log(a / b)$
+
+--
+- Natural logarithm: $e^{log(x)} = x$
+
+--
+- We can use these identities to "undo" the log transformation
+
+---
+
+## Interpreting the slope
+
+The slope coefficient for the log transformed model is -0.3577, meaning the log mercury difference between people whose household incomes are one SD apart is predicted to be -0.3577 log ppm.
+
+--
+
+.question[
+Using this information, and properties of logs that we just reviewed, fill in the blanks in the following alternate interpretation of the slope:
+
+>For each additional SD the household assets are greater, the hair mercury concentration is expected to be `___` , on average, by a factor of `___`.
+]
+
+---
+
+>For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+
+
+$$ log(\text{hair Hg for assets x+1}) - log(\text{hair Hg for assets x}) = -0.3577 $$
+
+--
+
+$$ log\left(\frac{\text{hair Hg for assets x+1}}{\text{hair Hg for assets x}}\right) = -0.3577 $$
+
+--
+
+$$ e^{log\left(\frac{\text{Hg for assets x+1}}{\text{Hg for assets x}}\right)} = e^{-0.3577} $$
+
+--
+
+$$ \frac{\text{Hg for assets x+1}}{\text{Hg for assets x}} \approx 0.70 $$
+
+--
+
+For each SD increase in assets, the hair Hg is expected to be lower, on average, by a factor of 0.70.
+
+---
+
+## Correlation does not imply causation
+
+Remember this when interpreting model coefficients
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/cell_phones.png")
+```
+
+.footnote[
+Source: XKCD, [Cell phones](https://xkcd.com/925/)
+]
+
+---
+
+class: middle
+
+# Parameter estimation
+
+---
+
+## Linear model with a single predictor
+
+- We're interested in $\beta_0$ (population parameter for the intercept) and $\beta_1$ (population parameter for the slope) in the following model:
+
+$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$
+
+--
+- Tough luck, you can't have them...
+
+--
+- So we use sample statistics to estimate them:
+
+$$\hat{y}_{i} = b_0 + b_1~x_{i}$$
+
+---
+
+## Least squares regression
+
+- The regression line minimizes the sum of squared residuals.
+
+--
+- If $e_i = y_i - \hat{y}_i$, then, the regression line minimizes 
+$\sum_{i = 1}^n e_i^2$.
+
+---
+
+## Visualizing residuals
+
+```{r vis-res-1, echo=FALSE, out.width="70%"}
+hg_assets_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc, data = mercury)
+
+hg_assets_fit_tidy <- tidy(hg_assets_fit$fit) 
+hg_assets_fit_aug  <- augment(hg_assets_fit$fit) %>%
+  mutate(res_cat = ifelse(.resid > 0, TRUE, FALSE))
+
+p <- ggplot(data = hg_assets_fit_aug, 
+            aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha = 0.1) + 
+  labs(
+    title = "Hair mercury by assets",
+    subtitle = "Peruvian Amazon",
+    x = "Household assets (standardized)",
+    y = "Hair mercury (log ppm)"
+    ) +
+  #coord_cartesian(xlim = c(0, 250), ylim = c(0, 200)) +
+  theme(plot.subtitle = element_text(colour = "#E48957", face = "bold", size = rel(1.5)))
+p
+```
+
+---
+
+## Visualizing residuals (cont.)
+
+```{r vis-res-2, echo=FALSE, out.width="70%"}
+p <- p + 
+  geom_smooth(method = "lm", color = "#8E2C90", se = FALSE) +
+  geom_point(mapping = aes(y = .fitted), color = "#E48957") +
+  labs(subtitle = "Data + least squares line")
+p
+```
+
+---
+
+## Visualizing residuals (cont.)
+
+```{r vis-res-3, echo = FALSE, out.width="70%"}
+p + 
+  geom_segment(mapping = aes(xend = assets_sc, yend = .fitted), color = "#E48957", alpha = 0.4) +
+  labs(subtitle = "Data + least squares line + residuals")
+```
+
+---
+
+## Properties of least squares regression
+
+- The regression line goes through the center of mass point, the coordinates corresponding to average $x$ and average $y$, $(\bar{x}, \bar{y})$:  
+
+$$\bar{y} = b_0 + b_1 \bar{x} ~ \rightarrow ~ b_0 = \bar{y} - b_1 \bar{x}$$
+
+--
+- The slope has the same sign as the correlation coefficient: $b_1 = r \frac{s_y}{s_x}$
+
+--
+- The sum of the residuals is zero: $\sum_{i = 1}^n e_i = 0$
+
+--
+- The residuals and $x$ values are uncorrelated
+
+---
+
+## Aside: Correlation Coefficient
+
+The *correlation coefficient* describes the linear relationship between $x$ and $y$ on the standard deviation scale.
+
+```{r corr}
+cor(mercury$lhairHg,mercury$assets_sc,use="complete.obs")
+```
+
+Here, for each one SD increase in assets, we expect a `r round(cor(mercury$lhairHg,mercury$assets_sc,use="complete.obs"),2)` SD increase (so thus a `r -round(cor(mercury$lhairHg,mercury$assets_sc,use="complete.obs"),2)` decrease) in standard deviations of log hair mercury.
+
+---
+
+
+class: middle
+
+# Models with categorical explanatory variables
+
+---
+
+## Categorical predictor with 2 levels
+
+.pull-left-narrow[
+.small[
+```{r echo=FALSE}
+mercury %>% 
+  filter(lhairHg != "NA") %>%
+  select(lhairHg, assets_sc, native_cat) %>%
+  print(n = 20)
+```
+]
+]
+.pull-right-wide[
+- `Native`: community classified as native by Peruvian government
+- `Non-native`: community does not have native classification
+]
+
+---
+
+## Mercury & native community relationship
+
+```{r hg-native-fit}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ native_cat, data = mercury) %>%
+  tidy()
+```
+
+---
+
+## Mercury and native communities
+
+Define $\text{Non-native}_i$=1 if non-native community and 0 otherwise.
+
+$$\widehat{y_i} = 1.12 - 1.11~\text{Non-native}_i$$
+
+- **Slope:** Residents of non-native communities, on average, are expected to have exposures that are -1.11 log ppm lower, on average, than residents of native communities.  Alternatively, the hair Hg is expected to be lower, on average, by a factor of $e^{-1.11}=0.33$ among residents of non-native communities.
+  - Compares baseline level (`Native`) to the other level (`Non-native`)
+    
+- **Intercept:** Individuals living in native communities are expected to have hair mercury exposures of 1.12 log ppm.
+
+---
+
+## Relationship between mercury and individual community
+
+```{r hg-comm}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ community, data = mercury) %>%
+  tidy()
+```
+
+---
+
+## Dummy variables
+
+```{r ref.label="hg-comm", echo = FALSE}
+```
+
+- When the categorical explanatory variable has many levels, they're encoded to **dummy variables**
+- Each coefficient describes the expected difference between heights in that particular community compared to the baseline level
+
+---
+
+## Categorical predictor with 3+ levels
+
+.pull-left-wide[
+```{r echo=FALSE}
+dummy_df <- mercury %>% 
+  select(community) %>% 
+  group_by(community) %>% 
+  sample_n(1) %>%
+  mutate(
+    BI    = as.integer(ifelse(community == "Boca Isiriwe", 1L, 0)),
+    BM   = as.integer(ifelse(community == "Boca Manu", 1L, 0)),
+    Cay    = as.integer(ifelse(community =="Caychihue", 1L, 0)),
+    Cho    = as.integer(ifelse(community == "Choque", 1L, 0)),
+    Dia    = as.integer(ifelse(community == "Diamante", 1L, 0)),
+    Hue    = as.integer(ifelse(community == "Huepetuhe", 1L, 0)),
+    Isl    = as.integer(ifelse(community == "Isla de los Valles", 1L, 0)),
+    Mas    = as.integer(ifelse(community == "Masenawa", 1L, 0))
+  )
+
+dummy_df <-
+  dummy_df %>%
+  filter(community %in% c("Boca Colorado","Boca Isiriwe","Boca Manu","Choque","Caychihue","Diamante","Huepetuhe","Isla de los Valles","Masenawa"))
+
+dummy_df %>%
+  kable(align = "lccccccc") %>%
+  kable_styling() %>%
+  column_spec(2, width = "10em", background = spec_color(dummy_df$BI[1:11], end = 0.8), color = "white") %>%
+  column_spec(3, width = "10em", background = spec_color(dummy_df$BM[1:10], end = 0.8), color = "white") %>%
+  column_spec(4, width = "10em", background = spec_color(dummy_df$Cay[1:9], end = 0.8), color = "white") %>%
+  column_spec(5, width = "10em", background = spec_color(dummy_df$Cho[1:9], end = 0.8), color = "white") %>%
+  column_spec(6, width = "10em", background = spec_color(dummy_df$Dia[1:9], end = 0.8), color = "white") %>%
+  column_spec(7, width = "10em", background = spec_color(dummy_df$Hue[1:9], end = 0.8), color = "white") %>%
+  column_spec(8, width = "10em", background = spec_color(dummy_df$Isl[1:9], end = 0.8), color = "white") %>%
+  column_spec(9, width = "10em", background = spec_color(dummy_df$Mas[1:9], end = 0.8), color = "white") 
+```
+
+]
+.pull-right-narrow[
+.small[
+```{r echo=FALSE}
+mercury %>% 
+  select(lhairHg, community) %>%
+  print(n = 20)
+```
+]
+]
+etc. for the other communities. Note Boca Colorado, as the *referent community*, will take value 0 for all dummy/indicator variables.
+
+---
+
+## Relationship between mercury and community
+
+.small[
+```{r ref.label="hg-comm", echo=FALSE}
+```
+
+- **Boca Colorado** hair mercury levels are expected, on average, to be **0.614 log ppm**.
+- **Boca Isiriwe** hair mercury levels are expected, on average, to be **1.20 log ppm higher** than *Boca Colorado* levels, at **1.814 log ppm** on average.
+- **Boca Manu** hair mercury levels are expected, on average, to be **0.833 log ppm higher** than *Boca Colorado* levels, at **1.447 log ppm** on average.
+- **Choque** hair mercury levels are expected, on average, to be **0.778 log ppm lower** than *Boca Colorado* levels, at **-0.164 log ppm** on average.
+- etc. It can be nice to have a table showing the estimated mean (along with uncertainty measures -- coming soon) for each community, and a plot can also be useful.
+]
+
+

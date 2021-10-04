@@ -5,7 +5,7 @@
     <link>https://sta198f2021.github.io/website/authors/</link>
       <atom:link href="https://sta198f2021.github.io/website/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>Authors</title>
@@ -69,7 +69,7 @@
     <item>
       <title></title>
       <link>https://sta198f2021.github.io/website/authors/admin/</link>
-      <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/authors/admin/</guid>
       <description>&lt;p&gt;Rigorous introduction to health data science using current applications in biomedical research, epidemiology, and health policy. Use modern statistical software to conduct reproducible data exploration, visualization, and analysis. Interpret and translate results for interdisciplinary researchers. Critically evaluate data-based claims, decisions, and policies. Includes exploratory data analysis, visualization, basics of probability and inference, predictive modeling and classification. This course focuses on the R computing language. No statistical or computing background is necessary.&lt;/p&gt;
 &lt;p&gt;Check out our &lt;a href=&#34;https://www.introds.org/&#34;&gt;centralized resource page for intro data science courses&lt;/a&gt; for great tips and help throughout the course.&lt;/p&gt;

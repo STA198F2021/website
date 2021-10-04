@@ -1,0 +1,117 @@
+---
+title: 'Lab #06: Mercury Levels by Settlement Type'
+subtitle: 'due Wednesday, October 13, 4:00 PM'
+output:
+  tufte::tufte_html:    
+    css: "sta199-labs.css"
+    tufte_variant: envisioned
+    highlight: pygments
+    toc: no
+    toc_depth: 1
+  html_document:
+    toc: no
+    toc_depth: '1'
+    df_print: paged
+link-citations: yes
+editor_options:
+  chunk_output_type: console
+---
+
+## Goals
+
+-   Construct confidence intervals
+-   Conduct hypothesis tests
+-   Interpret confidence intervals and results of hypothesis tests in context of the data
+
+## Getting Started
+
+Log in to GitHub to determine your team number and members for Lab 6.
+
+- Introduce yourself.
+- Find a one hour block of time outside of class that you can use to work on the
+lab / project if needed. You may not need to use this, but it is good to have it
+in reserve. Tools like [Doodle](https://doodle.com/en/)
+and [When2Meet](https://www.when2meet.com/) are helpful.
+- Determine how your group will communicate (email, text, slack, etc).
+
+
+## Artisanal and Small Scale Gold Mining in the Peruvian Amazon
+
+Artisinal and small scale gold mining has grown significantly over the past twenty years. It has the potential to provide strong socioeconomic benefits to individuals and communities. However, unlike large-scale mining, which is governed by regulatory controls and state standards, regulation of artisinal and small scale mining is often poorly-policed with a lack of enforcement, leading to human and labor rights conflicts, safety issues, and environmental degradation. One of the major associated environmental contaminants is mercury -- the miners themselves are subject to mercury vapor inhalation, and contamination of fish in nearby waterways is a concern for the general population.
+
+Professor Bill Pan in Duke's Global Health Institute in collaboration with colleagues in the US and Peru designed and conducted a population-based mercury exposure assessment in 23 communities around the Amarakaeri Communal Reserve, which is bordered by an area of significant artisinal and small scale gold mining activity. In this lab we explore mercury levels in hair samples (`lhairHg`, on the scale of log ppm), which are an indicator of chronic exposure over roughly one year, and in blood samples (`lbloodHg`, on the scale of log ppm), which measure exposure over just the past few months. We are curious about the correspondence between hair and blood measures, as one measure of how much fluctuation there is in exposure over time. In addition, we would like to explore whether exposure levels are different for those living in communities classified as indigenous or native `native` (1=yes, 0=no) by the Peruvian government.
+
+Other variables in the dataset of potential interest for this assignment include `hid` (household ID), `withinid` (ID of the individual within the household), `cid` (community ID), `community` (community name), `longitude`, and `latitude` (these refer to the household location).
+
+
+
+```{r datasteps, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(infer)
+
+mercury <- readr::read_csv("06/mercury_lab6.csv")
+
+```
+
+
+
+
+# Exercises
+
+1. First, we would like to explore whether the hair mercury levels are different in native/indigenous and non-native/indigenous communities. Create a single plot that shows the histograms of hair mercury levels (on the log scale) by native status. Be sure to use informative labels for all variables (you may wish to create a new native variable that contains a nicer variable label, e.g. "native" instead of 1). Provide a short interpretation of the plot, with a focus on whether there appears to be any evidence of a difference between groups and on whether the assumptions for a t-test appear to be satisfied.
+
+
+2. Determine which type of t-test is best suited to evaluating the hypothesis.  Carry out this test and interpret its results.  In addition, provide a 95% confidence interval for the mean difference in log hair mercury levels as a function of community native status.
+
+
+3. We want to evaluate whether the log mercury levels in hair and blood are the same. First, provide descriptive statistics regarding the number of observations with both hair and blood mercury, the number of observations with only hair mercury, the number of observations with only blood mercury, and the number of observations with no mercury measures.
+
+HINT: the `janitor` library contains the function `tabyl` that is an easy way to make cross-tabulated tables. For example, if you have two logical variables, tabyl(var1,var2) will give you counts of all possible combinations of TRUE and FALSE. [Click here for details](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html).
+
+
+
+4. When we have large fractions of missing data, we often worry about representativeness of our sample. Create (1) a box plot showing measured levels of blood mercury for those with observed and missing hair mercury, and (2)  a box plot showing measured levels of hair mercury for those with observed and missing blood mercury. Comment on any patterns in the data.
+
+
+
+
+
+5. Program R to provide a table showing the fraction of missing (a) hair and (b) mercury measures for each community. Comment on any patterns in these data.  
+
+
+
+
+6. Now filter the data to include only observations with both hair and blood measures available. Create a  scatter plot with hair mercury on the x-axis and blood mercury on the y-axis (both in log ppm units), using `geom_abline()` to draw the $x=y$ line through the points (i.e., intercept 0 and slope 1). Interpret the plot.
+
+
+7. Simulate the null distribution for a test of the hypothesis that the difference between log hair and blood mercury measures is zero. Be sure to set a seed so that you get the same result each time you knit the file. Provide a histogram of the simulation-based null distribution and indicate the location your point estimate of the mean difference on the histogram. Interpret your plot.
+
+
+8. Provide a t-based confidence interval for the difference in log hair mercury and log blood mercury, and conduct, report, and interpret an appropriate t-test of the null hypothesis. Be sure to justify your choice of t-test. 
+
+
+
+9. Suppose we wish to conduct a formal test of whether hair mercury measures differ between those with measured and missing blood mercury. Write the hypotheses for this test.
+
+
+
+
+10. Conduct the appropriate hypothesis test of whether hair mercury measures differ between those with and without blood mercury measured, calculate the p-value, and interpret the results in context of the data and the hypothesis test. 
+
+## Grading
+Total: 50 pts
+
+- Exercise 1: 4 pts
+- Exercise 2: 5 pts
+- Exercise 3: 4 pts
+- Exercise 4: 5 pts
+- Exercise 5: 4 pts
+- Exercise 6: 5 pts
+- Exercise 7: 4 pts
+- Exercise 8: 5 pts
+- Exercise 9: 5 pts
+- Exercise 10: 5 pts
+
+- Overall:  4 pts
+
+  - Overall includes the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
