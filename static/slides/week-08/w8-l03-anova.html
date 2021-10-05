@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ANOVA: Analysis of Variance</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# ANOVA: Analysis of Variance
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+class: middle
+
+# Data: Artisanal and Small-Scale Gold Mining in the Peruvian Amazon
+
+---
+
+## Mercury and Community
+
+[Artisinal and small-scale gold mining is largest source of mercury pollution worldwide](https://theconversation.com/gold-rush-mercury-legacy-small-scale-mining-for-gold-has-produced-long-lasting-toxic-pollution-from-1860s-california-to-modern-peru-133324).
+
+Are mercury concentrations in hair related to community of residence?
+
+
+```r
+library(tidyverse)
+library(tidymodels)
+library(readr)
+mercury &lt;- readr::read_csv("mercury_reg.csv")
+```
+
+
+---
+
+## Relationship between mercury and individual community
+
+One way to explore this relationship is through a linear regression model, with *dummy* or *indicator variables* for community as predictors.
+
+
+```r
+res &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(lhairHg ~ community, data = mercury) %&gt;%
+  tidy() 
+print(res,n=23)
+```
+
+---
+
+
+
+
+```
+#&gt; # A tibble: 23 × 5
+#&gt;    term                        estimate std.error statistic  p.value
+#&gt;    &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 (Intercept)                   0.614     0.0644     9.54  3.55e-21
+#&gt;  2 communityBoca Isiriwe         1.20      0.159      7.56  5.77e-14
+#&gt;  3 communityBoca Manu            0.833     0.129      6.43  1.56e-10
+#&gt;  4 communityCaychihue           -1.10      0.132     -8.36  1.09e-16
+#&gt;  5 communityChoque              -0.778     0.117     -6.68  3.04e-11
+#&gt;  6 communityDiamante             1.06      0.109      9.67  1.00e-21
+#&gt;  7 communityHuepetuhe           -0.694     0.0732    -9.48  5.96e-21
+#&gt;  8 communityIsla de los Valles   1.12      0.245      4.57  5.18e- 6
+#&gt;  9 communityMasenawa             1.20      0.401      3.00  2.74e- 3
+#&gt; 10 communityPalotoa Teparo       0.350     0.148      2.36  1.82e- 2
+#&gt; 11 communityPuerto Azul          1.22      0.230      5.27  1.45e- 7
+#&gt; 12 communityPuerto Luz           0.494     0.0991     4.98  6.67e- 7
+#&gt; 13 communityPunquiri            -0.678     0.176     -3.84  1.26e- 4
+#&gt; 14 communityPuquiri              0.0842    0.192      0.439 6.61e- 1
+#&gt; 15 communityQuebrada Neuva      -0.812     0.0966    -8.41  7.21e-17
+#&gt; 16 communityQueros              -0.707     0.245     -2.89  3.93e- 3
+#&gt; 17 communityQuimiri             -0.621     0.274     -2.26  2.38e- 2
+#&gt; 18 communityQuincemil           -0.822     0.0858    -9.57  2.55e-21
+#&gt; 19 communitySalvacion           -0.732     0.0850    -8.61  1.31e-17
+#&gt; 20 communitySan Lorenzo         -0.245     0.124     -1.98  4.82e- 2
+#&gt; 21 communitySetapo               0.517     0.319      1.62  1.05e- 1
+#&gt; 22 communityShintuya             0.130     0.122      1.07  2.86e- 1
+#&gt; 23 communityShipitiari           0.532     0.161      3.30  9.65e- 4
+```
+
+---
+
+- When the categorical explanatory variable has many levels, they're encoded to **indicator variables** or **dummy variables**
+
+- Each coefficient describes the expected difference between hair mercury levels in that particular community compared to the baseline level
+
+- Here, all the community mean hair mercury levels are different from those in Boca Colorado (the *referent* group, selected alphabetically) with the exception of Puquiri, Setapo, and Shintuya.
+
+- What if we want to make comparisons between pairs of communities that don't involve Boca Colorado?  We'll address that shortly!
+
+---
+
+## ANOVA
+
+When our predictor variable is categorical and the response is (approximately) normal (perhaps after transformation), often this type of model is fitted as an **ANOVA** model. **ANOVA or Analysis of Variance** refers to an approach when we have all categorical predictors, in which the hypothesis of interest is related to the degree of variability in the means across groups (versus within-group variability).  
+
+We can think of ANOVA as a special case of regression, when all predictors are categorical. Technically, ANOVA is more of a tool to break apart different sources of variation in data.
+
+---
+
+First, let's explore hair Hg levels (in log ppm) by community in our data visually.
+
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l03-anova_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = mercury,
+       aes(x = community, y = lhairHg,
+           color = community)) +
+  geom_boxplot() +
+  labs(color = "NULL",
+       y = "Hair Hg (log ppm)",
+       x = "Community") +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      vjust = 1,
+      hjust = 1,
+      size = 6
+    ),
+    legend.position = "none"
+  )
+```
+]
+]
+
+---
+
+## Hypothesis of Interest
+
+We might be interested in testing whether all the community means are the same or not.
+
+`$$H_0: \mu_{Boca Col}=\mu_{Boca Isi}=\cdots=\mu_{Shipitiari}$$`
+
+versus the alternative hypothesis that at least one of the community means is different.
+
+One way to do this would be to use t-tests on all possible pairs of tests. In this case,  with 23 communities we would need to do `\(\begin{pmatrix} 23 \\ 2 \end{pmatrix}=253\)` tests!  In addition to being time-consuming, carrying out multiple tests typically leads to an *inflated type I error rate*.
+
+---
+
+## Multiple Comparisons
+
+- Suppose all means are truly equal, and we conduct all 253 pairwise tests
+
+- Suppose also the tests are independent and done at a 0.05 significance level
+
+- Then the probability we fail to reject all 253 tests (the right decision) is `\((1-0.05)^{253}=0.95^{253} \approx 0\)`, and the probability of rejecting at least one of the 253 null hypotheses, called the **family-wise error rate**, is `\(\approx 1 &gt;&gt;0.05\)`
+
+- In reality, this is a little more complicated (tests are not independent), but we still have the problem of an inflated type I error rate.
+
+- ANOVA extends the t-test and is one way to control the overall type I error rate at a fixed level `\(\alpha\)`, if we only test pairwise differences when the *chunk* or *overall test* is rejected
+
+---
+
+## ANOVA Null Hypothesis
+
+In ANOVA, we typically follow this testing procedure.  
+
+- First, you conduct an *overall* or *chunk* test of the null hypothesis that the means of all of the groups are equal.
+
+  - If you reject this null hypothesis, then we usually *step down* to see which means are different from each other.  A *multiple comparisons* correction is sometimes used for these pairwise comparisons of means.
+  
+  - If you do not reject the null hypothesis, this means our data are consistent with a population in which the means are all equal.  Generally, no further testing should be done.  
+
+---
+
+class: middle
+
+# Multiple Comparisons in Action
+
+---
+
+## Overall Test
+
+&lt;img src="img/jb1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 1: Wild Blackberry
+
+&lt;img src="img/jbpurple.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 2: Root Beer
+
+&lt;img src="img/jbbrown.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 3: Cotton Candy
+
+&lt;img src="img/jbpink.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 4: Island Punch
+
+&lt;img src="img/jbblue.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 5: Blueberry
+
+&lt;img src="img/jbteal.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 6: Pink Grapefruit
+
+&lt;img src="img/jbsalmon.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 7: Strawberry Jam
+
+&lt;img src="img/jbred.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 8: Berry Blue
+
+&lt;img src="img/jbturquoise.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Extra Test 9: Pomegranate
+
+&lt;img src="img/jbmagenta.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 10: Buttered Popcorn
+
+&lt;img src="img/jbyellow.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 11: Black Pepper 
+
+&lt;img src="img/jbgrey.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 12: Ear Wax 
+
+&lt;img src="img/jbtan.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 13: Soap 
+
+&lt;img src="img/jbcyan.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Extra Test 14: Green Apple
+
+&lt;img src="img/jbgreen.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Extra Test 15: Strawberry Cheesecake
+
+&lt;img src="img/jbmauve.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## GREEN APPLE!
+
+&lt;img src="img/greenbeans.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Green Jelly Beans Again
+
+Disclaimer:  So, uh, we did the green study again and got no link.  It was probably a -- "RESEARCH CONFLICTED ON GREEN JELLY BEAN-ACNE LINK; MORE STUDY RECOMMENDED!" headline.
+
+Later, we'll learn how to control type I error rate for many comparisons.
+
+---
+
+class: middle
+
+# Back to ANOVA
+
+---
+
+## Why Analyze Variance? 
+
+ANOVA stands for *analysis of variance*.  
+
+
+What does variance have to do with our null hypothesis, which is about equality of means, say `\(H_0: \mu_1=\mu_2=\cdots=\mu_K\)` for K means? 
+
+
+
+
+---
+
+## General ANOVA Setup
+
+- `\(H_0:  \mu_1=\mu_2=\cdots=\mu_K\)`
+
+- `\(H_A:\)`  at least one of the means is different
+
+  - NOT ONLY `\(H_A: \mu_1 \neq \mu_2 \neq \cdots \neq \mu_K\)` (this would force all means to be different)
+  
+- Let the response of subject `\(j\)` in group `\(i\)` be given by `\(y_{ij}\)`, `\(i=1,2,\ldots,K\)`, `\(j=1,\ldots,n_i\)`
+
+- `\(K\)` is the number of groups
+
+- `\(n_i\)` is the number of subjects in group `\(i\)`
+
+---
+
+ANOVA model is `$$y_{ij}=\mu_i+\varepsilon_{ij}$$` where we assume the `\(\varepsilon_{ij}\)` are independent and normally distributed with mean 0 and variance `\(\sigma^2\)`.   
+- `\(\varepsilon_{ij}\)` represent random error about each group mean, `\(\mu_i\)`
+- Model assumes the `\(y_{ij}\)` are independent and normally distributed with mean `\(\mu_i\)` and variance `\(\sigma^2\)`
+- Sometimes you see the model broken out with `\(\mu_i=\mu+\alpha_i\)`, where `\(\mu\)` represents the overall or *grand mean* and `\(\alpha_i\)` represents each group's deviation from the overall mean
+- Alternatively *reference cell* coding, like we used when fitting the regression model, could be used, where one group is the *referent group* and the other coefficients represent differences between each group and the referent group
+
+---
+
+## Assumptions of ANOVA
+
+- Outcomes within groups are normally distributed
+
+- *Homoscedastic variance* (same variance of individual observations in each group)
+
+- Samples are independent
+
+---
+
+### Checking ANOVA Assumptions in Mercury Data: PPM Scale
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l03-anova_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+.panel[.panel-name[Code]
+
+
+```r
+mercury %&gt;%
+  ggplot(aes(x = exp(lhairHg))) +
+    geom_histogram() +
+    facet_wrap(~community) +
+    labs(x = "Mercury (ppm)", y = NULL)
+```
+]
+]
+
+
+---
+
+
+### Checking ANOVA Assumptions in Mercury Data: Log Scale
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w8-l03-anova_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+.panel[.panel-name[Code]
+
+
+```r
+mercury %&gt;%
+  ggplot(aes(x = lhairHg)) +
+    geom_histogram() +
+    facet_wrap(~community) +
+    labs(x = "Mercury (log ppm)", y = NULL)
+```
+]
+]
+
+
+---
+
+## ANOVA Assumptions
+
+- Normality: nothing looks terribly non-normal on the log scale, though some communities have relatively few measures
+
+- Equal variances: more or less ok on the log scale
+
+- Independence: this is an issue with these data, as some households provided multiple hair samples, and individuals within households may share exposure sources (e.g., meals), leading to correlated data within household. We will address this issue shortly.
+
+---
+
+## ANOVA for Mercury Data
+
+- Let the hair mercury of subject `\(j\)` in community `\(i\)` be given by `\(y_{ij}\)`, `\(i=1,2,\ldots, 23\)`, `\(j=1,\ldots,n_i\)`
+- We have 23 communities with `\(n_i\)` subjects in each  
+- For each community, calculate the sample mean and variance, so now we have `\(\bar{y}_1\)` and `\({s_1}^2\)`, `\(\bar{y}_2\)` and `\({s_2}^2\)`, and so on `\(\bar{y}_i\)` and `\({s_i}^2\)` `\(i=1,\ldots,23\)`
+- ANOVA is concerned with two different types of variances:  
+  - *Within-groups variance*:  variance of the individual observations around their respective community means
+  - *Between-groups variance*:  variance of the community means around the overall mean of all observations, `\(\bar{y}_\cdot\)` 
+  
+---
+
+## Overall variance
+
+Variance of `\(y\)` is estimated as `$$s^2=\frac{\sum_{i=1}^K \sum_{j=1}^{n_i} (y_{ij}-\bar{y})^2}{n-1},$$` where `\(n=\sum_{i=1}^K n_i\)` is the total sample size across all communities
+
+---
+
+## Within-groups variance
+
+Each community's variance `$${s}^2_i=\frac{\sum_{j=1}^{n_i} (y_{ij}-\overline{y}_i)^2}{n_i-1}$$` is a measure of the variance of the individuals around that community mean.  To get a pooled estimate of the common variance of individuals around their community means, we can calculate `$${s_W}^2=\frac{(n_1-1){s_1}^2 + (n_2-1){s_2}^2 + \cdots + (n_K-1){s_K}^2}{n - K},$$` where `\(K\)` is the number of groups and `\(n=n_1+n_2+\cdots+n_K\)`.  We can think of the within-groups variance as the inherent variability in the population.
+
+---
+
+### Between-groups variance
+
+The between groups variance is estimated by `$${s_B}^2=\frac{n_1(\bar{y}_1-\bar{y}_\cdot)^2+n_2(\bar{y}_2-\bar{y}_\cdot)^2 + \cdots + n_K(\bar{y}_K-\bar{y}_\cdot)^2}{K-1}.$$`
+
+
+We can think of the between-groups variance as the sum of inherent variability *and* any kind of systematic variability due to the group/community effect.
+
+---
+
+## F test
+
+Both `\({s_W}^2\)` and `\({s_B}^2\)` are estimates of the population variance `\(\sigma^2\)` if `\(H_0\)` is true.  Now, if the sample means vary around the overall mean (this variance measured by `\({s_B}^2\)`) more than the individual observations vary around the sample means (measured by `\({s_W}^2\)`), we have evidence that the corresponding group population means are in fact different (so that all `\(K\)` means are not the same).
+
+How do we compare the variances? Consider `$$F=\frac{\text{inherent variability + treatment effect}}{\text{inherent variability}}.$$`  If there is little to no group  effect (no group effect implies `\(H_0\)` is true), this ratio will be very close to 1.
+
+---
+
+## F test
+
+ Thus the F statistic is given by `$$F=\frac{{s_B}^2}{{s_W}^2},$$` which if `\(H_0\)` is true has an `\(F\)` distribution with `\(K-1\)` and `\(n-K\)` df.  The df associated with `\({s_B}^2\)` are called the *numerator degrees of freedom* and correspond to the total number of groups minus 1.  The df associated with `\({s_W}^2\)` are called the *denominator degrees of freedom* and equal the total sample size minus the number of groups.  For ANOVA the test is inherently one-tailed, rejecting `\(H_0\)` only if `\(F\)` is considerably larger than one.  (This does not mean we have a one-sided alternative; we just look at one tail of the F distribution to get the p-value.)
+ 
+  
+If there are only two groups, then the F test gives the same result as the t-test (with equal variances).
+ 
+---
+
+## F Distribution
+
+
+&lt;img src="img/fdists.png" width="80%" style="display: block; margin: auto;" /&gt;
+The numerator and denominator degrees of freedom (ndf and ddf) determine the cutpoint for a given `\(\alpha\)` level.  The ndf is one less than the number of groups, and the ddf is the total number of observations minus the number of groups.
+
+---
+
+## Visualizing ANOVA
+
+We can visualize the between and within groups variances, as well as how testing variances tells us about means, using [this cool R Shiny app](https://gallery.shinyapps.io/anova_shiny_rstudio/).
+
+
+---
+
+## ANOVA for Mercury Data
+
+
+```r
+summary(aov(lhairHg~community,data=mercury))
+```
+
+```
+#&gt;               Df Sum Sq Mean Sq F value Pr(&gt;F)    
+#&gt; community     22  909.6   41.34   52.82 &lt;2e-16 ***
+#&gt; Residuals   2285 1788.7    0.78                   
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 1775 observations deleted due to missingness
+```
+
+```r
+# Holm's correction gives us good protection against type I errors under a wide variety of settings
+hairpair &lt;- pairwise.t.test(mercury$lhairHg,    mercury$community, p.adj = "holm")
+sigpairs &lt;- broom::tidy(hairpair) %&gt;%
+  filter(p.value&lt;0.05) %&gt;%
+  arrange(group1,group2)
+nrow(sigpairs)
+```
+
+```
+#&gt; [1] 138
+```
+
+---
+
+```r
+print(sigpairs,n=10)
+```
+
+```
+#&gt; # A tibble: 138 × 3
+#&gt;    group1       group2         p.value
+#&gt;    &lt;chr&gt;        &lt;chr&gt;            &lt;dbl&gt;
+#&gt;  1 Boca Isiriwe Boca Colorado 1.13e-11
+#&gt;  2 Boca Manu    Boca Colorado 2.82e- 8
+#&gt;  3 Caychihue    Boca Colorado 2.31e-14
+#&gt;  4 Caychihue    Boca Isiriwe  5.64e-32
+#&gt;  5 Caychihue    Boca Manu     5.52e-30
+#&gt;  6 Choque       Boca Colorado 5.56e- 9
+#&gt;  7 Choque       Boca Isiriwe  1.35e-26
+#&gt;  8 Choque       Boca Manu     2.18e-24
+#&gt;  9 Diamante     Boca Colorado 2.30e-19
+#&gt; 10 Diamante     Caychihue     1.68e-45
+#&gt; # … with 128 more rows
+```
+
+Most communities do differ in levels of hair mercury! 
+
+---
+
+## Write-up of Methods and Results
+
+The data were analyzed using one-way ANOVA to test the overall hypothesis of no difference across communities, with planned step-down tests using a Holm correction for multiple comparisons when the overall hypothesis was rejected.
+
+Using the overall F test (ndf=22, ddf=2285), a significant difference among the communities was identified (p&lt;0.0001). Step-down tests indicated that mercury levels differed across the majority of pairwise community comparisons.
+
+One challenge to the validity of this analysis is that multiple measures were obtained per household. If shared exposures or other factors induced positive correlations in mercury measures among household members, our standard errors would be too small, and our estimated significance levels would be anti-conservative.
+
+---
+
+
+## Bonferroni Correction
+
+As we showed earlier, conducting multiple tests on a data set increases the *family-wise error rate*.  One very conservative way to ensure this is not the case is to divide `\(\alpha\)` by the number of tests to be done and to use that as the significance level.  This procedure is called the Bonferroni correction. For example for two tests, to preserve an overall 0.05 type I error rate, the Bonferroni correction would use `\(\frac{\alpha}{2}=0.025\)` as the significance level for each individual test instead of `\(0.05\)`.  Bonferroni is a conservative multiple comparisons correction (like saving your money in your mattress!), making it harder to reject the null hypothesis, but it is a safe bet in controlling the type I error rate. A less conservative method that also offers strong control of the error rate is Holm's method, which we used in our code.
+
+---
+
+## Violation of independence
+
+The violation of the independence assumption due to the inclusion of multiple household members is indeed a concern.  To do this, let's calculate the fraction of households (coded using `hid`) provided hair measures from more than one household member.
+
+.panelset[
+.panel[.panel-name[Output]
+
+```
+#&gt; # A tibble: 23 × 2
+#&gt;    community          avgct
+#&gt;    &lt;chr&gt;              &lt;dbl&gt;
+#&gt;  1 Boca Colorado      0.794
+#&gt;  2 Boca Isiriwe       0.973
+#&gt;  3 Boca Manu          0.903
+#&gt;  4 Caychihue          0.831
+#&gt;  5 Choque             0.807
+#&gt;  6 Diamante           0.842
+#&gt;  7 Huepetuhe          0.842
+#&gt;  8 Isla de los Valles 0.929
+#&gt;  9 Masenawa           0.6  
+#&gt; 10 Palotoa Teparo     0.977
+#&gt; # … with 13 more rows
+```
+]
+.panel[.panel-name[Code]
+
+
+```r
+mercury %&gt;%
+  filter(is.na(lhairHg)==FALSE) %&gt;%
+  group_by(hid) %&gt;%
+  mutate(hhobs=n(),
+         multmeas=(hhobs&gt;1)) %&gt;%
+  group_by(community) %&gt;%
+  summarize(avgct=mean(multmeas))
+```
+
+```
+#&gt; # A tibble: 23 × 2
+#&gt;    community          avgct
+#&gt;    &lt;chr&gt;              &lt;dbl&gt;
+#&gt;  1 Boca Colorado      0.794
+#&gt;  2 Boca Isiriwe       0.973
+#&gt;  3 Boca Manu          0.903
+#&gt;  4 Caychihue          0.831
+#&gt;  5 Choque             0.807
+#&gt;  6 Diamante           0.842
+#&gt;  7 Huepetuhe          0.842
+#&gt;  8 Isla de los Valles 0.929
+#&gt;  9 Masenawa           0.6  
+#&gt; 10 Palotoa Teparo     0.977
+#&gt; # … with 13 more rows
+```
+]
+]
+
+---
+
+## Concerns when Independence is Violated
+
+Typically, observations within a household are positively correlated (e.g., if one family member has a high level of hair mercury, another family member is more likely to have high hair mercury). Ignoring this type of positive correlation within household can lead to estimated standard errors (and thus p-values) that are **too small**, invalidating our inferences.
+
+---
+
+## Simple Fix: Limit to One Person Per Household
+
+The easiest solution to this problem is to limit the dataset to a single person per household. In this case, we'll limit to the household member denoted `withinid=1`.
+
+
+```r
+mercuryone &lt;- mercury %&gt;%
+  filter(withinid==1)
+
+summary(aov(lhairHg~community,data=mercuryone))
+```
+
+```
+#&gt;              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+#&gt; community    22  237.4  10.792   11.84 &lt;2e-16 ***
+#&gt; Residuals   669  610.0   0.912                   
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 434 observations deleted due to missingness
+```
+
+Our dataset is much smaller now, but we still see differences across communities and reject the overall test.
+
+---
+
+
+```r
+hairpair &lt;- pairwise.t.test(mercuryone$lhairHg,    mercuryone$community, p.adj = "holm")
+sigpairs &lt;- broom::tidy(hairpair) %&gt;%
+  filter(p.value&lt;0.05) %&gt;%
+  arrange(group1,group2)
+nrow(sigpairs)
+```
+
+```
+#&gt; [1] 55
+```
+
+---
+
+```r
+print(sigpairs,n=10)
+```
+
+```
+#&gt; # A tibble: 55 × 3
+#&gt;    group1    group2             p.value
+#&gt;    &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
+#&gt;  1 Caychihue Boca Colorado 0.0210      
+#&gt;  2 Caychihue Boca Isiriwe  0.0000188   
+#&gt;  3 Caychihue Boca Manu     0.00279     
+#&gt;  4 Choque    Boca Isiriwe  0.000240    
+#&gt;  5 Choque    Boca Manu     0.0344      
+#&gt;  6 Diamante  Boca Colorado 0.00478     
+#&gt;  7 Diamante  Caychihue     0.0000000397
+#&gt;  8 Diamante  Choque        0.000000507 
+#&gt;  9 Huepetuhe Boca Colorado 0.000282    
+#&gt; 10 Huepetuhe Boca Isiriwe  0.0000169   
+#&gt; # … with 45 more rows
+```
+
+Now just 55 community pair comparisons are different -- still a marked difference across communities.
+
+---
+
+
+
+
+
+## Random Effects ANOVA
+
+Another way to control for multiple measures for each household is to add a **random effect** for household, to allow data from individuals within households to be positively correlated.
+
+The random effect allows the model to capture correlation between residents of the same household.
+
+---
+
+## Random effects results
+
+
+```r
+library(lme4)
+# need a factor version of hid
+mercury &lt;- mercury %&gt;%
+  mutate(hhid=as.factor(hid))
+
+m1=lmer(lhairHg ~ community + (1 | hhid), data = mercury)
+anova(m1)
+```
+
+```
+#&gt; Analysis of Variance Table
+#&gt;           npar Sum Sq Mean Sq F value
+#&gt; community   22 258.74  11.761  28.853
+```
+
+As you can see, the F statistic is markedly smaller after accounting for within-household correlation. R does not provide a p-value here, as testing in this setting is quite tricky.
+
+---
+
+We can estimate the correlation, called the **inter class correlation** or **ICC**, as the ratio of the group variance to the total variance:
+
+```r
+library(performance)
+icc(m1)
+```
+
+```
+#&gt; # Intraclass Correlation Coefficient
+#&gt; 
+#&gt;      Adjusted ICC: 0.488
+#&gt;   Conditional ICC: 0.331
+```
+
+```r
+# you want the adjusted ICC
+```
+
+We interpret the ICC=0.49 as the correlation inside a household, or the fraction of variance explained by household membership.  The correlation here is quite large. We should not be making any decisions based on the first analysis that included multiple individuals per household with no adjustment for correlated data (the analysis limiting to one person per household is still fine).
+
+---
+
+
+```r
+library(emmeans)
+library(lmerTest)
+library(pbkrtest)
+paired &lt;- m1 %&gt;%
+    emmeans(pairwise~community) 
+
+paired$emmeans
+```
+
+```
+#&gt;  community           emmean     SE   df lower.CL upper.CL
+#&gt;  Boca Colorado       0.6170 0.0784 1103   0.4631   0.7708
+#&gt;  Boca Isiriwe        1.7817 0.2125  805   1.3646   2.1988
+#&gt;  Boca Manu           1.4431 0.1458  967   1.1569   1.7292
+#&gt;  Caychihue          -0.4783 0.1483 1014  -0.7694  -0.1872
+#&gt;  Choque             -0.1554 0.1255 1054  -0.4017   0.0909
+#&gt;  Diamante            1.6189 0.1102 1040   1.4026   1.8352
+#&gt;  Huepetuhe          -0.0541 0.0450 1007  -0.1424   0.0342
+#&gt;  Isla de los Valles  1.6244 0.3357  854   0.9656   2.2832
+#&gt;  Masenawa            1.9044 0.4759 1199   0.9706   2.8382
+#&gt;  Palotoa Teparo      0.9485 0.1773  895   0.6005   1.2964
+#&gt;  Puerto Azul         1.7967 0.2858  925   1.2359   2.3576
+#&gt;  Puerto Luz          1.1175 0.1137  791   0.8944   1.3406
+#&gt;  Punquiri           -0.0923 0.2086 1007  -0.5017   0.3171
+#&gt;  Puquiri             0.5921 0.2379 1026   0.1253   1.0588
+#&gt;  Quebrada Neuva     -0.1655 0.0963  966  -0.3545   0.0234
+#&gt;  Queros             -0.1532 0.3109  925  -0.7634   0.4570
+#&gt;  Quimiri             0.0981 0.3788  876  -0.6452   0.8415
+#&gt;  Quincemil          -0.1945 0.0746  995  -0.3408  -0.0482
+#&gt;  Salvacion          -0.1259 0.0727  963  -0.2685   0.0167
+#&gt;  San Lorenzo         0.3246 0.1497  847   0.0308   0.6185
+#&gt;  Setapo              1.1185 0.4443  916   0.2466   1.9905
+#&gt;  Shintuya            0.7482 0.1373  933   0.4788   1.0177
+#&gt;  Shipitiari          1.1867 0.1927  958   0.8085   1.5650
+#&gt; 
+#&gt; Degrees-of-freedom method: kenward-roger 
+#&gt; Confidence level used: 0.95
+```
+
+Here we see estimated means by community.
+
+---
+
+To learn more about *random effects models*, also known as *hierarchical* or *multilevel* models, check out STA 210 (regression analysis) this spring.
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
