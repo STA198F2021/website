@@ -51,10 +51,12 @@ Note: the videos this week track the lecture topics fairly closely but use diffe
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :open_book: | IMS: [Chp 7: Linear Regression with a Single Predictor](https://openintro-ims.netlify.app/model-slr.html#model-slr) | **Required** |
+| :open_book: | IMS: [Chp 22: Inference for Comparing Many Means](https://openintro-ims.netlify.app/inference-many-means.html) | **Required** |
 | :movie_camera: | [Modeling I](https://www.youtube.com/watch?v=MWkkvDopBKc) | **Optional** |
 | :movie_camera: |[Simple Linear Regression](https://www.youtube.com/watch?v=69U92Q3pwnA) | **Optional** |
 | :movie_camera: |[Nonlinear Relationships](https://www.youtube.com/watch?v=j4MZ6ZdHnHg) | **Optional** |
 | :open_book: | [Mercury Pollution from Artisinal and Small-Scale Gold Mining](https://theconversation.com/gold-rush-mercury-legacy-small-scale-mining-for-gold-has-produced-long-lasting-toxic-pollution-from-1860s-california-to-modern-peru-133324r) | **Optional** |
+
 
 
 
