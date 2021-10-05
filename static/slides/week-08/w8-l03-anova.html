@@ -471,7 +471,7 @@ How do we compare the variances? Consider `$$F=\frac{\text{inherent variability 
 
 ## F test
 
- Thus the F statistic is given by `$$F=\frac{{s_B}^2}{{s_W}^2},$$` which if `\(H_0\)` is true has an `\(F\)` distribution with `\(K-1\)` and `\(n-K\)` df.  The df associated with `\({s_B}^2\)` are called the *numerator degrees of freedom* and correspond to the total number of groups minus 1.  The df associated with `\({s_W}^2\)` are called the *denominator degrees of freedom* and equal the total sample size minus the number of groups.  For ANOVA the test is inherently one-tailed, rejecting `\(H_0\)` only if `\(F\)` is considerably larger than one.  (This does not mean we have a one-sided alternative; we just look at one tail of the F distribution to get the p-value.)
+ Thus the F statistic is given by `$$F={s_B}^2/{s_W}^2,$$` which if `\(H_0\)` is true has an `\(F\)` distribution with `\(K-1\)` and `\(n-K\)` df.  The df associated with `\({s_B}^2\)` are called the *numerator degrees of freedom* and correspond to the total number of groups minus 1.  The df associated with `\({s_W}^2\)` are called the *denominator degrees of freedom* and equal the total sample size minus the number of groups.  For ANOVA the test is inherently one-tailed, rejecting `\(H_0\)` only if `\(F\)` is considerably larger than one.  (This does not mean we have a one-sided alternative; we just look at one tail of the F distribution to get the p-value.)
  
   
 If there are only two groups, then the F test gives the same result as the t-test (with equal variances).
