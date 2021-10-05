@@ -1,0 +1,18 @@
+---
+authors:
+- admin
+date: "2021-07-15T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/yPBHXvN3HII)'
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2021-07-15T00:00:00Z"
+projects: []
+subtitle: 'Survival analysis and data science ethics'
+summary: Advanced topics
+title: 'Week 15 - Ethics and survival'
+
+---

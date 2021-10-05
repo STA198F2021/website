@@ -5,7 +5,7 @@
     <link>https://sta198f2021.github.io/website/authors/admin/</link>
       <atom:link href="https://sta198f2021.github.io/website/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>STA 198 / GLHLTH 298</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://sta198f2021.github.io/website/img/icon-192.png</url>
       <title>STA 198 / GLHLTH 298</title>
@@ -13,231 +13,65 @@
     </image>
     
     <item>
-      <title>Week 9 - Classification and model building</title>
-      <link>https://sta198f2021.github.io/website/post/09-week/oldindex/</link>
-      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/09-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 9&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/CSKmJvUYorU&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+09+-+01+-+Keeping+up+with+IDS/1_fzpfs9m8&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-09/w9-d01-kuwids/w9-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;9:10&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Logistic regression&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/AidXFYSYfJg&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+09+-+02+-+Logistic+regression/1_sfftcg3u&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-09/w9-d02-logistic-reg/w9-d02-logistic-reg.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;19:29&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Prediction and overfitting&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/Qd4lu_Lmwi0&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+09+-+03+-+Prediction+and+overfitting/1_e6jlwqhw&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-09/w9-d03-prediction-overfitting/w9-d03-prediction-overfitting.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;28:22&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feature engineering&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/wZt9ab4jBZ4&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+09+-+04+-+Feature+engineering/1_jjba2iyl&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-09/w9-d04-feature-engineering/w9-d04-feature-engineering.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;30:07&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Lab 06&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/labs/lab-06/lab-06-modelling-course-evals.html&#34;&gt;Course evaluations&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Tue, 17 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 08&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/08-modeling-multiple/&#34;&gt;Multiple regression&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sun, 22 Nov, 23:59 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Lab 07&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/labs/lab-07/lab-07-work-on-projects&#34;&gt;Work on projects&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Tue, 24 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 03 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wed, 25 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 04&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-04/hw-04-potpourri.html&#34;&gt;Potpourri&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Tue, 26 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression&#34;&gt;Chp 4.5 - Logistic regression&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;tidymodels: &lt;a href=&#34;https://www.tidymodels.org/start/models/&#34;&gt;Build a model&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;tidymodels: &lt;a href=&#34;https://www.tidymodels.org/start/recipes/&#34;&gt;Preprocess your data with recipes&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;You can find starter code for this session on &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;RStudio Cloud&lt;/a&gt;, in the project titled &lt;em&gt;Code Along 09 - Hotel bookings&lt;/em&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/iV0bIRBKe2U&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+09+-+Code+along/1_uc4mdx7d&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/09-code-along/hotels.Rmd&#34;&gt;&lt;strong&gt;&lt;code&gt;.Rmd&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;     &lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/09-code-along/hotels.md&#34;&gt;&lt;strong&gt;&lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No interactive R tutorials this week. Use the time to work on projects!&lt;/p&gt;
-</description>
+      <title>Week 15 - Ethics and survival</title>
+      <link>https://sta198f2021.github.io/website/post/15-week/</link>
+      <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/15-week/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Week 7 - Evaluating Hypotheses</title>
-      <link>https://sta198f2021.github.io/website/post/07-week/</link>
-      <pubDate>Wed, 07 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/07-week/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/07-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Form your project team by Friday, October 8 and let me know the members!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;class-slides-and-activities&#34;&gt;Class Slides and Activities&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div  style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Hypothesis Testing&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-07/w7-l01-testing.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Hypothesis Testing about the Mean and Proportions&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-07/w7-l02-test-mean-prop.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings-and-videos&#34;&gt;Readings and Videos&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.openintro.org/book/os/&#34;&gt;OpenIntro Chapter 5, Section 5.3: Foundations for Inference &lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=5OL1RqHrZQ8&amp;amp;app=desktop&#34;&gt;Dance of the P-Values&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.amstat.org/newsroom/pressreleases/P-ValueStatement.pdf&#34;&gt;ASA Statement on P-Values: Press Release &lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://www.nature.com/news/scientific-method-statistical-errors-1.14700&#34;&gt;Nature Article on P-Values&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Highly Recommended&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-</description>
+      <title>Week 14 - Which turkeys will survive?</title>
+      <link>https://sta198f2021.github.io/website/post/14-week/</link>
+      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/14-week/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Week 13 - Project Presentations</title>
+      <link>https://sta198f2021.github.io/website/post/13-week/</link>
+      <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/13-week/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Week 12 - Model Validation</title>
+      <link>https://sta198f2021.github.io/website/post/12-week/</link>
+      <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/12-week/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Week 11 - Logistic regression</title>
+      <link>https://sta198f2021.github.io/website/post/11-week/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/11-week/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Week 10 - Binary Classification</title>
+      <link>https://sta198f2021.github.io/website/post/10-week/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/10-week/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Week 9 - More Modelling</title>
+      <link>https://sta198f2021.github.io/website/post/09-week/</link>
+      <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/09-week/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Week 8 - Modelling Data</title>
       <link>https://sta198f2021.github.io/website/post/08-week/</link>
-      <pubDate>Wed, 07 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/post/08-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
 &lt;h3 id=&#34;tasks-1&#34;&gt;Tasks&lt;/h3&gt;
@@ -330,6 +164,70 @@
 &lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://theconversation.com/gold-rush-mercury-legacy-small-scale-mining-for-gold-has-produced-long-lasting-toxic-pollution-from-1860s-california-to-modern-peru-133324r&#34;&gt;Mercury Pollution from Artisinal and Small-Scale Gold Mining&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 7 - Evaluating Hypotheses</title>
+      <link>https://sta198f2021.github.io/website/post/07-week/</link>
+      <pubDate>Wed, 07 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://sta198f2021.github.io/website/post/07-week/</guid>
+      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/07-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Form your project team by Friday, October 8 and let me know the members!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;class-slides-and-activities&#34;&gt;Class Slides and Activities&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div  style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Hypothesis Testing&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-07/w7-l01-testing.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Hypothesis Testing about the Mean and Proportions&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-07/w7-l02-test-mean-prop.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;readings-and-videos&#34;&gt;Readings and Videos&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.openintro.org/book/os/&#34;&gt;OpenIntro Chapter 5, Section 5.3: Foundations for Inference &lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=5OL1RqHrZQ8&amp;amp;app=desktop&#34;&gt;Dance of the P-Values&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.amstat.org/newsroom/pressreleases/P-ValueStatement.pdf&#34;&gt;ASA Statement on P-Values: Press Release &lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;http://www.nature.com/news/scientific-method-statistical-errors-1.14700&#34;&gt;Nature Article on P-Values&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Highly Recommended&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -915,896 +813,6 @@
       <guid>https://sta198f2021.github.io/website/post/00-overview/</guid>
       <description>&lt;p&gt;The figure below is a visual summary of the tentative course schedule. The flow of topics for each week might change slightly depending on how quickly / slowly it feels right to progress through them. However, the deadlines for assignments will not change barring unexpected circumstances, which, unfortunately, may occur this semester! If deadlines need to be adjusted after the first day of class, they will be pushed to a later date and never pulled up to an earlier date. If it becomes necessary to make such adjustments, I will try my best to avoid collision with other previously scheduled deadlines, but this might be difficult to ensure.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;scheduleplot.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 11 - Looking beyond IDS</title>
-      <link>https://sta198f2021.github.io/website/post/11-week/oldindex/</link>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/11-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Finish your project and submit (last push to GitHub repo) by 10am on Friday, 4 December&lt;/li&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This week&amp;rsquo;s videos have short slide decks. All of the code we go through in the slides can be found in &lt;a href=&#34;https://github.com/mine-cetinkaya-rundel/fm-speeches-covid19&#34;&gt;this repo&lt;/a&gt;. You can clone or fork-and-clone the repo if you want to play with the code yourself.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 11&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/dOfht-G-_Ms&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+01+-+Keeping+up+with+IDS/1_cauun6it&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d01-kuwids/w11-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;9:44&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Text analysis&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/_YqEHZccujc&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+02+-+Text+analysis/1_fde8volk&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d02-text-analysis/w11-d02-text-analysis.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;43:32&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Comparing texts&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/Q79feeFbsxM&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+03+-+Comparing+texts/1_345gr2x6&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d03-comparing-texts/w11-d03-comparing-texts.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;16:26&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Interactive web apps&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/gXBEOFWrxsk&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+04+-+Interactive+web+apps/1_x5w3dqal&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d04-interactive-web-app/w11-d04-interactive-web-app.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;22:59&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Machine learning&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/IP5skNjwo7A&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+05+-+Machine+learning/1_iftzg29s&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d05-machine-learning/w11-d05-machine-learning.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;41:18&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wrapping up IDS&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/qL1eQ0OmPUw&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+06+-+Wrapping+up+IDS%21/1_lklhyw15&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d06-wrap-up/w11-d06-wrap-up.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;20:42&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 04 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sat, 5 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 10&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/10-looking-beyond/&#34;&gt;Looking beyond&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 05&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-05/hw-05-model-review.html&#34;&gt;Model and review&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;p&gt;There are no required readings this week. The following are suggested readings for learning more about the topics covered in the videos.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.tidytextmining.com/index.html&#34;&gt;Chp 1-3 - Text Mining with R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://mastering-shiny.org/&#34;&gt;Chp 1 - Mastering Shiny&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://smltar.com/mlclassification.html&#34;&gt;Chp 7 - Supervised Machine Learning for Text Analysis in R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;You can find starter code for this session on &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;RStudio Cloud&lt;/a&gt;, in the project titled &lt;em&gt;Code Along 11 - Videos&lt;/em&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/hpPT7AF-5FY&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+Code+along/1_7ut9fsl9&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.Rmd&#34;&gt;&lt;strong&gt;&lt;code&gt;.Rmd&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;     &lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.md&#34;&gt;&lt;strong&gt;&lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;em&gt;to be posted&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 11 - Looking beyond IDS</title>
-      <link>https://sta198f2021.github.io/website/post/12-week/oldindex/</link>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/12-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Finish your project and submit (last push to GitHub repo) by 10am on Friday, 4 December&lt;/li&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This week&amp;rsquo;s videos have short slide decks. All of the code we go through in the slides can be found in &lt;a href=&#34;https://github.com/mine-cetinkaya-rundel/fm-speeches-covid19&#34;&gt;this repo&lt;/a&gt;. You can clone or fork-and-clone the repo if you want to play with the code yourself.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 11&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/dOfht-G-_Ms&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+01+-+Keeping+up+with+IDS/1_cauun6it&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d01-kuwids/w11-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;9:44&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Text analysis&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/_YqEHZccujc&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+02+-+Text+analysis/1_fde8volk&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d02-text-analysis/w11-d02-text-analysis.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;43:32&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Comparing texts&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/Q79feeFbsxM&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+03+-+Comparing+texts/1_345gr2x6&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d03-comparing-texts/w11-d03-comparing-texts.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;16:26&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Interactive web apps&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/gXBEOFWrxsk&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+04+-+Interactive+web+apps/1_x5w3dqal&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d04-interactive-web-app/w11-d04-interactive-web-app.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;22:59&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Machine learning&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/IP5skNjwo7A&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+05+-+Machine+learning/1_iftzg29s&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d05-machine-learning/w11-d05-machine-learning.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;41:18&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wrapping up IDS&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/qL1eQ0OmPUw&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+06+-+Wrapping+up+IDS%21/1_lklhyw15&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d06-wrap-up/w11-d06-wrap-up.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;20:42&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 04 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sat, 5 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 10&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/10-looking-beyond/&#34;&gt;Looking beyond&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 05&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-05/hw-05-model-review.html&#34;&gt;Model and review&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;p&gt;There are no required readings this week. The following are suggested readings for learning more about the topics covered in the videos.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.tidytextmining.com/index.html&#34;&gt;Chp 1-3 - Text Mining with R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://mastering-shiny.org/&#34;&gt;Chp 1 - Mastering Shiny&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://smltar.com/mlclassification.html&#34;&gt;Chp 7 - Supervised Machine Learning for Text Analysis in R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;You can find starter code for this session on &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;RStudio Cloud&lt;/a&gt;, in the project titled &lt;em&gt;Code Along 11 - Videos&lt;/em&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/hpPT7AF-5FY&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+Code+along/1_7ut9fsl9&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.Rmd&#34;&gt;&lt;strong&gt;&lt;code&gt;.Rmd&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;     &lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.md&#34;&gt;&lt;strong&gt;&lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;em&gt;to be posted&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 11 - Looking beyond IDS</title>
-      <link>https://sta198f2021.github.io/website/post/13-week/oldindex/</link>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/13-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Finish your project and submit (last push to GitHub repo) by 10am on Friday, 4 December&lt;/li&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This week&amp;rsquo;s videos have short slide decks. All of the code we go through in the slides can be found in &lt;a href=&#34;https://github.com/mine-cetinkaya-rundel/fm-speeches-covid19&#34;&gt;this repo&lt;/a&gt;. You can clone or fork-and-clone the repo if you want to play with the code yourself.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 11&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/dOfht-G-_Ms&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+01+-+Keeping+up+with+IDS/1_cauun6it&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d01-kuwids/w11-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;9:44&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Text analysis&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/_YqEHZccujc&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+02+-+Text+analysis/1_fde8volk&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d02-text-analysis/w11-d02-text-analysis.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;43:32&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Comparing texts&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/Q79feeFbsxM&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+03+-+Comparing+texts/1_345gr2x6&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d03-comparing-texts/w11-d03-comparing-texts.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;16:26&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Interactive web apps&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/gXBEOFWrxsk&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+04+-+Interactive+web+apps/1_x5w3dqal&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d04-interactive-web-app/w11-d04-interactive-web-app.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;22:59&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Machine learning&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/IP5skNjwo7A&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+05+-+Machine+learning/1_iftzg29s&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d05-machine-learning/w11-d05-machine-learning.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;41:18&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wrapping up IDS&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/qL1eQ0OmPUw&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+06+-+Wrapping+up+IDS%21/1_lklhyw15&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d06-wrap-up/w11-d06-wrap-up.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;20:42&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 04 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sat, 5 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 10&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/10-looking-beyond/&#34;&gt;Looking beyond&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 05&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-05/hw-05-model-review.html&#34;&gt;Model and review&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;p&gt;There are no required readings this week. The following are suggested readings for learning more about the topics covered in the videos.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.tidytextmining.com/index.html&#34;&gt;Chp 1-3 - Text Mining with R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://mastering-shiny.org/&#34;&gt;Chp 1 - Mastering Shiny&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://smltar.com/mlclassification.html&#34;&gt;Chp 7 - Supervised Machine Learning for Text Analysis in R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;You can find starter code for this session on &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;RStudio Cloud&lt;/a&gt;, in the project titled &lt;em&gt;Code Along 11 - Videos&lt;/em&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/hpPT7AF-5FY&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+Code+along/1_7ut9fsl9&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.Rmd&#34;&gt;&lt;strong&gt;&lt;code&gt;.Rmd&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;     &lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.md&#34;&gt;&lt;strong&gt;&lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;em&gt;to be posted&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 11 - Looking beyond IDS</title>
-      <link>https://sta198f2021.github.io/website/post/15-week/oldindex/</link>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/15-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Finish your project and submit (last push to GitHub repo) by 10am on Friday, 4 December&lt;/li&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/11-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This week&amp;rsquo;s videos have short slide decks. All of the code we go through in the slides can be found in &lt;a href=&#34;https://github.com/mine-cetinkaya-rundel/fm-speeches-covid19&#34;&gt;this repo&lt;/a&gt;. You can clone or fork-and-clone the repo if you want to play with the code yourself.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 11&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/dOfht-G-_Ms&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+01+-+Keeping+up+with+IDS/1_cauun6it&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d01-kuwids/w11-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;9:44&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Text analysis&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/_YqEHZccujc&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+02+-+Text+analysis/1_fde8volk&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d02-text-analysis/w11-d02-text-analysis.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;43:32&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Comparing texts&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/Q79feeFbsxM&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+03+-+Comparing+texts/1_345gr2x6&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d03-comparing-texts/w11-d03-comparing-texts.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;16:26&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Interactive web apps&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/gXBEOFWrxsk&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+04+-+Interactive+web+apps/1_x5w3dqal&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d04-interactive-web-app/w11-d04-interactive-web-app.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;22:59&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Machine learning&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/IP5skNjwo7A&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+05+-+Machine+learning/1_iftzg29s&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d05-machine-learning/w11-d05-machine-learning.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;41:18&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wrapping up IDS&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/qL1eQ0OmPUw&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+06+-+Wrapping+up+IDS%21/1_lklhyw15&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-11/w11-d06-wrap-up/w11-d06-wrap-up.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;20:42&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 04 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sat, 5 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 10&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/10-looking-beyond/&#34;&gt;Looking beyond&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 05&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-05/hw-05-model-review.html&#34;&gt;Model and review&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 10 Dec, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;p&gt;There are no required readings this week. The following are suggested readings for learning more about the topics covered in the videos.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.tidytextmining.com/index.html&#34;&gt;Chp 1-3 - Text Mining with R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://mastering-shiny.org/&#34;&gt;Chp 1 - Mastering Shiny&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://smltar.com/mlclassification.html&#34;&gt;Chp 7 - Supervised Machine Learning for Text Analysis in R&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Optional&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;You can find starter code for this session on &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;RStudio Cloud&lt;/a&gt;, in the project titled &lt;em&gt;Code Along 11 - Videos&lt;/em&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/hpPT7AF-5FY&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+11+-+Code+along/1_7ut9fsl9&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.Rmd&#34;&gt;&lt;strong&gt;&lt;code&gt;.Rmd&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;     &lt;a href=&#34;https://github.com/ids-s1-20/code-along/blob/master/11-code-along/videos.md&#34;&gt;&lt;strong&gt;&lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;em&gt;to be posted&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;No new interactive R tutorials this week. If you haven&amp;rsquo;t completed &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#interactive-r-tutorials&#34;&gt;last week&amp;rsquo;s tutorials&lt;/a&gt;, you should do so before starting HW 05.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 10 - Model validation and uncertainty quantification</title>
-      <link>https://sta198f2021.github.io/website/post/10-week/oldindex/</link>
-      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
-      <guid>https://sta198f2021.github.io/website/post/10-week/oldindex/</guid>
-      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Watch the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#videos&#34;&gt;videos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/10-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;(Optional) Fill out surveys:
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUOFU4VEFUVUMzV0hHQUIyT0NGTTNIQjFOSC4u&#34;&gt;What shall we learn in Week 11?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUNThTSVpIT0hUMk1GUUhFRVYwRDRCMVhDTS4u&#34;&gt;Got any burning questions you&amp;rsquo;d like answered before we wrap up the semester?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;videos&#34;&gt;Videos&lt;/h3&gt;
-&lt;p&gt;You have two options for watching the course videos, on YouTube or on MediaHopper. You can also find a playlists for all course videos on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PLNUVZZ6hfXX1tyUykCWShOKZdIB0TIhtM&#34;&gt;here&lt;/a&gt; and on MediaHopper &lt;a href=&#34;https://media.ed.ac.uk/playlist/dedicated/183821961/1_r35z2f16/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px;text-align:center&#34;&gt;No.&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;YouTube&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;MediaHopper&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:80px;text-align:center&#34;&gt;Length&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Keeping up with IDS: Week 10&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/M3zlAula9pM&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+01+-+Keeping+up+with+IDS/1_74u9yhk6&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-10/w10-d01-kuwids/w10-d01-kuwids.pdf&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6:54&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Cross validation&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/L1KfIISmUT4&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+02+-+Cross+validation/1_9d1v5r6l&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-10/w10-d02-cross-validation/w10-d02-cross-validation.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;44:20&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;AE - The Office, Part 1&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/qsUYstdN4LQ&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+03+-+AE+-+The+Office%2C+Part+1/1_ru9aczu5&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/application-exercises/blob/main/ae-09-feat-eng-cv/theoffice.md&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;30:45&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;AE - The Office, Part 2&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/WstIr94Fdjc&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+04+-+AE+-+The+Office%2C+Part+2/1_dwfr8cvr&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/ids-s1-20/application-exercises/blob/main/ae-09-feat-eng-cv/theoffice.md&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;19:53&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Quantifying uncertainty&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/LYpKrtZmQtI&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+05+-+Quantifying+uncertainty/1_hlzwmvtf&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-10/w10-d05-quantify-uncertainty/w10-d05-quantify-uncertainty.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;28:50&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Bootstrapping&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://youtu.be/bdqpI3iVOso&#34;&gt;&lt;span style=&#39;color: red;&#39;&gt;&lt;i class=&#39;fab fa-youtube fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+06+-+Bootstrapping/1_5rizp6s9&#34;&gt;&lt;span style=&#39;color: #0A1E3F;&#39;&gt;&lt;i class=&#39;fas fa-file-video fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/slides/week-10/w10-d06-bootstrap/w10-d06-bootstrap.html&#34;&gt;&lt;span style=&#39;color: #4b5357;&#39;&gt;&lt;i class=&#39;fas fa-desktop fa-lg&#39;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;15:06&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;assignments&#34;&gt;Assignments&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due this week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Lab 07&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/labs/lab-07/lab-07-work-on-projects&#34;&gt;Work on projects&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Tue, 24 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Feedback&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Peer evaluation 03 (emailed via TEAMMATES)&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Wed, 25 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;HW 04&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/homework/hw-04/hw-04-potpourri.html&#34;&gt;Potpourri&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Thur, 26 Nov, 16:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;OQ 09&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/09-modeling-overview/&#34;&gt;Modeling overview&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Sun, 29 Nov, 23:59 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Due next week&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Lab 08&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://ids-s1-20.github.io/labs/lab-08/lab-08-work-on-projects&#34;&gt;Work on projects&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;No interim deadline&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/#project&#34;&gt;Project&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Fri, 4 Dec, 10:00 UK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;tidymodels: &lt;a href=&#34;https://www.tidymodels.org/start/resampling/&#34;&gt;Evaluate your model with resampling&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/intro-stat-inference.html#boot-ci&#34;&gt;Chp 5.2 - Bootstrap confidence intervals&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-along&#34;&gt;Code-along&lt;/h3&gt;
-&lt;p&gt;This week we discussed making slides with xaringan and tips for presentations.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Recording&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://youtu.be/pzsHSMoqQvw&#34;&gt;&lt;span style=&#34;color: red;&#34;&gt;&lt;i class=&#34;fab fa-youtube fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;       &lt;a href=&#34;https://media.ed.ac.uk/media/IDS+-+Week+10+-+Code+along/1_ti9g30zp&#34;&gt;&lt;span style=&#34;color: #0A1E3F;&#34;&gt;&lt;i class=&#34;fas fa-file-video fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Session artifacts&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://rstd.io/design-deck&#34;&gt;Designing a slide deck&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;interactive-r-tutorials&#34;&gt;Interactive R tutorials&lt;/h3&gt;
-&lt;p&gt;The following are interactive R tutorials, designed to give you more practice with R. These are optional, but they will show up in your next homework assignment, so you should gain familiarity with it. If you&amp;rsquo;re struggling with any of the topics covered this week, we strongly recommend you work through the interactive tutorials.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:480px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/dsbox-07-exploregss/&#34;&gt;Exploring the GSS&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Related to HW 05&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://minecr.shinyapps.io/dsbox-08-bootstrapgss/&#34;&gt;Bootstrapping the GSS&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Related to HW 05&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 </description>
     </item>
     
