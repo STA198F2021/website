@@ -39,7 +39,7 @@ title: 'Week 8 - Modelling Data'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Project | [Project Proposal](https://sta198f2021.github.io/website/)
-| Quiz | [Quiz 6](https://sakai.duke.edu) | Monday, 10/11 |
+| Quiz | [Quiz 6](https://sakai.duke.edu) | Tuesday, 10/12 |
 | Lab 6 |[Exploring Mercury Levels](https://sta198f2021.github.io/website/slides/week-08/lab-06-mercury-levels.html)| Wed., 10/13 |
 
 
