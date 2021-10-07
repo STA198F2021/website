@@ -1,0 +1,678 @@
+---
+title: "Multiple Regression and Model Selection"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+## Read in Data and Restrict to One Person Per Household
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>",
+  highlight = TRUE,
+  fig.align = "center"
+)
+```
+
+
+
+```{r packages}
+library(tidyverse)
+library(tidymodels)
+library(readr)
+library(patchwork)
+library(plotly)
+library(widgetframe)
+mercury <- readr::read_csv("mercury_reg.csv")
+mercury <-
+  mercury %>%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %>%
+    #another variable we may use later
+  mutate(form_min_sc=scale(FM_buffer)) %>%
+  #so I don't have to remember coding
+  mutate(sex,sex_cat=ifelse(sex==1,"Male","Female")) %>%
+  mutate(native,native_cat=ifelse(native==1,"Native","Non-native")) 
+# limit to one observation per household (household ID=1)
+mercury1 <-
+  mercury %>%
+  filter(withinid==1)
+```
+
+---
+
+class: middle
+
+# The linear model with multiple predictors
+
+---
+
+## Hair mercury vs assets and native status 
+
+.pull-left[
+Linear regression model with assets (standardized to mean 0 and sd 1) and community native status as predictors and log(hair Hg) as the response.
+```{r}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat,
+      data = mercury1) %>%
+  tidy()
+```
+
+]
+.pull-right[
+```{r out.width = "100%", echo = FALSE, fig.align = "right"}
+ggplot(mercury1, aes(x = assets_sc, y = lhairHg, color = native_cat, shape = native_cat)) +
+  geom_point(alpha = 1, size = 1) +
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+
+]
+
+
+
+---
+
+## Interpretation of estimates
+
+```{r echo=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1) %>%
+  tidy()
+```
+
+
+Model: $lhairHg_i=\beta_0+\beta_1 assets\_sc_i + \beta_2 native\_cat_i + \varepsilon_i$, where the $\varepsilon_i$ have mean 0 (and are typically assumed to follow a normal distribution)
+
+$$\hat{\beta_0}=1.00, ~~ \hat{\beta_1}=-0.0945, ~~\hat{\beta_2}=-0.957$$
+
+
+
+We can predict log hair mercury as:
+$$\widehat{lhairHg}_i=\hat{\beta_0}+\hat{\beta_1} assets\_sc_i + \hat{\beta_2} native\_cat_i$$
+so
+$\widehat{lhairHg}_i=1.00 - 0.0945 \times assets\_sc_i - 0.957 \times native\_cat_i$
+
+---
+## Interpretation of estimates
+
+```{r echo=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1) %>%
+  tidy()
+```
+
+--
+- **Slope - assets:** *All else held constant*, for each additional standard deviation that assets are larger, we would expect the log hair mercury to be lower, on average, by 0.09 log ppm. Alternatively, *all else held constant*, for each additional standard deviation that assets are larger, we would expect hair mercury to be lower by a factor of $e^{-0.0945}=0.91$.
+
+--
+- **Slope - non-native:** *All else held constant*, those living in non-native communities have hair mercury levels that are on average 0.957 log ppm lower than those living in native communities. Alternatively,  *all else held constant*, those living in non-native communities are expected to have hair mercury that is lower by a factor of $e^{-0.957}=0.38$.
+
+--
+- **Intercept:** Individuals with the mean level of assets (remember this is standardized!) living in native communities are expected to have hair mercury levels of 1 log ppm, on average. 
+
+
+---
+
+## Interpretation of estimates
+
+```{r echo=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1) %>%
+  tidy()
+```
+
+The column labeled "statistic" contains the t-statistic calculated by subtracting the hypothesized value (0 by default) from the parameter estimate, and then dividing by the appropriate standard error (so the estimate column entries divided by the std.error column entries). These are t-statistics because we had to estimate the variance (you'll learn more about how that is done if you take STA 210!).
+
+Each of the p-values here reflects the result of a t-test of $H_0: \beta_k=0$ for the $k^{th}$ regression coefficient, versus the alternative $H_A: \beta_k \neq 0$. Generally, we don't care too much about the model intercept and focus on tests of the slope.  If we use $\alpha=0.05$ as our significance level, then both slope parameter estimates appear to be important.
+
+
+
+---
+
+## Interpretation of estimates
+
+```{r ci, warning = FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1) %>%
+  tidy(conf.int=TRUE)
+```
+
+
+We can use a CLT-based confidence interval here. Because we had to estimate the standard error of our estimates $\hat{\beta}$, we use a t-interval, and R can calculate this for us upon request. 
+
+---
+
+## Main vs. interaction effects
+
+.question[
+Suppose we want to predict hair mercury from assets and native status of the community. Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which hair mercury changes as assets 
+increase would be the same in native and non-native communities, and interaction 
+effects would mean the rate at which hair mercury changes as assets increase would be different for native and non-native communities.
+]
+
+---
+
+```{r Hg-main-int, echo=FALSE, out.width="65%", fig.asp = 0.8}
+Hg_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1)
+Hg_main_fit_aug <- augment(Hg_main_fit$fit)
+
+Hg_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat + assets_sc*native_cat, data = mercury1)
+Hg_int_fit_aug <- augment(Hg_int_fit$fit)
+
+p_main <- ggplot() +
+  geom_point(
+    Hg_main_fit_aug,
+    mapping = aes(
+      x = assets_sc,
+      y = lhairHg,
+      color = native_cat,
+      shape = native_cat
+    ),
+    alpha = 0.7
+  ) +
+  geom_line(Hg_main_fit_aug,
+            mapping = aes(x = assets_sc, y = .fitted, color = native_cat)) +
+  labs(title = "Main effects, parallel slopes",
+       subtitle = "Hg-hat = assets + native",
+       x="Assets (Standardized)", y="log(hair Hg)",
+       color = "Native Status") +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  guides(shape = FALSE)
+
+p_int <- ggplot() +
+  geom_point(
+    Hg_int_fit_aug,
+    mapping = aes(
+      x = assets_sc,
+      y = lhairHg,
+      color = native_cat,
+      shape = native_cat
+    ),
+    alpha = 0.7
+  ) +
+  geom_line(Hg_int_fit_aug,
+            mapping = aes(x = assets_sc, y = .fitted, color = native_cat)) +
+  labs(title = "Interaction effects, not parallel slopes",
+       subtitle = "Hg-hat = assets + native + assets * native", x="Assets (Standardized)", y="log(hair Hg)",
+       color = "Native Status") +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  guides(shape = FALSE)
+
+p_main /
+  p_int +
+  plot_layout(guides = "collect")
+```
+
+---
+
+## In pursuit of Occam's razor
+
+- Occam's Razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected.
+
+--
+- Model selection follows this principle.
+
+--
+- We only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model.
+
+--
+- In other words, we prefer the simplest best model, i.e. **parsimonious** model.
+
+---
+
+.pull-left[
+```{r ref.label = "Hg-main-int", echo = FALSE, out.width="100%", fig.asp = 0.8}
+```
+]
+.pull-right[
+.question[
+Visually, which of the two models is preferable under Occam's razor?
+]
+]
+
+---
+
+## R-squared
+
+- $R^2$ is the percentage of variability in the response variable explained by 
+the regression model.
+
+```{r}
+glance(Hg_main_fit)$r.squared
+glance(Hg_int_fit)$r.squared
+```
+
+--
+- The model with interactions has a higher $R^2$.
+
+--
+- However, using $R^2$ for model selection in models with multiple explanatory variables is not a good idea, as $R^2$ never decreases when **any** variable is added to the model.
+
+---
+
+## Adjusted R-squared
+
+... a (more) objective measure for model selection
+
+- Adjusted $R^2$ doesn't increase if the new variable does not provide any new 
+informaton or is completely unrelated, as it applies a penalty for number of 
+variables included in the model.
+- This makes adjusted $R^2$ a preferable metric for model selection in multiple
+regression models.
+
+---
+
+## Comparing models
+
+.pull-left[
+```{r}
+glance(Hg_main_fit)$r.squared
+glance(Hg_int_fit)$r.squared
+```
+]
+.pull-right[
+```{r}
+glance(Hg_main_fit)$adj.r.squared
+glance(Hg_int_fit)$adj.r.squared
+```
+]
+
+--
+
+.pull-left-wide[
+.small[
+- Is R-sq higher for int model?
+```{r}
+glance(Hg_int_fit)$r.squared > glance(Hg_main_fit)$r.squared 
+```
+
+- Is R-sq adj. higher for int model?
+
+```{r}
+glance(Hg_int_fit)$adj.r.squared > glance(Hg_main_fit)$adj.r.squared
+```
+]
+]
+
+---
+
+class: middle
+
+# Two numerical predictors
+
+---
+
+
+## Multiple predictors
+
+- Response variable: `lhairHg` 
+- Explanatory variables: Assets (scaled) and proximity to formal mining operations (scaled)
+
+```{r model-hg-assets-mining}
+mr_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + form_min_sc, data = mercury1)
+tidy(mr_fit)
+```
+
+---
+
+##  Linear model with multiple predictors
+
+```{r model-hg-assets-mining-tidy, echo=FALSE}
+tidy(mr_fit)
+```
+
+<br>
+
+$$\widehat{log\_Hg}_i = 0.249 - 0.258 \times {assets\_sc}_i  - 0.126 \times {form\_min\_sc}_i$$
+
+---
+
+
+class: middle
+
+# Numerical and categorical predictors
+
+---
+
+
+## Mercury, assets, and native communities
+
+- Explore the relationship between hair mercury and assets, conditioned 
+on whether or not the individual lives in a native community
+- First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+```{r}
+mercury1 %>%
+  count(native)
+```
+]
+
+---
+
+## Typical surface area
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-narrow[
+Note that asset levels differ across native and non-native communities.
+]
+.pull-right-wide[
+```{r ref.label = "viz-surf-hg", echo = FALSE, warning = FALSE, out.width="90%"}
+```
+]
+]
+.panel[.panel-name[Code]
+```{r viz-surf-hg, fig.show = "hide"}
+ggplot(data = mercury1, aes(x = assets_sc, fill = native_cat)) +
+  geom_histogram() +
+  facet_grid(native_cat ~ .) +
+  scale_fill_manual(values = c("#E48957", "#071381")) +
+  guides(fill = FALSE) +
+  labs(x = "Assets", y = NULL) 
+```
+]
+]
+
+---
+
+## Facet to get a better look
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "viz-surf-facet", echo = FALSE, warning = FALSE, out.width = "80%", fig.asp = 0.5}
+```
+]
+.panel[.panel-name[Code]
+```{r viz-surf-facet, fig.show = "hide"}
+ggplot(data = mercury1,
+       aes(
+         y = lhairHg,
+         x = assets_sc,
+         color = native_cat,
+         shape = native_cat
+       )) +
+  geom_point(alpha = 0.7) +
+  facet_wrap( ~ native_cat) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  theme(legend.position = "NONE") +
+  labs(y = "Hg (log ppm)",
+       x = "Assets (standardized)")
+```
+]
+]
+
+
+---
+
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between  log hair mercury and assets
+**does not vary** by whether or not the individual resides in a native community.
+- **Interaction effects:** Assuming relationship between log hair mercury and assets **varies** by whether or not the person is a resident of a native community.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+non-parallel lines.
+
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+## Two ways to model
+
+.pull-left-narrow[
+- **Main effects:** Assuming relationship between logged mercury and assets **does not vary** by whether or not the individual lives in a native community
+- **Interaction effects:** Assuming relationship between logged mercury and assets **varies** by whether or not the individual lives in a native community
+]
+.pull-right-wide[
+```{r hg-main-int-viz, echo=FALSE, out.width="70%", fig.asp = 0.9}
+hg_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1)
+hg_main_fit_aug <- augment(hg_main_fit$fit)
+
+hg_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc * native_cat, data = mercury1)
+hg_int_fit_aug <- augment(hg_int_fit$fit)
+
+p_main <- ggplot(hg_main_fit_aug,
+                 aes(y = lhairHg, x = assets_sc, color = native_cat)) +
+  geom_point(aes(shape = native_cat), alpha = 0.1) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  geom_line(aes(y = .fitted), size = 1.5) +
+  theme(legend.position = "NONE") +
+  labs(y = "log Hg", title = "Main effects", x = "Assets (standardized)") + guides(shape = FALSE, COLOR = FALSE)
+
+hg_int <- ggplot(
+  hg_int_fit_aug,
+  aes(y = lhairHg, x = assets_sc, color = native_cat)
+) +
+  geom_point(aes(shape = native_cat), alpha = 0.1) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  geom_line(aes(y = .fitted), size = 1.5) +
+  theme(legend.position = "NONE") +
+  labs(y = "log Hg", title = "Interaction effects", x = "Assets (standardized)") + 
+  guides(shape = FALSE, color = FALSE)
+
+p_main /
+  p_int  #+ 
+  #plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: `lhairHg`
+- Explanatory variables: `assets_sc` and `native_cat`
+
+.midi[
+```{r model-main-effects}
+hg_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1)
+tidy(hg_main_fit)
+```
+]
+
+--
+
+$$\widehat{log\_Hg}_i = 1.00 - 0.0945 \times assets\_sc_i - 0.957 \times I(nonnative_i=1)$$
+The notation $I(nonnative_i=1)$ indicates that predictor takes value 1 if the person's community is non-native, and 0 otherwise. 
+---
+
+## Solving the model
+
+- Native community: Plug in 0 for `native_cat`
+
+
+$$\widehat{log\_Hg}_i = 1.00 - 0.0945 \times assets\_sc_i - 0.957  \times 0 = 1.00 - 0.0945 \times assets\_sc_i$$
+
+
+--
+- Non-native community: Plug in 1 for `native_cat`
+
+$$\widehat{log\_Hg}_i = 1.00 - 0.0945 \times assets\_sc_i - 0.957 = 0.043 - 0.0945 \times assets\_sc_i$$
+
+---
+
+## Visualizing main effects
+
+.pull-left-narrow[
+- **Same slope:** Average rate of change in log Hg as assets increase does not vary between individuals living in native and non-native communities.
+- **Different intercept:** Mercury levels in hair of those living in native communities are consistently higher than levels in those living in non-native communities.
+]
+.pull-right-wide[
+```{r out.width="100%", echo = FALSE}
+p_main
+```
+]
+
+---
+
+## Interpreting main effects
+
+.midi[
+```{r exp-coefs}
+tidy(hg_main_fit) %>% 
+  mutate(exp_estimate = exp(estimate)) %>%
+  select(term, estimate, exp_estimate)
+```
+]
+
+- All else held constant, for each additional standard deviation in assets, the hair Hg level is predicted, on average, to be lower by a factor of $e^{-0.0945}=0.91$.
+- All else held constant, residents of non-native communities are predicted, on average, to have hair Hg concentrations that are lower by a factor of $e^{-0.957}=0.38$ than concentrations among residence of native communities.
+- Hair Hg concentrations of native community residents who have the mean level of assets are predicted, on average, to be 2.72 ppm
+
+---
+
+## Main vs. interaction effects
+
+- The way we specified our main effects model only lets `native_cat` affect the intercept.
+
+- Model implicitly assumes that residents in each type of community have the *same slope* and only allows for *different intercepts*.  
+
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colors
++ Same slope and different intercept for both colors
++ Different slope and different intercept for both colors
+]
+
+---
+
+## Interaction: `Assets_sc*native_cat`
+
+```{r out.width="60%", echo = FALSE}
+p_int
+```
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: lhairHg
+- Explanatory variables: `assets_sc`, `native_cat`, and their interaction
+
+```{r model-interaction-effects}
+Hg_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc * native_cat, data = mercury1)
+```
+
+---
+
+```{r}
+tidy(Hg_int_fit)
+```
+
+$$\widehat{log\_Hg}_i = 0.779 - 0.320 \times assetssc_i $$
+$$ - 0.757 \times I(nonnative_i=1) + 0.301 \times {assetssc}_i \times I(nonnative_i=1)$$
+
+
+---
+
+## Interpretation of interaction effects
+
+Rate of change in log hair Hg as assets increase does 
+vary between residents of native and non-native communities (different slopes), and those in native communities have generally higher levels of hair mercury than those in non-native communities (different intercept + lines do not cross in range of data).
+
+- Native community resident: 
+
+$$\widehat{log\_Hg}_i = 0.779 - 0.320 \times assetssc_i - 0.757 \times 0 + 0.301 \times assetssc_i \times 0 $$
+$$\widehat{log\_Hg}_i = 0.779 - 0.320 \times assetssc_i$$
+
+- Non-native community resident: 
+$$\widehat{log\_Hg}_i = 0.779 - 0.320 \times assetssc_i - 0.757 \times 1 + 0.301 \times assetssc_i \times 1$$
+
+$$\widehat{log\_Hg}_i = 0.022 - 0.019 \times assetssc_i$$
+
+---
+
+## Interpretation of interaction effects
+
+.small[
+.pull-left[
+- Native community resident: 
+
+$$\widehat{log\_Hg}_i = 0.779 - 0.320 \times assetssc_i$$
+
+- Non-native community resident: 
+
+$$\widehat{log\_Hg}_i = 0.022 - 0.019 \times assetssc_i$$
+
+]
+]
+.pull-right[
+```{r viz-interaction-effects2, out.width="80%", echo = FALSE}
+p_int
+```
+]
+
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted $R^2$, so we 
+should indeed use the model with the interactions.
+
+```{r}
+glance(hg_main_fit)$adj.r.squared
+glance(hg_int_fit)$adj.r.squared
+```
+
+---
+
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.
+

@@ -1,0 +1,402 @@
+---
+title: "Residual Analysis and Transformations"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+## Read in Data
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>",
+  highlight = TRUE,
+  fig.align = "center"
+)
+library(tidyverse)
+library(tidymodels)
+```
+
+
+
+```{r packages}
+library(tidyverse)
+library(tidymodels)
+library(readr)
+library(ggtext)
+library(knitr)
+library(kableExtra)
+mercury <- readr::read_csv("mercury_reg.csv")
+mercury <-
+  mercury %>%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %>%
+  mutate(hairHg=exp(lhairHg))
+```
+
+---
+
+class: middle
+
+# Model checking
+
+---
+
+## "Linear" models
+
+- We're fitting a "linear" model, which assumes a linear relationship between our explanatory and response variables.
+- But how do we assess this?
+
+---
+
+## Graphical diagnostic: residuals plot (ppm units)
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "residuals-plot", echo = FALSE, warning = FALSE, out.width = "60%"}
+```
+]
+.panel[.panel-name[Code]
+```{r residuals-plot, fig.show="hide"}
+hg_asset_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(hairHg ~ assets_sc, data = mercury)
+
+hg_asset_fit_aug <- augment(hg_asset_fit$fit) #<<
+
+ggplot(hg_asset_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted mercury (ppm)", y = "Residuals")
+```
+]
+
+.panel[.panel-name[Augment]
+```{r}
+hg_asset_fit_aug
+```
+]
+]
+
+---
+
+## More on `augment()`
+
+```{r}
+glimpse(hg_asset_fit_aug)
+```
+
+---
+
+
+## Looking for...
+
+- Residuals distributed randomly around 0
+- With no visible pattern along the x or y axes
+
+```{r out.width = "60%", echo=FALSE}
+df <- tibble(
+  fake_resid = rnorm(1000, mean = 0, sd = 30),
+  fake_predicted = runif(1000, min = 0, max = 200)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Fan shapes**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_resid = c(rnorm(100, mean = 0, sd = 1), 
+                 rnorm(100, mean = 0, sd = 15), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 20), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 50), 
+                 rnorm(100, mean = 0, sd = 35), 
+                 rnorm(100, mean = 0, sd = 40),
+                 rnorm(200, mean = 0, sd = 80)),
+  fake_predicted = seq(0.2, 200, 0.2)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Groups of patterns**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = c(
+    rnorm(500, mean = -20, sd = 10),
+    rnorm(500, mean = 10, sd = 10)
+  )
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Residuals correlated with predicted values**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = fake_predicted + rnorm(1000, mean = 0, sd = 50)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Any patterns!**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(-100, 100, 0.4),
+  fake_resid = -5*fake_predicted^2 - 3*fake_predicted + 20000 + rnorm(501, mean = 0, sd = 10000)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+
+.question[
+What patterns does the residuals plot reveal that should make us question whether a linear model is a good fit for modeling the relationship between mercury (ppm) and assets?
+]
+
+```{r out.width = "60%", echo=FALSE}
+ggplot(hg_asset_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted mercury (ppm)", y = "Residuals")
+```
+
+---
+
+class: middle
+
+# Exploring linearity
+
+---
+
+## Data: Mercury
+
+```{r echo=FALSE, out.width = "70%"}
+ggplot(data = mercury, aes(x = hairHg)) +
+  geom_histogram() +
+  labs(title = "Mercury (ppm)")
+```
+
+---
+
+## Mercury vs. assets
+
+```{r echo=FALSE, out.width = "70%", warning = FALSE}
+ggplot(data = mercury, aes(x = assets_sc, y = hairHg)) +
+  geom_point(alpha = 0.05) +
+  labs(x = "Assets (standardized)", y = "Mercury (ppm)") 
+```
+
+---
+
+## Mercury vs assets
+
+.question[
+Which plot shows a more linear relationship?
+]
+
+.small[
+  
+.pull-left[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+ggplot(data = mercury, 
+       mapping = aes(x = assets_sc, y = hairHg)) +
+  geom_point(alpha = 0.2) +
+  labs(
+    title = "Mercury and Assets", 
+    x = "Assets (standardized)", 
+    y = "Mercury (ppm)"
+    )
+```
+]
+
+.pull-right[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+ggplot(data = mercury, 
+       mapping = aes(x = assets_sc, y = lhairHg)) +
+  geom_point(alpha = 0.2) +
+  labs(
+    title = "Log(Mercury) and Assets", 
+    x = "Assets (standardized)", 
+    y = "Mercury (log ppm)"
+    )
+```
+]
+
+]
+
+---
+
+## Mercury and Assets, residuals
+
+.question[
+Which plot shows a residuals that are uncorrelated with predicted values from the model? Also, what is the unit of the residuals?
+]
+  
+.pull-left[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+hg_assets_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(hairHg ~ assets_sc, data = mercury)
+hg_assets_fit_aug <- augment(hg_assets_fit$fit)
+
+ggplot(data = hg_assets_fit_aug, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.2) +
+  labs(
+    title = "Mercury vs. assets, residuals", 
+    x = "Predicted mercury (ppm)", 
+    y = "Residuals"
+    )
+```
+]
+.pull-right[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+lhg_assets_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc, data = mercury)
+lhg_assets_fit_aug <- augment(lhg_assets_fit$fit)
+
+ggplot(data = lhg_assets_fit_aug, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.2) +
+  labs(
+    title = "Log Mercury vs. assets, residuals", 
+    x = "Predicted mercury (log ppm)", 
+    y = "Residuals"
+    )
+```
+]
+
+---
+
+## Transforming the data
+
+- We saw that `hairHg` has a right-skewed distribution, and the residuals of that model don't look great.
+
+--
+- In these situations a transformation applied to the response variable may be useful.
+
+--
+- In order to decide which transformation to use, we should examine the distribution of the response variable.
+
+--
+- The extremely right skewed distribution suggests that a log transformation may 
+be useful.
+    - log = natural log, $ln$
+    - Default base of the `log` function in R is the natural log: <br>
+    `log(x, base = exp(1))`
+    
+---
+
+## Transformations
+
+- Non-constant variance is one of the most common model violations, however it is usually fixable by transforming the response (y) variable.
+
+--
+- The most common transformation when the response variable is right skewed is the log transform: $log(y)$, especially useful when the response variable is 
+(extremely) right skewed.
+
+--
+- This transformation is also useful for variance stabilization.
+
+--
+- When using a log transformation on the response variable the interpretation of 
+the slope changes: *"For each unit increase in x, y is expected on average to be higher/lower <br> by a factor of $e^{b_1}$."*
+
+--
+- Another useful transformation is the square root: $\sqrt{y}$, especially 
+useful when the response variable is a count.
+
+---
+
+## Transform, or learn more?
+
+- Data transformations may also be useful when the relationship is non-linear
+- However in those cases a polynomial regression may be more appropriate
+  + This is beyond the scope of this course, but you’re welcomed to try it for your final project, and I’d be happy to provide further guidance
+
+---
+
+## Aside: when $y = 0$
+
+In some cases the value of the response variable might be 0, and
+
+```{r}
+log(0)
+```
+
+--
+
+The trick is to add a very small number to the value of the response variable for these cases so that the `log` function can still be applied:
+
+```{r}
+log(0 + 0.00001)
+```
+
