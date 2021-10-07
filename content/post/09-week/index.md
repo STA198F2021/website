@@ -38,7 +38,7 @@ title: 'Week 9 - More Modelling'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Project | [Project Proposal - Optional Resubmission](https://sta198f2021.github.io/website/) | Mon., 10/18 |
-| Quiz | [Quiz 7](https://sakai.duke.edu) | Tues., 10/29 |
+| Quiz | [Quiz 7](https://sakai.duke.edu) | Tues., 10/19 |
 | Lab 7 |[]()| Wed., 10/20 |
 | Homework 3 | []() | Fri., 10/22 |
 
