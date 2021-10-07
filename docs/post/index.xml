@@ -65,7 +65,96 @@
       <link>https://sta198f2021.github.io/website/post/09-week/</link>
       <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/post/09-week/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/09-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;class-slides-and-activities&#34;&gt;Class Slides and Activities&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div  style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Residuals and Transformations&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-09/w9-l01-resid-xform.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Multiple Regression&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-09/w9-l02-multiple-reg.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;assignments-and-labs&#34;&gt;Assignments and Labs&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Project&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/&#34;&gt;Project Proposal - Optional Resubmission&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Mon., 10/18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Quiz&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sakai.duke.edu&#34;&gt;Quiz 7&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Tues., 10/29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Lab 7&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Wed., 10/20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Homework 3&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Fri., 10/22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;readings-and-videos&#34;&gt;Readings and Videos&lt;/h3&gt;
+&lt;p&gt;Note: the videos this week track the lecture topics fairly closely but use different examples. This could be helpful if you want a different perspective on similar material!&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📖&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;IMS: &lt;a href=&#34;https://openintro-ims.netlify.app/model-mlr.html&#34;&gt;Chp 8: Linear Regression with Multiple Predictors&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=j4MZ6ZdHnHg&#34;&gt;Nonlinear Relationships&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=mjkNabD4oi4&#34;&gt;Models with Multiple Predictors I&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=nJAYRnLPb10&#34;&gt;Models with Multiple Predictors II&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
     </item>
     
     <item>
@@ -74,7 +163,6 @@
       <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/post/08-week/</guid>
       <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
-&lt;h3 id=&#34;tasks-1&#34;&gt;Tasks&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/08-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/08-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
@@ -157,12 +245,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=69U92Q3pwnA&#34;&gt;Simple Linear Regression&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=j4MZ6ZdHnHg&#34;&gt;Nonlinear Relationships&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=69U92Q3pwnA&#34;&gt;Linear Regression&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;

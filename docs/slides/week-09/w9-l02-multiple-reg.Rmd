@@ -164,6 +164,8 @@ linear_reg() %>%
 
 We can use a CLT-based confidence interval here. Because we had to estimate the standard error of our estimates $\hat{\beta}$, we use a t-interval, and R can calculate this for us upon request. 
 
+This type of model, with one continuous predictor and the rest categorical, can also be formulated as an ANCOVA (analysis of covariance) model.
+
 ---
 
 ## Main vs. interaction effects
