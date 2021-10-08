@@ -454,8 +454,36 @@ Create two new variables, calculated as (1) initial lead concentration minus the
 
 ---
 
+```{r result}
+flint=rename(flint, "Pb_45"="Pb Bottle 2 (ppb) - 45 secs flushing")
+flint=rename(flint, "Pb_2"="Pb Bottle 3 (ppb) - 2 mins flushing")
+flint <- flint %>% mutate(diff45=Pb_initial-Pb_45) %>%
+  mutate(diff2=Pb_initial-Pb_2)
+```
 
+---
+```{r next}
+flint %>%
+  ggplot(aes(x=diff45))+geom_histogram()
+range(flint$diff45)
+```
 
+---
+
+```{r next2}
+flint %>%
+  ggplot(aes(x=diff2))+geom_histogram()
+range(flint$diff2)
+```
+
+---
+
+```{r next3}
+t.test(flint$diff45)
+t.test(flint$diff2)
+```
+
+---
 ### Two-sample tests of the mean
 
 In practice, we don't usually test that a sample mean equals a single fixed value; instead, we want to compare responses across groups or across different values of covariates.  The type of t-test we use to compare two means depends on how the samples were obtained.  

@@ -502,7 +502,88 @@ Create two new variables, calculated as (1) initial lead concentration minus the
 ---
 
 
+```r
+flint=rename(flint, "Pb_45"="Pb Bottle 2 (ppb) - 45 secs flushing")
+flint=rename(flint, "Pb_2"="Pb Bottle 3 (ppb) - 2 mins flushing")
+flint &lt;- flint %&gt;% mutate(diff45=Pb_initial-Pb_45) %&gt;%
+  mutate(diff2=Pb_initial-Pb_2)
+```
 
+---
+
+```r
+flint %&gt;%
+  ggplot(aes(x=diff45))+geom_histogram()
+```
+
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/next-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+```r
+range(flint$diff45)
+```
+
+```
+#&gt; [1] -1043.756   136.055
+```
+
+---
+
+
+```r
+flint %&gt;%
+  ggplot(aes(x=diff2))+geom_histogram()
+```
+
+&lt;img src="w7-l02-test-mean-prop_files/figure-html/next2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+```r
+range(flint$diff2)
+```
+
+```
+#&gt; [1] -59.378 138.003
+```
+
+---
+
+
+```r
+t.test(flint$diff45)
+```
+
+```
+#&gt; 
+#&gt; 	One Sample t-test
+#&gt; 
+#&gt; data:  flint$diff45
+#&gt; t = 0.083533, df = 270, p-value = 0.9335
+#&gt; alternative hypothesis: true mean is not equal to 0
+#&gt; 95 percent confidence interval:
+#&gt;  -7.782909  8.472607
+#&gt; sample estimates:
+#&gt; mean of x 
+#&gt; 0.3448487
+```
+
+```r
+t.test(flint$diff2)
+```
+
+```
+#&gt; 
+#&gt; 	One Sample t-test
+#&gt; 
+#&gt; data:  flint$diff2
+#&gt; t = 6.3748, df = 270, p-value = 7.891e-10
+#&gt; alternative hypothesis: true mean is not equal to 0
+#&gt; 95 percent confidence interval:
+#&gt;  4.827963 9.142612
+#&gt; sample estimates:
+#&gt; mean of x 
+#&gt;  6.985288
+```
+
+---
 ### Two-sample tests of the mean
 
 In practice, we don't usually test that a sample mean equals a single fixed value; instead, we want to compare responses across groups or across different values of covariates.  The type of t-test we use to compare two means depends on how the samples were obtained.  
