@@ -108,10 +108,10 @@ Total: 50 pts
 - Exercise 5: 4 pts
 - Exercise 6: 5 pts
 - Exercise 7: 4 pts
-- Exercise 8: 5 pts
+- Exercise 8: 4 pts
 - Exercise 9: 5 pts
 - Exercise 10: 5 pts
 
-- Overall:  4 pts
+- Overall:  5 pts
 
   - Overall includes the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
