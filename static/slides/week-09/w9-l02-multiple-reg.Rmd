@@ -271,7 +271,13 @@ Visually, which of the two models is preferable under Occam's razor?
 the regression model.
 
 ```{r}
+Hg_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1)
 glance(Hg_main_fit)$r.squared
+Hg_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lhairHg ~ assets_sc + native_cat + assets_sc*native_cat, data = mercury1)
 glance(Hg_int_fit)$r.squared
 ```
 
