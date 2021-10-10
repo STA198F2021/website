@@ -1,0 +1,103 @@
+---
+title: "Homework #03: Community-Based Intervention to Enhance Child Neurodevelopment"
+subtitle: "due Friday, October 22 at 4:00pm"
+output: 
+  tufte::tufte_html:
+    css: "sta199-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: true
+    toc_depth: 1
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Miller et al (2021) report the results of a randomized, controlled trial designed to evaluate effectiveness of a large-scale community-based group parenting intervention (CASITA) in the Carabayllo distrit of Lima, Peru in 2017-2018. The intervention, designed to increase the caregiver's ability to provide developmentally-stimulating interactions with their young child, included parent coaching and social support. The Extended Ages and Stages Questionnaire (EASQ) was used to measure child development at baseline and at the end of the study. Eligible children were between 6-20 months and either at risk of developmental delay or with developmental delay already identified. The enrolled children were randomized with equal probability into the CASITA intervention group or a control group (note the control families all were offered the intervention at the end of the study period). 
+
+The data analysis plan specified that the primary response would be EASQ age-standardized z-scores at follow-up (`total_z_vs_wb2`) and that the data would be analyzed using linear regression analysis on the intent-to-treat population, with covariates in the model including the following:
+
+- treatment group `study_arm1` (0=control, 1=intervention)
+
+- maternal education `mom_educ` (0=primary, 1=secondary, or 2=post-secondary) 
+
+- gestational age of the child at birth `gest_age_cat` (1=40+weeks, 2=38-39 weeks, 3=36-37 weeks)
+
+- child sex `Sex` (0=missing, 1=male, 2=female) 
+
+- baseline age-standardized EASQ z-score `total_z_vs_wb1`
+
+While an appropriate t-test would be a valid way of analyzing the results of this randomized study, it was not prespecified as the primary analysis here because the researchers wanted to control for known variability in development as a function of child sex, gestational age at birth, and other factors, which should lead to (appropriately) more tighter confidence intervals.
+
+Before doing any analysis, you need to restrict the data to include only children with `study_a_participant` value=3, as some data may be provided for children who did not officially enroll in the study.
+
+1. The EASQ scores were converted into z-scores using age-specific quantiles obtained from a Peruvian population. (Age-specific z-scores are standardized to have mean 0 and variance 1 separately for each age group, so that you can directly compare children of different ages -- an "average" child at age 8 months will have z-score of 0, and an "average" child at age 1 year will also have a z-score of 0, even though the raw scores may differ as children develop). Provide a histogram of baseline EASQ z-scores. Do these scores appear to represent children who have developmental delay or who are at risk of delay?  
+
+```{r readdata, message=FALSE, warning=FALSE}
+library(haven) #to read the Stata .dta file
+library(tidyverse)
+library(tidymodels)
+cdev=read_dta("cdev.dta")
+
+```
+
+(Your response here.)
+
+2. Create a scatterplot that has the baseline EASQ z-scores on the x-axis and the follow-up EASQ scores on the y-axis. Make sure your plot makes it easy to distinguish treatment (CASITA) versus control participants in the study.  In a few sentences provide an interpretation of the scatterplot.
+
+(Your response here.)
+
+
+3. Create a 95% confidence interval for the change in z-score from baseline to follow-up in the control group, as well as a 95% confidence interval for the change in z-score from baseline to follow-up in the CASITA treatment group. Conduct a t-test for (a) the null hypothesis that EASQ age-adjusted z-scores were unchanged from baseline to follow-up in the control group, and (b) the null hypothesis that EASQ age-adjusted z-scores were unchanged from baseline to follow-up in the CASITA group. Clearly specify what type of t-test you used, providing a brief rationale. Briefly describe the substance of your findings.
+
+(Your response here.)
+
+4. What kind of t-test is most appropriate for determining whether the treatment is effective, using a direct comparison of CASITA versus control? Provide a justification for your preferred t-test, conduct it, and interpret the results, including a single 95% confidence interval corresponding to the test you conducted.
+
+(Your response here.) 
+
+5. Fit the linear regression model specified in the data analysis plan.  Provide a plot of residuals vs predicted follow-up EASQ scores and note whether you have any concerns based on the plot.  
+
+
+(Your response here.) 
+
+6. Is CASITA effective?  Provide evidence (e.g., a test result or confidence interval) based on the regression model to support your claim, and if CASITA is effective, provide an estimated benefit in terms of the difference in z-score, holding the other factors in the model constant.
+
+(Your response here.) 
+
+7. Are any other factors in the model "significantly" related to follow-up EASQ at an $\alpha=0.05$ significance level?  For each "significant" factor, describe how that factor is related to follow-up EASQ using estimates from your model.
+
+(Your response here.) 
+
+
+8. Does the model as a whole explain most of the variability in the EASQ scores at follow-up? Provide statistical evidence to support your answer.
+
+(Your response here.) 
+
+9. Researchers would like to check whether the CASITA intervention is equally effective for participants regardless of baseline EASQ score. Add an interaction term to your model that allows you to evaluate this question, perform a test of the null hypothesis that the CASITA intervention is equally effective for participants regardless of baseline EASQ score, and interpret the results of your test.
+
+(Your response here.)
+
+### Grading:
+
+| Component | Points |
+|:----------|:-------|
+| Ex 1      | 5     |
+| Ex 2      | 5     |
+| Ex 3      | 5     |
+| Ex 4      | 5     |
+| Ex 5      | 5     |
+| Ex 6      | 5     |
+| Ex 7      | 5     |
+| Ex 8      | 5     |
+| Ex 9      | 5     |
+| Workflow & formatting   | 5      |
+
+**Grading notes**:
+
+-   The "Workflow & formatting" grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages, labeling the code chunks, updating the name and date in the YAML, and in general having a neat report.

@@ -252,6 +252,9 @@ the regression model.
 
 
 ```r
+Hg_main_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(lhairHg ~ assets_sc + native_cat, data = mercury1)
 glance(Hg_main_fit)$r.squared
 ```
 
@@ -260,6 +263,9 @@ glance(Hg_main_fit)$r.squared
 ```
 
 ```r
+Hg_int_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(lhairHg ~ assets_sc + native_cat + assets_sc*native_cat, data = mercury1)
 glance(Hg_int_fit)$r.squared
 ```
 
