@@ -120,7 +120,7 @@ ggplot(data = mercury, aes(x = exp(lhairHg))) +
 
 ---
 
-```{r xform, out.width="70%"}
+```{r xform, out.width="50%"}
 ggplot(data = mercury, aes(x = lhairHg)) +
   geom_histogram() +
   labs(x = "Mercury (log ppm)", y = NULL)
@@ -329,7 +329,7 @@ How, if at all, does the relationship between hair mercury and household assets 
 ]
 .panel[.panel-name[Code]
 ```{r hg_asset_native, fig.show="hide", warning=FALSE}
-ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg, color = native_cat)) +
   geom_point(alpha = 0.1) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
@@ -357,7 +357,7 @@ The prior lines were nice in that they did not extrapolate beyond the range of o
 ]
 .panel[.panel-name[Code]
 ```{r extrapolation, fig.show="hide", warning=FALSE}
-ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg, color = native_cat)) +
   geom_point(alpha = 0.1) +
   geom_smooth(method = "lm",
               se = FALSE,

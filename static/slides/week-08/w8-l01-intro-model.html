@@ -117,7 +117,7 @@ ggplot(data = mercury, aes(x = lhairHg)) +
   labs(x = "Mercury (log ppm)", y = NULL)
 ```
 
-&lt;img src="w8-l01-intro-model_files/figure-html/xform-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-l01-intro-model_files/figure-html/xform-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 Because the models we will discuss to start prefer data that are approximately normally distributed, we will work with the log of hair mercury concentrations.
 
@@ -325,7 +325,7 @@ How, if at all, does the relationship between hair mercury and household assets 
 .panel[.panel-name[Code]
 
 ```r
-ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg, color = native_cat)) +
   geom_point(alpha = 0.1) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
@@ -353,7 +353,7 @@ The prior lines were nice in that they did not extrapolate beyond the range of o
 .panel[.panel-name[Code]
 
 ```r
-ggplot(data = mercury, aes(x = lhairHg, y = assets_sc, color = native_cat)) +
+ggplot(data = mercury, aes(x = assets_sc, y = lhairHg, color = native_cat)) +
   geom_point(alpha = 0.1) +
   geom_smooth(method = "lm",
               se = FALSE,
