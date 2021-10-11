@@ -71,7 +71,7 @@ The purposes of the proposal are (1) to help you get started early with thinking
 research question and your data (where it came from, how it was collected, 
 what are the cases, what are the  variables, etc.). The motivation for your research question should be clear, with citations to relevant literature as appropriate.
 
-- Section 2 - Data: Place your data in the `/data` folder. Then print out the output of 
+- Section 2 - Data: Place your data and codebook in the `/data` folder. Then print out the output of 
 `glimpse()` or `skim()` of your data frame.
 
 - Section 3 - Data analysis plan:
