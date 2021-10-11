@@ -30,7 +30,7 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "Class - 10:15-11:30am <br> Social Sciences 136 <br> Prof. Herring hours - 11:30am-12:30pm <br> 208 Old Chem <br> Alexandra hours - 1:30-2:30pm <br> Edge Project Room 3"  
+  description = "Class - 10:15-11:30am <br> Social Sciences 136 <br> Prof. Herring hours - 11:30am-12:30pm <br> 208 Old Chem" 
   
 [[feature]]
   icon = "comments"
@@ -42,5 +42,5 @@ subtitle = "Code along labs on Mondays; classes on Wednesdays and Fridays; offic
   icon = "university"
   icon_pack = "fas"
   name = "Friday"
-  description = "Class - 10:15-11:30am <br> Social Sciences 136"  
+  description = "Class - 10:15-11:30am <br> Social Sciences 136  <br> Alexandra hours - 11:30am-12:30pm <br> Edge Project Room 6"  
 +++
