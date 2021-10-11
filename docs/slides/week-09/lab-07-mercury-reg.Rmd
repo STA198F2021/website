@@ -1,0 +1,88 @@
+---
+title: 'Lab #07: Mercury Levels by Age and Native Community Status'
+subtitle: 'due Wednesday, October 20, 4:00 PM'
+output:
+  tufte::tufte_html:    
+    css: "sta199-labs.css"
+    tufte_variant: envisioned
+    highlight: pygments
+    toc: no
+    toc_depth: 1
+  html_document:
+    toc: no
+    toc_depth: '1'
+    df_print: paged
+link-citations: yes
+editor_options:
+  chunk_output_type: console
+---
+
+## Goals
+
+-   Fit a linear regression with a single numerical and categorical predictor
+-   Interpret regression output in context of the data
+-   Compare models
+
+
+
+## Artisanal and Small Scale Gold Mining in the Peruvian Amazon
+
+We continue our investigation on data on artisanal and small-scale gold mining. In this lab we'll look at an individual's age as a predictor in addition to native status of the community. First, read in the data and filter it to contain only observations for which `withinid`=2.
+
+
+```{r datasteps, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(infer)
+
+mercury <- readr::read_csv("mercury_reg.csv") 
+
+# add code here as needed
+
+```
+
+# Exercises
+
+1. First, we would like to explore the relationship between mercury in hair (using `lhairHg`) and age. Create a simple scatterplot showing this relationship. Specify the aesthetics so that you can see the points clearly (there are many points to plot). Then, create a second scatterplot in which the native status of the village is distinguished using color, which allows us to explore the relationship between age and hair Hg conditionally on the native status of the village. Briefly describe whether age and hair Hg (in log ppm) appear to be related.
+
+
+
+2. Let's see if any apparent trend in the plot is something more than natural variation. Fit a linear model called `hair_age` to predict average hair Hg on the log scale `lhairHg` by age (`age`). This first model should not include native community status as a predictor. Based on the regression output, write the equation for predicting log hair Hg, e.g. $\widehat{y}=\widehat{\beta}_0+\widehat{\beta}_1 x_i$ in our setting.
+
+
+3. Recreate the scatterplot from Exercise 1, and add the regression line to this plot in orange color.
+
+
+4. Interpret the slope of the linear model in context of the data.
+
+
+5.  Interpret the intercept of the linear model in context of the data. Comment on whether or not the intercept makes sense in this context.
+
+
+6. Determine the $R^2$ of the model and interpret it in context of the data.
+
+
+7.   Fit a new linear model called `hair_age_native` to predict average log mercury based on age and community native status. In this new model, use a new age variable, re-scaled so that a one-unit increase represents a 10-year increase in age. In this model, assume the impact of a 10-year increase in age (one unit increase in your new scaled predictor) does not vary by native status but that native status may affect log mercury levels in a similar manner at any age. Based on the regression output, write the equation of the line for those in native communities and the equation of the line for those in non-native communities. Interpret the slope and intercept of each line in the context of the data.
+
+
+
+8. Using the $R^2$ and adjusted $R^2$ as  means of model comparison, describe which of the two models is preferred.
+
+
+
+ 
+## Grading
+Total: 50 pts
+
+- Exercise 1: 5 pts
+- Exercise 2: 5 pts
+- Exercise 3: 5 pts
+- Exercise 4: 5 pts
+- Exercise 5: 5 pts
+- Exercise 6: 5 pts
+- Exercise 7: 10 pts
+- Exercise 8: 5 pts
+
+- Overall:  5 pts
+
+  - Overall includes proper data processing, the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
