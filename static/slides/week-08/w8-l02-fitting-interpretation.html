@@ -77,8 +77,8 @@ mercury &lt;-
 ---
 ## Goal: Predict mercury from assets
 
-`$$\widehat{y}_{i} = \beta_0 + \beta_1 \times x_{i}$$`
-Here `\(y_i\)` represents log hair mercury for subject `\(i\)` and `\(x_i\)` represents standardized household income.
+`$$\widehat{y}_{i} = \widehat{\beta}_0 + \widehat{\beta}_1 \times x_{i}$$`
+Here `\(y_i\)` represents log hair mercury for subject `\(i\)`, and `\(x_i\)` represents standardized household income.
 &lt;img src="w8-l02-fitting-interpretation_files/figure-html/hg_asset_plot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
@@ -184,9 +184,9 @@ linear_reg() %&gt;%
 #&gt; 1 (Intercept)    0.280    0.0213      13.1 7.49e-38
 #&gt; 2 assets_sc     -0.358    0.0216     -16.5 3.90e-58
 ```
-UPDATE UPDATE
+
 .large[
-`$$\widehat{y}_{i} = 0.2795 - 0.3577 \times x_{i}$$`
+`$$\widehat{y}_{i} = 0.28 - 0.358 \times x_{i}$$`
 ]
 
 ---
@@ -206,7 +206,9 @@ UPDATE UPDATE
 - perhaps not a very useful statement given the scale
 
 
-- **Intercept:** Individuals with household assets at the mean level are expected to have hair mercury concentrations of 0.2795 log ppm, on average
+- **Intercept:** Individuals with household assets at the mean level (`assets_sc`=0) are expected to have hair mercury concentrations of 0.2795 log ppm, on average
+
+  - Remember `assets_sc` was standardized, so `assets_sc`=0 does not mean "no assets" but instead means "average assets" as it corresponds to an assets z-score of 0
 
 ---
 class: middle
@@ -241,7 +243,7 @@ Using this information, and properties of logs that we just reviewed, fill in th
 
 ---
 
-&gt;For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+&gt;For each additional increase in scaled assets, hair mercury content is expected to be `___` , on average, by a factor of `___`.
 
 
 $$ log(\text{hair Hg for assets x+1}) - log(\text{hair Hg for assets x}) = -0.3577 $$
@@ -286,15 +288,16 @@ class: middle
 
 - We're interested in `\(\beta_0\)` (population parameter for the intercept) and `\(\beta_1\)` (population parameter for the slope) in the following model:
 
-`$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$`
+`$$y_{i} = \beta_0 + \beta_1~x_{i}+\varepsilon_i$$`
+where `\(\varepsilon\)` represents random error around our mean
 
 --
 - Tough luck, you can't have them...
 
 --
-- So we use sample statistics to estimate them:
+- So we use sample statistics to estimate them, using the notation  `\(b\)` or `\(\widehat{\beta}\)` to distinguish our estimates from the true parameters `\(\beta\)`
 
-`$$\hat{y}_{i} = b_0 + b_1~x_{i}$$`
+`$$\widehat{y}_{i} = b_0 + b_1~x_{i}$$` or `$$\widehat{y}_i = \widehat{\beta}_0 + \widehat{\beta}_1~x_i$$`
 
 ---
 
@@ -434,10 +437,10 @@ Define `\(\text{Non-native}_i\)`=1 if non-native community and 0 otherwise.
 
 `$$\widehat{y_i} = 1.12 - 1.11~\text{Non-native}_i$$`
 
-- **Slope:** Residents of non-native communities, on average, are expected to have exposures that are -1.11 log ppm lower, on average, than residents of native communities.  Alternatively, the hair Hg is expected to be lower, on average, by a factor of `\(e^{-1.11}=0.33\)` among residents of non-native communities.
+- **Slope:** Residents of non-native communities, on average, are expected to have Hg concentrations that are -1.11 log ppm lower, on average, than residents of native communities.  Alternatively, the hair Hg is expected to be lower, on average, by a factor of `\(e^{-1.11}=0.33\)` among residents of non-native communities.
   - Compares baseline level (`Native`) to the other level (`Non-native`)
     
-- **Intercept:** Individuals living in native communities are expected to have hair mercury exposures of 1.12 log ppm.
+- **Intercept:** Individuals living in native communities (`Non-native`=0) are expected to have hair mercury exposures of 1.12 log ppm.
 
 ---
 
@@ -470,7 +473,7 @@ linear_reg() %&gt;%
 
 ---
 
-## Dummy variables
+## Dummy or indicator variables
 
 
 ```
@@ -490,14 +493,13 @@ linear_reg() %&gt;%
 #&gt; # … with 13 more rows
 ```
 
-- When the categorical explanatory variable has many levels, they're encoded to **dummy variables**
-- Each coefficient describes the expected difference between heights in that particular community compared to the baseline level
+- When the categorical explanatory variable has many levels, they're encoded to **dummy** or **indicator variables**
+- Each coefficient describes the expected difference between log mercury concentrations in that particular community compared to the baseline community 
 
 ---
 
 ## Categorical predictor with 3+ levels
 
-.pull-left-wide[
 &lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
@@ -615,39 +617,9 @@ linear_reg() %&gt;%
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-]
-.pull-right-narrow[
-.small[
 
-```
-#&gt; # A tibble: 4,083 × 2
-#&gt;    lhairHg community    
-#&gt;      &lt;dbl&gt; &lt;chr&gt;        
-#&gt;  1  0.676  Boca Colorado
-#&gt;  2 NA      Boca Colorado
-#&gt;  3  0.0908 Boca Colorado
-#&gt;  4 NA      Boca Colorado
-#&gt;  5 NA      Boca Colorado
-#&gt;  6 NA      Boca Colorado
-#&gt;  7 NA      Boca Colorado
-#&gt;  8 NA      Boca Colorado
-#&gt;  9 NA      Boca Colorado
-#&gt; 10 NA      Boca Colorado
-#&gt; 11  1.67   Boca Colorado
-#&gt; 12 NA      Boca Colorado
-#&gt; 13  0.450  Boca Colorado
-#&gt; 14  0.704  Boca Colorado
-#&gt; 15 -0.512  Boca Colorado
-#&gt; 16 -0.125  Boca Colorado
-#&gt; 17 -0.103  Boca Colorado
-#&gt; 18 NA      Boca Colorado
-#&gt; 19  0.351  Boca Colorado
-#&gt; 20 NA      Boca Colorado
-#&gt; # … with 4,063 more rows
-```
-]
-]
-etc. for the other communities. Note Boca Colorado, as the *referent community*, will take value 0 for all dummy/indicator variables.
+
+etc. for the other communities. Note Boca Colorado, the *referent community*, =0 for all vars
 
 ---
 
