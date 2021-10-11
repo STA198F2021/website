@@ -113,7 +113,7 @@ print(res,n=23)
 
 ---
 
-- When the categorical explanatory variable has many levels, they're encoded to **indicator variables** or **dummy variables**
+- When the categorical explanatory variable has many levels, they're encoded to **indicator** or **dummy variables**
 
 - Each coefficient describes the expected difference between hair mercury levels in that particular community compared to the baseline level
 
@@ -172,7 +172,7 @@ We might be interested in testing whether all the community means are the same o
 
 versus the alternative hypothesis that at least one of the community means is different.
 
-One way to do this would be to use t-tests on all possible pairs of tests. In this case,  with 23 communities we would need to do `\(\begin{pmatrix} 23 \\ 2 \end{pmatrix}=253\)` tests!  In addition to being time-consuming, carrying out multiple tests typically leads to an *inflated type I error rate*.
+One way to do this would be to use t-tests on all possible pairs of communities. In this case,  with 23 communities we would need to do `\(\begin{pmatrix} 23 \\ 2 \end{pmatrix}=253\)` tests!  In addition to being time-consuming, carrying out multiple tests typically leads to an *inflated type I error rate*.
 
 ---
 
@@ -465,13 +465,13 @@ We can think of the between-groups variance as the sum of inherent variability *
 
 Both `\({s_W}^2\)` and `\({s_B}^2\)` are estimates of the population variance `\(\sigma^2\)` if `\(H_0\)` is true.  Now, if the sample means vary around the overall mean (this variance measured by `\({s_B}^2\)`) more than the individual observations vary around the sample means (measured by `\({s_W}^2\)`), we have evidence that the corresponding group population means are in fact different (so that all `\(K\)` means are not the same).
 
-How do we compare the variances? Consider `$$F=\frac{\text{inherent variability + treatment effect}}{\text{inherent variability}}.$$`  If there is little to no group  effect (no group effect implies `\(H_0\)` is true), this ratio will be very close to 1.
+How do we compare the variances? Consider `$$F=\frac{\text{inherent variability + group effect}}{\text{inherent variability}}.$$`  If there is little to no group  effect (no group effect implies `\(H_0\)` is true), this ratio will be very close to 1.
 
 ---
 
 ## F test
 
- Thus the F statistic is given by `$$F={s_B}^2/{s_W}^2,$$` which if `\(H_0\)` is true has an `\(F\)` distribution with `\(K-1\)` and `\(n-K\)` df.  The df associated with `\({s_B}^2\)` are called the *numerator degrees of freedom* and correspond to the total number of groups minus 1.  The df associated with `\({s_W}^2\)` are called the *denominator degrees of freedom* and equal the total sample size minus the number of groups.  For ANOVA the test is inherently one-tailed, rejecting `\(H_0\)` only if `\(F\)` is considerably larger than one.  (This does not mean we have a one-sided alternative; we just look at one tail of the F distribution to get the p-value.)
+ Thus the F statistic is given by `$$F={s_B}^2/{s_W}^2,$$` which if `\(H_0\)` is true has an `\(F\)` distribution with `\(K-1\)` and `\(n-K\)` df.  The df associated with `\({s_B}^2\)` are called the *numerator degrees of freedom* and correspond to the total number of groups minus 1.  The df associated with `\({s_W}^2\)` are called the *denominator degrees of freedom* and equal the total sample size minus the number of groups (we lose one df for each group mean we estimate).  For ANOVA the test is inherently one-tailed, rejecting `\(H_0\)` only if `\(F\)` is considerably larger than one.  (This does not mean we have a one-sided alternative; we just look at one tail of the F distribution to get the p-value, as the F statistic is never negative because variances cannot be negative.)
  
   
 If there are only two groups, then the F test gives the same result as the t-test (with equal variances).
@@ -509,6 +509,13 @@ summary(aov(lhairHg~community,data=mercury))
 #&gt; 1775 observations deleted due to missingness
 ```
 
+Here's the **overall test** of the null hypothesis that all 23 means are equal, versus the alternative that at least one mean is different.  Based on that p-value, these data, or more extreme data, would be highly unlikely if the null hypothesis were true. Next, we probably wish to know which means are different!
+
+---
+
+## Step-Down Tests
+
+
 ```r
 # Holm's correction gives us good protection against type I errors under a wide variety of settings
 hairpair &lt;- pairwise.t.test(mercury$lhairHg,    mercury$community, p.adj = "holm")
@@ -521,6 +528,8 @@ nrow(sigpairs)
 ```
 #&gt; [1] 138
 ```
+
+OK, that's a lot of differences!  More community pairs are different than not.
 
 ---
 
@@ -559,6 +568,12 @@ One challenge to the validity of this analysis is that multiple measures were ob
 
 ---
 
+class: middle
+
+# Wait, is that wrong? Hold that thought.
+
+---
+
 
 ## Bonferroni Correction
 
@@ -568,7 +583,7 @@ As we showed earlier, conducting multiple tests on a data set increases the *fam
 
 ## Violation of independence
 
-The violation of the independence assumption due to the inclusion of multiple household members is indeed a concern.  To do this, let's calculate the fraction of households (coded using `hid`) provided hair measures from more than one household member.
+The violation of the independence assumption due to the inclusion of multiple household members is indeed a concern.  To explore this, let's calculate the fraction of households (coded using `hid`) that provided hair measures from more than one household member.
 
 .panelset[
 .panel[.panel-name[Output]
@@ -626,7 +641,7 @@ mercury %&gt;%
 
 ## Concerns when Independence is Violated
 
-Typically, observations within a household are positively correlated (e.g., if one family member has a high level of hair mercury, another family member is more likely to have high hair mercury). Ignoring this type of positive correlation within household can lead to estimated standard errors (and thus p-values) that are **too small**, invalidating our inferences.
+Typically, observations within a household are positively correlated (e.g., if one family member has a high level of hair mercury, another family member is more likely to have high hair mercury). Ignoring this type of positive correlation within household can lead to estimated standard errors (and thus p-values) that are **too small** when we're estimating group means, invalidating our inferences.
 
 ---
 
@@ -701,9 +716,11 @@ Now just 55 community pair comparisons are different -- still a marked differenc
 
 ## Random Effects ANOVA
 
-Another way to control for multiple measures for each household is to add a **random effect** for household, to allow data from individuals within households to be positively correlated.
+Another way to address multiple measures in each household is to add a **random effect** for household, to allow data from individuals within households to be positively correlated. This allows us to use all the data but controls for the within-household correlation that causes us to violate the independence assumption, replacing it with a *conditional independence* assumption: conditional on household, individuals are independent.
 
 The random effect allows the model to capture correlation between residents of the same household.
+
+NOTE:  this discussion of *random effects ANOVA* is something you get for free with STA 198!  I'm not going to expect you to fit these models, but I will expect you just to know that if you have correlated data, a *random effects model* is a good option!
 
 ---
 
@@ -726,7 +743,7 @@ anova(m1)
 #&gt; community   22 258.74  11.761  28.853
 ```
 
-As you can see, the F statistic is markedly smaller after accounting for within-household correlation. R does not provide a p-value here, as testing in this setting is quite tricky.
+As you can see, the F statistic is markedly smaller after accounting for within-household correlation. R does not provide a p-value here, as testing in this setting is quite tricky. The story at the end of the day is the same -- community matters.  If you want to learn more about these models (also called multi-level or hierarchical models), we have more classes for you to do just that!  
 
 ---
 
