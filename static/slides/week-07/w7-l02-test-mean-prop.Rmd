@@ -527,8 +527,8 @@ $$H_A:  \mu_{MALE}\neq\mu_{FEMALE}$$
 
 OR equivalently,
 
-$$H_0:  \mu_{MALE}-\mu_{FEMALE}=0 $$
-$$H_A:  \mu_{MALE}-\mu_{FEMALE}\neq 0$$
+$$H_0: \mu_{MALE}-\mu_{FEMALE}=0$$
+$$H_A: \mu_{MALE}-\mu_{FEMALE}\neq 0$$
 
 
 ---
