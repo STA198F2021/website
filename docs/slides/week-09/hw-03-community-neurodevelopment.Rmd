@@ -18,6 +18,8 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Note: Remember Homework Assignments are to be completed *individually* without collaborating with classmates!
+
 Miller et al (2021) report the results of a randomized, controlled trial designed to evaluate effectiveness of a [large-scale community-based group parenting intervention](https://www.pih.org/article/casita-program-helps-risk-children-excel-peru) (CASITA) in the Carabayllo distrit of Lima, Peru in 2017-2018. The intervention, designed to increase the caregiver's ability to provide developmentally-stimulating interactions with their young child, included parent coaching and social support. The Extended Ages and Stages Questionnaire (EASQ) was used to measure child development at baseline and at the end of the study. Eligible children were between 6-20 months and either at risk of developmental delay or with developmental delay already identified. The enrolled children were randomized with equal probability into the CASITA intervention group or a control group (note the control families all were offered the intervention at the end of the study period). 
 
 The data analysis plan specified that the primary response would be EASQ age-standardized z-scores at follow-up (`total_z_vs_wb2`) and that the data would be analyzed using linear regression analysis on the intent-to-treat population, with covariates in the model including the following:
