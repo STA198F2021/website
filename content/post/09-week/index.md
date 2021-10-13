@@ -40,7 +40,7 @@ title: 'Week 9 - More Modelling'
 | Project | [Project Proposal - Optional Resubmission](https://sta198f2021.github.io/website/) | Mon., 10/18 |
 | Quiz | [Quiz 7](https://sakai.duke.edu) | Tues., 10/19 |
 | Lab 7 |[Mercury as a Function of Age and Native Status](https://sta198f2021.github.io/website/slides/week-09/lab-07-mercury-reg.html)| Wed., 10/20 |
-| Homework 3 | [Community-Based Intervention Study]() | Fri., 10/22 |
+| Homework 3 | [Community-Based Intervention Study](https://sta198f2021.github.io/website/slides/week-09/hw-03-community-neurodevelopment.html) | Fri., 10/22 |
 
 
 
