@@ -40,7 +40,7 @@ Beyond the in class activities, you will be assigned regular homework assignment
 
 ### Quizzes
 
-Regular quizzes on Sakai will be used to ensure students are keeping up with the reading assignments. These quizzes will generally be due Tuesday evenings by 11:59 pm and should be completed individually. They will be added together and count towards the semester grade as a single homework.
+Regular quizzes on Sakai will be used to ensure students are keeping up with the reading assignments. These quizzes will generally be due Tuesday evenings by 11:59 pm and should be completed individually. They will be added together and count towards the semester grade as a single homework (the lowest 2 quiz grades will be dropped).
 
 ### Final project
 
@@ -138,6 +138,7 @@ All work is due on the stated due date. Due dates are there to help guide your p
 
 - **Late work policy:** Some assignments cannot be turned in late and some assignments can be turned in past the deadline with a late penalty:
   - Labs: No late work accepted
+  - Quizzes: No late work accepted (lowest 2 quiz grades automatically dropped)
   - Homework assignments: Late work accepted up to 3 days past the deadline (i.e. Monday after the deadline, 4pm), with 5% penalty for each day. Grading of late assignments may be delayed.
   - Project proposal: Late work accepted up to 4 days past the deadline, with 5% penalty for each day
   - Project re-proposal: No late work accepted (this is an optional assignment)
