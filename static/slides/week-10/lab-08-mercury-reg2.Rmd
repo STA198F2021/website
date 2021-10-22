@@ -1,0 +1,82 @@
+---
+title: 'Lab #08: Mercury Levels by Assets and Urban Community Status'
+subtitle: 'due Wednesday, October 27, 4:00 PM'
+output:
+  tufte::tufte_html:    
+    css: "sta199-labs.css"
+    tufte_variant: envisioned
+    highlight: pygments
+    toc: no
+    toc_depth: 1
+  html_document:
+    toc: no
+    toc_depth: '1'
+    df_print: paged
+link-citations: yes
+editor_options:
+  chunk_output_type: console
+---
+
+## Goals
+
+-   Fit a linear regression with multiple predictors
+-   Interpret regression output in context of the data, including in models with interaction terms
+-   Compare models
+
+
+
+## Artisanal and Small Scale Gold Mining in the Peruvian Amazon
+
+We continue our investigation on data on artisanal and small-scale gold mining. In this lab we'll look at an individual's age as a predictor in addition to native status of the community. First, read in the data and filter it to contain only observations for which `withinid`=2.
+
+
+```{r datasteps, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(infer)
+
+mercury <- readr::read_csv("mercury_reg.csv") %>%
+  mutate(urban, urban_cat = ifelse(urban == 1, "Urban", "Not Urban")) %>%
+  mutate(assets_sc=scale(SESassets))
+
+  
+
+```
+
+
+
+# Exercises
+
+1. In this lab, we'll explore the relationship between standardized assets (`assets_sc`), where a person lives (`urban_cat`, in an urban area or not), and log hair mercury.  Create a scatterplot with standardized assets on the x-axis and log hair Hg on the y-axis, faceted by whether or not the resident lives in an urban area.  Briefly describe the scatterplots.
+
+2. Fit the model $$lhairHg_i=\beta_0+\beta_1 assets\_sc_i + \beta_2 urban\_cat_i + $$ $$\beta_3 assets\_sc_i \times urban\_cat_i + \varepsilon_i.$$ Write the equations of the lines corresponding to those in urban areas and to those in non-urban areas, respectively.
+
+3. Does the interaction term add much to the fit of the model?  Provide two different types of statistical evidence to support your response.
+
+
+4. Create a scatter plot of the residuals by the predicted values and discuss any concerns you may have.
+
+
+5. Assume the residual plot looks great!  Create a scatterplot with log hair Hg on the y-axis and standardized assets on the x-axis. Overlay on the plot the regression lines for urban and non-urban residents.  Interpret the slope and intercept of each line in terms of the subject matter.
+
+
+6.  Now suppose the residual plot does not look good. Fit a new interaction model to the response of the square root of hair mercury, instead of to the response of log of hair mercury. Recreate both the plot with the fitted regression lines and the residual plot.  Is the "story" the same (in terms of what matters in predicting hair mercury) in both models?  Are the residuals from the square root-transformed response model better than those from the log-transformed response model?
+
+
+7. Suppose you are reporting on the findings of a study, which reports the data presented in parts 1-6, for a Peruvian podcast. Provide the link to a podcast, 60 seconds or less in duration, that explains the results in a nutshell using language the general public can understand. 
+
+ 
+## Grading
+Total: 50 pts
+
+- Exercise 1: 6 pts
+- Exercise 2: 6 pts
+- Exercise 3: 4 pts
+- Exercise 4: 6 points
+- Exercise 5: 12 pts
+- Exercise 6: 6 pts
+- Exercise 7: 7 pts
+
+- Overall:  3 pts
+
+  - Overall includes proper data processing, the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
