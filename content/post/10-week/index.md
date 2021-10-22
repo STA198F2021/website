@@ -27,7 +27,7 @@ title: 'Week 10 - Categorical Data'
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
-| Contingency Tables   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-09/w10-l01-fish-chi2.html)  | 
+| Contingency Tables   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-10/w10-l01-fish-chi2.html)  | 
 
 
 ### Assignments and Labs
@@ -35,7 +35,7 @@ title: 'Week 10 - Categorical Data'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Quiz | [Quiz 8](https://sakai.duke.edu) | Tues., 10/26 |
-| Lab 8 |[Mercury Levels by Assets and Urban Community Status](https://sta198f2021.github.io/website/slides/week-09/lab-08-mercury-reg2.html)| Wed., 10/27 |
+| Lab 8 |[Mercury Levels by Assets and Urban Community Status](https://sta198f2021.github.io/website/slides/week-10/lab-08-mercury-reg2.html)| Wed., 10/27 |
 | Exam 2 | See Practice on Sakai | Fri., 10/29 |
 
 
