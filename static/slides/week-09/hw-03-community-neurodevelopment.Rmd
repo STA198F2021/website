@@ -28,7 +28,7 @@ The data analysis plan specified that the primary response would be EASQ age-sta
 
 - maternal education `mom_educ` (0=primary, 1=secondary, or 2=post-secondary) 
 
-- gestational age of the child at birth `gest_age_cat` (1=40+weeks, 2=38-39 weeks, 3=36-37 weeks)
+- gestational age of the child at birth `gest_age_cat` (0=40+weeks, 1=38-39 weeks, 2=36-37 weeks)
 
 - child sex `Sex` (0=missing, 1=male, 2=female) 
 
