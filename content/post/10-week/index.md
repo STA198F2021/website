@@ -19,8 +19,8 @@ title: 'Week 10 - Categorical Data'
 
 ### Tasks
 
-- Complete the [readings](/post/09-week/#readings)
-- Complete the [assignments](/post/09-week/#assignments)
+- Complete the [readings](/post/10-week/#readings)
+- Complete the [assignments](/post/10-week/#assignments)
 
 
 ### Class Slides 
