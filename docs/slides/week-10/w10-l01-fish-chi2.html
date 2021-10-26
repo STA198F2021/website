@@ -882,7 +882,8 @@ Consider the following contingency table.
 ## Odds Ratio
 
 `$$\widehat{Pr}(D \mid E)=\frac{a}{a+c} ~~~~~~~\widehat{Pr}(D \mid E^c) = \frac{b}{b+d}$$`
-$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}} $$
+`$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}}$$`
+
 
 `$$\widehat{OR}=\frac{\left\{\frac{\frac{a}{a+c}}{\frac{c}{a+c}}\right\}}{\left\{\frac{\frac{b}{b+d}}{\frac{d}{b+d}} \right\}} =\frac{ad}{bc}$$`
 ---
@@ -946,6 +947,7 @@ table(pneu3)
 #&gt;   Serotype 10               7       37
 #&gt;   Serotype 31              10       24
 ```
+---
 
 ```r
 fisher.test(table(pneu3))
