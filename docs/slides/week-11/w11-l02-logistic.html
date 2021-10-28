@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Categorical Data</title>
+    <title>Logistic Regression</title>
     <meta charset="utf-8" />
     <meta name="author" content="Back to Website" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -16,7 +16,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Categorical Data
+# Logistic Regression
 ## <br><br> Introduction to Global Health Data Science
 ### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
 ### <br> Prof. Amy Herring
@@ -45,927 +45,393 @@ layout: true
 
 
 
+
 class: middle
 
-# Introduction to contingency tables
+# Logistic Regression
 
 ---
 
-## Motivating example: *Streptococcus pneumoniae*
+### Data
 
-Infections due to *Streptococcus pneumoniae* remain a substantial source of morbidity and mortality in both developing and developed countries despite a century of research and the development of therapeutic interventions such as multiple classes of antibiotics and vaccination. The World Health Organization estimates that in developing countries 814,000 children under the age of five die annually from invasive pneumococcal disease (IPD), with an estimated 1.6 million deaths affecting all ages globally.
+We consider data from the Global Adult Tobacco Survey (GATS), which is designed to provide nationally-representative data on non-institutionalized people 15 years and older. This survey is a global standard for systematically monitoring adult tobacco use and is produced by the Centers for Disease Control (CDC) in collaboration with the World Health Organization (WHO), RTI International, and Johns Hopkins University.
 
-
-Several recent studies have identified associations between pneumococcal serotypes (species variations) and patient outcomes from IPD.  We consider data from a Scottish study of pneumococcal serotypes and mortality.
-
----
-
-## Contingency tables
-
-A *contingency table* is a display format for showing the relationship between two categorical variables. Below is a contingency table for a subset of serotypes from the Scottish study.
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
+China has the largest smoking population in the world and accounts for roughly 40% of tobacco consumption worldwide. We will focus on GATS data from China in 2018 (the most recent survey year), but note data from other countries are available from the [WHO's Microdata Repository](https://extranet.who.int/ncdsmicrodata/index.php/home).
 
 ---
 
-## Dataset (Random sample of observations printed)
 
+```r
+gats &lt;- readr::read_csv("data/gats_rev.csv")
 
-
-
+gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
+gats$PROVINCE=factor(gats$PROVINCE,levels=seq(1:31),labels=c("Beijing","Tianjin","Hebei","Shanxi","Neimenggu","Liaoning","Jilin","Heilongjiang","Shanghai","Jiangsu","Zhejiang","Anhui","Fujian","Jiangxi","Shangdong","Henan","Hubei","Hunan","Guangdong","Guangxi","Hainan","Chongqing","Sichuan","Guizhou","Yunnan","Xizang","Shaanxi","Gansu","Qinghai","Ningxia","Xinjiang"))
+gats$REGION6=factor(gats$REGION6,levels=seq(1:6),labels=c("North","North-East","East","South-Central","South-West","North-West"))
+gats$REGION3=factor(gats$REGION3,levels=seq(1:3),labels=c("East","Central","West"))
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$CURRENTSMOKE=factor(gats$CURRENTSMOKE,levels=c(1,2,7),labels=c("Yes","No","Don't Know"))
+gats$EDUCATION=factor(gats$EDUCATION,levels=c(1,2,3,4,5,6,7,8,77,99),labels=c("None","Less than Primary School","Primary School","Less than Secondary School","Secondary School","High School","University","Postgraduate","Don't Know","Refused"))
+gats$OCCUPATION=factor(gats$OCCUPATION,levels=c(1,2,3,4,5,6,7,8,9,10,77,99),labels=c("Farming","Government","Business","Teacher","Healthcare","Student","Soldier","Unemployed","Retired","Other","Don't Know","Refused"))
+gats$HEARDOFECIG=factor(gats$HEARDOFECIG,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$ECIGUSE=factor(gats$ECIGUSE,levels=c(1,2,3,9),labels=c("Daily","Less than Daily","Not at All","Refused"))
+gats$TRYSTOP=factor(gats$TRYSTOP,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$HOMESMOKERULES=factor(gats$HOMESMOKERULES,levels=c(1,2,3,4,7,9),labels=c("Allowed","Not Allowed but Exceptions","Never Allowed","No Rules","Don't Know","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+gats$SMOKESICKBINARY=ifelse(gats$SMOKESICK=="Yes","Yes","No")
+gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+#scale age into decades
+gats$DECADES=gats$AGE/10
 ```
-#&gt;        Serotype        Survived
-#&gt; 28  Serotype 10        Survived
-#&gt; 80  Serotype 15        Survived
-#&gt; 250 Serotype 31 Did not survive
-#&gt; 150 Serotype 20        Survived
-#&gt; 101 Serotype 15        Survived
-#&gt; 236 Serotype 31        Survived
-#&gt; 111 Serotype 15 Did not survive
-#&gt; 137 Serotype 20        Survived
-#&gt; 133 Serotype 20        Survived
-#&gt; 166 Serotype 20        Survived
-#&gt; 144 Serotype 20        Survived
-#&gt; 132 Serotype 20        Survived
-#&gt; 98  Serotype 15        Survived
-#&gt; 103 Serotype 15        Survived
-#&gt; 214 Serotype 20 Did not survive
-#&gt; 90  Serotype 15        Survived
-#&gt; 70  Serotype 15        Survived
-#&gt; 79  Serotype 15        Survived
-#&gt; 206 Serotype 20        Survived
-#&gt; 116 Serotype 15 Did not survive
-```
+
+What's up with all that code? I don't want alphabetical order in plots of education or other somewhat ordered categorical variables, so I'm using the levels and labels commands to specify ordering in advance.
+
 ---
 
-## Visualizing Serotypes and Survival
+### Selected variables
+
+&lt;br&gt;
+
+.midi[
+variable        | description
+----------------|-------------
+`CURRENTSMOKE`      |	yes, no, or don't know
+`AGE` |	computed from date of birth
+`EDUCATION`	          | highest level of education completed
+`OCCUPATION` | occupation
+`RESIDENCE` | urban or rural
+`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary"; options for male, female, missing/NA
+`SMOKESICKYES` | respondent believes cigarette smoking can make you sick
+]
+
+Other data are also available in the file. Sample survey weights are not included but should be used to obtain nationally-representative estimates (our estimates are fairly close for the quantities we consider today).
+---
 
 
-Here's the relationship in the sample data.
+## Is Believing Smoking Makes You Sick Related to Smoking?
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-2-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 ```r
-pneu %&gt;%
-  ggplot(aes(y = Serotype, fill = Survived)) +
-  geom_bar(position = "fill") +
-  labs(x="Proportion",
-       title="Survival by Streptococcus Serotype") + 
-  scale_fill_manual(values=c("#638B27","#BBA2B6"))
+ggplot(gats, aes(x = SMOKESICKBINARY,
+                 fill =CURRENTSMOKE)) +
+  geom_bar() + 
+  labs(x = 'Smoking Makes You Sick?',
+       fill = 'Current Smoking') +
+   scale_fill_manual(values = c("#E48957", "#071381","#07813e"))
 ```
 ]
 ]
----
-
-If there were no relationship between serotype and survival, we'd expect to see the lavender bars all the same length across the serotypes. Are the differences we see here reflecting actual differences in population-level survival across serotypes, or are they just a function of random variation?
-
-&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Typical questions of interest with `\(r \times c\)` contingency tables
-
-- Is there an association between the row variable (indexed by `\(r\)`) and the column variable (indexed by `\(c\)`)?
-
-  - In our case, `\(r=4\)` (4 serotypes) and `\(c=2\)` (survived or died). We could easily reverse rows and columns with no ill effects.
-
-- How strong is any association?
-
-Here, we would like to test `\(H_0:\)` pneumococcal serotype is unrelated to mortality against the alternative `\(H_A:\)`  pneumococcal serotype is related to mortality
-
----
-
-
-class: middle
-
-# Tests for Association
-
----
-
-class: middle
-
-# Fisher's Exact Test
-
----
-
-## Fisher's Exact Test
-
-Fisher's exact test is a great first choice for testing a relationship between two variables in a contingency table.  While it has been around for almost 100 years, it was originally used only for very small samples due to the computational burden involved (this concern has been largely alleviated by modern computing). This test was invented by the same person for whom the F test we studied recently was named (Fisher made many important contributions to statistics).
-
----
-
-## Fisher's Exact Test
-
-Fisher's exact test is fairly intuitive.  The way it works is that we assume the column and row totals are fixed (so for our pneumococcus example, we assume we have 38 deaths and 218 survivors and that we have 34 in serotype 31, 44 in serotype 10, 72 in serotype 15, and 106 in serotype 20).  Then, we construct all possible contingency tables with the same margins, and then sum up the probabilities of all tables as extreme or more extreme than our own table to get the p-value (recall the p-value is the probability of the observed data, or more extreme data, occurring under the null hypothesis). 
-
-Margins:  row and column totals
-
-Obviously, this was no fun before modern computing.
-
----
-
-.pull-left[
-Our table:
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-
-.pull-right[
-A more extreme table with same margins:
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | &lt;span style="color: red;"&gt;38&lt;/span&gt; | &lt;span style="color: red;"&gt;6&lt;/span&gt; | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | &lt;span style="color: red;"&gt;23&lt;/span&gt; | &lt;span style="color: red;"&gt;11&lt;/span&gt; | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-
----
-
-
-
-.pull-left[
-Our table:
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-
-.pull-right[
-A more extreme table with same margins:
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | &lt;span style="color: red;"&gt;44&lt;/span&gt; | &lt;span style="color: red;"&gt;0&lt;/span&gt; | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | &lt;span style="color: red;"&gt;17&lt;/span&gt; | &lt;span style="color: red;"&gt;17&lt;/span&gt; | 34 |
-| Total | 218 | 38 | 256 |
-
-
-
-]
-
----
-## Conducting the test for Pneumococcus data
-
-
-```r
-fisher.test(pneu$Serotype,pneu$Survived)
-```
-
-```
-#&gt; 
-#&gt; 	Fisher's Exact Test for Count Data
-#&gt; 
-#&gt; data:  pneu$Serotype and pneu$Survived
-#&gt; p-value = 0.02658
-#&gt; alternative hypothesis: two.sided
-```
-
-Here we conclude that the rows and columns of our table are not independent. That is, we conclude that there is a relationship between serotype and survival.
-
----
-
-
-class: middle
-
-# `\(\chi^2\)` (Chi-Squared) Test
-
----
-
-## `\(\chi^2\)` Test
-
-We can also test our null hypothesis that genotype is unrelated to survival using a `\(\chi^2\)` test.  The `\(\chi^2\)` test is valid in sufficiently large samples with cell counts all `\(&gt;10\)` for an 0.05-level test; Fisher's exact test is always valid. If some cell counts are &lt;10, most software uses a correction called Yates' Continuity Correction that slightly changes the calculations we describe.
-
-For *very* large samples, Fisher's exact test can still be too computationally expensive, and the `\(\chi^2\)` test has nice connections to the logistic regression models we will study later in the course.
-
-In addition, the chi-squared test has a very nice motivation in terms of comparing observed proportions in the data to the proportions we would expect if `\(H_0\)` were true.
-
----
-
-
-```r
-pneu=as_tibble(pneu)
-table(pneu) %&gt;% kable()
-```
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Did not survive &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Survived &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Serotype 10 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 37 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Serotype 15 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 12 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 60 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Serotype 20 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 97 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Serotype 31 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-Some summaries of *marginal* probabilities will be helpful as we consider the data.
-
-Survived:  `\(\frac{37+60+97+24}{37+60+97+24+7+12+9+10}=\frac{218}{256}=84\%\)` survived 
-
-Prevalence of serotypes: serotype 10:  `\(\frac{44}{256}=17.2\%\)`; 
-serotype 15:  `\(\frac{72}{256}=28.1\%\)`; 
-serotype 20:  `\(\frac{106}{256}=41.4\%\)`; 
-serotype 31:  `\(\frac{34}{256}=13.3\%\)` 
-
----
-
-## `\(\chi^2\)` Test 
-Suppose that `\(H_0\)` is true, and serotype of infection and survival are independent events. In that case, how would we calculate the probability that a patient had serotype 10 and survived?
-
----
-
-## Back to probability!
-
-Remember for two independent events, `\(P(A \cap B)=P(A)P(B)\)`.
-
-Another handy probability law in this setting is the law of total probability, e.g. `\(P(A)+P(A^c)=1\)`.
-
-We can use these probability rules to calculate what our table would be expected to look like, given *fixed margins* (i.e., the same number of survivors and infections of each serotype as we have here), if `\(H_0\)` is true. When `\(H_0\)` is true, the  serotype is independent of survival.
-
----
-
-## `\(\chi^2\)` Test
-
-.pull-left[
-Let's create the table we would expect to see if `\(H_0\)` were true.
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = expected # who survived and had serotype 10 if `\(H_0\)` true
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = probability of being both serotype 10 and surviving times number of study participants = P(Serotype 10) `\(\times\)` P(Survived) `\(\times\)` 256
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = `\(\frac{44}{256}\times\frac{218}{256}\times 256=37.5\)`
-
-]
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | &lt;span style="color: red;"&gt;?&lt;/span&gt; | | 44 |
-| Serotype 15 | | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
-
-  
----
-
-## `\(\chi^2\)` Test
-
-
-.pull-left[
-&lt;span style="color: red;"&gt;?&lt;/span&gt; can be obtained by subtraction as 44-37.5
-]
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | &lt;span style="color: red;"&gt;?&lt;/span&gt; | 44 |
-| Serotype 15 | | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## `\(\chi^2\)` Test
-
-
-.pull-left[
-  
-  &lt;span style="color: red;"&gt;?&lt;/span&gt; = expected # who survived and had serotype 15 if `\(H_0\)` true
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = probability of being both serotype 15 and surviving times number of study participants = P(Serotype 15) `\(\times\)` P(Survived) `\(\times\)` 256
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = `\(\frac{72}{256}\times\frac{218}{256}\times 256=61.3\)`
-]
-
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | &lt;span style="color: red;"&gt;?&lt;/span&gt; | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## `\(\chi^2\)` Test
-
-
-.pull-left[
-&lt;span style="color: red;"&gt;?&lt;/span&gt; can be obtained by subtraction as 72-61.3
-]
-
-.pull-right[
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3 | &lt;span style="color: red;"&gt;?&lt;/span&gt; | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## `\(\chi^2\)` Test
-
-
-.pull-left[
-  &lt;span style="color: red;"&gt;?&lt;/span&gt; = expected # who survived and had serotype 20 if `\(H_0\)` true
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = probability of being both serotype 20 and surviving times number of study participants = P(Serotype 20) `\(\times\)` P(Survived) `\(\times\)` 256
-
-&lt;span style="color: red;"&gt;?&lt;/span&gt; = `\(\frac{106}{256}\times\frac{218}{256}\times 256=90.3\)`
-
-The remainder of the entries in the table can be obtained now by subtraction.
-]
-
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   &lt;span style="color: red;"&gt;?&lt;/span&gt; | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-  
-]
-
----
-
-
-## `\(\chi^2\)` Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | &lt;span style="color: red;"&gt;106-90.3&lt;/span&gt; | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-  
----
-
-## `\(\chi^2\)` Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | &lt;span style="color: red;"&gt;218-37.5-61.3-90.3&lt;/span&gt; | | 34|
-| Total | 218 | 38 | 256 |
-  
----
-
-## `\(\chi^2\)` Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | &lt;span style="color: red;"&gt;34-28.9&lt;/span&gt; | 34|
-| Total | 218 | 38 | 256 |
-
----
-
-## `\(\chi^2\)` Test
-
-Thus if `\(H_0\)` is true, we would expect to see a table like this.
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-So we do observe some different proportions than we would expect under `\(H_0\)`, in particular for serotypes 20 and 31. Is this "different enough" for us to raise an alarm about one or more serotypes?
-  
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-      
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-
-- The `\(\chi^2\)` test compares the observed frequencies, `\(O\)`, in each cell of the table to the expected frequencies, `\(E\)`, if `\(H_0\)` is true. 
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-      
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-
-- If differences between what we observe and expect, `\(O-E\)`, are large enough, we reject `\(H_0\)`.  
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-- To combine differences across table cells, we need to square them (so that extra deaths in one serotype are not cancelled out by fewer deaths in another serotype) before adding them up. 
-
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-- In addition, we need to *scale* the differences.  That is, seeing 5 'extra' deaths is a big deal if our study only contains 10 participants and is not a big deal if our study contains 100,000 participants, so we divide by `\(E\)` to examine relative differences
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under `\(H_0\)`
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-Our test statistic is `\(X^2=\sum_{i=1}^{rc} \frac{(O_i-E_i)^2}{E_i},\)` where `\(r\times c=rc\)` is the number of cells in the table (not including any totals, so there are 8 cells here). So here that's `$$\frac{(37-37.5)^2}{37.5}+\frac{(7-6.5)^2}{6.5}+ \cdots + \frac{(10-5.1)^2}{5.1}$$`
-
----
-  
-  ## `\(\chi^2\)` Test
-  
-  - The distribution of this sum is approximated by a chi-squared distribution with `\((r-1)(c-1)\)` degrees of freedom, written `\({\chi^2}_{(r-1)(c-1)}\)`
-  
-  - Like the `\(F\)` distribution, there is a different `\(\chi^2\)` distribution for each degrees of freedom, and chi-squared distribution is not symmetric
-
-- Like the `\(F\)` distribution, all the mass is above 0, and to calculate the p-value we look at the area in the right tail only.
-
----
-  
-  ## `\(\chi^2\)` Statistic
-  
-
-```r
-observed_chisq_statistic &lt;- pneu %&gt;%
-  specify(Serotype ~ Survived) %&gt;%
-  calculate(stat = "Chisq")
-```
-
-Before we calculate the p-value corresponding to this test statistic, we can visualize the distribution of `\(\chi^2_{(4-1)(2-1)}=\chi^2_3\)` statistics we would see under `\(H_0\)`.
-
----
-
-We can visualize the null distribution in two ways: by looking at the `\(\chi^2_3\)` distribution directly or by randomly sampling to generate the null distribution. First, let's consider a simulated null distribution. 
-
-
-```r
-# generate the null distribution using randomization
-null_distribution_simulated &lt;- pneu %&gt;%
-  specify(Serotype ~ Survived) %&gt;%
-  hypothesize(null = "independence") %&gt;%
-  generate(reps = 5000, type = "permute") %&gt;%
-  calculate(stat = "Chisq")
-```
-
-
-Next we can generate the null directly from a `\(\chi^2_3\)` distribution.
-
-
-```r
-# generate the null distribution by theoretical approximation
-null_distribution_theoretical &lt;- pneu %&gt;%
-  specify(Serotype ~ Survived) %&gt;%
-  hypothesize(null = "independence") %&gt;%
-  # note that we skip the generation step here!
-  calculate(stat = "Chisq")
-```
-
----
-
-Let's visualize based on the simulated null distribution.
-
+## Is Gender Related to Smoking?
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 ```r
-# visualize the null distribution and test statistic!
-null_distribution_simulated %&gt;%
-  visualize() + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
+ggplot(gats, aes(x = GENDER,
+                 fill =CURRENTSMOKE)) +
+  geom_bar() + 
+  labs(x = 'Gender',
+       fill = "Current Smoking") +
+   scale_fill_manual(values = c("#E48957", "#071381","#07813e"))
 ```
-
-&lt;img src="w11-l02-logistic_files/figure-html/vizsim-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 ]
-
-
 
 ---
 
-
-
-We can also visualize based on the theoretical distribution, `\(\chi^2_3\)`.
+## Is Education Related to Smoking?
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-4-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 ```r
-# visualize the theoretical null distribution and test statistic!
-pneu %&gt;%
-  specify(Serotype ~ Survived) %&gt;%
-  hypothesize(null= "independence") %&gt;%
-  visualize(method = "theoretical") + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
+ggplot(gats, aes(x = EDUCATION,
+                 fill = CURRENTSMOKE)) +
+  geom_bar() +
+  labs(x = 'Education',
+       fill = "Current Smoking") +
+  scale_fill_manual(values = c("#E48957", "#071381", "#07813e")) +
+  theme(axis.text.x = element_text(angle = 45,hjust=1))
 ```
-
-&lt;img src="w11-l02-logistic_files/figure-html/viz2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 ]
-
-
-
 
 ---
 
-Here we can also have our cake and eat it, too!  Let's visualize both.
-
+## Is Residence Related to Smoking?
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-5-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 ```r
-# visualize both null distributions and the test statistic!
-null_distribution_simulated %&gt;%
-  visualize(method = "both") + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
+ggplot(gats, aes(x = RESIDENCE,
+                 fill = CURRENTSMOKE)) +
+  geom_bar() +
+  labs(x = 'Residence',
+       fill = "Current Smoking") +
+  scale_fill_manual(values = c("#E48957", "#071381", "#07813e")) 
 ```
-
-&lt;img src="w11-l02-logistic_files/figure-html/viz3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
+---
 
+## Is Occupation Related to Smoking?
 
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(gats, aes(x = OCCUPATION,
+                 fill = CURRENTSMOKE)) +
+  geom_bar() +
+  labs(x = 'OCCUPATION',
+       fill = "Current Smoking") +
+  scale_fill_manual(values = c("#E48957", "#071381", "#07813e")) +
+  theme(axis.text.x = element_text(angle = 45,hjust=1))
+```
+]
+]
 
 ---
 
-We can now carry out the test.
+## Is Age Related to Smoking?
 
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+
+.panel[.panel-name[Code]
 
 ```r
-chisq_test(pneu,Serotype~Survived)
+library(ggridges)
+gats %&gt;%
+  ggplot(aes(x = AGE, y = CURRENTSMOKE, fill = CURRENTSMOKE, color = CURRENTSMOKE)) +
+  geom_density_ridges2(alpha = 0.5) +
+  labs(
+    x = "Age (years)", 
+    y = "Current Smoking",
+    title = "Age vs. Current Smoking"
+    ) +
+  guides(color = FALSE, fill = FALSE) +
+  scale_fill_manual(values = c("#E48957", "#071381", "#07813e")) +
+  scale_color_manual(values = c("#E48957", "#071381", "#07813e")) 
 ```
-
-```
-#&gt; # A tibble: 1 × 3
-#&gt;   statistic chisq_df p_value
-#&gt;       &lt;dbl&gt;    &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1      9.32        3  0.0253
-```
-
-If there were no relationship, the probability we would see a `\(\chi^2_3\)` test statistic as large as 9.32 or larger is just 0.0253.  So serotypes are related to survival probability.
+]
+]
 
 ---
 
-## Step-Down Tests
+## Modelling smoking
 
-We can also step-down to see which serotypes are different.  Here, we compare serotypes 20 and 31.
+- Age, gender, education, occupation, residence, and beliefs about effects of smoking might all be related to whether a person smokes. How do we come up with a model that will let us explore this relationship?
+
+--
+- For simplicity, we'll focus on age (in decades) (`DECADES`) as predictor, but the model we describe can be expanded to take multiple predictors as well.
+
+---
+
+## Don't Know What to Do About Don't Know
+
+The "don't know" for current smoking category is complicated. Ideally, we would work with the survey leaders to understand whether "don't know" is a way to avoid saying "yes," an indicator of only occasional smoking, or something else. For now, we will drop it and just consider responses of people who endorsed either "Yes" or "No" on the current smoking variable.
 
 
 ```r
-pneu2 &lt;- pneu %&gt;%
-  filter(Serotype=="Serotype 20" | Serotype == "Serotype 31")
-chisq_test(pneu2,Serotype~Survived)
+gatsbin &lt;- gats %&gt;%
+  filter(CURRENTSMOKE != "Don't Know")
 ```
 
-```
-#&gt; # A tibble: 1 × 3
-#&gt;   statistic chisq_df p_value
-#&gt;       &lt;dbl&gt;    &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1      7.91        1 0.00493
-```
+---
 
+
+
+## Modelling Smoking
+
+This isn't something we can reasonably fit a linear model to -- we need something different!
+
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Framing the problem
+
+- We can treat each outcome (smoking and not) as successes and failures arising from separate Bernoulli trials
+  - Bernoulli trial: a random experiment with exactly two possible outcomes, "success" and "failure", in which the probability of success is the same every time the experiment is conducted
+
+--
+- Each Bernoulli trial can have a separate probability of success
+
+$$ y_i ∼ Bern(\pi_i) $$
+
+--
+- We can then use the predictor variables to model that probability of success, `\(\pi_i\)`
+
+--
+- We can't just use a linear model for `\(\pi_i\)` (since `\(\pi_i\)` must be between 0 and 1) but we can transform the linear model to have the appropriate range
+
+---
+
+## Generalized linear models
+
+- This is a very general way of addressing many problems in regression and the resulting models are called **generalized linear models (GLMs)**
+
+--
+- Logistic regression is just one example
+
+---
+
+## Three characteristics of GLMs
+
+All GLMs have the following three characteristics:
+
+1. A probability distribution describing a generative model for the outcome variable
+
+--
+2. A linear model:
+`$$\eta_i = \beta_0 + \beta_1 X_{1,i} + \cdots + \beta_k X_{k,i}$$`
+
+--
+3. A link function that relates the linear model to the parameter of the outcome distribution
+  
 ---
 
 class: middle
 
-# How strong is the association?
+# Logistic regression
 
 ---
 
-## The Odds Ratio (OR)
+## Logistic regression
 
-Suppose we have a disease `\(D\)` (e.g., lung cancer) and two groups, `\(E\)` and `\(E^c\)`, where `\(E\)`=smokers and `\(E^c\)`=nonsmokers.
+- Logistic regression is a GLM used to model a binary categorical outcome using numerical and categorical predictors
 
-`$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}}$$`
+--
+- To finish specifying the logistic model we just need to define a reasonable link function that connects `\(\eta_i\)` to `\(\pi_i\)`: logit function
 
-The OR ranges from 0 to `\(\infty\)`.  When `\(OR=1\)` (even odds), there is no association between two variables.  
+--
+- **Logit function:** For `\(0\le \pi \le 1\)`
+
+`$$logit(\pi) = \log\left(\frac{\pi}{1-\pi}\right)$$`
+
+
 
 ---
 
-## Odds Ratio
+## Logit function, visualised
 
-Consider the following contingency table.
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-| | Exposed | Unexposed | Total |
-|:----|:-------:|:------:|----:|
-| Disease | a | b | a+b |
-| No disease | c | d | c+d |
-| Total | a+c | b+d | a+b+c+d |
-
-`$$\widehat{Pr}(D \mid E)=\frac{a}{a+c}$$`
-`$$\widehat{Pr}(D \mid E^c) = \frac{b}{b+d}$$`
 ---
 
-## Odds Ratio
+## Properties of the logit
 
-`$$\widehat{Pr}(D \mid E)=\frac{a}{a+c} ~~~~~~~\widehat{Pr}(D \mid E^c) = \frac{b}{b+d}$$`
-$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}} $$
+- The logit function takes a value between 0 and 1 and maps it to a value between `\(-\infty\)` and `\(\infty\)`
 
-`$$\widehat{OR}=\frac{\left\{\frac{\frac{a}{a+c}}{\frac{c}{a+c}}\right\}}{\left\{\frac{\frac{b}{b+d}}{\frac{d}{b+d}} \right\}} =\frac{ad}{bc}$$`
+--
+- Inverse logit (logistic) function:
+`$$g^{-1}(x) = \frac{\exp(x)}{1+\exp(x)} = \frac{1}{1+\exp(-x)}$$`
+
+--
+- The inverse logit function takes a value between `\(-\infty\)` and `\(\infty\)` and maps it to a value between 0 and 1
+
+--
+- This formulation is also useful for interpreting the model, since the logit can be interpreted as the log odds of a success -- more on this later
+
 ---
 
-## Estimating an OR and a 95% CI for it
+## The logistic regression model
 
-Many R packages will estimate an odds ratio and 95% CI for it when provided a 2 `\(\times\)` 2 table. For now, we can take advantage of the fact that the `fisher.test` function does this automatically. First, though, we need to subset to only two serotypes. Below we subset to serotypes 20 and 31 so we get an OR comparing these two. Our null hypothesis is that the survival probabilities are the same for both serotypes, and the alternative is that they are different.
+- Based on the three GLM criteria we have
+  - `\(y_i \sim \text{Bern}(\pi_i)\)`
+  - `\(\eta_i = \beta_0+\beta_1 x_{1,i} + \cdots + \beta_n x_{n,i}\)`
+  - `\(\text{logit}(\pi_i) = \eta_i\)`
+
+--
+- From which we get
+
+`$$\pi_i = \frac{\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}{1+\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}$$`
+---
+
+## Modeling smoking
+
+In R we fit a GLM in the same way as a linear model except we
+
+- specify the model with `logistic_reg()`
+- use `"glm"` instead of `"lm"` as the engine 
+- define `family = "binomial"` for the link function to be used in the model
+
+--
 
 
 ```r
-pneu2 &lt;- pneu %&gt;%
-  filter(Serotype=="Serotype 20" | Serotype == "Serotype 31")
-```
----
+#using DECADES to get age scaled by 10 year intervals
+smoke_fit &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(CURRENTSMOKE ~ DECADES, data = gats, family = "binomial")
 
-```r
-table(pneu2)
-```
-
-```
-#&gt;              Survived
-#&gt; Serotype      Did not survive Survived
-#&gt;   Serotype 20               9       97
-#&gt;   Serotype 31              10       24
-```
-
-```r
-fisher.test(table(pneu2))
+tidy(smoke_fit)
 ```
 
 ```
-#&gt; 
-#&gt; 	Fisher's Exact Test for Count Data
-#&gt; 
-#&gt; data:  table(pneu2)
-#&gt; p-value = 0.003891
-#&gt; alternative hypothesis: true odds ratio is not equal to 1
-#&gt; 95 percent confidence interval:
-#&gt;  0.07201804 0.69330783
-#&gt; sample estimates:
-#&gt; odds ratio 
-#&gt;  0.2257481
+#&gt; # A tibble: 2 × 5
+#&gt;   term        estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 (Intercept)   1.20      0.0567     21.2  1.93e-99
+#&gt; 2 DECADES      -0.0249    0.0103     -2.42 1.54e- 2
 ```
-
-`\(\widehat{OR}=0.23\)` with a 95% CI of (0.07, 0.69). Those infected with serotype 20 have just 0.23 (95% CI=(0.07, 0.69)) times the odds of death as those infected with serotype 31.
 
 ---
 
-Now we can quantify other differences. For example, we may wish to evaluate whether serotype 10 and serotype 31 have the same survival probability or not.
+## Smoking model
 
 
 ```r
-pneu3 &lt;- pneu %&gt;%
-  filter(Serotype=="Serotype 10" | Serotype == "Serotype 31")
-table(pneu3)
+tidy(smoke_fit, conf.int=TRUE)
 ```
 
 ```
-#&gt;              Survived
-#&gt; Serotype      Did not survive Survived
-#&gt;   Serotype 10               7       37
-#&gt;   Serotype 31              10       24
+#&gt; # A tibble: 2 × 7
+#&gt;   term   estimate std.error statistic  p.value conf.low conf.high
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Inte…   1.20      0.0567     21.2  1.93e-99   1.09     1.31   
+#&gt; 2 DECAD…  -0.0249    0.0103     -2.42 1.54e- 2  -0.0450  -0.00476
 ```
 
-```r
-fisher.test(table(pneu3))
-```
+--
 
-```
-#&gt; 
-#&gt; 	Fisher's Exact Test for Count Data
-#&gt; 
-#&gt; data:  table(pneu3)
-#&gt; p-value = 0.1758
-#&gt; alternative hypothesis: true odds ratio is not equal to 1
-#&gt; 95 percent confidence interval:
-#&gt;  0.128805 1.546707
-#&gt; sample estimates:
-#&gt; odds ratio 
-#&gt;    0.45881
-```
 
-What do you conclude?
+
+
+
+
+
+
+
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

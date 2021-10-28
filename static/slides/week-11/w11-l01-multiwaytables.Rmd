@@ -40,798 +40,242 @@ library(kableExtra)
 ```
 
 
-class: middle
-
-# Introduction to contingency tables
-
----
-
-## Motivating example: *Streptococcus pneumoniae*
-
-Infections due to *Streptococcus pneumoniae* remain a substantial source of morbidity and mortality in both developing and developed countries despite a century of research and the development of therapeutic interventions such as multiple classes of antibiotics and vaccination. The World Health Organization estimates that in developing countries 814,000 children under the age of five die annually from invasive pneumococcal disease (IPD), with an estimated 1.6 million deaths affecting all ages globally.
-
-
-Several recent studies have identified associations between pneumococcal serotypes (species variations) and patient outcomes from IPD.  We consider data from a Scottish study of pneumococcal serotypes and mortality.
-
----
-
-## Contingency tables
-
-A *contingency table* is a display format for showing the relationship between two categorical variables. Below is a contingency table for a subset of serotypes from the Scottish study.
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
----
-
-## Dataset (Random sample of observations printed)
-
-```{r pneu, echo=FALSE}
-# you could also input summary data, which I'm not doing here
-pneu = data.frame(Serotype=c(rep("Serotype 10",44),rep("Serotype 15",72),rep("Serotype 20",106),rep("Serotype 31",34)),Survived=c(rep("Survived",37),rep("Did not survive",7),rep("Survived",60),rep("Did not survive",12),rep("Survived",97),rep("Did not survive",9),rep("Survived",24),rep("Did not survive",10)))
-
-
-
-
-```
-
-```{r viewpneu, echo=FALSE}
-pneu[sample(nrow(pneu), 20), ]
-```
----
-
-## Visualizing Serotypes and Survival
-
-
-Here's the relationship in the sample data.
-
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label = "vizpneu", echo = FALSE, warning = FALSE}
-```
-]
-.panel[.panel-name[Code]
-```{r vizpneu, fig.show="hide"}
-pneu %>%
-  ggplot(aes(y = Serotype, fill = Survived)) +
-  geom_bar(position = "fill") +
-  labs(x="Proportion",
-       title="Survival by Streptococcus Serotype") + 
-  scale_fill_manual(values=c("#638B27","#BBA2B6"))
-```
-]
-]
----
-
-If there were no relationship between serotype and survival, we'd expect to see the lavender bars all the same length across the serotypes. Are the differences we see here reflecting actual differences in population-level survival across serotypes, or are they just a function of random variation?
-
-```{r ref.label = "vizpneu", echo = FALSE, warning = FALSE}
-```
-
----
-
-## Typical questions of interest with $r \times c$ contingency tables
-
-- Is there an association between the row variable (indexed by $r$) and the column variable (indexed by $c$)?
-
-  - In our case, $r=4$ (4 serotypes) and $c=2$ (survived or died). We could easily reverse rows and columns with no ill effects.
-
-- How strong is any association?
-
-Here, we would like to test $H_0:$ pneumococcal serotype is unrelated to mortality against the alternative $H_A:$  pneumococcal serotype is related to mortality
-
----
-
 
 class: middle
 
-# Tests for Association
+# Berkson's Fallacy
+
+---
+
+## Berkson's Fallacy
+
+.pull-left[
+Due to ease of data collection, a restricted sample is often used to test a hypothesis of interest.  We illustrate a common problem with this approach.
+
+Researchers are interested in the special population of HIV+ women on antiretroviral therapy in sub-Saharan Africa.  They would like to know whether in this population, a new pregnancy is related to the probability of having an AIDS-defining event.
+
+]
+
+.pull-right[
+In order to test their hypothesis, they recruit women from a large network of health care clinics and find the following.
+
+| | AIDS | No AIDS | Total |
+|:-----|------:|------:|-----:|
+| Pregnant | 31 | 44 | 75 |
+| Not pregnant | 124 | 99 | 223 |
+| Total | 155 | 143 | 298 |
+
+The estimated $\widehat{OR}$ and 95% CI are $\frac{31 \times 99}{44 \times 124}$ = 0.56 (0.32, 0.99). Should HIV+ women on antiretroviral therapy try to get pregnant to prevent an AIDS-defining event?
+]
+
+---
+
+## Berkson's Fallacy
+
+Now we consider all HIV+ women in the area, not just those who visited a health clinic during the study period.
+
+| | AIDS | No AIDS | Total |
+|:-----|------:|------:|-----:|
+| Pregnant | 44 | 175 | 219 |
+| Not pregnant | 248 | 990 | 1238 |
+| Total | 292 | 1165 | 1457 |
+
+Their estimated $\widehat{OR}$ and 95% CI are $\frac{44 \times 990}{175 \times 248}$ = 1.00 (0.68, 1.44).  What happened?
+
+---
+
+## Berkson's Fallacy
+
+The bias in the clinic-based sample comes from the fact that not all HIV+ women are equally likely to visit a health clinic.  
+
+| Diagnosis | \# with Clinic Visit | Total Women | Pr(Visit) |
+|:-------|----:|----:|----:|
+| Pregnant+AIDS | 31 | 44 | $\frac{31}{44}=0.70$ |
+| Pregnant Only | 44 | 175 | 0.25 |
+| AIDS Only | 124 | 248 | 0.50 |
+| Neither | 99 | 990 | 0.10 |
+
+The observed spurious relationship, observed only because of how we chose the sample, is called *Berkson's fallacy* and is often a danger with clinic- or hospital-based samples.
 
 ---
 
 class: middle
 
-# Fisher's Exact Test
+# Simpson's Paradox
 
 ---
 
-## Fisher's Exact Test
+## Multiple Contingency Tables
 
-Fisher's exact test is a great first choice for testing a relationship between two variables in a contingency table.  While it has been around for almost 100 years, it was originally used only for very small samples due to the computational burden involved (this concern has been largely alleviated by modern computing). This test was invented by the same person for whom the F test we studied recently was named (Fisher made many important contributions to statistics).
+Previously we talked about how to analyze data from r $\times$ c tables to quantify a potential association between two factors.  We will continue with this concept but now concentrate on the relationship between two factors in the presence of a third factor. 
+
+When might this be of interest?
+
+  - We have a 2 $\times$ 2 table at each site in a multi-site study
+  
+  - We wish to combine results of several published studies in a meta-analysis
+  
+  - The value of a third factor affects our estimates of the association between two factors 
+  
+---
+
+## Combining Multiple Tables
+
+Sometimes, the presence of a third factor can affect the relationship between the two factors of interest.  We will discuss how to proceed in the presence of a third factor, and in particular will examine the consequences of aggregrating (or not aggregating) data over levels of a third factor.  (Note:  whether or not to aggregate often depends on your subject matter knowledge as much as on statistical considerations)
+
+To start, we will consider cases of Simpson's paradox, in which aggregating or not aggregating data can lead to drastically different conclusions.
 
 ---
 
-## Fisher's Exact Test
-
-Fisher's exact test is fairly intuitive.  The way it works is that we assume the column and row totals are fixed (so for our pneumococcus example, we assume we have 38 deaths and 218 survivors and that we have 34 in serotype 31, 44 in serotype 10, 72 in serotype 15, and 106 in serotype 20).  Then, we construct all possible contingency tables with the same margins, and then sum up the probabilities of all tables as extreme or more extreme than our own table to get the p-value (recall the p-value is the probability of the observed data, or more extreme data, occurring under the null hypothesis). 
-
-Margins:  row and column totals
-
-Obviously, this was no fun before modern computing.
-
----
+## Simpson's Paradox
 
 .pull-left[
-Our table:
-
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
+*Simpson's paradox* occurs when the an association between two variables is reversed or disappears after stratification upon a third variable.  
 ]
-
 .pull-right[
-A more extreme table with same margins:
+```{r echo=FALSE, out.width="90%", fig.align="left"}
+knitr::include_graphics("img/simpsons1.png")
 
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | <span style="color: red;">38</span> | <span style="color: red;">6</span> | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | <span style="color: red;">23</span> | <span style="color: red;">11</span> | 34 |
-| Total | 218 | 38 | 256 |
-
+```
 ]
 
 ---
 
+## Kidney Stone Study
 
+In 1986 *British Medical Journal* reported the results of a study comparing open surgical treatment to percutaneous nephrolithotomy (PN) for removal of kidney stones.  They first examined success rates of the procedure stratified by the size of the kidney stone.
+
+---
+
+## Small Kidney Stones
+
+| | Successful Surgery | Non-successful Surgery |
+|:-----|-----:|-----:|
+| Open Procedure | 81 | 6 |
+| PN | 234 | 36 |
+
+The estimated probability of success for small stones using open procedures was $\frac{81}{87}=0.93$, and the corresponding probability using PN was $\frac{234}{234+36}=0.87$.  The corresponding $$\widehat{OR}=\frac{\frac{81/87}{6/87}}{\frac{234/270}{36/270}}$$ and 95% CI = 2.08 (0.84, 5.11).
+
+Here, we are not able to reject the null hypothesis that the treatments have different success rates, but note the (non-significant) point estimate of the probability of success is higher in the open surgery group.
+---
+
+```{r small}
+library(epiR) #input summary data!
+epi.2by2(matrix(c(81,6,234,36),byrow=TRUE,nrow=2))
+```
+
+---
+
+
+## Large Kidney Stones
+
+| | Successful Surgery | Non-successful Surgery |
+|:-----|-----:|-----:|
+| Open Procedure | 192 | 71 |
+| PN | 55 | 25 |
+
+The estimated probability of success for large stones using open procedures was $\frac{192}{192+71}=0.73$, and the corresponding probability using PN was $\frac{55}{55+25}=0.69$.  The corresponding $\widehat{OR}$ and 95% CI were 1.23 (0.71, 2.12).
+
+Again, we are not able to reject the null hypothesis that the treatments have different success rates, but note the (non-significant) point estimate of the probability of success is higher in the open surgery group.
+
+---
+
+```{r large}
+library(epiR) #input summary data!
+epi.2by2(matrix(c(192,71,55,25),byrow=TRUE,nrow=2))
+```
+
+---
+
+## Small and Large Stones Combined
+
+
+
+| | Successful Surgery | Non-successful Surgery |
+|:-----|-----:|-----:|
+| Open Procedure | 273 | 77 |
+| PN | 289 | 61 |
+
+The estimated probability of success for all stones using open procedures was $\frac{273}{273+77}=0.78$, and the corresponding probability using PN was $\frac{289}{289+61}=0.83$.  The corresponding OR and 95% CI were 0.75 (0.51, 1.09). 
+
+After combining the stones, the probability of success is higher in the PN group, though again, the difference is not statistically significant. Still, what happened?
+
+---
+
+```{r all}
+library(epiR) #input summary data!
+epi.2by2(matrix(c(273,77,289,61),byrow=TRUE,nrow=2))
+```
+
+
+---
+
+## What Happened?
+
+- Group sizes are quite different
+
+- Doctors tended to prefer open surgery for the harder-to-cure cases (large stones)
+
+- The success rate is more strongly influenced by the size of the kidney stone than the treatment type
+
+---
+
+## Famous Example of Simpson's Paradox: Berkeley Grad School Admissions
+
+A math and English double major, you are looking at graduate programs and discover during your interview that your dream university last year admitted 30.0% of men but only 21.3% of women.  You are shocked by the apparent gender bias and decide to apply elsewhere, but during your meetings with the directors of graduate studies of the two departments (math and English are the only departments in this dream university), you see some startling figures.
+
+---
+
+## The English Department
 
 .pull-left[
-Our table:
+The English department's admissions statistics are below.
 
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
+| | Rejected | Admitted |
+|:-----|:-----:|:-----:|
+| Female  | 29 | 21 |
+| Male  | 60 | 40 |
 ]
-
 .pull-right[
-A more extreme table with same margins:
+So English admitted $21/50$=42% of women, and $40/100$=40% of men.  Maybe it's just math professors who are driving the abysmal admissions statistics.
 
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | <span style="color: red;">44</span> | <span style="color: red;">0</span> | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | <span style="color: red;">17</span> | <span style="color: red;">17</span> | 34 |
-| Total | 218 | 38 | 256 |
+```{r echo=FALSE, fig.align="left"}
+knitr::include_graphics("img/lisa2.png")
 
-
-
+```
 ]
 
 ---
-## Conducting the test for Pneumococcus data
 
-```{r fisherexact}
-fisher.test(pneu$Serotype,pneu$Survived)
-```
-
-Here we conclude that the rows and columns of our table are not independent. That is, we conclude that there is a relationship between serotype and survival.
-
----
-
-
-class: middle
-
-# $\chi^2$ (Chi-Squared) Test
-
----
-
-## $\chi^2$ Test
-
-We can also test our null hypothesis that genotype is unrelated to survival using a $\chi^2$ test.  The $\chi^2$ test is valid in sufficiently large samples with cell counts all $>10$ for an 0.05-level test; Fisher's exact test is always valid. If some cell counts are <10, most software uses a correction called Yates' Continuity Correction that slightly changes the calculations we describe.
-
-For *very* large samples, Fisher's exact test can still be too computationally expensive, and the $\chi^2$ test has nice connections to the logistic regression models we will study later in the course.
-
-In addition, the chi-squared test has a very nice motivation in terms of comparing observed proportions in the data to the proportions we would expect if $H_0$ were true.
-
----
-
-```{r dataview}
-pneu=as_tibble(pneu)
-table(pneu) %>% kable()
-
-```
-
-Some summaries of *marginal* probabilities will be helpful as we consider the data.
-
-Survived:  $\frac{37+60+97+24}{37+60+97+24+7+12+9+10}=\frac{218}{256}=84\%$ survived 
-
-Prevalence of serotypes: serotype 10:  $\frac{44}{256}=17.2\%$; 
-serotype 15:  $\frac{72}{256}=28.1\%$; 
-serotype 20:  $\frac{106}{256}=41.4\%$; 
-serotype 31:  $\frac{34}{256}=13.3\%$ 
-
----
-
-## $\chi^2$ Test 
-Suppose that $H_0$ is true, and serotype of infection and survival are independent events. In that case, how would we calculate the probability that a patient had serotype 10 and survived?
-
----
-
-## Back to probability!
-
-Remember for two independent events, $P(A \cap B)=P(A)P(B)$.
-
-Another handy probability law in this setting is the law of total probability, e.g. $P(A)+P(A^c)=1$.
-
-We can use these probability rules to calculate what our table would be expected to look like, given *fixed margins* (i.e., the same number of survivors and infections of each serotype as we have here), if $H_0$ is true. When $H_0$ is true, the  serotype is independent of survival.
-
----
-
-## $\chi^2$ Test
+## The Department of Mathematics
 
 .pull-left[
-Let's create the table we would expect to see if $H_0$ were true.
+Because math is such an amazing major, you decide to meet with them despite your reservations.  Their admissions director provides you with the following admissions statistics. 
 
-<span style="color: red;">?</span> = expected # who survived and had serotype 10 if $H_0$ true
-
-<span style="color: red;">?</span> = probability of being both serotype 10 and surviving times number of study participants = P(Serotype 10) $\times$ P(Survived) $\times$ 256
-
-<span style="color: red;">?</span> = $\frac{44}{256}\times\frac{218}{256}\times 256=37.5$
-
+| | Rejected | Admitted |
+|:-----|:-----:|:-----:|
+| Female  | 89 | 11 |
+| Male  | 45 | 5 |
 ]
 .pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | <span style="color: red;">?</span> | | 44 |
-| Serotype 15 | | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
+Math admitted $11/100$=11% of women, and $5/50$=10% of men!  
 
-
-  
----
-
-## $\chi^2$ Test
-
-
-.pull-left[
-<span style="color: red;">?</span> can be obtained by subtraction as 44-37.5
-]
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | <span style="color: red;">?</span> | 44 |
-| Serotype 15 | | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## $\chi^2$ Test
-
-
-.pull-left[
-  
-  <span style="color: red;">?</span> = expected # who survived and had serotype 15 if $H_0$ true
-
-<span style="color: red;">?</span> = probability of being both serotype 15 and surviving times number of study participants = P(Serotype 15) $\times$ P(Survived) $\times$ 256
-
-<span style="color: red;">?</span> = $\frac{72}{256}\times\frac{218}{256}\times 256=61.3$
-]
-
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | <span style="color: red;">?</span> | | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## $\chi^2$ Test
-
-
-.pull-left[
-<span style="color: red;">?</span> can be obtained by subtraction as 72-61.3
-]
-
-.pull-right[
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3 | <span style="color: red;">?</span> | 72 |
-| Serotype 20 | | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-]
-
----
-
-## $\chi^2$ Test
-
-
-.pull-left[
-  <span style="color: red;">?</span> = expected # who survived and had serotype 20 if $H_0$ true
-
-<span style="color: red;">?</span> = probability of being both serotype 20 and surviving times number of study participants = P(Serotype 20) $\times$ P(Survived) $\times$ 256
-
-<span style="color: red;">?</span> = $\frac{106}{256}\times\frac{218}{256}\times 256=90.3$
-
-The remainder of the entries in the table can be obtained now by subtraction.
-]
-
-.pull-right[
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   <span style="color: red;">?</span> | | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-  
-]
-
----
-
-
-## $\chi^2$ Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | <span style="color: red;">106-90.3</span> | 106  |
-| Serotype 31 | | | 34|
-| Total | 218 | 38 | 256 |
-  
----
-
-## $\chi^2$ Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | <span style="color: red;">218-37.5-61.3-90.3</span> | | 34|
-| Total | 218 | 38 | 256 |
-  
----
-
-## $\chi^2$ Test
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | <span style="color: red;">34-28.9</span> | 34|
-| Total | 218 | 38 | 256 |
-
----
-
-## $\chi^2$ Test
-
-Thus if $H_0$ is true, we would expect to see a table like this.
-
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-So we do observe some different proportions than we would expect under $H_0$, in particular for serotypes 20 and 31. Is this "different enough" for us to raise an alarm about one or more serotypes?
-  
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-      
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-
-- The $\chi^2$ test compares the observed frequencies, $O$, in each cell of the table to the expected frequencies, $E$, if $H_0$ is true. 
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-      
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-
-- If differences between what we observe and expect, $O-E$, are large enough, we reject $H_0$.  
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-- To combine differences across table cells, we need to square them (so that extra deaths in one serotype are not cancelled out by fewer deaths in another serotype) before adding them up. 
-
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-- In addition, we need to *scale* the differences.  That is, seeing 5 'extra' deaths is a big deal if our study only contains 10 participants and is not a big deal if our study contains 100,000 participants, so we divide by $E$ to examine relative differences
-
----
-  
-## Comparing Observed and Expected Tables
-  
-.pull-left[
-    Observed Table
-    
-| Serotype | Survived | Died | Total |
-|:-----|-----:|------:|-----:|
-| Serotype 10 | 37 | 7 | 44 |
-| Serotype 15 | 60 | 12 | 72 |
-| Serotype 20 | 97 | 9 | 106 |
-| Serotype 31 | 24 | 10 | 34 |
-| Total | 218 | 38 | 256 |
-
-]
-.pull-right[
-  Expected Table under $H_0$
-    
-| | Survived | Died | Total |
-|:------|------:|-------:|--------:|
-| Serotype 10 | 37.5 | 6.5 | 44 |
-| Serotype 15 | 61.3| 10.7 | 72 |
-| Serotype 20 |   90.3 | 15.7  | 106  |
-| Serotype 31 | 28.9 | 5.1 | 34|
-| Total | 218 | 38 | 256 |
-]
-
-Our test statistic is $X^2=\sum_{i=1}^{rc} \frac{(O_i-E_i)^2}{E_i},$ where $r\times c=rc$ is the number of cells in the table (not including any totals, so there are 8 cells here). So here that's $$\frac{(37-37.5)^2}{37.5}+\frac{(7-6.5)^2}{6.5}+ \cdots + \frac{(10-5.1)^2}{5.1}$$
-
----
-  
-  ## $\chi^2$ Test
-  
-  - The distribution of this sum is approximated by a chi-squared distribution with $(r-1)(c-1)$ degrees of freedom, written ${\chi^2}_{(r-1)(c-1)}$
-  
-  - Like the $F$ distribution, there is a different $\chi^2$ distribution for each degrees of freedom, and chi-squared distribution is not symmetric
-
-- Like the $F$ distribution, all the mass is above 0, and to calculate the p-value we look at the area in the right tail only.
-
----
-  
-  ## $\chi^2$ Statistic
-  
-```{r calcchi2}
-observed_chisq_statistic <- pneu %>%
-  specify(Serotype ~ Survived) %>%
-  calculate(stat = "Chisq")
+```{r echo=FALSE, fig.align="left"}
+knitr::include_graphics("img/bart2.png")
 
 ```
-
-Before we calculate the p-value corresponding to this test statistic, we can visualize the distribution of $\chi^2_{(4-1)(2-1)}=\chi^2_3$ statistics we would see under $H_0$.
-
----
-
-We can visualize the null distribution in two ways: by looking at the $\chi^2_3$ distribution directly or by randomly sampling to generate the null distribution. First, let's consider a simulated null distribution. 
-
-```{r simnull}
-# generate the null distribution using randomization
-null_distribution_simulated <- pneu %>%
-  specify(Serotype ~ Survived) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = 5000, type = "permute") %>%
-  calculate(stat = "Chisq")
-```
-
-
-Next we can generate the null directly from a $\chi^2_3$ distribution.
-
-```{r theory}
-
-# generate the null distribution by theoretical approximation
-null_distribution_theoretical <- pneu %>%
-  specify(Serotype ~ Survived) %>%
-  hypothesize(null = "independence") %>%
-  # note that we skip the generation step here!
-  calculate(stat = "Chisq")
-```
-
----
-
-Let's visualize based on the simulated null distribution.
-
-
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label = "vizsim", echo = FALSE, warning = FALSE}
-```
-]
-.panel[.panel-name[Code]
-```{r vizsim}
-# visualize the null distribution and test statistic!
-null_distribution_simulated %>%
-  visualize() + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
-```
-]
 ]
 
-
-
 ---
 
+## UC-Berkeley
+
+Overall, your dream university admitted $(21+11)/(50+100)$=21.3% of women, and $(40+5)/(100+50)$=30% of men.  However, $2/3$ of the women applied to the department that was harder to get into (math), and only $1/3$ of the men applied to this department.
 
 
-We can also visualize based on the theoretical distribution, $\chi^2_3$.
 
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label = "viz2", echo = FALSE, warning = FALSE}
-```
-]
-.panel[.panel-name[Code]
-```{r viz2}
-# visualize the theoretical null distribution and test statistic!
-pneu %>%
-  specify(Serotype ~ Survived) %>%
-  hypothesize(null= "independence") %>%
-  visualize(method = "theoretical") + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
-```
-]
-]
+A similar thing happened at UC-Berkeley in Fall 1973, and the university was sued for gender discrimination based on the university-wide aggregate data.  Essentially, Simpson's paradox was the culprit -- on the whole, women had applied to more competitive departments.  (In this case, they were the less well-funded departments that had fewer graduate fellowships to offer.)
 
 
 
 
----
-
-Here we can also have our cake and eat it, too!  Let's visualize both.
-
-
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label = "viz3", echo = FALSE, warning = FALSE}
-```
-]
-.panel[.panel-name[Code]
-```{r viz3}
-# visualize both null distributions and the test statistic!
-null_distribution_simulated %>%
-  visualize(method = "both") + 
-  shade_p_value(observed_chisq_statistic,
-                direction = "greater")
-
-```
-]
-]
-
-
-
-
----
-
-We can now carry out the test.
-
-```{r testresult}
-
-chisq_test(pneu,Serotype~Survived)
-
-```
-
-If there were no relationship, the probability we would see a $\chi^2_3$ test statistic as large as 9.32 or larger is just 0.0253.  So serotypes are related to survival probability.
-
----
-
-## Step-Down Tests
-
-We can also step-down to see which serotypes are different.  Here, we compare serotypes 20 and 31.
-
-```{r stepdown}
-pneu2 <- pneu %>%
-  filter(Serotype=="Serotype 20" | Serotype == "Serotype 31")
-chisq_test(pneu2,Serotype~Survived)
-```
-
----
-
-class: middle
-
-# How strong is the association?
-
----
-
-## The Odds Ratio (OR)
-
-Suppose we have a disease $D$ (e.g., lung cancer) and two groups, $E$ and $E^c$, where $E$=smokers and $E^c$=nonsmokers.
-
-$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}}$$
-
-The OR ranges from 0 to $\infty$.  When $OR=1$ (even odds), there is no association between two variables.  
-
----
-
-## Odds Ratio
-
-Consider the following contingency table.
-
-| | Exposed | Unexposed | Total |
-|:----|:-------:|:------:|----:|
-| Disease | a | b | a+b |
-| No disease | c | d | c+d |
-| Total | a+c | b+d | a+b+c+d |
-
-$$\widehat{Pr}(D \mid E)=\frac{a}{a+c}$$
-$$\widehat{Pr}(D \mid E^c) = \frac{b}{b+d}$$
----
-
-## Odds Ratio
-
-$$\widehat{Pr}(D \mid E)=\frac{a}{a+c} ~~~~~~~\widehat{Pr}(D \mid E^c) = \frac{b}{b+d}$$
-$$OR=\frac{\left\{\frac{Pr(D \mid E)}{1-Pr(D \mid E)}\right\}}{\left\{\frac{Pr(D \mid E^c)}{1-Pr(D \mid E^c)}\right\}} $$
-
-$$\widehat{OR}=\frac{\left\{\frac{\frac{a}{a+c}}{\frac{c}{a+c}}\right\}}{\left\{\frac{\frac{b}{b+d}}{\frac{d}{b+d}} \right\}} =\frac{ad}{bc}$$
----
-
-## Estimating an OR and a 95% CI for it
-
-Many R packages will estimate an odds ratio and 95% CI for it when provided a 2 $\times$ 2 table. For now, we can take advantage of the fact that the `fisher.test` function does this automatically. First, though, we need to subset to only two serotypes. Below we subset to serotypes 20 and 31 so we get an OR comparing these two. Our null hypothesis is that the survival probabilities are the same for both serotypes, and the alternative is that they are different.
-
-```{r filterpneu}
-pneu2 <- pneu %>%
-  filter(Serotype=="Serotype 20" | Serotype == "Serotype 31")
-```
----
-```{r orci}
-table(pneu2)
-fisher.test(table(pneu2))
-```
-
-$\widehat{OR}=0.23$ with a 95% CI of (0.07, 0.69). Those infected with serotype 20 have just 0.23 (95% CI=(0.07, 0.69)) times the odds of death as those infected with serotype 31.
-
----
-
-Now we can quantify other differences. For example, we may wish to evaluate whether serotype 10 and serotype 31 have the same survival probability or not.
-
-```{r ten31}
-pneu3 <- pneu %>%
-  filter(Serotype=="Serotype 10" | Serotype == "Serotype 31")
-table(pneu3)
-fisher.test(table(pneu3))
-```
-
-What do you conclude?

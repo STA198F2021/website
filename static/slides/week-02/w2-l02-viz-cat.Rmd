@@ -22,6 +22,7 @@ output:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(openintro)
+library(ggridges)
 
 gats <- readr::read_csv("data/gats_rev.csv")
 
