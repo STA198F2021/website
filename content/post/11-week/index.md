@@ -26,6 +26,10 @@ title: 'Week 11 - Logistic regression'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 | Fallacies and Paradoxes   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-11/w11-l01-multiwaytables.html)  | 
+| Logistic Regression   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-11/w11-l02-logistic.html)  | 
+
+
+
 
 
 
@@ -43,6 +47,6 @@ title: 'Week 11 - Logistic regression'
 | <div style="width:50px"></div>  | <div style="width:420px"></div>  |  <div style="width:200px"></div> |
 |:---:|:---|:---:|
 | :open_book: | OIS: [Chp 9, Section 9.5](https://www.openintro.org/book/os/)  | **Required** |
-| :open_book: | Penn State Statistics for Epidemiology: [Unit 12, Sections 12-12.2; 12.4-12.5](https://online.stat.psu.edu/stat507/lesson/12) | **Required** |
+| :open_book: | Penn State Statistics for Epidemiology: [Unit 12, Sections 12-12.2; 12.4-12.5](https://online.stat.psu.edu/stat507/lesson/12) | **Required** | 
 
 

@@ -260,9 +260,16 @@ The "don't know" for current smoking category is complicated. Ideally, we would 
 ```r
 gatsbin &lt;- gats %&gt;%
   filter(CURRENTSMOKE != "Don't Know")
+
+gatsbin$SMOKE &lt;- gatsbin$CURRENTSMOKE[gatsbin$CURRENTSMOKE != "Don't Know"]
+gatsbin$SMOKE &lt;- factor(gatsbin$SMOKE)
+
+
+gatsbin$SMOKE &lt;- relevel(gatsbin$SMOKE, ref = "No")
 ```
 
 ---
+
 
 
 
@@ -271,6 +278,8 @@ gatsbin &lt;- gats %&gt;%
 This isn't something we can reasonably fit a linear model to -- we need something different!
 
 &lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
 
 ---
 
@@ -316,6 +325,31 @@ All GLMs have the following three characteristics:
   
 ---
 
+## A Familiar GLM: The Normal Linear Model
+
+We can formulate the linear regression model as a GLM!
+
+  - Probability distribution: `\(y_i \sim N(\mu_i,\sigma^2)\)`
+  
+  - `\(\eta_i=\beta_0 + \beta_1 X_{1,i} + \cdots + \beta_k X_{k,i}\)`
+  
+  - Link function: `\(\mu_i=\eta_i\)`
+
+---
+
+## Nice Features of the GLM
+
+The GLM provides an overarching framework for estimation and testing in a broad class of models. For any GLM, the following apply.
+
+  - A hypothesis test of `\(H_0: \beta=0\)` versus `\(H_A: \beta \neq 0\)` can be obtained using a z-statistic. This test is valid as long as we have a big enough sample size. In some models, an "exact" test is available for a given outcome distribution (e.g., in linear regression, the t-test is an exact test if the response is normally distributed).
+  
+  - 95% confidence intervals for `\(\beta\)` can be constructed as `\(\hat{\beta} \pm 1.96 \times s_\hat{\beta}\)` - again these are valid as long as we have "enough" data -- and for other coverage levels (e.g., 99% CI), we just use the relevant confidence multiplier
+  
+If we reject `\(H_0\)`, or if our confidence interval excludes the value 0, our conclusion is that our data provide evidence against the null hypothesis.
+
+
+---
+
 class: middle
 
 # Logistic regression
@@ -325,6 +359,8 @@ class: middle
 ## Logistic regression
 
 - Logistic regression is a GLM used to model a binary categorical outcome using numerical and categorical predictors
+
+- Here our probability distribution is the Bernoulli, and we can define `\(\eta_i\)` as we do in linear regression
 
 --
 - To finish specifying the logistic model we just need to define a reasonable link function that connects `\(\eta_i\)` to `\(\pi_i\)`: logit function
@@ -371,7 +407,37 @@ class: middle
 - From which we get
 
 `$$\pi_i = \frac{\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}{1+\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}$$`
+--
+
+What value of `\(\beta\)` here would indicate our predictor variable is not related to our response?
+
 ---
+
+## Odds Ratios
+
+Consider a basic model:
+
+`$$logit(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i},$$`
+which is equivalent to 
+
+`$$\left(\frac{\pi_i}{1-\pi_i}\right)=\exp\left(\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}\right)$$`
+
+This is a multiplicative model for the odds. For example, if
+we change `\(x_{1,i}\)` by one unit while holding the other variable `\(x_{2,i}\)` constant, we multiply the odds by `\(\exp(\beta_1)\)` because `$$\exp(\beta_1(x_{1,i}+1))=\exp(\beta_1x_{1,i})\exp(\beta_1).$$`
+
+---
+
+`$$logit(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}$$`
+`$$\exp(\beta_1(x_{1,i}+1))=\exp(\beta_1x_{1,i})\exp(\beta_1)$$`
+
+Thus we can interpret `\(\exp(\beta_1)\)` as the **odds ratio (OR)** for the response (here, smoking), comparing people with value `\(x_{1,i}+1\)` to value `\(x_{1,i}\)` (a one-unit difference).
+
+
+Note that in a logistic regression model, negative logits represent probabilities less than one-half, and
+positive logits represent probabilities above one-half.
+
+---
+
 
 ## Modeling smoking
 
@@ -383,12 +449,15 @@ In R we fit a GLM in the same way as a linear model except we
 
 --
 
+Our model is `$$\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES_i},$$` where `\(\pi_i\)` is the probability person `\(i\)` is a smoker. If age and smoking are independent, we would expect to se `\(\beta_1\)` close to 0.
+---
+
 
 ```r
 #using DECADES to get age scaled by 10 year intervals
 smoke_fit &lt;- logistic_reg() %&gt;%
   set_engine("glm") %&gt;%
-  fit(CURRENTSMOKE ~ DECADES, data = gats, family = "binomial")
+  fit(SMOKE ~ DECADES, data = gatsbin, family = "binomial")
 
 tidy(smoke_fit)
 ```
@@ -397,8 +466,8 @@ tidy(smoke_fit)
 #&gt; # A tibble: 2 × 5
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 (Intercept)   1.20      0.0567     21.2  1.93e-99
-#&gt; 2 DECADES      -0.0249    0.0103     -2.42 1.54e- 2
+#&gt; 1 (Intercept)  -1.19      0.0567    -21.0  8.20e-98
+#&gt; 2 DECADES       0.0241    0.0103      2.35 1.88e- 2
 ```
 
 ---
@@ -414,23 +483,366 @@ tidy(smoke_fit, conf.int=TRUE)
 #&gt; # A tibble: 2 × 7
 #&gt;   term   estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 (Inte…   1.20      0.0567     21.2  1.93e-99   1.09     1.31   
-#&gt; 2 DECAD…  -0.0249    0.0103     -2.42 1.54e- 2  -0.0450  -0.00476
+#&gt; 1 (Inte…  -1.19      0.0567    -21.0  8.20e-98 -1.30      -1.08  
+#&gt; 2 DECAD…   0.0241    0.0103      2.35 1.88e- 2  0.00401    0.0443
 ```
+
+--
+Fitted model:
+`$$\log\left(\frac{\hat{\pi}_i}{1-\hat{\pi}_i}\right) = -1.19+0.0241\times \text{DECADES_i}$$`
+Our confidence interval does not contain 0, so we can reject the null hypothesis that age is independent of smoking.
+
+---
+
+We can interpret the estimate `\(\hat{\beta}_1=0.0241\)` as the OR for a one-unit increase in decades: the odds of smoking for a group one decade older is `\(\exp(0.0241)\)` = 1.024 times the odds of the referent group.  Alternatively, each 10 year increment in age is associated with  1.024 times the odds of smoking. Older individuals have higher odds of smoking.  
+
+In a *multiple logistic regression model* with many predictors, we'd interpret this OR conditionally on fixed values of the other predictors, just as we would in multiple linear regression.
+
+---
+
+## Hypothesis Tests in Logistic Regression
+
+Generally, we wish to know whether the OR=1 or equivalently whether the log OR (a `\(\beta\)` coefficient)=0.  To test `\(H_0:\beta_j=0\)`, we can compare the ratio of a parameter estimate to its standard error using `$$z=\frac{\hat{\beta}_j-0}{s_{\hat{\beta}_j}},$$` comparing this z-statistic to the standard normal distribution.  
+
+
+Confidence intervals for the effects on the logit scale, `\(\hat{\beta}_j \pm 1.96s_{\hat{\beta}_j}\)`, are typically translated into confidence intervals for OR's by exponentiating the lower and upper confidence limits as `\(\left(\exp^{\hat{\beta}_j - 1.96s_{\hat{\beta}_j}}, \exp^{\hat{\beta}_j + 1.96s_{\hat{\beta}_j}}\right)\)` .
+
+---
+
+
+
+
+
+## P(smoking) for a person aged 20
+
+Next, we'll back out estimates of probabilities from our model.
+
+
+`$$\log \frac{\hat{\pi}_i}{1-\hat{\pi}_i} = -1.19+0.0241\times 2$$`
+--
+`$$\frac{\hat{\pi}_i}{1-\hat{\pi}_i} = \exp(-1.1418) = 0.3192 \rightarrow \hat{\pi} = 0.3192 \times (1 - \hat{\pi})$$`
+
+--
+`$$\hat{\pi} = 0.3192 - 0.3192\hat{\pi} \rightarrow 1.3192\hat{\pi} = 0.3192$$`
+--
+`$$\hat{\pi} = 0.3192 / 1.3192 = 0.24$$`
+
+---
+
+.question[
+What is the probability that a person aged 30 smokes? What about a person aged 70?
+]
 
 --
 
 
+.pull-left[
+&lt;img src="w11-l02-logistic_files/figure-html/smoke-predict-viz-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+- .light-blue[20 years: P(smoke) = 0.24]
+- .yellow[30 years, P(smoke) = 0.25]
+- .green[70 years, P(smoke) = 0.26]
+]
 
 
+---
+
+## Multiple Logistic Regression
+
+Let's look at the relationships now among age, gender, occupation, and current smoking.  First, let's go back to the plots.
+
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+The gender effect seems strong. Male will be the referent group (set by code at start of class).
+
+---
+
+There are some odd levels of occupation. We could combine them, drop them, or leave them alone for now.  Let's do the latter.
+
+&lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+The default referent group in the model will be the first level shown here, farming (set by my code at the start of class), and the other occupation levels will be represented by 1/0 indicator variables. Recall occupation is a factor variable, and each person belongs to just one level of occupation.
+
+---
+
+Our model is `$$\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES}_i + \beta_2 \times \text{Female}_i + \beta_3 \times \text{Government}_i$$` `$$+ ~\beta_4 \times \text{Business}_i + \beta_5 \times \text{Teacher}_i + \beta_6 \times \text{Healthcare}_i+\beta_7 \times \text{Student}_i$$` `$$+ ~\beta_8 \times \text{Soldier}_i + \beta_9 \times \text{Unemployed}_i+ \beta_{10} \times \text{Retired}_i + \beta_{11} \times \text{Other}_i$$` `$$+ ~\beta_{12} \times \text{Don't Know}_i + \beta_{13} \times \text{Refused}_i,$$` where `\(\pi_i\)` is the probability person `\(i\)` is a smoker.
+---
+
+Let's fit the model!
+
+.panelset[
+.panel[.panel-name[Output]
+
+```
+#&gt; # A tibble: 14 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…   0.436     0.0971    4.49   6.98e- 6   0.246    0.627  
+#&gt;  2 DECA…  -0.0214    0.0157   -1.37   1.72e- 1  -0.0522   0.00931
+#&gt;  3 GEND…  -3.81      0.0684  -55.7    0         -3.95    -3.68   
+#&gt;  4 OCCU…  -0.546     0.116    -4.73   2.30e- 6  -0.773   -0.320  
+#&gt;  5 OCCU…  -0.263     0.0594   -4.43   9.50e- 6  -0.380   -0.147  
+#&gt;  6 OCCU…  -0.845     0.185    -4.57   4.78e- 6  -1.22    -0.489  
+#&gt;  7 OCCU…  -0.697     0.204    -3.43   6.13e- 4  -1.10    -0.304  
+#&gt;  8 OCCU…  -2.68      0.280    -9.59   8.58e-22  -3.27    -2.17   
+#&gt;  9 OCCU…  -1.36      0.586    -2.32   2.04e- 2  -2.64    -0.282  
+#&gt; 10 OCCU…  -0.331     0.0805   -4.12   3.87e- 5  -0.489   -0.174  
+#&gt; 11 OCCU…  -0.626     0.0690   -9.07   1.19e-19  -0.762   -0.491  
+#&gt; 12 OCCU…  -0.0403    0.0639   -0.631  5.28e- 1  -0.166    0.0850 
+#&gt; 13 OCCU…   0.0438    1.04      0.0422 9.66e- 1  -2.14     2.03   
+#&gt; 14 OCCU…  -0.952     0.439    -2.17   3.02e- 2  -1.87    -0.118
+```
+]
+.panel[.panel-name[Code]
+
+```r
+smoke_fit_multi &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(SMOKE ~ DECADES + GENDER + OCCUPATION, data=gatsbin, family="binomial")
+result&lt;-tidy(smoke_fit_multi, conf.int=TRUE)
+print(result,n=14)
+```
+
+```
+#&gt; # A tibble: 14 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…   0.436     0.0971    4.49   6.98e- 6   0.246    0.627  
+#&gt;  2 DECA…  -0.0214    0.0157   -1.37   1.72e- 1  -0.0522   0.00931
+#&gt;  3 GEND…  -3.81      0.0684  -55.7    0         -3.95    -3.68   
+#&gt;  4 OCCU…  -0.546     0.116    -4.73   2.30e- 6  -0.773   -0.320  
+#&gt;  5 OCCU…  -0.263     0.0594   -4.43   9.50e- 6  -0.380   -0.147  
+#&gt;  6 OCCU…  -0.845     0.185    -4.57   4.78e- 6  -1.22    -0.489  
+#&gt;  7 OCCU…  -0.697     0.204    -3.43   6.13e- 4  -1.10    -0.304  
+#&gt;  8 OCCU…  -2.68      0.280    -9.59   8.58e-22  -3.27    -2.17   
+#&gt;  9 OCCU…  -1.36      0.586    -2.32   2.04e- 2  -2.64    -0.282  
+#&gt; 10 OCCU…  -0.331     0.0805   -4.12   3.87e- 5  -0.489   -0.174  
+#&gt; 11 OCCU…  -0.626     0.0690   -9.07   1.19e-19  -0.762   -0.491  
+#&gt; 12 OCCU…  -0.0403    0.0639   -0.631  5.28e- 1  -0.166    0.0850 
+#&gt; 13 OCCU…   0.0438    1.04      0.0422 9.66e- 1  -2.14     2.03   
+#&gt; 14 OCCU…  -0.952     0.439    -2.17   3.02e- 2  -1.87    -0.118
+```
+]
+]
 
 
+---
+
+Let's print the levels of occupation so we can interpret those terms!
 
 
+```r
+levels(gats$OCCUPATION)
+```
+
+```
+#&gt;  [1] "Farming"    "Government" "Business"   "Teacher"   
+#&gt;  [5] "Healthcare" "Student"    "Soldier"    "Unemployed"
+#&gt;  [9] "Retired"    "Other"      "Don't Know" "Refused"
+```
+
+---
+
+Let's exponentiate so we have our OR's.  
+
+.panelset[
+.panel[.panel-name[Output]
+
+```
+#&gt; # A tibble: 14 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…   1.55      0.0971    4.49   6.98e- 6   1.28      1.87  
+#&gt;  2 DECA…   0.979     0.0157   -1.37   1.72e- 1   0.949     1.01  
+#&gt;  3 GEND…   0.0221    0.0684  -55.7    0          0.0193    0.0253
+#&gt;  4 OCCU…   0.579     0.116    -4.73   2.30e- 6   0.461     0.726 
+#&gt;  5 OCCU…   0.769     0.0594   -4.43   9.50e- 6   0.684     0.864 
+#&gt;  6 OCCU…   0.429     0.185    -4.57   4.78e- 6   0.297     0.613 
+#&gt;  7 OCCU…   0.498     0.204    -3.43   6.13e- 4   0.332     0.738 
+#&gt;  8 OCCU…   0.0683    0.280    -9.59   8.58e-22   0.0379    0.114 
+#&gt;  9 OCCU…   0.257     0.586    -2.32   2.04e- 2   0.0711    0.755 
+#&gt; 10 OCCU…   0.718     0.0805   -4.12   3.87e- 5   0.613     0.840 
+#&gt; 11 OCCU…   0.535     0.0690   -9.07   1.19e-19   0.467     0.612 
+#&gt; 12 OCCU…   0.960     0.0639   -0.631  5.28e- 1   0.847     1.09  
+#&gt; 13 OCCU…   1.04      1.04      0.0422 9.66e- 1   0.117     7.62  
+#&gt; 14 OCCU…   0.386     0.439    -2.17   3.02e- 2   0.155     0.889
+```
+]
+.panel[.panel-name[Code]
+
+```r
+result2&lt;-tidy(smoke_fit_multi, conf.int=TRUE, exponentiate=TRUE)
+print(result2,n=14)
+```
+
+```
+#&gt; # A tibble: 14 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…   1.55      0.0971    4.49   6.98e- 6   1.28      1.87  
+#&gt;  2 DECA…   0.979     0.0157   -1.37   1.72e- 1   0.949     1.01  
+#&gt;  3 GEND…   0.0221    0.0684  -55.7    0          0.0193    0.0253
+#&gt;  4 OCCU…   0.579     0.116    -4.73   2.30e- 6   0.461     0.726 
+#&gt;  5 OCCU…   0.769     0.0594   -4.43   9.50e- 6   0.684     0.864 
+#&gt;  6 OCCU…   0.429     0.185    -4.57   4.78e- 6   0.297     0.613 
+#&gt;  7 OCCU…   0.498     0.204    -3.43   6.13e- 4   0.332     0.738 
+#&gt;  8 OCCU…   0.0683    0.280    -9.59   8.58e-22   0.0379    0.114 
+#&gt;  9 OCCU…   0.257     0.586    -2.32   2.04e- 2   0.0711    0.755 
+#&gt; 10 OCCU…   0.718     0.0805   -4.12   3.87e- 5   0.613     0.840 
+#&gt; 11 OCCU…   0.535     0.0690   -9.07   1.19e-19   0.467     0.612 
+#&gt; 12 OCCU…   0.960     0.0639   -0.631  5.28e- 1   0.847     1.09  
+#&gt; 13 OCCU…   1.04      1.04      0.0422 9.66e- 1   0.117     7.62  
+#&gt; 14 OCCU…   0.386     0.439    -2.17   3.02e- 2   0.155     0.889
+```
+]
+]
 
 
+---
+
+## Interpreting the Results
+
+First, take a look at our estimate for `\(\beta_1\)` or `\(\exp(\beta_1)\)`, the coefficient of DECADES. This is no longer significant and in fact even goes in the opposite direction!  So conditional on gender and occupation, age is no longer related to the probability of smoking. 
+
+Gender is a very strong predictor of smoking. Conditional on age and occupation, those identifying as female in the data have just 0.022 (95% CI=(0.019,0.025)) times the odds of smoking as those not identifying as female.
+
+---
+
+There are many occupation estimates to interpret!  First, let's pick off the easy ones -- conditional on gender and age, we don't see evidence that the odds of smoking are any different for those who reported other occupations or reported they didn't know their occupation than they are for farmers.  Conditional on age and gender, all the other occupations have lower odds of smoking than do farmers.  For example, those in government positions have 0.58 (95% CI=(0.46, 0.73)) times the odds of smoking as farmers, conditional on gender and age. Those in healthcare have 0.50 (95% CI=(0.33, 0.74)) times the odds of smoking as farmers, conditional on gender and age.
+
+---
+
+One issue with the age term is that we may wish to stratify by gender in examining its effect -- for example maybe there's just an association between smoking and age within gender. It's good to explore this because gender is such a strong predictor, with few women smoking.  So let's add an interaction between gender and smoking to the model.
+
+---
 
 
+```r
+smoke_int &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(SMOKE ~ DECADES+GENDER + DECADES*GENDER + OCCUPATION, data=gatsbin, family="binomial")
+result_int&lt;-tidy(smoke_int, conf.int=TRUE,exponentiate=TRUE)
+print(result_int,n=15)
+```
+
+```
+#&gt; # A tibble: 15 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…  1.85       0.101     6.09   1.10e- 9  1.52      2.25   
+#&gt;  2 DECA…  0.947      0.0165   -3.31   9.35e- 4  0.917     0.978  
+#&gt;  3 GEND…  0.00429    0.268   -20.3    5.49e-92  0.00252   0.00720
+#&gt;  4 OCCU…  0.571      0.116    -4.82   1.41e- 6  0.454     0.716  
+#&gt;  5 OCCU…  0.760      0.0599   -4.59   4.44e- 6  0.675     0.854  
+#&gt;  6 OCCU…  0.438      0.187    -4.42   1.01e- 5  0.301     0.628  
+#&gt;  7 OCCU…  0.502      0.207    -3.33   8.66e- 4  0.333     0.750  
+#&gt;  8 OCCU…  0.0616     0.281    -9.92   3.29e-23  0.0342    0.103  
+#&gt;  9 OCCU…  0.247      0.586    -2.39   1.69e- 2  0.0681    0.725  
+#&gt; 10 OCCU…  0.722      0.0803   -4.05   5.05e- 5  0.617     0.845  
+#&gt; 11 OCCU…  0.546      0.0684   -8.86   7.85e-19  0.477     0.624  
+#&gt; 12 OCCU…  0.950      0.0639   -0.801  4.23e- 1  0.838     1.08   
+#&gt; 13 OCCU…  0.964      1.02     -0.0362 9.71e- 1  0.110     6.67   
+#&gt; 14 OCCU…  0.373      0.442    -2.23   2.58e- 2  0.149     0.866  
+#&gt; 15 DECA…  1.35       0.0447    6.64   3.05e-11  1.23      1.47
+```
+
+---
+You'll be able to see all the text in the R console, sorry about this formatting.  The interaction term is listed last in this output.
+
+Now, both main effects and the interaction term are statistically significant. This is a bit tricky to interpret, so let's write out the model separately for men and women, and for simplicity let's consider the occupation farming (the referent). Since there's no interaction between gender and occupation, it doesn't matter which occupation we pick for this comparison, as long as we hold it constant.
+
+---
+
+Our full model is
+`$$\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES}_i + \beta_2 \times \text{Female}_i + \beta_3 \times \text{Government}_i$$` `$$+ ~\beta_4 \times \text{Business}_i + \beta_5 \times \text{Teacher}_i + \beta_6 \times \text{Healthcare}_i+\beta_7 \times \text{Student}_i$$` `$$+ ~\beta_8 \times \text{Soldier}_i + \beta_9 \times \text{Unemployed}_i+ \beta_{10} \times \text{Retired}_i + \beta_{11} \times \text{Other}_i$$` `$$+ ~\beta_{12} \times \text{Don't Know}_i + \beta_{13} \times \text{Refused}_i + \beta_{14} \times \text{Female}_i \times \text{DECADES}_i$$`
+Model for male farmers: `\(\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES}_i\)`
+
+Model for female farmers: `\(\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES}_i + \beta_2 \times \text{Female}_i + \beta_{14} \times \text{Female}_i \times \text{DECADES}_i\)`
+
+---
+
+Model for male farmers: `\(\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1\times \text{DECADES}_i\)`
+
+Model for female farmers: `\(\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_2 + (\beta_1 + \beta_{14}) \times \text{DECADES}_i\)`
+
+So `\(\beta_1\)` gives is the age effect among men:  conditional on occupation, a one decade increase in age among men is associated with 0.95 (95% CI=(0.92, 0.98)) times the odds of smoking.
+
+---
+
+We have to be careful about getting the OR of age among females.  The **odds** of smoking for a female farmer are given by `$$\exp\left(\beta_0+\beta_2 + (\beta_1 + \beta_{14}) \times \text{DECADES}_i\right)$$`, and if we add a decade, the odds of smoking for that female farmer one decade older are given by `$$\exp\left(\beta_0+\beta_2 + (\beta_1 + \beta_{14}) \times (\text{DECADES}_i+1)\right).$$` This means the OR for an increase in age (in decades) among females is given by `\(\exp\left(\beta_1+\beta_{14}\right).\)` We can get the estimated OR itself by just taking `\(\exp\left(\beta_1+\beta_{14}\right)=\exp(\beta_1)\exp(\beta_{14})=1.28,\)` but the variance of this quantity cannot be estimated from the model fitting output provided. This is a bit of a drag.
+
+---
+
+The quickest way to get the OR for age for females is just to change the referent level of gender and pull it off the main effect for age (like we did above for males). 
+
+
+.panelset[
+.panel[.panel-name[Output]
+
+```
+#&gt; # A tibble: 15 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…  7.94e-3    0.260   -18.6    3.82e-77  4.73e-3    0.0131
+#&gt;  2 DECA…  1.27e+0    0.0428    5.67   1.42e- 8  1.17e+0    1.39  
+#&gt;  3 GEND…  2.33e+2    0.268    20.3    5.49e-92  1.39e+2  397.    
+#&gt;  4 OCCU…  5.71e-1    0.116    -4.82   1.41e- 6  4.54e-1    0.716 
+#&gt;  5 OCCU…  7.60e-1    0.0599   -4.59   4.44e- 6  6.75e-1    0.854 
+#&gt;  6 OCCU…  4.38e-1    0.187    -4.42   1.01e- 5  3.01e-1    0.628 
+#&gt;  7 OCCU…  5.02e-1    0.207    -3.33   8.66e- 4  3.33e-1    0.750 
+#&gt;  8 OCCU…  6.16e-2    0.281    -9.92   3.29e-23  3.42e-2    0.103 
+#&gt;  9 OCCU…  2.47e-1    0.586    -2.39   1.69e- 2  6.81e-2    0.725 
+#&gt; 10 OCCU…  7.22e-1    0.0803   -4.05   5.05e- 5  6.17e-1    0.845 
+#&gt; 11 OCCU…  5.46e-1    0.0684   -8.86   7.85e-19  4.77e-1    0.624 
+#&gt; 12 OCCU…  9.50e-1    0.0639   -0.801  4.23e- 1  8.38e-1    1.08  
+#&gt; 13 OCCU…  9.64e-1    1.02     -0.0362 9.71e- 1  1.10e-1    6.67  
+#&gt; 14 OCCU…  3.73e-1    0.442    -2.23   2.58e- 2  1.49e-1    0.866 
+#&gt; 15 DECA…  7.43e-1    0.0447   -6.64   3.05e-11  6.80e-1    0.811
+```
+]
+.panel[.panel-name[Code]
+
+```r
+gatsfem &lt;- gatsbin
+
+gatsfem$GENDER=relevel(gatsfem$GENDER, ref = "Female")
+
+smoke_int_femref &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(SMOKE ~ DECADES+GENDER + DECADES*GENDER + OCCUPATION, data=gatsfem, family="binomial")
+result3&lt;-tidy(smoke_int_femref, conf.int=TRUE, exponentiate=TRUE)
+print(result3,n=15)
+```
+
+```
+#&gt; # A tibble: 15 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…  7.94e-3    0.260   -18.6    3.82e-77  4.73e-3    0.0131
+#&gt;  2 DECA…  1.27e+0    0.0428    5.67   1.42e- 8  1.17e+0    1.39  
+#&gt;  3 GEND…  2.33e+2    0.268    20.3    5.49e-92  1.39e+2  397.    
+#&gt;  4 OCCU…  5.71e-1    0.116    -4.82   1.41e- 6  4.54e-1    0.716 
+#&gt;  5 OCCU…  7.60e-1    0.0599   -4.59   4.44e- 6  6.75e-1    0.854 
+#&gt;  6 OCCU…  4.38e-1    0.187    -4.42   1.01e- 5  3.01e-1    0.628 
+#&gt;  7 OCCU…  5.02e-1    0.207    -3.33   8.66e- 4  3.33e-1    0.750 
+#&gt;  8 OCCU…  6.16e-2    0.281    -9.92   3.29e-23  3.42e-2    0.103 
+#&gt;  9 OCCU…  2.47e-1    0.586    -2.39   1.69e- 2  6.81e-2    0.725 
+#&gt; 10 OCCU…  7.22e-1    0.0803   -4.05   5.05e- 5  6.17e-1    0.845 
+#&gt; 11 OCCU…  5.46e-1    0.0684   -8.86   7.85e-19  4.77e-1    0.624 
+#&gt; 12 OCCU…  9.50e-1    0.0639   -0.801  4.23e- 1  8.38e-1    1.08  
+#&gt; 13 OCCU…  9.64e-1    1.02     -0.0362 9.71e- 1  1.10e-1    6.67  
+#&gt; 14 OCCU…  3.73e-1    0.442    -2.23   2.58e- 2  1.49e-1    0.866 
+#&gt; 15 DECA…  7.43e-1    0.0447   -6.64   3.05e-11  6.80e-1    0.811
+```
+]
+]
+
+---
+
+There you have it, the estimated OR is 1.28, 95% CI=(1.17, 1.39), so holding occupation constant, a one-decade increase in age for women is associated with 1.28 times the odds of smoking.
+
+What's up with male gender here?  Well, it wasn't as obvious in the prior model, but we had the same problem. So few women smoke in the data that these odds ratios are getting quite large (or small in the other model). It might even make more sense to exclude women entirely when examining predictors of smoking.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
