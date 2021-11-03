@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Cross-Validation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Cross-Validation
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+class: middle
+
+# Data and exploration
+
+---
+
+## Mercury data
+
+
+```r
+mercury &lt;- readr::read_csv("mercury_reg.csv")
+mercury &lt;-
+  mercury %&gt;%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %&gt;%
+    #another variable we may use later
+  mutate(form_min_sc=scale(FM_buffer)) %&gt;%
+  #so I don't have to remember coding
+  mutate(sex,sex_cat=ifelse(sex==1,"Male","Female")) %&gt;%
+  mutate(native,native_cat=ifelse(native==1,"Native","Non-native")) 
+
+# limit to one observation per household (household ID=1)
+mercury1 &lt;-
+  mercury %&gt;%
+  filter(withinid==1)
+mercury1$an_int=mercury1$assets_sc*mercury1$native
+```
+
+
+---
+
+# Modeling
+
+---
+
+## Train / test
+
+- Create an initial split
+
+
+```r
+mercury_split &lt;- initial_split(mercury1) # prop = 3/4 by default
+```
+
+--
+.pull-left[
+- Save training data
+
+```r
+mercury_train &lt;- training(mercury_split)
+dim(mercury_train)
+```
+
+```
+#&gt; [1] 844  23
+```
+]
+
+--
+.pull-right[
+- Save testing data
+
+```r
+mercury_test  &lt;- testing(mercury_split)
+dim(mercury_test)
+```
+
+```
+#&gt; [1] 282  23
+```
+]
+
+---
+## Specify model
+
+
+```r
+mercury_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+    fit(lhairHg ~ assets_sc * native_cat + form_min_sc + sex_cat + age + urban, data = mercury_train)
+  
+mp &lt;- tidy(mercury_fit)
+print(mp,n=10)
+```
+
+```
+#&gt; # A tibble: 8 × 5
+#&gt;   term                      estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 (Intercept)                 0.509    0.177       2.87   4.23e-3
+#&gt; 2 assets_sc                  -0.331    0.112      -2.96   3.25e-3
+#&gt; 3 native_catNon-native       -0.789    0.199      -3.95   8.81e-5
+#&gt; 4 form_min_sc                 0.0227   0.0514      0.442  6.59e-1
+#&gt; 5 sex_catMale                -0.0855   0.0950     -0.901  3.68e-1
+#&gt; 6 age                         0.0120   0.00283     4.24   2.65e-5
+#&gt; 7 urban                      -0.0446   0.126      -0.355  7.22e-1
+#&gt; 8 assets_sc:native_catNon-…   0.253    0.129       1.97   4.93e-2
+```
+
+---
+
+class: middle
+
+# Evaluate model
+
+---
+
+## Make predictions for training data
+
+
+```r
+mercury_train_pred &lt;- predict(mercury_fit, mercury_train) %&gt;%
+  bind_cols(mercury_train %&gt;% select(lhairHg))
+
+mercury_train_pred
+```
+
+```
+#&gt; # A tibble: 844 × 2
+#&gt;     .pred lhairHg
+#&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1  0.331   -0.897
+#&gt; 2  0.183   -0.268
+#&gt; 3 -0.158   NA    
+#&gt; 4  0.0895  NA    
+#&gt; 5 -0.0276   0.510
+#&gt; 6 -0.0288  NA    
+#&gt; # … with 838 more rows
+```
+
+---
+
+## R-squared
+
+Percentage of variability in the hair mercury explained by the model
+
+
+```r
+rsq(mercury_train_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rsq     standard       0.209
+```
+
+--
+
+.question[
+Are models with high or low `\(R^2\)` preferable?
+]
+
+---
+
+## RMSE
+
+An alternative model performance statistic: **root mean square error**
+
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}} $$
+
+--
+
+
+```r
+rmse(mercury_train_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rmse    standard        1.00
+```
+
+--
+
+.question[
+Are models with high or low RMSE are more preferable?
+]
+
+---
+
+## Interpreting RMSE
+
+.question[
+Is this RMSE considered low or high?
+]
+
+
+```r
+rmse(mercury_train_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rmse    standard        1.00
+```
+
+
+```r
+mercury_train %&gt;%
+  summarise(min = min(lhairHg,na.rm=TRUE), max = max(lhairHg,na.rm=TRUE))
+```
+
+```
+#&gt; # A tibble: 1 × 2
+#&gt;     min   max
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 -6.91  3.02
+```
+
+---
+class: middle
+
+.hand[
+.light-blue[
+but, really, who cares about predictions on .pink[training] data?
+]
+]
+
+---
+
+## Make predictions for testing data
+
+
+```r
+mercury_test_pred &lt;- predict(mercury_fit, mercury_test) %&gt;%
+  bind_cols(mercury_test %&gt;% select(lhairHg))
+
+mercury_test_pred
+```
+
+```
+#&gt; # A tibble: 282 × 2
+#&gt;     .pred lhairHg
+#&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1  0.140   NA    
+#&gt; 2 -0.111   NA    
+#&gt; 3  0.201    1.51 
+#&gt; 4 -0.0172   0.768
+#&gt; 5 NA       NA    
+#&gt; 6 NA       NA    
+#&gt; # … with 276 more rows
+```
+
+---
+
+## Evaluate performance on testing data
+
+- RMSE of model fit to testing data
+
+
+```r
+rmse(mercury_test_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rmse    standard        1.01
+```
+
+- `\(R^2\)` of model fit to testing data
+
+
+```r
+rsq(mercury_test_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rsq     standard       0.112
+```
+
+---
+
+## Training vs. testing
+
+&lt;br&gt;
+
+
+|metric    | train|  test|comparison                    |
+|:---------|-----:|-----:|:-----------------------------|
+|RMSE      | 1.005| 1.012|RMSE lower for training       |
+|R-squared | 0.209| 0.112|R-squared higher for training |
+
+---
+
+## Evaluating performance on training data
+
+-  The training set does not have the capacity to be a good arbiter of performance.
+
+--
+- It is not an independent piece of information; predicting the training set can only reflect what the model already knows.
+
+--
+- Suppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.
+
+.footnote[
+.small[
+Source: [tidymodels.org](https://www.tidymodels.org/start/resampling/)
+]
+]
+
+---
+
+class: middle
+
+# Cross validation
+
+---
+
+## Cross validation
+
+More specifically, **k-fold cross validation**:
+
+- Shuffle your data into `\(k\)` partitions
+- Use 1 partition for validation, and the remaining `\(k-1\)` partitions for training
+- Repeat `\(k\)` times
+
+- Note: our R function calls this **v-fold** cross-validation
+
+
+
+---
+
+## Cross validation
+
+&lt;img src="img/cross-validation.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Split data into folds
+
+.pull-left[
+
+```r
+set.seed(345)
+
+folds &lt;- vfold_cv(mercury_train, v = 5)
+folds
+```
+
+```
+#&gt; #  5-fold cross-validation 
+#&gt; # A tibble: 5 × 2
+#&gt;   splits            id   
+#&gt;   &lt;list&gt;            &lt;chr&gt;
+#&gt; 1 &lt;split [675/169]&gt; Fold1
+#&gt; 2 &lt;split [675/169]&gt; Fold2
+#&gt; 3 &lt;split [675/169]&gt; Fold3
+#&gt; 4 &lt;split [675/169]&gt; Fold4
+#&gt; 5 &lt;split [676/168]&gt; Fold5
+```
+]
+.pull-right[
+&lt;img src="img/cross-validation.png" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Fit resamples
+
+.pull-left[
+
+```r
+mercury_mod &lt;- linear_reg() %&gt;%
+  set_engine("lm")
+
+mercury_rec &lt;- recipe(lhairHg ~ assets_sc + native_cat + form_min_sc + sex_cat + age + urban + an_int, data = mercury_train)
+
+mercury_wflow &lt;- workflow() %&gt;%
+  add_model(mercury_mod) %&gt;%
+  add_recipe(mercury_rec)
+
+mercury_fit_rs &lt;- mercury_wflow %&gt;%
+  fit_resamples(folds)
+
+mercury_fit_rs
+```
+
+```
+#&gt; # Resampling results
+#&gt; # 5-fold cross-validation 
+#&gt; # A tibble: 5 × 4
+#&gt;   splits            id    .metrics         .notes          
+#&gt;   &lt;list&gt;            &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+#&gt; 1 &lt;split [675/169]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+#&gt; 2 &lt;split [675/169]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+#&gt; 3 &lt;split [675/169]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+#&gt; 4 &lt;split [675/169]&gt; Fold4 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+#&gt; 5 &lt;split [676/168]&gt; Fold5 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+```
+]
+.pull-right[
+&lt;img src="img/cross-validation-animated.gif" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Collect CV metrics
+
+
+```r
+collect_metrics(mercury_fit_rs)
+```
+
+```
+#&gt; # A tibble: 2 × 6
+#&gt;   .metric .estimator  mean     n std_err .config             
+#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+#&gt; 1 rmse    standard   1.01      5  0.0670 Preprocessor1_Model1
+#&gt; 2 rsq     standard   0.196     5  0.0374 Preprocessor1_Model1
+```
+
+---
+
+## Deeper look into CV metrics
+
+.panelset[
+.panel[.panel-name[Raw]
+
+```r
+collect_metrics(mercury_fit_rs, summarize = FALSE) %&gt;%
+  print(n = 10)
+```
+
+```
+#&gt; # A tibble: 10 × 5
+#&gt;    id    .metric .estimator .estimate .config             
+#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+#&gt;  1 Fold1 rmse    standard       1.00  Preprocessor1_Model1
+#&gt;  2 Fold1 rsq     standard       0.198 Preprocessor1_Model1
+#&gt;  3 Fold2 rmse    standard       1.05  Preprocessor1_Model1
+#&gt;  4 Fold2 rsq     standard       0.117 Preprocessor1_Model1
+#&gt;  5 Fold3 rmse    standard       1.24  Preprocessor1_Model1
+#&gt;  6 Fold3 rsq     standard       0.200 Preprocessor1_Model1
+#&gt;  7 Fold4 rmse    standard       0.831 Preprocessor1_Model1
+#&gt;  8 Fold4 rsq     standard       0.330 Preprocessor1_Model1
+#&gt;  9 Fold5 rmse    standard       0.943 Preprocessor1_Model1
+#&gt; 10 Fold5 rsq     standard       0.136 Preprocessor1_Model1
+```
+]
+.panel[.panel-name[Tidy]
+
+|Fold  |  RMSE| R-squared|
+|:-----|-----:|---------:|
+|Fold1 | 1.000|     0.198|
+|Fold2 | 1.046|     0.117|
+|Fold3 | 1.238|     0.200|
+|Fold4 | 0.831|     0.330|
+|Fold5 | 0.943|     0.136|
+]
+]
+
+---
+
+## How does RMSE compare to y?
+
+- Cross validation RMSE stats
+
+
+```
+#&gt; # A tibble: 1 × 6
+#&gt;     min   max  mean   med    sd   IQR
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 0.831  1.24  1.01  1.00 0.150 0.103
+```
+- Training data mercury stats
+
+
+```
+#&gt; # A tibble: 1 × 6
+#&gt;     min   max  mean   med    sd   IQR
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 -6.91  3.02 0.202 0.166  1.13  1.55
+```
+
+---
+
+## Compare to simpler model
+
+Let's check how accurate predictions from this model are: RMSE=1.01, `\(R^2=0.196\)`, compared to predictions from a simpler model with age, assets, and native community status.
+
+
+```r
+mercury_rec_2 &lt;- recipe(lhairHg ~ assets_sc + native_cat + age, data = mercury_train)
+
+mercury_wflow_2 &lt;- workflow() %&gt;%
+  add_model(mercury_mod) %&gt;%
+  add_recipe(mercury_rec_2)
+
+mercury_fit_rs_2 &lt;- mercury_wflow_2 %&gt;%
+  fit_resamples(folds)
+
+collect_metrics(mercury_fit_rs_2)
+```
+
+```
+#&gt; # A tibble: 2 × 6
+#&gt;   .metric .estimator  mean     n std_err .config             
+#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+#&gt; 1 rmse    standard   1.00      5  0.0645 Preprocessor1_Model1
+#&gt; 2 rsq     standard   0.205     5  0.0363 Preprocessor1_Model1
+```
+---
+
+## What's next?
+
+&lt;img src="img/post-cv-testing.png" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+---
+
+## Picking a Model
+
+When choosing between these two models, we see essentially the same `\(R^2\)` and RMSE, but one model is much simpler than the other. It makes sense to use the simpler model to facilitate interpretation. Let's practice interpreting results from the model, now fit to the full data, now!
+
+
+```r
+final_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+    fit(lhairHg ~ assets_sc + native_cat + age, data = mercury1)
+
+final_fit
+
+tidy(final_fit, conf.int=TRUE)
+```
+
+---
+
+
+
+```
+#&gt; parsnip model object
+#&gt; 
+#&gt; Fit time:  1ms 
+#&gt; 
+#&gt; Call:
+#&gt; stats::lm(formula = lhairHg ~ assets_sc + native_cat + age, data = data)
+#&gt; 
+#&gt; Coefficients:
+#&gt;          (Intercept)             assets_sc  
+#&gt;             0.718469             -0.108647  
+#&gt; native_catNon-native                   age  
+#&gt;            -0.941823              0.009656
+```
+
+```
+#&gt; # A tibble: 4 × 7
+#&gt;   term   estimate std.error statistic  p.value conf.low conf.high
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Inte…  0.718     0.120        5.98 3.65e- 9  0.482      0.954 
+#&gt; 2 asset… -0.109     0.0468      -2.32 2.06e- 2 -0.201     -0.0167
+#&gt; 3 nativ… -0.942     0.114       -8.30 5.64e-16 -1.16      -0.719 
+#&gt; 4 age     0.00966   0.00240      4.03 6.19e- 5  0.00495    0.0144
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

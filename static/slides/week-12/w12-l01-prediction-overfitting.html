@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Prediction and Overfitting</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Prediction and Overfitting
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+
+class: middle
+
+# Prediction
+
+---
+
+
+```r
+gats &lt;- readr::read_csv("data/gats_rev.csv")
+
+gats &lt;- gats %&gt;%
+  filter(CURRENTSMOKE == "1") %&gt;%
+  filter(TRYSTOP != "9") %&gt;%
+  select(-CIGS_DAY,-CASEID,-CURRENTSMOKE,-AGESTART,-REGION6,-REGION3,-HEARDOFECIG,-ECIGUSE)
+
+gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
+gats$PROVINCE=factor(gats$PROVINCE,levels=seq(1:31),labels=c("Beijing","Tianjin","Hebei","Shanxi","Neimenggu","Liaoning","Jilin","Heilongjiang","Shanghai","Jiangsu","Zhejiang","Anhui","Fujian","Jiangxi","Shangdong","Henan","Hubei","Hunan","Guangdong","Guangxi","Hainan","Chongqing","Sichuan","Guizhou","Yunnan","Xizang","Shaanxi","Gansu","Qinghai","Ningxia","Xinjiang"))
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$EDUCATION=factor(gats$EDUCATION,levels=c(1,2,3,4,5,6,7,8,77,99),labels=c("None","Less than Primary School","Primary School","Less than Secondary School","Secondary School","High School","University","Postgraduate","Don't Know","Refused"))
+gats$OCCUPATION=factor(gats$OCCUPATION,levels=c(1,2,3,4,5,6,7,8,9,10,77,99),labels=c("Farming","Government","Business","Teacher","Healthcare","Student","Soldier","Unemployed","Retired","Other","Don't Know","Refused"))
+gats$TRYSTOP=factor(gats$TRYSTOP,levels=c(1,2),labels=c("Yes","No"))
+gats$TRYSTOP=relevel(gats$TRYSTOP, ref = "No")
+gats$TRYSTOP=as.factor(gats$TRYSTOP)
+gats$HOMESMOKERULES=factor(gats$HOMESMOKERULES,levels=c(1,2,3,4,7,9),labels=c("Allowed","Not Allowed but Exceptions","Never Allowed","No Rules","Don't Know","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+```
+
+---
+
+## Goal: Predict Who Has Tried to Stop Smoking
+
+- Data: Set of survey responses, and we know who tried to stop smoking, and who didn't
+- Use logistic regression to predict the probability that someone has tried to stop smoking
+- Use model selection to pick the model with the best predictive performance
+
+--
+- Building a model to predict the probability that someone will try to stop smoking is only half of the battle! We also need a decision rule about whom we predict to have tried to stop (e.g. what probability should we use as out cutoff?)
+
+--
+- A simple approach: choose a single threshold probability and any person who exceeds that probability is flagged as someone who may have tried to stop
+
+---
+
+## A multiple logistic regression approach
+
+Let's start by including a lot of predictors in a big model.
+
+```r
+bigmod &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(TRYSTOP ~ GENDER+PROVINCE+RESIDENCE+EDUCATION+OCCUPATION+HOMESMOKERULES+SMOKESICK+SMOKECANCER, data = gats, family = "binomial") %&gt;%
+  tidy() 
+```
+ 
+---
+
+
+```r
+print(bigmod,n=17)
+```
+
+```
+#&gt; # A tibble: 64 × 5
+#&gt;    term                 estimate std.error statistic p.value
+#&gt;    &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 (Intercept)           -0.805      0.406    -1.98   0.0474
+#&gt;  2 GENDERFemale           0.249      0.158     1.57   0.115 
+#&gt;  3 PROVINCETianjin       -0.847      0.636    -1.33   0.183 
+#&gt;  4 PROVINCEHebei          0.387      0.398     0.972  0.331 
+#&gt;  5 PROVINCEShanxi         0.335      0.398     0.841  0.400 
+#&gt;  6 PROVINCENeimenggu      0.369      0.424     0.869  0.385 
+#&gt;  7 PROVINCELiaoning       0.474      0.424     1.12   0.264 
+#&gt;  8 PROVINCEJilin          0.494      0.408     1.21   0.226 
+#&gt;  9 PROVINCEHeilongjiang  -0.115      0.415    -0.277  0.782 
+#&gt; 10 PROVINCEShanghai      -0.248      0.423    -0.587  0.557 
+#&gt; 11 PROVINCEJiangsu        0.334      0.392     0.852  0.394 
+#&gt; 12 PROVINCEZhejiang       0.234      0.416     0.563  0.574 
+#&gt; 13 PROVINCEAnhui          1.03       0.402     2.57   0.0103
+#&gt; 14 PROVINCEFujian         0.725      0.404     1.79   0.0729
+#&gt; 15 PROVINCEJiangxi       -0.0774     0.445    -0.174  0.862 
+#&gt; 16 PROVINCEShangdong      0.399      0.397     1.01   0.314 
+#&gt; 17 PROVINCEHenan          0.810      0.398     2.04   0.0417
+#&gt; # … with 47 more rows
+```
+
+---
+
+
+```r
+print(bigmod[18:33,],n=16)
+```
+
+```
+#&gt; # A tibble: 16 × 5
+#&gt;    term              estimate std.error statistic p.value
+#&gt;    &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 PROVINCEHubei       0.115     0.399     0.288  0.773  
+#&gt;  2 PROVINCEHunan       0.757     0.390     1.94   0.0526 
+#&gt;  3 PROVINCEGuangdong   0.188     0.390     0.482  0.629  
+#&gt;  4 PROVINCEGuangxi     0.816     0.407     2.00   0.0450 
+#&gt;  5 PROVINCEHainan      1.70      0.623     2.72   0.00650
+#&gt;  6 PROVINCEChongqing  -0.0311    0.415    -0.0751 0.940  
+#&gt;  7 PROVINCESichuan     0.223     0.388     0.575  0.566  
+#&gt;  8 PROVINCEGuizhou     0.714     0.401     1.78   0.0748 
+#&gt;  9 PROVINCEYunnan      0.692     0.421     1.64   0.100  
+#&gt; 10 PROVINCEXizang     -0.142     0.701    -0.202  0.840  
+#&gt; 11 PROVINCEShaanxi     0.646     0.403     1.60   0.109  
+#&gt; 12 PROVINCEGansu       0.785     0.432     1.82   0.0693 
+#&gt; 13 PROVINCEQinghai     1.16      0.498     2.34   0.0195 
+#&gt; 14 PROVINCENingxia     0.175     0.586     0.298  0.766  
+#&gt; 15 PROVINCEXinjiang    0.120     0.436     0.275  0.783  
+#&gt; 16 RESIDENCERural      0.137     0.0795    1.73   0.0840
+```
+
+---
+
+
+```r
+print(bigmod[34:52,],n=19)
+```
+
+```
+#&gt; # A tibble: 19 × 5
+#&gt;    term                      estimate std.error statistic p.value
+#&gt;    &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 EDUCATIONLess than Prima…   0.285     0.159     1.79   0.0731 
+#&gt;  2 EDUCATIONPrimary School     0.247     0.156     1.58   0.114  
+#&gt;  3 EDUCATIONLess than Secon…   0.371     0.178     2.08   0.0373 
+#&gt;  4 EDUCATIONSecondary School   0.206     0.151     1.36   0.173  
+#&gt;  5 EDUCATIONHigh School        0.446     0.164     2.72   0.00652
+#&gt;  6 EDUCATIONUniversity         0.337     0.185     1.82   0.0689 
+#&gt;  7 EDUCATIONPostgraduate      -0.721     0.837    -0.862  0.389  
+#&gt;  8 EDUCATIONDon't Know       -11.8     325.       -0.0364 0.971  
+#&gt;  9 EDUCATIONRefused          -10.9     325.       -0.0334 0.973  
+#&gt; 10 OCCUPATIONGovernment        0.252     0.200     1.26   0.206  
+#&gt; 11 OCCUPATIONBusiness          0.0873    0.0978    0.893  0.372  
+#&gt; 12 OCCUPATIONTeacher           0.320     0.348     0.920  0.358  
+#&gt; 13 OCCUPATIONHealthcare        0.370     0.351     1.06   0.291  
+#&gt; 14 OCCUPATIONStudent          -1.07      0.637    -1.68   0.0926 
+#&gt; 15 OCCUPATIONSoldier           0.255     1.02      0.249  0.803  
+#&gt; 16 OCCUPATIONUnemployed        0.122     0.129     0.950  0.342  
+#&gt; 17 OCCUPATIONRetired           0.292     0.126     2.33   0.0199 
+#&gt; 18 OCCUPATIONOther             0.0844    0.0998    0.845  0.398  
+#&gt; 19 OCCUPATIONDon't Know      -11.6     230.       -0.0504 0.960
+```
+
+
+---
+
+
+```r
+print(bigmod[53:64,],n=13)
+```
+
+```
+#&gt; # A tibble: 12 × 5
+#&gt;    term                    estimate std.error statistic   p.value
+#&gt;    &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 OCCUPATIONRefused        -1.10      1.13      -0.971   3.31e-1
+#&gt;  2 HOMESMOKERULESNot Allo…   0.129     0.0903     1.43    1.53e-1
+#&gt;  3 HOMESMOKERULESNever Al…   0.425     0.0931     4.57    4.89e-6
+#&gt;  4 HOMESMOKERULESNo Rules   -0.103     0.0852    -1.21    2.28e-1
+#&gt;  5 HOMESMOKERULESDon't Kn…  -0.0354    0.340     -0.104   9.17e-1
+#&gt;  6 HOMESMOKERULESRefused     0.174     1.05       0.165   8.69e-1
+#&gt;  7 SMOKESICKNo              -0.352     0.127     -2.78    5.46e-3
+#&gt;  8 SMOKESICKDon't Know      -0.245     0.104     -2.36    1.82e-2
+#&gt;  9 SMOKESICKRefused         -1.36      0.916     -1.48    1.39e-1
+#&gt; 10 SMOKECANCERNo            -0.259     0.147     -1.76    7.84e-2
+#&gt; 11 SMOKECANCERDon't Know    -0.453     0.0909    -4.98    6.46e-7
+#&gt; 12 SMOKECANCERRefused        0.393     0.847      0.464   6.43e-1
+```
+
+---
+
+## Some observations
+
+- Our model has a lot of predictors
+
+- Some information is likely repetitive
+
+- Some information is likely noise
+
+- How do we pick a "best" model to get the "best" predictions?
+
+---
+
+## Prediction
+
+- The mechanics of prediction is **easy**:
+  - Plug in values of predictors to the model equation
+  - Calculate the predicted value of the response variable, `\(\hat{y}\)`
+
+--
+- Getting it right is **hard**!
+  - There is no guarantee the model estimates you have are correct
+  - Or that your model will perform as well with new data as it did with your sample data
+
+---
+
+## Underfitting and overfitting
+
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Spending our data
+
+- Several steps to create a useful model: parameter estimation, model selection, performance assessment, etc.
+
+- Doing all of this on the entire data we have available can lead to **overfitting**
+
+- Allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far)
+
+---
+
+class: middle
+
+# Splitting data
+
+---
+
+## Splitting data
+
+- **Training set:**
+  - Sandbox for model building 
+  - Spend most of your time using the training set to develop the model
+  - Majority of the data (often 80%)
+  
+- **Testing set:**
+  - Held in reserve to determine efficacy of one or two chosen models
+  - Critical to look at it once, otherwise it becomes part of the modeling process
+  - Remainder of the data (often 20%)
+  
+---
+
+## Performing the split
+
+
+```r
+# Fix random numbers by setting the seed 
+# Enables analysis to be reproducible when random numbers are used 
+set.seed(1213)
+
+# Put 80% of the data into the training set 
+gats_split &lt;- initial_split(gats, prop = 0.80)
+
+# Create data frames for the two sets:
+train_data &lt;- training(gats_split)
+test_data  &lt;- testing(gats_split)
+```
+
+---
+
+## Peek at the split
+
+.small[
+.pull-left[
+
+```r
+glimpse(train_data)
+```
+
+```
+#&gt; Rows: 3,751
+#&gt; Columns: 10
+#&gt; $ RESIDENCE      &lt;fct&gt; Urban, Urban, Urban, Urban, Rural, Rural…
+#&gt; $ PROVINCE       &lt;fct&gt; Shanghai, Heilongjiang, Shangdong, Shang…
+#&gt; $ AGE            &lt;dbl&gt; 28.07671, 75.91507, 70.53973, 30.91233, …
+#&gt; $ GENDER         &lt;fct&gt; Male, Female, Male, Male, Male, Male, Ma…
+#&gt; $ EDUCATION      &lt;fct&gt; University, Secondary School, None, High…
+#&gt; $ OCCUPATION     &lt;fct&gt; Other, Retired, Farming, Business, Farmi…
+#&gt; $ TRYSTOP        &lt;fct&gt; Yes, Yes, No, No, Yes, No, No, Yes, No, …
+#&gt; $ HOMESMOKERULES &lt;fct&gt; Allowed, Not Allowed but Exceptions, All…
+#&gt; $ SMOKESICK      &lt;fct&gt; Yes, Yes, Don't Know, Yes, Yes, Yes, Don…
+#&gt; $ SMOKECANCER    &lt;fct&gt; Yes, Don't Know, Don't Know, Yes, Yes, Y…
+```
+]
+.pull-right[
+
+```r
+glimpse(test_data)
+```
+
+```
+#&gt; Rows: 938
+#&gt; Columns: 10
+#&gt; $ RESIDENCE      &lt;fct&gt; Urban, Urban, Urban, Urban, Urban, Urban…
+#&gt; $ PROVINCE       &lt;fct&gt; Beijing, Beijing, Beijing, Beijing, Beij…
+#&gt; $ AGE            &lt;dbl&gt; 60.60548, 55.14795, 64.94795, 66.03014, …
+#&gt; $ GENDER         &lt;fct&gt; Female, Male, Male, Male, Male, Male, Fe…
+#&gt; $ EDUCATION      &lt;fct&gt; Primary School, University, Secondary Sc…
+#&gt; $ OCCUPATION     &lt;fct&gt; Retired, Retired, Retired, Retired, Reti…
+#&gt; $ TRYSTOP        &lt;fct&gt; Yes, No, No, No, Yes, No, No, No, No, No…
+#&gt; $ HOMESMOKERULES &lt;fct&gt; Allowed, Not Allowed but Exceptions, All…
+#&gt; $ SMOKESICK      &lt;fct&gt; Yes, Yes, Yes, Yes, Don't Know, Yes, Yes…
+#&gt; $ SMOKECANCER    &lt;fct&gt; Yes, Yes, Yes, Yes, Don't Know, Yes, Yes…
+```
+]
+]
+
+---
+
+## Fit our model to the training dataset
+
+
+```r
+trystop_m1 &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(TRYSTOP ~ GENDER+PROVINCE+RESIDENCE+EDUCATION+OCCUPATION+HOMESMOKERULES+SMOKESICK+SMOKECANCER, data = train_data, family = "binomial") 
+```
+
+.small[
+
+```r
+trystop_m1
+```
+
+```
+#&gt; parsnip model object
+#&gt; 
+#&gt; Fit time:  171ms 
+#&gt; 
+#&gt; Call:  stats::glm(formula = TRYSTOP ~ GENDER + PROVINCE + RESIDENCE + 
+#&gt;     EDUCATION + OCCUPATION + HOMESMOKERULES + SMOKESICK + SMOKECANCER, 
+#&gt;     family = stats::binomial, data = data)
+#&gt; 
+#&gt; Coefficients:
+#&gt;                              (Intercept)                              GENDERFemale  
+#&gt;                               -6.708e-01                                 2.610e-01  
+#&gt;                          PROVINCETianjin                             PROVINCEHebei  
+#&gt;                               -5.248e-01                                 3.793e-01  
+#&gt;                           PROVINCEShanxi                         PROVINCENeimenggu  
+#&gt;                                3.616e-01                                 2.684e-01  
+#&gt;                         PROVINCELiaoning                             PROVINCEJilin  
+#&gt;                                3.961e-01                                 5.275e-01  
+#&gt;                     PROVINCEHeilongjiang                          PROVINCEShanghai  
+#&gt;                               -1.762e-01                                -5.718e-01  
+#&gt;                          PROVINCEJiangsu                          PROVINCEZhejiang  
+#&gt;                                1.769e-01                                 4.243e-01  
+#&gt;                            PROVINCEAnhui                            PROVINCEFujian  
+#&gt;                                1.264e+00                                 5.890e-01  
+#&gt;                          PROVINCEJiangxi                         PROVINCEShangdong  
+#&gt;                               -2.023e-01                                 2.893e-01  
+#&gt;                            PROVINCEHenan                             PROVINCEHubei  
+#&gt;                                6.924e-01                                 9.467e-02  
+#&gt;                            PROVINCEHunan                         PROVINCEGuangdong  
+#&gt;                                7.593e-01                                 1.913e-01  
+#&gt;                          PROVINCEGuangxi                            PROVINCEHainan  
+#&gt;                                8.570e-01                                 1.798e+00  
+#&gt;                        PROVINCEChongqing                           PROVINCESichuan  
+#&gt;                                4.410e-02                                 2.711e-01  
+#&gt;                          PROVINCEGuizhou                            PROVINCEYunnan  
+#&gt;                                5.734e-01                                 7.005e-01  
+#&gt;                           PROVINCEXizang                           PROVINCEShaanxi  
+#&gt;                               -2.320e-01                                 5.954e-01  
+#&gt;                            PROVINCEGansu                           PROVINCEQinghai  
+#&gt;                                7.537e-01                                 1.344e+00  
+#&gt;                          PROVINCENingxia                          PROVINCEXinjiang  
+#&gt;                                1.110e-02                                 4.020e-02  
+#&gt;                           RESIDENCERural         EDUCATIONLess than Primary School  
+#&gt;                                1.063e-01                                 3.090e-01  
+#&gt;                  EDUCATIONPrimary School       EDUCATIONLess than Secondary School  
+#&gt;                                7.829e-02                                 1.287e-01  
+#&gt;                EDUCATIONSecondary School                      EDUCATIONHigh School  
+#&gt;                                1.482e-01                                 3.880e-01  
+#&gt;                      EDUCATIONUniversity                     EDUCATIONPostgraduate  
+#&gt;                                3.018e-01                                -1.370e+00  
+#&gt;                      EDUCATIONDon't Know                          EDUCATIONRefused  
+#&gt;                               -1.172e+01                                -1.102e+01  
+#&gt;                     OCCUPATIONGovernment                        OCCUPATIONBusiness  
+#&gt;                                3.996e-01                                 7.594e-02  
+#&gt;                        OCCUPATIONTeacher                      OCCUPATIONHealthcare  
+#&gt;                                2.885e-01                                 2.437e-01  
+#&gt;                        OCCUPATIONStudent                         OCCUPATIONSoldier  
+#&gt;                               -1.934e+00                                -4.921e-01  
+#&gt;                     OCCUPATIONUnemployed                         OCCUPATIONRetired  
+#&gt;                                1.134e-01                                 2.939e-01  
+#&gt;                          OCCUPATIONOther                      OCCUPATIONDon't Know  
+#&gt;                               -7.435e-04                                -1.165e+01  
+#&gt;                        OCCUPATIONRefused  HOMESMOKERULESNot Allowed but Exceptions  
+#&gt;                               -1.063e+00                                 9.078e-02  
+#&gt;              HOMESMOKERULESNever Allowed                    HOMESMOKERULESNo Rules  
+#&gt;                                3.801e-01                                -1.388e-01  
+#&gt;                 HOMESMOKERULESDon't Know                     HOMESMOKERULESRefused  
+#&gt;                                3.701e-02                                -1.931e-01  
+#&gt;                              SMOKESICKNo                       SMOKESICKDon't Know  
+#&gt;                               -3.419e-01                                -1.801e-01  
+#&gt;                         SMOKESICKRefused                             SMOKECANCERNo  
+#&gt;                               -1.661e+00                                -2.183e-01  
+#&gt;                    SMOKECANCERDon't Know                        SMOKECANCERRefused  
+#&gt;                               -5.140e-01                                -9.663e-01  
+#&gt; 
+#&gt; Degrees of Freedom: 3750 Total (i.e. Null);  3687 Residual
+#&gt; Null Deviance:	    5197 
+#&gt; Residual Deviance: 4936 	AIC: 5064
+```
+]
+
+---
+
+## Predict outcome on the testing dataset
+
+
+```r
+predict(trystop_m1, test_data)
+```
+
+```
+#&gt; # A tibble: 938 × 1
+#&gt;   .pred_class
+#&gt;   &lt;fct&gt;      
+#&gt; 1 No         
+#&gt; 2 Yes        
+#&gt; 3 No         
+#&gt; 4 Yes        
+#&gt; 5 No         
+#&gt; 6 No         
+#&gt; # … with 932 more rows
+```
+
+
+---
+
+## Predict probabilities on the testing dataset
+
+
+```r
+trystop_pred1 &lt;- predict(trystop_m1, test_data, type = "prob") %&gt;%
+  bind_cols(test_data %&gt;% select(TRYSTOP))
+
+trystop_pred1
+```
+
+```
+#&gt; # A tibble: 938 × 3
+#&gt;   .pred_No .pred_Yes TRYSTOP
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  
+#&gt; 1    0.509     0.491 Yes    
+#&gt; 2    0.496     0.504 No     
+#&gt; 3    0.557     0.443 No     
+#&gt; 4    0.496     0.504 No     
+#&gt; 5    0.596     0.404 Yes    
+#&gt; 6    0.680     0.320 No     
+#&gt; # … with 932 more rows
+```
+
+---
+
+## A closer look at predictions
+
+.pull-left-wide[
+
+```r
+trystop_pred1 %&gt;%
+  arrange(desc(.pred_Yes)) %&gt;%
+  print(n = 15)
+```
+
+```
+#&gt; # A tibble: 938 × 3
+#&gt;    .pred_No .pred_Yes TRYSTOP
+#&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  
+#&gt;  1    0.158     0.842 No     
+#&gt;  2    0.180     0.820 Yes    
+*#&gt;  3    0.193     0.807 No     
+#&gt;  4    0.196     0.804 No     
+#&gt;  5    0.197     0.803 Yes    
+#&gt;  6    0.205     0.795 Yes    
+*#&gt;  7    0.220     0.780 No     
+#&gt;  8    0.222     0.778 No     
+#&gt;  9    0.223     0.777 Yes    
+#&gt; 10    0.227     0.773 No     
+#&gt; 11    0.227     0.773 Yes    
+#&gt; 12    0.228     0.772 No     
+#&gt; 13    0.241     0.759 No     
+#&gt; 14    0.243     0.757 Yes    
+#&gt; 15    0.247     0.753 No     
+#&gt; # … with 923 more rows
+```
+]
+
+
+---
+
+## Evaluate the performance
+
+**Receiver operating characteristic (ROC) curve**&lt;sup&gt;+&lt;/sup&gt; plots true positive rate vs. false positive rate (1 - specificity)
+
+.pull-left[
+
+```r
+trystop_pred1 %&gt;%
+  roc_curve(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  ) %&gt;%
+  autoplot()
+```
+]
+.pull-right[
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[
+.small[
+&lt;sup&gt;+&lt;/sup&gt;Originally developed for operators of military radar receivers, hence the name.
+]
+]
+
+---
+
+
+## Evaluate the performance
+
+Find the area under the curve:
+
+.pull-left[
+
+```r
+trystop_pred1 %&gt;%
+  roc_auc(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  )
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 roc_auc binary         0.588
+```
+]
+.pull-right[
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+OK, this is not a lot better than randomly predicting based on the prevalence of having tried to stop smoking in the data (AUC=0.5).
+
+---
+
+## Comparing Models
+
+Let's compare the fit of this large model to one that only contains province, home wmoking rules, and beliefs about whether smoking makes you sick or causes cancer.
+
+
+```r
+trystop_m2 &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(TRYSTOP ~ PROVINCE+HOMESMOKERULES+SMOKESICK+SMOKECANCER, data = train_data, family = "binomial") 
+
+trystop_pred2 &lt;- predict(trystop_m2, test_data, type = "prob") %&gt;% bind_cols(test_data %&gt;% select(TRYSTOP))
+```
+
+---
+
+.pull-left[
+"Big" model with gender, education, occupation, residence,  province, home rules, beliefs
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 roc_auc binary         0.588
+```
+]
+.pull-right[
+Model without gender, education, occupation, and residence
+
+
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 roc_auc binary         0.599
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

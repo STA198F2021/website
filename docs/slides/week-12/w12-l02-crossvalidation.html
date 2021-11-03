@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Prediction and Overfitting</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Prediction and Overfitting
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+class: middle
+
+# Data and exploration
+
+---
+
+## Mercury data
+
+
+```r
+mercury &lt;- readr::read_csv("mercury_reg.csv")
+mercury &lt;-
+  mercury %&gt;%
+  # scale() subtracts the mean and divides by the SD to make the units "standard deviations" like a z-score
+  mutate(assets_sc=scale(SESassets)) %&gt;%
+    #another variable we may use later
+  mutate(form_min_sc=scale(FM_buffer)) %&gt;%
+  #so I don't have to remember coding
+  mutate(sex,sex_cat=ifelse(sex==1,"Male","Female")) %&gt;%
+  mutate(native,native_cat=ifelse(native==1,"Native","Non-native")) 
+# limit to one observation per household (household ID=1)
+mercury1 &lt;-
+  mercury %&gt;%
+  filter(withinid==1)
+```
+
+
+---
+
+# Modeling
+
+---
+
+## Train / test
+
+- Create an initial split
+
+
+```r
+set.seed(1122)
+mercury_split &lt;- initial_split(mercury1) # prop = 3/4 by default
+```
+
+--
+.pull-left[
+- Save training data
+
+```r
+mercury_train &lt;- training(mercury_split)
+dim(mercury_train)
+```
+
+```
+#&gt; [1] 844  22
+```
+]
+
+--
+.pull-right[
+- Save testing data
+
+```r
+mercury_test  &lt;- testing(mercury_split)
+dim(mercury_test)
+```
+
+```
+#&gt; [1] 282  22
+```
+]
+
+---
+## Specify model
+
+
+```r
+mercury_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+    fit(lhairHg ~ assets_sc * native_cat + form_min_sc + sex_cat + age + urban, data = mercury1)
+  
+tidy(mercury_fit)
+```
+
+```
+#&gt; # A tibble: 8 × 5
+#&gt;   term                 estimate std.error statistic    p.value
+#&gt;   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 (Intercept)           0.544     0.151      3.59   0.000352  
+#&gt; 2 assets_sc            -0.314     0.0946    -3.32   0.000953  
+#&gt; 3 native_catNon-native -0.760     0.170     -4.48   0.00000893
+#&gt; 4 form_min_sc          -0.00341   0.0443    -0.0770 0.939     
+#&gt; 5 sex_catMale          -0.0330    0.0815    -0.405  0.686     
+#&gt; 6 age                   0.00919   0.00243    3.78   0.000171  
+#&gt; # … with 2 more rows
+```
+
+---
+
+class: middle
+
+# Evaluate model
+
+---
+
+## Make predictions for training data
+
+
+```r
+mercury_train_pred &lt;- predict(mercury_fit, mercury_train) %&gt;%
+  bind_cols(mercury_train %&gt;% select(lhairHg))
+
+mercury_train_pred
+```
+
+```
+#&gt; # A tibble: 844 × 2
+#&gt;     .pred lhairHg
+#&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 -0.196   NA    
+#&gt; 2  0.203    0.911
+#&gt; 3  0.0907  -1.23 
+#&gt; 4  0.0564   0.807
+#&gt; 5  0.0926   2.13 
+#&gt; 6  0.738    0.941
+#&gt; # … with 838 more rows
+```
+
+---
+
+## R-squared
+
+Percentage of variability in the hair mercury explained by the model
+
+
+```r
+rsq(mercury_train_pred, truth = lhairHg, estimate = .pred)
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 rsq     standard       0.148
+```
+
+--
+
+.question[
+Are models with high or low `\(R^2\)` preferable?
+]
+
+---
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

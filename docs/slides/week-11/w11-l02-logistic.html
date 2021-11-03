@@ -554,7 +554,7 @@ Let's look at the relationships now among age, gender, occupation, and current s
 
 &lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
-The gender effect seems strong. Male will be the referent group (set by code at start of class).
+The gender effect seems strong. Male will be the referent group. You can check using the code `levels(gats$GENDER)` -- the referent will be the first level.
 
 ---
 
@@ -562,7 +562,7 @@ There are some odd levels of occupation. We could combine them, drop them, or le
 
 &lt;img src="w11-l02-logistic_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
-The default referent group in the model will be the first level shown here, farming (set by my code at the start of class), and the other occupation levels will be represented by 1/0 indicator variables. Recall occupation is a factor variable, and each person belongs to just one level of occupation.
+The default referent group in the model will be the first level shown here, farming, and the other occupation levels will be represented by 1/0 indicator variables. Recall occupation is a factor variable, and each person belongs to just one level of occupation.
 
 ---
 
