@@ -1,0 +1,71 @@
+---
+title: "Logistic Regression"
+subtitle: "<br><br> Introduction to Global Health Data Science"
+author: "[Back to Website](https://sta198f2021.github.io/website/)"
+date: "<br> Prof. Amy Herring"
+output:
+  xaringan::moon_reader:
+    css: 
+      - css/xaringan-themer.css
+      - css/slides.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#>",
+  highlight = TRUE,
+  fig.align = "center"
+)
+```
+
+
+
+
+```{r packages, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(tidymodels)
+set.seed(1213)
+```
+
+
+class: middle
+
+# Logistic Regression
+
+---
+
+### Data
+
+We consider data from the Global Adult Tobacco Survey (GATS), which is designed to provide nationally-representative data on non-institutionalized people 15 years and older. This survey is a global standard for systematically monitoring adult tobacco use and is produced by the Centers for Disease Control (CDC) in collaboration with the World Health Organization (WHO), RTI International, and Johns Hopkins University.
+
+China has the largest smoking population in the world and accounts for roughly 40% of tobacco consumption worldwide. We will focus on GATS data from China in 2018 (the most recent survey year), but note data from other countries are available from the [WHO's Microdata Repository](https://extranet.who.int/ncdsmicrodata/index.php/home).
+
+---
+
+```{r readdata}
+gats <- readr::read_csv("data/gats_rev.csv")
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$EDUCATION=factor(gats$EDUCATION,levels=c(1,2,3,4,5,6,7,8,77,99),labels=c("None","Less than Primary School","Primary School","Less than Secondary School","Secondary School","High School","University","Postgraduate","Don't Know","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+gats$SMOKESICKBINARY=ifelse(gats$SMOKESICK=="Yes","Yes","No")
+gats$SMOKESICKBINARY=as.factor(gats$SMOKESICKBINARY)
+```
+
+---
+
+Let's explore factors related to a respondent's belief that smoking makes you sick.  First, filter to data to exclude anyone who did not respond to the education question or who reported they didn't know their education level.
+
+Then, conduct some initial exploratory analysis of how the belief smoking makes you sick varies across levels of gender and education. Fit a logistic regression model with gender and education as predictors. Write a paragraph or two describing your findings.
