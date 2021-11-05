@@ -1,0 +1,92 @@
+---
+title: 'Lab #10: Smoking Cessation: Data from the Global Adult Tobacco Survey in China'
+subtitle: 'due Wednesday, November 10, 4:00 PM'
+output:
+  tufte::tufte_html:    
+    css: "sta199-labs.css"
+    tufte_variant: envisioned
+    highlight: pygments
+    toc: no
+    toc_depth: 1
+  html_document:
+    toc: no
+    toc_depth: '1'
+    df_print: paged
+link-citations: yes
+editor_options:
+  chunk_output_type: console
+---
+
+## Goals
+
+-   Fit a logistic regression with multiple predictors
+-   Interpret logistic regression output in the context of the data
+
+## Global Adult Tobacco Study (China)
+
+Using data from GATS, we will explore the following data, including factors related to trying to stop smoking, in the group of current smokers.
+
+<br>
+
+variable        | description
+----------------|-------------
+`CURRENTSMOKE`      |	currently smokes: yes, no, or don't know
+`TRYSTOP` | tried to stop smoking: yes, no, or refused
+`RESIDENCE` | urban or rural
+`GENDER`	          | interviewer instructions were "Record gender from observation. Ask if necessary": male or female
+`SMOKESICK` | respondent believes cigarette smoking can make you sick: yes, no, don't know, or refused
+`ECIGUSE` | how often has respondent used e-cigarettes: daily, some but less than daily, not at all, or refused
+
+
+## Data
+
+First, we read in and process the data. Notice the use of the `relevel` command to reset the referent group for the outcome.
+
+```{r getdata, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+gats <- readr::read_csv("gats_rev.csv")
+
+gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
+gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
+gats$CURRENTSMOKE=factor(gats$CURRENTSMOKE,levels=c(1,2,7),labels=c("Yes","No","Don't Know"))
+gats$ECIGUSE=factor(gats$ECIGUSE,levels=c(1,2,3,9),labels=c("Daily","Less than Daily","Not at All","Refused"))
+gats$TRYSTOP=factor(gats$TRYSTOP,levels=c(1,2,9),labels=c("Yes","No","Refused"))
+gats$SMOKESICK=factor(gats$SMOKESICK,levels=c(1,2,7,9),labels=c("Yes","No","Don't Know","Refused"))
+
+# Want the logistic regression to model Pr(Tried to Stop) so need to make "No" the referent group
+gats$TRYSTOP=relevel(gats$TRYSTOP, ref = "No")
+
+```
+
+
+
+## Exercises
+
+1. Filter the data to include only current smokers and to eliminate those who refused to provide answers to questions about trying to stop smoking, e-cigarette use, and whether smoking makes you sick. For this question, make sure your code chunk is visible.
+
+
+
+2. Create informative visualizations to show the relationship between having tried to stop smoking and e-cigarette use, having tried to stop smoking and gender, having tried to stop smoking and residence (urban or rural), and having tried to stop smoking and beliefs about whether smoking makes you sick. One challenge in making your plots useful is that some groups are very small, so be thoughtful about how to show whether each factor is associated with having tried to stop smoking. Briefly describe the findings from each plot.
+
+
+<br>
+
+Let $\pi_i$ be the probability that a respondent has tried to stop smoking. Let $\mbox{female}_i=1$ if respondent $i$ is identified as female, and let $\mbox{female}_i=0$ otherwise. Let $\mbox{rural}_i=1$ if a respondent is classified as rural, and let $\mbox{rural}_i=0$ otherwise.  Let $\mbox{daily}_i=1$ if a respondent uses e-cigarettes daily, and let $\mbox{daily}_i=0$ otherwise; let $\mbox{ltdaily}_i=1$ if the respondent uses e-cigarettes some but less than daily, and let $\mbox{ltdaily}_i=0$ otherwise. Let $\mbox{sickyes}_i=1$ if the respondent believes smoking can make you sick, and let $\mbox{sickyes}_i=0$ otherwise; and let $\mbox{sickdk}_i=1$ if the respondent doesn't know whether smoking can make you sick, and let $\mbox{sickdk}_i=0$ otherwise. 
+
+3. Fit the model $$logit(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0+\beta_1\mbox{rural}_i + \beta_2\mbox{female}_i+\beta_3\mbox{daily}_i+\beta_4\mbox{ltdaily}_i+\beta_5\mbox{sickyes}_i+\beta_6\mbox{sickdk}_i.$$  Be sure the indicator variables/factor variables in the model you fit are coded as indicated in the model equation. Provide a table of exponentiated estimates and 95% confidence intervals.
+
+
+4. Evaluate $H_0: \beta_j=0$ versus $H_A: \beta_j \neq 0$ for $j=1, 2, 3, 4, 5, 6$. For cases $j$ in which you reject $H_0$, interpret the odds ratio estimate in terms of the subject matter.
+ 
+## Grading
+Total: 50 pts
+
+- Exercise 1: 10 pts
+- Exercise 2: 10 pts
+- Exercise 3: 10 pts
+- Exercise 4: 15 pts
+
+- Overall:  5 pts
+
+  - Overall includes proper data processing, the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
