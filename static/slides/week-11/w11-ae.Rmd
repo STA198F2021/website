@@ -126,12 +126,14 @@ ggplot(gats2, aes(x = EDUCATION,
 
 ---
 
+## Output (on the log OR scale)
+
 ```{r}
 
 sick_m1 <- logistic_reg() %>%
   set_engine("glm") %>%
   fit(SMOKESICKBINARY ~ GENDER + EDUCATION, data=gats2, family="binomial")
-result<-tidy(sick_m1, conf.int=TRUE, exponentiate=TRUE)
+result<-tidy(sick_m1, conf.int=TRUE)
 ```
 
 ---
@@ -145,4 +147,74 @@ print(result[,1],n=9)
 
 ```{r}
 print(result,n=9)
+```
+
+---
+## Try an interaction (exponentiating output here)
+
+```{r}
+sick_m2 <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(SMOKESICKBINARY ~ GENDER + EDUCATION * GENDER*EDUCATION, data=gats2, family="binomial")
+result2<-tidy(sick_m2, conf.int=TRUE, exponentiate=TRUE)
+```
+
+---
+
+```{r}
+print(result2[,1],n=16)
+```
+
+
+---
+
+```{r}
+print(result2,n=16)
+```
+
+Whew, no important interaction terms apparent here.
+---
+
+## Have aggregate data like counts and/or rates?
+
+```{r }
+
+# create 0/1 version of SMOKESICKBINARY where 1=yes makes you sick and 0=no
+#right now 1=yes and 2=no
+
+gats2$SMOKESICKBIN2=ifelse(gats2$SMOKESICKBINARY=="Yes",1,0)
+
+## Turn our data into aggregate counts
+## Sickyes = # by gender and education who think smoking makes you sick
+## TOTAL: # in each gender and education group (denominator for prevalence)
+## Prevalence: probability people in group think smoking makes you sick, calc as Sickyes/TOTAL
+
+## Sickno: TOTAL-Sickyes
+
+gats2_agg <- gats2%>%group_by(GENDER, EDUCATION) %>% 
+  summarise(TOTAL=n(), Sickyes=sum(as.numeric(SMOKESICKBIN2))) %>%
+  ungroup() %>% 
+  mutate(prevalence=Sickyes/TOTAL)
+
+
+gats2_agg$Sickno <- gats2_agg$TOTAL- gats2_agg$Sickyes
+
+```
+
+---
+
+##Now that we have aggregate data, how do we fit the model?
+
+```{r}
+modelagg<-glm(cbind(Sickyes, Sickno) ~ GENDER+EDUCATION, data=gats2_agg, family = binomial)
+```
+
+---
+
+Compare this to the output we got from the individual observations!
+
+```{r}
+summary(modelagg)
+
+
 ```

@@ -138,12 +138,14 @@ ggplot(gats2, aes(x = EDUCATION,
 
 ---
 
+## Output (on the log OR scale)
+
 
 ```r
 sick_m1 &lt;- logistic_reg() %&gt;%
   set_engine("glm") %&gt;%
   fit(SMOKESICKBINARY ~ GENDER + EDUCATION, data=gats2, family="binomial")
-result&lt;-tidy(sick_m1, conf.int=TRUE, exponentiate=TRUE)
+result&lt;-tidy(sick_m1, conf.int=TRUE)
 ```
 
 ---
@@ -180,15 +182,174 @@ print(result,n=9)
 #&gt; # A tibble: 9 × 7
 #&gt;   term   estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 (Inte…     6.25    0.105      17.5  1.09e-68    5.11       7.70
-#&gt; 2 GENDE…     2.23    0.0716     11.2  4.48e-29    1.94       2.57
-#&gt; 3 EDUCA…     1.21    0.126       1.48 1.39e- 1    0.940      1.54
-#&gt; 4 EDUCA…     1.67    0.127       4.04 5.36e- 5    1.30       2.14
-#&gt; 5 EDUCA…     1.73    0.163       3.37 7.46e- 4    1.26       2.40
-#&gt; 6 EDUCA…     2.14    0.118       6.46 1.05e-10    1.70       2.69
-#&gt; 7 EDUCA…     2.97    0.137       7.93 2.28e-15    2.27       3.89
-#&gt; 8 EDUCA…     2.72    0.139       7.19 6.45e-13    2.07       3.58
-#&gt; 9 EDUCA…     1.98    0.432       1.58 1.14e- 1    0.921      5.17
+#&gt; 1 (Inte…    1.83     0.105      17.5  1.09e-68   1.63       2.04 
+#&gt; 2 GENDE…    0.801    0.0716     11.2  4.48e-29   0.662      0.943
+#&gt; 3 EDUCA…    0.187    0.126       1.48 1.39e- 1  -0.0618     0.434
+#&gt; 4 EDUCA…    0.513    0.127       4.04 5.36e- 5   0.263      0.761
+#&gt; 5 EDUCA…    0.551    0.163       3.37 7.46e- 4   0.235      0.876
+#&gt; 6 EDUCA…    0.760    0.118       6.46 1.05e-10   0.528      0.990
+#&gt; 7 EDUCA…    1.09     0.137       7.93 2.28e-15   0.820      1.36 
+#&gt; 8 EDUCA…    1.00     0.139       7.19 6.45e-13   0.729      1.28 
+#&gt; 9 EDUCA…    0.684    0.432       1.58 1.14e- 1  -0.0822     1.64
+```
+
+---
+## Try an interaction (exponentiating output here)
+
+
+```r
+sick_m2 &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(SMOKESICKBINARY ~ GENDER + EDUCATION * GENDER*EDUCATION, data=gats2, family="binomial")
+result2&lt;-tidy(sick_m2, conf.int=TRUE, exponentiate=TRUE)
+```
+
+---
+
+
+```r
+print(result2[,1],n=16)
+```
+
+```
+#&gt; # A tibble: 16 × 1
+#&gt;    term                                            
+#&gt;    &lt;chr&gt;                                           
+#&gt;  1 (Intercept)                                     
+#&gt;  2 GENDERFemale                                    
+#&gt;  3 EDUCATIONLess than Primary School               
+#&gt;  4 EDUCATIONPrimary School                         
+#&gt;  5 EDUCATIONLess than Secondary School             
+#&gt;  6 EDUCATIONSecondary School                       
+#&gt;  7 EDUCATIONHigh School                            
+#&gt;  8 EDUCATIONUniversity                             
+#&gt;  9 EDUCATIONPostgraduate                           
+#&gt; 10 GENDERFemale:EDUCATIONLess than Primary School  
+#&gt; 11 GENDERFemale:EDUCATIONPrimary School            
+#&gt; 12 GENDERFemale:EDUCATIONLess than Secondary School
+#&gt; 13 GENDERFemale:EDUCATIONSecondary School          
+#&gt; 14 GENDERFemale:EDUCATIONHigh School               
+#&gt; 15 GENDERFemale:EDUCATIONUniversity                
+#&gt; 16 GENDERFemale:EDUCATIONPostgraduate
+```
+
+
+---
+
+
+```r
+print(result2,n=16)
+```
+
+```
+#&gt; # A tibble: 16 × 7
+#&gt;    term  estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 (Int…    6.51      0.168   11.2    5.70e-29   4.75        9.18
+#&gt;  2 GEND…    2.10      0.201    3.70   2.18e- 4   1.41        3.09
+#&gt;  3 EDUC…    1.13      0.197    0.635  5.26e- 1   0.763       1.66
+#&gt;  4 EDUC…    1.57      0.197    2.30   2.16e- 2   1.06        2.29
+#&gt;  5 EDUC…    1.67      0.230    2.22   2.62e- 2   1.06        2.62
+#&gt;  6 EDUC…    2.05      0.186    3.85   1.19e- 4   1.41        2.93
+#&gt;  7 EDUC…    2.89      0.205    5.17   2.29e- 7   1.92        4.29
+#&gt;  8 EDUC…    2.63      0.210    4.62   3.92e- 6   1.73        3.95
+#&gt;  9 EDUC…    2.71      0.617    1.62   1.06e- 1   0.940      11.5 
+#&gt; 10 GEND…    1.12      0.265    0.434  6.64e- 1   0.671       1.90
+#&gt; 11 GEND…    1.12      0.268    0.440  6.60e- 1   0.670       1.92
+#&gt; 12 GEND…    1.05      0.351    0.150  8.81e- 1   0.537       2.13
+#&gt; 13 GEND…    1.07      0.249    0.264  7.92e- 1   0.660       1.75
+#&gt; 14 GEND…    1.02      0.292    0.0635 9.49e- 1   0.580       1.82
+#&gt; 15 GEND…    1.04      0.292    0.133  8.94e- 1   0.590       1.86
+#&gt; 16 GEND…    0.440     0.864   -0.950  3.42e- 1   0.0751      2.58
+```
+
+Whew, no important interaction terms apparent here.
+---
+
+## Have aggregate data like counts and/or rates?
+
+
+```r
+# create 0/1 version of SMOKESICKBINARY where 1=yes makes you sick and 0=no
+#right now 1=yes and 2=no
+
+gats2$SMOKESICKBIN2=ifelse(gats2$SMOKESICKBINARY=="Yes",1,0)
+
+## Turn our data into aggregate counts
+## Sickyes = # by gender and education who think smoking makes you sick
+## TOTAL: # in each gender and education group (denominator for prevalence)
+## Prevalence: probability people in group think smoking makes you sick, calc as Sickyes/TOTAL
+
+## Sickno: TOTAL-Sickyes
+
+gats2_agg &lt;- gats2%&gt;%group_by(GENDER, EDUCATION) %&gt;% 
+  summarise(TOTAL=n(), Sickyes=sum(as.numeric(SMOKESICKBIN2))) %&gt;%
+  ungroup() %&gt;% 
+  mutate(prevalence=Sickyes/TOTAL)
+
+
+gats2_agg$Sickno &lt;- gats2_agg$TOTAL- gats2_agg$Sickyes
+```
+
+---
+
+##Now that we have aggregate data, how do we fit the model?
+
+
+```r
+modelagg&lt;-glm(cbind(Sickyes, Sickno) ~ GENDER+EDUCATION, data=gats2_agg, family = binomial)
+```
+
+---
+
+Compare this to the output we got from the individual observations!
+
+
+```r
+summary(modelagg)
+```
+
+```
+#&gt; 
+#&gt; Call:
+#&gt; glm(formula = cbind(Sickyes, Sickno) ~ GENDER + EDUCATION, family = binomial, 
+#&gt;     data = gats2_agg)
+#&gt; 
+#&gt; Deviance Residuals: 
+#&gt;      Min        1Q    Median        3Q       Max  
+#&gt; -0.81858  -0.16035  -0.00327   0.14003   0.63091  
+#&gt; 
+#&gt; Coefficients:
+#&gt;                                     Estimate Std. Error z value
+#&gt; (Intercept)                          1.83277    0.10464  17.516
+#&gt; GENDERFemale                         0.80144    0.07161  11.192
+#&gt; EDUCATIONLess than Primary School    0.18665    0.12628   1.478
+#&gt; EDUCATIONPrimary School              0.51271    0.12693   4.039
+#&gt; EDUCATIONLess than Secondary School  0.55071    0.16331   3.372
+#&gt; EDUCATIONSecondary School            0.76047    0.11772   6.460
+#&gt; EDUCATIONHigh School                 1.08889    0.13740   7.925
+#&gt; EDUCATIONUniversity                  1.00133    0.13926   7.191
+#&gt; EDUCATIONPostgraduate                0.68403    0.43250   1.582
+#&gt;                                     Pr(&gt;|z|)    
+#&gt; (Intercept)                          &lt; 2e-16 ***
+#&gt; GENDERFemale                         &lt; 2e-16 ***
+#&gt; EDUCATIONLess than Primary School   0.139399    
+#&gt; EDUCATIONPrimary School             5.36e-05 ***
+#&gt; EDUCATIONLess than Secondary School 0.000746 ***
+#&gt; EDUCATIONSecondary School           1.05e-10 ***
+#&gt; EDUCATIONHigh School                2.28e-15 ***
+#&gt; EDUCATIONUniversity                 6.45e-13 ***
+#&gt; EDUCATIONPostgraduate               0.113741    
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; (Dispersion parameter for binomial family taken to be 1)
+#&gt; 
+#&gt;     Null deviance: 213.0720  on 15  degrees of freedom
+#&gt; Residual deviance:   1.4187  on  7  degrees of freedom
+#&gt; AIC: 107.13
+#&gt; 
+#&gt; Number of Fisher Scoring iterations: 4
 ```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
