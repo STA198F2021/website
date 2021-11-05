@@ -49,6 +49,8 @@ class: middle
 
 ---
 
+## GATS Data
+
 
 ```r
 gats &lt;- readr::read_csv("data/gats_rev.csv")
@@ -75,14 +77,17 @@ gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","
 
 ## Goal: Predict Who Has Tried to Stop Smoking
 
-- Data: Set of survey responses, and we know who tried to stop smoking, and who didn't
+- Data: Set of survey responses, and we know who tried to stop smoking, and who hasn't
+
 - Use logistic regression to predict the probability that someone has tried to stop smoking
-- Use model selection to pick the model with the best predictive performance
+
+- Consider how we might compare different models in terms of predictive performance
 
 --
 - Building a model to predict the probability that someone will try to stop smoking is only half of the battle! We also need a decision rule about whom we predict to have tried to stop (e.g. what probability should we use as out cutoff?)
 
 --
+
 - A simple approach: choose a single threshold probability and any person who exceeds that probability is flagged as someone who may have tried to stop
 
 ---
@@ -232,13 +237,18 @@ print(bigmod[53:64,],n=13)
 
 ## Prediction
 
-- The mechanics of prediction is **easy**:
+- The mechanics of prediction are **easy**:
+
   - Plug in values of predictors to the model equation
+  
   - Calculate the predicted value of the response variable, `\(\hat{y}\)`
 
 --
+
 - Getting it right is **hard**!
+
   - There is no guarantee the model estimates you have are correct
+  
   - Or that your model will perform as well with new data as it did with your sample data
 
 ---
@@ -364,7 +374,7 @@ trystop_m1
 ```
 #&gt; parsnip model object
 #&gt; 
-#&gt; Fit time:  171ms 
+#&gt; Fit time:  162ms 
 #&gt; 
 #&gt; Call:  stats::glm(formula = TRYSTOP ~ GENDER + PROVINCE + RESIDENCE + 
 #&gt;     EDUCATION + OCCUPATION + HOMESMOKERULES + SMOKESICK + SMOKECANCER, 
@@ -510,9 +520,9 @@ trystop_pred1 %&gt;%
 #&gt;  2    0.180     0.820 Yes    
 *#&gt;  3    0.193     0.807 No     
 #&gt;  4    0.196     0.804 No     
-#&gt;  5    0.197     0.803 Yes    
+*#&gt;  5    0.197     0.803 Yes    
 #&gt;  6    0.205     0.795 Yes    
-*#&gt;  7    0.220     0.780 No     
+#&gt;  7    0.220     0.780 No     
 #&gt;  8    0.222     0.778 No     
 #&gt;  9    0.223     0.777 Yes    
 #&gt; 10    0.227     0.773 No     
@@ -589,7 +599,7 @@ OK, this is not a lot better than randomly predicting based on the prevalence of
 
 ## Comparing Models
 
-Let's compare the fit of this large model to one that only contains province, home wmoking rules, and beliefs about whether smoking makes you sick or causes cancer.
+Let's compare the fit of this large model to one that only contains province, home smoking rules, and beliefs about whether smoking makes you sick or causes cancer.
 
 
 ```r
@@ -628,6 +638,48 @@ Model without gender, education, occupation, and residence
 #&gt; 1 roc_auc binary         0.599
 ```
 ]
+
+
+
+---
+
+The model with only an intercept should yield an AUC of 0.5 (chance assignment).
+
+
+```r
+trystop_m3 &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(TRYSTOP ~ 1, data = train_data, family = "binomial") 
+
+trystop_pred3 &lt;- predict(trystop_m3, test_data, type = "prob") %&gt;% bind_cols(test_data %&gt;% select(TRYSTOP))
+
+trystop_pred3 %&gt;%
+  roc_auc(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  )
+```
+
+```
+#&gt; # A tibble: 1 × 3
+#&gt;   .metric .estimator .estimate
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 roc_auc binary           0.5
+```
+---
+
+```r
+trystop_pred3 %&gt;%
+  roc_curve(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  ) %&gt;%
+  autoplot()
+```
+
+&lt;img src="w12-l01-prediction-overfitting_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

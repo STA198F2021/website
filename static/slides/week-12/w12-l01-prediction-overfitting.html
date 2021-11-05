@@ -374,7 +374,7 @@ trystop_m1
 ```
 #&gt; parsnip model object
 #&gt; 
-#&gt; Fit time:  163ms 
+#&gt; Fit time:  162ms 
 #&gt; 
 #&gt; Call:  stats::glm(formula = TRYSTOP ~ GENDER + PROVINCE + RESIDENCE + 
 #&gt;     EDUCATION + OCCUPATION + HOMESMOKERULES + SMOKESICK + SMOKECANCER, 
@@ -642,6 +642,8 @@ Model without gender, education, occupation, and residence
 
 
 ---
+
+The model with only an intercept should yield an AUC of 0.5 (chance assignment).
 
 
 ```r

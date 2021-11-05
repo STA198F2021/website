@@ -39,7 +39,7 @@ title: 'Week 12 - Model Validation'
 
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
-| Quiz | [Quiz 9](https://sakai.duke.edu) | Tues., 11/9 |
+| Quiz | [Quiz 10](https://sakai.duke.edu) | Tues., 11/9 |
 | Lab 10 |Logistic Regression |  |
 
 

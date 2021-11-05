@@ -53,6 +53,8 @@ class: middle
 
 ---
 
+## GATS Data
+
 ```{r readdata, warning=FALSE, message=FALSE}
 gats <- readr::read_csv("data/gats_rev.csv")
 
@@ -78,14 +80,17 @@ gats$SMOKECANCER=factor(gats$SMOKECANCER,levels=c(1,2,7,9),labels=c("Yes","No","
 
 ## Goal: Predict Who Has Tried to Stop Smoking
 
-- Data: Set of survey responses, and we know who tried to stop smoking, and who didn't
+- Data: Set of survey responses, and we know who tried to stop smoking, and who hasn't
+
 - Use logistic regression to predict the probability that someone has tried to stop smoking
-- Use model selection to pick the model with the best predictive performance
+
+- Consider how we might compare different models in terms of predictive performance
 
 --
 - Building a model to predict the probability that someone will try to stop smoking is only half of the battle! We also need a decision rule about whom we predict to have tried to stop (e.g. what probability should we use as out cutoff?)
 
 --
+
 - A simple approach: choose a single threshold probability and any person who exceeds that probability is flagged as someone who may have tried to stop
 
 ---
@@ -141,13 +146,18 @@ print(bigmod[53:64,],n=13)
 
 ## Prediction
 
-- The mechanics of prediction is **easy**:
+- The mechanics of prediction are **easy**:
+
   - Plug in values of predictors to the model equation
+  
   - Calculate the predicted value of the response variable, $\hat{y}$
 
 --
+
 - Getting it right is **hard**!
+
   - There is no guarantee the model estimates you have are correct
+  
   - Or that your model will perform as well with new data as it did with your sample data
 
 ---
@@ -289,7 +299,7 @@ trystop_pred1
 ## A closer look at predictions
 
 .pull-left-wide[
-```{r highlight.output=c(6, 10)}
+```{r highlight.output=c(6, 8)}
 trystop_pred1 %>%
   arrange(desc(.pred_Yes)) %>%
   print(n = 15)
@@ -353,9 +363,9 @@ OK, this is not a lot better than randomly predicting based on the prevalence of
 
 ## Comparing Models
 
-Let's compare the fit of this large model to one that only contains province, home wmoking rules, and beliefs about whether smoking makes you sick or causes cancer.
+Let's compare the fit of this large model to one that only contains province, home smoking rules, and beliefs about whether smoking makes you sick or causes cancer.
 
-```{r amyplay, message=FALSE, warning=FALSE}
+```{r smallermodel, message=FALSE, warning=FALSE}
 trystop_m2 <- logistic_reg() %>%
   set_engine("glm") %>%
   fit(TRYSTOP ~ PROVINCE+HOMESMOKERULES+SMOKESICK+SMOKECANCER, data = train_data, family = "binomial") 
@@ -404,3 +414,38 @@ trystop_pred2 %>%
   )
 ```
 ]
+
+
+
+---
+
+The model with only an intercept should yield an AUC of 0.5 (chance assignment).
+
+```{r intonlymodel, message=FALSE, warning=FALSE}
+trystop_m3 <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(TRYSTOP ~ 1, data = train_data, family = "binomial") 
+
+trystop_pred3 <- predict(trystop_m3, test_data, type = "prob") %>% bind_cols(test_data %>% select(TRYSTOP))
+
+trystop_pred3 %>%
+  roc_auc(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  )
+```
+---
+```{r}
+
+
+trystop_pred3 %>%
+  roc_curve(
+    truth = TRYSTOP,
+    .pred_Yes,
+    event_level = "second"
+  ) %>%
+  autoplot()
+
+
+```

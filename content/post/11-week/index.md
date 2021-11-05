@@ -27,6 +27,7 @@ title: 'Week 11 - Logistic regression'
 |:---:|:---------------------|
 | Fallacies and Paradoxes   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-11/w11-l01-multiwaytables.html)  | 
 | Logistic Regression   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-11/w11-l02-logistic.html)  | 
+| Logistic Regression Application   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-11/w11-ae-problem.html)  | 
 
 
 

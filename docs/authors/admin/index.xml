@@ -57,11 +57,11 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;Split Sample Analysis&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-12/w12-l01-prediction-overfitting.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;Cross-Validation&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-12/w12-l02-cross-validation.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -77,7 +77,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Quiz&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sakai.duke.edu&#34;&gt;Quiz 9&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sakai.duke.edu&#34;&gt;Quiz 10&lt;/a&gt;&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;Tues., 11/9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -138,6 +138,10 @@
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;Logistic Regression&lt;/td&gt;
 &lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-11/w11-l02-logistic.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Logistic Regression Application&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-11/w11-ae-problem.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
