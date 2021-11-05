@@ -256,9 +256,11 @@ tibble(
 -  The training set does not have the capacity to be a good arbiter of performance.
 
 --
+
 - It is not an independent piece of information; predicting the training set can only reflect what the model already knows.
 
 --
+
 - Suppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.
 
 .footnote[
@@ -435,7 +437,7 @@ knitr::include_graphics("img/post-cv-testing.png")
 
 ## Picking a Model
 
-When choosing between these two models, we see essentially the same $R^2$ and RMSE, but one model is much simpler than the other. It makes sense to use the simpler model to facilitate interpretation. Let's practice interpreting results from the model, now fit to the full data, now!
+When choosing between these two models, we see essentially the same $R^2$ and RMSE, but one model is much simpler than the other. It makes sense to use the simpler model to facilitate interpretation. Let's practice interpreting results from the model, fit to the full data, now!
 
 ```{r finalmodel, out.width="120%", eval=FALSE}
 final_fit <- linear_reg() %>%

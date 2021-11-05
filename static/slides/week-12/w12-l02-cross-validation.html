@@ -342,9 +342,11 @@ rsq(mercury_test_pred, truth = lhairHg, estimate = .pred)
 -  The training set does not have the capacity to be a good arbiter of performance.
 
 --
+
 - It is not an independent piece of information; predicting the training set can only reflect what the model already knows.
 
 --
+
 - Suppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.
 
 .footnote[
@@ -584,7 +586,7 @@ tidy(final_fit, conf.int=TRUE)
 ```
 #&gt; parsnip model object
 #&gt; 
-#&gt; Fit time:  0ms 
+#&gt; Fit time:  2ms 
 #&gt; 
 #&gt; Call:
 #&gt; stats::lm(formula = lhairHg ~ assets_sc + native_cat + age, data = data)
