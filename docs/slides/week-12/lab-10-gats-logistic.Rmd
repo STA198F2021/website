@@ -45,7 +45,7 @@ First, we read in and process the data. Notice the use of the `relevel` command 
 ```{r getdata, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(tidymodels)
-gats <- readr::read_csv("gats_rev.csv")
+gats <- readr::read_csv("data/gats_rev.csv")
 
 gats$RESIDENCE=factor(gats$RESIDENCE,levels=c(1,2),labels=c("Urban","Rural"))
 gats$GENDER=factor(gats$GENDER,levels=c(1,2),labels=c("Male","Female"))
