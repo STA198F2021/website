@@ -1,0 +1,88 @@
+---
+title: "Homework #04: Malaria Vaccine Trial"
+subtitle: "due Friday, November 12 at 4:00pm"
+output: 
+  tufte::tufte_html:
+    css: "sta199-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: true
+    toc_depth: 1
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Malaria Vaccine Study
+
+We consider data inspired (i.e., generated from data published in the manuscript) by the study of Datoo et al (2021), carried out in children aged 5-17 in Nanoro, Burkina Faso. Nanoro is a town with highly seasonal transmission of malaria. The study evaluates a promising low dose vaccine candidate, R21, in combination with one of two doses of adjuvant Matrix-M (MM), which stimulates the body's immune response. Thus the two treatment groups are group 1, which received 5 $\mu$g R21 with 25 $\mu$g MM, and group 2, which received 5 $\mu$g R21 with 50 $\mu$g MM. Group 3 did not receive a malaria vaccine but was given a rabies vaccine as a positive control (as part of the study, immune responses were measured, and this group was given rabies vaccine to ensure their immune systems were functioning).
+
+The study was a randomized, double-blind, controlled trial with 150 participants in each of the three groups.  The primary endpoint was one or more episodes of clinical malaria, defined as a fever and parasite density >5000 parasites per $\mu$L, in the six months following vaccination.
+
+You are provided with two data sets.  The first, `malaria_efficacy`, contains a variable indicating the dose group, `group`, defined as above, and a binary variable `malaria` that takes value "yes" if a participant had one or more malaria episodes in the six months following vaccination, and "no" otherwise. This data set contains data on 146 group 1, 146 group 2, and 147 group 3 participants.
+
+The second data set, `malaria_safety`, contains information of the most common adverse event, fever. It contains the variable `group` as well as a variable `fever` taking value "yes" if the participant had an adverse reaction of fever after the first vaccine dose, and "no" otherwise. Fever data are available for all 450 study participants. We are not able to connect participants in the `malaria_efficacy` and `malaria_safety` data sets.
+
+```{r data, message=FALSE, warning=FALSE}
+malaria_efficacy = data.frame(group=c(rep("Group 1",146),rep("Group 2",146),rep("Group 3",147)),malaria=c(rep("yes",43),rep("no",103),rep("yes",38),rep("no",108),rep("yes",105),rep("no",42)))
+malaria_efficacy$group=as.factor(malaria_efficacy$group)
+malaria_efficacy$malaria=as.factor(malaria_efficacy$malaria)
+malaria_efficacy$group=relevel(malaria_efficacy$group, ref = "Group 3")
+
+malaria_fever = data.frame(group=c(rep("Group 1",150),rep("Group 2",150),rep("Group 3",150)),fever=c(rep("yes",14),rep("no",136),rep("yes",28),rep("no",122),rep("yes",13),rep("no",137)))
+malaria_fever$group=as.factor(malaria_fever$group)
+malaria_fever$fever=as.factor(malaria_fever$fever)
+
+```
+
+## Primary endpoint: malaria
+
+1. Create an informative visualization showing the relationship between malaria diagnosis and treatment group, and briefly comment on the findings from your visualization.
+
+2. Using Fisher's exact test, evaluate the null hypothesis that the probability of contracting malaria in the 6 months after vaccination is independent of treatment group.
+
+3. Now let $\pi_i$ be the probability study participant $i$ gets malaria, let $\mbox{group 1}_i$ take value 1 for those in group 1 and 0 otherwise, let $\mbox{group 2}_i$ take value 1 for those in group 2 and 0 otherwise, and let $\mbox{group 3}_i$ take value 1 for those in group 3 and 0 otherwise. Fit the logistic regression model $logit(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0 + \beta_1\mbox{group 1}_i + \beta_2 \mbox{group 2}_i$, and provide a table containing exponentiated estimates and confidence intervals. Interpret your estimates in terms of the subject matter.
+
+
+4. Now use the `relevel` command to make group 1 the reference group, so that you can fit the model $logit(\pi_i) = \log\left(\frac{\pi_i}{1-\pi_i}\right)=\alpha_0 + \alpha_1\mbox{group 2}_i + \alpha_2 \mbox{group 3}_i$ and get a straightforward comparison of group 1 and group 2. (Be sure you show your code block for this question.) Provide an estimate and 95% confidence interval for $\alpha_1$, use a test to evaluate $H_0: \alpha_1=0$, and interpret the estimate and test results in terms of the subject matter.
+
+ 
+
+5. Notice that $\hat{\alpha}_1 \neq \hat{\beta}_2$. Should this be surprising? Explain.
+
+
+## Most Common Adverse Vaccine Reaction: Fever
+
+6. Create an appropriate visualization showing the relationship between treatment group and fever in the data, and comment briefly on your findings.
+
+
+
+7. Using an appropriate method of your choice, determine whether the incidence of the adverse event of fever varies across the treatment groups, and provide statistical evidence to support your answer. (Be sure to provide relevant estimates and confidence intervals.)
+
+
+## Summary
+
+8. Do the data provide evidence that the vaccine R21 protects against malaria in children aged 5-17?  If yes, is there a significant difference in either efficacy or adverse event (fever) incidence between the two MM adjuvant doses, and if yes, which dose is preferred, if the goal is to have an effective vaccine while minimizing the adverse event (fever)? Provide a short summary of your findings that answers these questions, supporting your response with evidence from the data.
+
+### Grading:
+
+| Component | Points |
+|:----------|:-------|
+| Ex 1      | 5     |
+| Ex 2      | 5     |
+| Ex 3      | 5     |
+| Ex 4      | 5     |
+| Ex 5      | 5     |
+| Ex 6      | 5     |
+| Ex 7      | 5     |
+| Ex 8      | 10     |
+| Workflow & formatting   | 5      |
+
+**Grading notes**:
+
+-   The "Workflow & formatting" grade is to assess the reproducible workflow. This includes having at least 2 informative commit messages, labeling the code chunks, updating the name and date in the YAML, and in general having a neat report.

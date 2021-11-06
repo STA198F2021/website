@@ -41,6 +41,7 @@ title: 'Week 12 - Model Validation'
 |:---|:---|:---|
 | Quiz | [Quiz 10](https://sakai.duke.edu) | Tues., 11/9 |
 | Lab 10 | [Logistic Regression](https://sta198f2021.github.io/website/slides/week-12/lab-10-gats-logistic.html) | Wed., 11/10 |
+| Homework 4 | [Categorical Data](https://sta198f2021.github.io/website/slides/week-12/hw-04-malaria-vaccine.html) | Fri., 11/12 |
 
 
 ### Readings

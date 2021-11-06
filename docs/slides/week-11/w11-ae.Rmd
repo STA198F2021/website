@@ -1,5 +1,5 @@
 ---
-title: "Logistic Regression"
+title: "Go to End for Aggregate Coding!"
 subtitle: "<br><br> Introduction to Global Health Data Science"
 author: "[Back to Website](https://sta198f2021.github.io/website/)"
 date: "<br> Prof. Amy Herring"
