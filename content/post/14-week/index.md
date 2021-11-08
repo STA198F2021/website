@@ -16,7 +16,7 @@ summary: Thanksgiving week
 title: 'Week 14 - Bringing it All Together'
 ---
 
-
+This week we'll use lab time to practice bringing together all the skills we've learned by reading about real studies and setting up analysis plans. There is no quiz, and there are no deliverables this week.
 
 ### Assignments and Labs
 
