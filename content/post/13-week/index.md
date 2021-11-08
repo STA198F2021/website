@@ -25,8 +25,8 @@ title: 'Week 13 - Project Presentations'
 | <div style="width:120px;text-align:left">Assignment</div> | <div style="width:340px;text-align:left">Title</div> | <div style="width:200px;text-align:left">Due</div> |
 |:---|:---|:---|
 | Lab | Finalize Projects | |
-| Project | [Project Reports](https://sta198f2021.github.io/website/) | Tues., 11/16 |
-| Project | [Project Presentations](https://sta198f2021.github.io/website/slides/week-13/project-tips.html) | Wed. and Fri., 11/17 and 11/19 |
+| Project | [Project Reports - Info on Main Page](https://sta198f2021.github.io/website/) | Tues., 11/16 |
+| Project | [Project Presentations - Click Here for Day and Time](https://sta198f2021.github.io/website/slides/week-13/project-tips.html) | Wed. and Fri., 11/17 and 11/19 |
 
 
 
