@@ -38,7 +38,7 @@ Carefully read the project draft, considering the questions below as you read it
 ## Exploratory data analysis 
 
 - Are the data cleaning and data wrangling clearly described? This includes dealing with missing data, creating new variables, etc.
-- Do the visualizations follow the guidelines we've discussed in STA 199? This includes using plots that are appropriate for the data, having proper axis labels, titles, etc.
+- Do the visualizations follow the guidelines we've discussed in STA 198? This includes using plots that are appropriate for the data, having proper axis labels, titles, etc.
 - Are any tables and figures clear, effective, and informative?  Should any be eliminated, or are any new tables or figures needed?
 - Is the choice of statistical method justified?
 
