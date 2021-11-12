@@ -17,7 +17,81 @@
       <link>https://sta198f2021.github.io/website/post/15-week/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://sta198f2021.github.io/website/post/15-week/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;tasks&#34;&gt;Tasks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/15-week/#readings&#34;&gt;readings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Complete the &lt;a href=&#34;https://sta198f2021.github.io/website/post/15-week/#assignments&#34;&gt;assignments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;class-slides&#34;&gt;Class Slides&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:250px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div  style=&#34;width:80px;text-align:center&#34;&gt;Slides&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Survival Analysis&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-15/w15-l01-survival.html&#34;&gt;&lt;span style=&#34;color: #4b5357;&#34;&gt;&lt;i class=&#34;fas fa-desktop fa-lg&#34;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;assignments-and-labs&#34;&gt;Assignments and Labs&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:120px;text-align:left&#34;&gt;Assignment&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:340px;text-align:left&#34;&gt;Title&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:200px;text-align:left&#34;&gt;Due&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Quiz&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sakai.duke.edu&#34;&gt;Quiz 11&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Tues., 11/30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Lab 12&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;Model Validation&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Wed., 12/1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Homework 5&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;&#34;&gt;Survival Analysis&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Fri., 12/3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;readings&#34;&gt;Readings&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:50px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;div style=&#34;width:420px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;div style=&#34;width:200px&#34;&gt;&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-02/w2-l03-prob.html&#34;&gt;Review: Probability&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📄&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://sta198f2021.github.io/website/slides/week-02/w2-l04-condprob.html&#34;&gt;Review: Conditional Probability &lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;🎥&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;a href=&#34;https://www.dailymotion.com/video/x6oqa4p&#34;&gt;5 Bears in the Bed&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;strong&gt;Required (Seriously!)&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
     </item>
     
     <item>

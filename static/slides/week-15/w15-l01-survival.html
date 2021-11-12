@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Survival Analysis</title>
+    <title>w15-l01-survival.knit</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Back to Website" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
@@ -14,14 +13,6 @@
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
-
-# Survival Analysis
-## <br><br> Introduction to Global Health Data Science
-### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
-### <br> Prof. Amy Herring
-
----
 
 
 
@@ -98,9 +89,9 @@ Data may be censored in multiple ways:
 ## Calendar Time and Participant Time
 
 
-It is important to distinguish between calendar time and participant time.
+It is important to distinguish between calendar time and participant time. In this plot, an "X" represents a death, and an "O" represents a censored observation.
 
-&lt;img src="img/studytime.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/studytime.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -247,14 +238,15 @@ Remember `\(d_t\)` is the # who fail at time `\(t\)`, and `\(I_t\)` is the # at 
 ]
 ]
 
-.pull-right[
+.small[
 
-#### Kaplan-Meier (KM) Estimate
+.pull-right[
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
 `\(\hat{S}(0)=1\)`
 
+]
 ]
 
 ---
@@ -278,13 +270,12 @@ Remember `\(d_t\)` is the # who fail at time `\(t\)`, and `\(I_t\)` is the # at 
 ]
 ]
 
+.small[
 .pull-right[
-
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
+
 $$Pr(\text{survive past time 4.5}) $$
 $$=Pr(\text{survive past time 0}) $$
 `$$\times Pr(\text{survive past time 4.5} \mid \text{survive past time 0})$$`
@@ -314,23 +305,24 @@ $$=Pr(\text{survive past time 0}) $$
 ]
 ]
 
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
 $$Pr(\text{survive past time 7.5}) $$
 `$$=Pr(\text{survive past time 4.5})$$`
 `$$\times Pr(\text{survive past time 7.5} \mid \text{survive past time 4.5})$$`
 ]
+
 ]
 
 ---
 
 
 .small[
+
 .pull-left[
 
 | `\(t\)` | # Failed: `\(d_t\)` | # Censored | # Left: `\(I_{t+1}\)` | `\(\hat{S}(t)\)` |
@@ -348,17 +340,18 @@ $$Pr(\text{survive past time 7.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
-.pull-right[
 
-#### Kaplan-Meier (KM) Estimate
+.small[
+.pull-right[
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
+
 $$Pr(\text{survive past time 8.5}) $$
 `$$=Pr(\text{survive past time 7.5})$$`
 `$$\times Pr(\text{survive past time 8.5} \mid \text{survive past time 7.5})$$`
 
+]
 ]
 
 ---
@@ -382,17 +375,17 @@ $$Pr(\text{survive past time 8.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
-.pull-right[
-
-#### Kaplan-Meier (KM) Estimate
-
-`$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
 .small[
+.pull-right[
+`$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
+
+
 $$Pr(\text{survive past time 11.5}) $$
 `$$=Pr(\text{survive past time 8.5})$$`
 `$$\times Pr(\text{survive past time 11.5} \mid \text{survive past time 8.5})$$`
 
+]
 ]
 
 ---
@@ -416,17 +409,18 @@ $$Pr(\text{survive past time 11.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
 $$Pr(\text{survive past time 13.5}) $$
 `$$=Pr(\text{survive past time 11.5})$$`
 `$$\times Pr(\text{survive past time 13.5} \mid \text{survive past time 11.5})$$`
 
+]
 ]
 
 ---
@@ -449,17 +443,18 @@ $$Pr(\text{survive past time 13.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
 $$Pr(\text{survive past time 15.5}) $$
 `$$=Pr(\text{survive past time 13.5})$$`
 `$$\times Pr(\text{survive past time 15.5} \mid \text{survive past time 13.5})$$`
 
+]
 ]
 
 ---
@@ -482,17 +477,19 @@ $$Pr(\text{survive past time 15.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
+
 $$Pr(\text{survive past time 16.5}) $$
 `$$=Pr(\text{survive past time 15.5})$$`
 `$$\times Pr(\text{survive past time 16.5} \mid \text{survive past time 15.5})$$`
 
+]
 ]
 
 ---
@@ -515,17 +512,19 @@ $$Pr(\text{survive past time 16.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
+
 $$Pr(\text{survive past time 17.5}) $$
 `$$=Pr(\text{survive past time 16.5})$$`
 `$$\times Pr(\text{survive past time 17.5} \mid \text{survive past time 16.5})$$`
 
+]
 ]
 
 ---
@@ -549,17 +548,18 @@ $$Pr(\text{survive past time 17.5}) $$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
 $$Pr(\text{survive past time 19.5}) $$
 `$$=Pr(\text{survive past time 17.5})$$`
 `$$\times Pr(\text{survive past time 19.5} \mid \text{survive past time 17.5})$$`
 
+]
 ]
 
 ---
@@ -582,17 +582,19 @@ $$Pr(\text{survive past time 19.5}) $$
 | 21.5 | 0 | 1 | &lt;p style="color:red"&gt;1&lt;/p&gt; | &lt;p style="color:red"&gt;$$0.207 \times \left(1-\frac{0}{1}\right)=0.207$$&lt;/p&gt; |
 ]
 ]
+
+.small[
 .pull-right[
 
-#### Kaplan-Meier (KM) Estimate
 
 `$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$`
 
-.small[
+
 $$Pr(\text{survive past time 21.5}) $$
 `$$=Pr(\text{survive past time 19.5})$$`
 `$$\times Pr(\text{survive past time 21.5} \mid \text{survive past time 19.5})$$`
 
+]
 ]
 
 ---
@@ -616,7 +618,7 @@ ATCT is an imaging-based biomarker of tumor prognosis.
 - Which values are associated with the worst survival?
 - What is the median survival time in the group with the smallest ATCT values?
   - Median survival is the time at which `\(\hat{S}(t)=0.5\)`
-- If a child is in the group with the largest ATCT values, what is his/her estimated 5-year survival probability?
+- If a child is in the group with the largest ATCT values, what is their estimated 5-year survival probability?
 ]
 
 ---
@@ -627,7 +629,7 @@ The `lung` dataset is available from the `survival` package in R. The data conta
 
 `time`: Survival time in days
 
-`status`: censoring status 1=censored, 2=dead
+`status`: censoring status 1=censored, 2=dead (failure) (note:  another common coding recognized by R is to let 0=censored and 1=failure)
 
 `ph.ecog`: Eastern Cooperative Oncology Group (ECOG) performance score, where 0=asymptomatic, 1=symptomatic but ambulatory, 2=in bed &lt;50% of day, 3=in bed &gt;50% of day but not bedbound, 4=bedbound
 
@@ -683,7 +685,7 @@ Note: because there was only 1 bedridden patient, the median survival time is th
 
 ## Comparing Survival Across Groups
 
-The log-rank test is a standard test for comparing groups when we have survival data. Here we use it to test the null hypothesis that there is no difference in survival between the groups, versus the alternative that there is a difference in survival.
+The **log-rank test** is a standard test for comparing groups when we have survival data. Here we use it to test the null hypothesis that there is no difference in survival between the groups, versus the alternative that there is a difference in survival.
 
 
 ```r
@@ -711,7 +713,7 @@ Here we see `\(p&lt;0.0001\)` and reject the null hypothesis, concluding that th
 
 ## Cox Proportional Hazards Model
 
-Suppose we have multiple covariates of interest. For example, in the lung cancer data, we also have covariates like `wt.loss` (weight loss in the past 6 months) and `age`.  If we want to fit a model to survival data, the *Cox proportional hazards model* is a popular choice.
+Suppose we have multiple covariates of interest. For example, in the lung cancer data, we also have covariates like `wt.loss` (weight loss in the past 6 months) and `age`.  If we want to fit a model to survival data, the **Cox proportional hazards model** is a popular choice.
 
 The Cox proportional hazards model has a couple of important assumptions that are beyond the scope of this course (non-informative censoring, meaning censoring times are unrelated to the unobserved failure time, and the proportional hazards assumption, meaning that the hazards of failure are proportional across groups). You should explore these more if you plan to model survival data.
 
@@ -724,7 +726,10 @@ The Cox proportional hazards model has a couple of important assumptions that ar
 ```r
 library(gtsummary)
 
-coxph(Surv(time, status) ~ as.factor(ph.ecog)+wt.loss+age, data = lung) %&gt;%
+coxph(Surv(time, status) ~ 
+        as.factor(ph.ecog)+
+        wt.loss+age, 
+      data = lung) %&gt;%
     tbl_regression(exp = TRUE) 
 ```
 
@@ -1134,11 +1139,11 @@ The estimates labeled `exp(coef)` are interpreted as *hazard ratios*. That is, p
 
 - The HR represents the ratio of hazards between two groups at any particular point in time.
 
-- The HR is interpreted as the instantaneous rate of occurrence of the event of interest in those who are still at risk for the event. 
+- The HR compares instantaneous rates of occurrence of the event of interest in those who are still at risk for the event. 
 
 - HR &lt; 1 indicates reduced hazard of death;  HR &gt; 1 indicates an increased hazard of death
 
-So our HR = 2.5 implies that around 2.5 times as many people who are bedridden are dying as those who are asymptomatic, at any given time.
+So our HR = 2.5 implies that around 2.5 times as many people who are bedridden are dying as those who are asymptomatic, at any given time, conditional on age and weight loss.
 
 
 

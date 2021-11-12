@@ -27,8 +27,8 @@ title: 'Week 15 - Ethics and survival'
 
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
-| Split Sample Analysis   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-12/w12-l01-prediction-overfitting.html)  | 
-| Cross-Validation   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-12/w12-l02-cross-validation.html)  | 
+| Survival Analysis   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-15/w15-l01-survival.html)  | 
+
 
 
 

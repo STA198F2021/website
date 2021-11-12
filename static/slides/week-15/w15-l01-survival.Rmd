@@ -95,9 +95,9 @@ Data may be censored in multiple ways:
 ## Calendar Time and Participant Time
 
 
-It is important to distinguish between calendar time and participant time.
+It is important to distinguish between calendar time and participant time. In this plot, an "X" represents a death, and an "O" represents a censored observation.
 
-```{r, echo=FALSE, out.width="90%"}
+```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/studytime.png")
 ```
 
@@ -250,12 +250,15 @@ Remember $d_t$ is the # who fail at time $t$, and $I_t$ is the # at risk of fail
 ]
 ]
 
+.small[
+
 .pull-right[
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
 $\hat{S}(0)=1$
 
+]
 ]
 
 ---
@@ -279,11 +282,12 @@ $\hat{S}(0)=1$
 ]
 ]
 
+.small[
 .pull-right[
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
+
 $$Pr(\text{survive past time 4.5}) $$
 $$=Pr(\text{survive past time 0}) $$
 $$\times Pr(\text{survive past time 4.5} \mid \text{survive past time 0})$$
@@ -313,22 +317,24 @@ $$\times Pr(\text{survive past time 4.5} \mid \text{survive past time 0})$$
 ]
 ]
 
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
 $$Pr(\text{survive past time 7.5}) $$
 $$=Pr(\text{survive past time 4.5})$$
 $$\times Pr(\text{survive past time 7.5} \mid \text{survive past time 4.5})$$
 ]
+
 ]
 
 ---
 
 
 .small[
+
 .pull-left[
 
 | $t$ | # Failed: $d_t$ | # Censored | # Left: $I_{t+1}$ | $\hat{S}(t)$ |
@@ -346,16 +352,18 @@ $$\times Pr(\text{survive past time 7.5} \mid \text{survive past time 4.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
-.pull-right[
 
+.small[
+.pull-right[
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
+
 $$Pr(\text{survive past time 8.5}) $$
 $$=Pr(\text{survive past time 7.5})$$
 $$\times Pr(\text{survive past time 8.5} \mid \text{survive past time 7.5})$$
 
+]
 ]
 
 ---
@@ -379,16 +387,17 @@ $$\times Pr(\text{survive past time 8.5} \mid \text{survive past time 7.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
-.pull-right[
-
-
-$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
 .small[
+.pull-right[
+$$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
+
+
 $$Pr(\text{survive past time 11.5}) $$
 $$=Pr(\text{survive past time 8.5})$$
 $$\times Pr(\text{survive past time 11.5} \mid \text{survive past time 8.5})$$
 
+]
 ]
 
 ---
@@ -412,16 +421,18 @@ $$\times Pr(\text{survive past time 11.5} \mid \text{survive past time 8.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
 $$Pr(\text{survive past time 13.5}) $$
 $$=Pr(\text{survive past time 11.5})$$
 $$\times Pr(\text{survive past time 13.5} \mid \text{survive past time 11.5})$$
 
+]
 ]
 
 ---
@@ -444,16 +455,18 @@ $$\times Pr(\text{survive past time 13.5} \mid \text{survive past time 11.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
 $$Pr(\text{survive past time 15.5}) $$
 $$=Pr(\text{survive past time 13.5})$$
 $$\times Pr(\text{survive past time 15.5} \mid \text{survive past time 13.5})$$
 
+]
 ]
 
 ---
@@ -476,16 +489,19 @@ $$\times Pr(\text{survive past time 15.5} \mid \text{survive past time 13.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
+
 $$Pr(\text{survive past time 16.5}) $$
 $$=Pr(\text{survive past time 15.5})$$
 $$\times Pr(\text{survive past time 16.5} \mid \text{survive past time 15.5})$$
 
+]
 ]
 
 ---
@@ -508,16 +524,19 @@ $$\times Pr(\text{survive past time 16.5} \mid \text{survive past time 15.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
+
 $$Pr(\text{survive past time 17.5}) $$
 $$=Pr(\text{survive past time 16.5})$$
 $$\times Pr(\text{survive past time 17.5} \mid \text{survive past time 16.5})$$
 
+]
 ]
 
 ---
@@ -541,16 +560,18 @@ $$\times Pr(\text{survive past time 17.5} \mid \text{survive past time 16.5})$$
 | 21.5 | 0 | 1 | | |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
 $$Pr(\text{survive past time 19.5}) $$
 $$=Pr(\text{survive past time 17.5})$$
 $$\times Pr(\text{survive past time 19.5} \mid \text{survive past time 17.5})$$
 
+]
 ]
 
 ---
@@ -573,16 +594,19 @@ $$\times Pr(\text{survive past time 19.5} \mid \text{survive past time 17.5})$$
 | 21.5 | 0 | 1 | <p style="color:red">1</p> | <p style="color:red">$$0.207 \times \left(1-\frac{0}{1}\right)=0.207$$</p> |
 ]
 ]
+
+.small[
 .pull-right[
 
 
 $$\hat{S}(t)=\prod_{t_i \leq t} \left(1-\frac{d_{t_i}}{I_{t_i}}\right)$$
 
-.small[
+
 $$Pr(\text{survive past time 21.5}) $$
 $$=Pr(\text{survive past time 19.5})$$
 $$\times Pr(\text{survive past time 21.5} \mid \text{survive past time 19.5})$$
 
+]
 ]
 
 ---
@@ -609,7 +633,7 @@ knitr::include_graphics("img/atct.png")
 - Which values are associated with the worst survival?
 - What is the median survival time in the group with the smallest ATCT values?
   - Median survival is the time at which $\hat{S}(t)=0.5$
-- If a child is in the group with the largest ATCT values, what is his/her estimated 5-year survival probability?
+- If a child is in the group with the largest ATCT values, what is their estimated 5-year survival probability?
 ]
 
 ---
@@ -620,7 +644,7 @@ The `lung` dataset is available from the `survival` package in R. The data conta
 
 `time`: Survival time in days
 
-`status`: censoring status 1=censored, 2=dead
+`status`: censoring status 1=censored, 2=dead (failure) (note:  another common coding recognized by R is to let 0=censored and 1=failure)
 
 `ph.ecog`: Eastern Cooperative Oncology Group (ECOG) performance score, where 0=asymptomatic, 1=symptomatic but ambulatory, 2=in bed <50% of day, 3=in bed >50% of day but not bedbound, 4=bedbound
 
@@ -664,7 +688,7 @@ Note: because there was only 1 bedridden patient, the median survival time is th
 
 ## Comparing Survival Across Groups
 
-The log-rank test is a standard test for comparing groups when we have survival data. Here we use it to test the null hypothesis that there is no difference in survival between the groups, versus the alternative that there is a difference in survival.
+The **log-rank test** is a standard test for comparing groups when we have survival data. Here we use it to test the null hypothesis that there is no difference in survival between the groups, versus the alternative that there is a difference in survival.
 
 ```{r logrank}
 survdiff(Surv(time,status)~ph.ecog, data=lung)
@@ -676,7 +700,7 @@ Here we see $p<0.0001$ and reject the null hypothesis, concluding that there is 
 
 ## Cox Proportional Hazards Model
 
-Suppose we have multiple covariates of interest. For example, in the lung cancer data, we also have covariates like `wt.loss` (weight loss in the past 6 months) and `age`.  If we want to fit a model to survival data, the *Cox proportional hazards model* is a popular choice.
+Suppose we have multiple covariates of interest. For example, in the lung cancer data, we also have covariates like `wt.loss` (weight loss in the past 6 months) and `age`.  If we want to fit a model to survival data, the **Cox proportional hazards model** is a popular choice.
 
 The Cox proportional hazards model has a couple of important assumptions that are beyond the scope of this course (non-informative censoring, meaning censoring times are unrelated to the unobserved failure time, and the proportional hazards assumption, meaning that the hazards of failure are proportional across groups). You should explore these more if you plan to model survival data.
 
@@ -688,7 +712,10 @@ The Cox proportional hazards model has a couple of important assumptions that ar
 ```{r cox}
 library(gtsummary)
 
-coxph(Surv(time, status) ~ as.factor(ph.ecog)+wt.loss+age, data = lung) %>%
+coxph(Surv(time, status) ~ 
+        as.factor(ph.ecog)+
+        wt.loss+age, 
+      data = lung) %>%
     tbl_regression(exp = TRUE) 
 ```
 ]
@@ -702,11 +729,11 @@ The estimates labeled `exp(coef)` are interpreted as *hazard ratios*. That is, p
 
 - The HR represents the ratio of hazards between two groups at any particular point in time.
 
-- The HR is interpreted as the instantaneous rate of occurrence of the event of interest in those who are still at risk for the event. 
+- The HR compares instantaneous rates of occurrence of the event of interest in those who are still at risk for the event. 
 
 - HR < 1 indicates reduced hazard of death;  HR > 1 indicates an increased hazard of death
 
-So our HR = 2.5 implies that around 2.5 times as many people who are bedridden are dying as those who are asymptomatic, at any given time.
+So our HR = 2.5 implies that around 2.5 times as many people who are bedridden are dying as those who are asymptomatic, at any given time, conditional on age and weight loss.
 
 
 
