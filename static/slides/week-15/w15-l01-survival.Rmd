@@ -682,7 +682,7 @@ One quantity of interest is the median survival time.
 survfit(Surv(time, status) ~ ph.ecog, data = lung)
 ```
 
-Note: because there was only 1 bedridden patient, the median survival time is the survival time of that patient in ph.ecog=3, and there is no confidence interval provided.
+Note: because there was only 1 bedridden patient, the median survival time is the survival time of that patient, and there is no confidence interval provided.
 
 ---
 
