@@ -63,6 +63,8 @@ The presentation is your time to show others your cool findings!  Be very carefu
 
 Presentation days times are randomly assigned; code and results are below!
 
+One change:  team-no-name-yet is swapping places with yay-stats
+
 ```{r presentdaytime}
 teams=data.frame(c("project-the-exposure-experience","team-name-tbd","g-i-joe","TBD1","the-gr8est-team","yay-stats","Rush-207","team-no-name-yet","TBD2","TBD3","The-Statista-Girls","Team-E-T","Jackie-Fan-Club","GGPlot-Gods","Probability-Pandas","IDK-name-yet","save-the-best-for-last"))
 daytime=c("Wed. 10:15","Wed. 10:23","Wed. 10:31","Wed. 10:39","Wed. 10:47","Wed. 10:55","Wed. 11:03","Wed. 11:11","Wed. 11:19","Fri. 10:15","Fri. 10:23","Fri. 10:31","Fri. 10:39", "Fri. 10:47","Fri. 10:55","Fri. 11:03","Fri. 11:11")
