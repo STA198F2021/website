@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Survival Analysis</title>
+    <title>Health Data Science Ethics</title>
     <meta charset="utf-8" />
     <meta name="author" content="Back to Website" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -16,7 +16,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Survival Analysis
+# Health Data Science Ethics
 ## <br><br> Introduction to Global Health Data Science
 ### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
 ### <br> Prof. Amy Herring
@@ -44,80 +44,66 @@ layout: true
 
 class: middle
 
-# Survival Data
+# Health Data Science Ethics
+
+---
+## Health Data Science Ethics
+
+Data science tools can be used ethically or unethically.
+
+You might be asked to use your knowledge in a way that is
+ethically questionable: because of business/policy goals, for the
+pursuit of further knowledge, or because your boss tells you to do so. 
+
+How do you train yourself to make the right decisions (or
+reduce the likelihood of accidentally making the wrong
+decisions) at those points?
 
 ---
 
-## Goal
+class: middle
 
-Survival analysis is a complex topic!  The goal of our coverage is to give you the skills you need to understand results of simple descriptive statistics in this setting, and we will not have time to discuss more complex modeling of survival data in this course. Come see me in the future if you need to analyze survival data!
-
----
-
-## Examples
-
-In many studies, the outcome of interest is the amount of time from an initial observation until the occurrence of some event of interest, e.g.
-  - Time from transplant surgery until new organ failure
-  - Time to death in a pancreatic cancer trial
-  - Time to first sex
-  - Time to menarche
-  - Time to divorce
-  - Time to graduation
-
-Typically, the event of interest is called a *failure* (even if it is a good thing).   The time interval between a starting point and the failure is known as the *survival time* and is often represented by `\(t\)`.
+We consider a number of concerns and challenges in conducting ethical health data science work, including privacy, data provenance and sharing, consent, roles various governmental and non-governmental entities, fair distribution of benefits and burdens, and accountability. 
 
 ---
 
-## Characteristics of Survival Data
+## Privacy
 
-Certain aspects of survival data make data analysis particularly challenging. 
-  - Typically, not all the individuals are observed until their times of failure
-    - An organ transplant recipient may die in an automobile accident before the new organ fails
-    - A student may withdraw to start a multi-billion dollar health company
-    - Not everyone gets divorced
-    - A pancreatic cancer patient may move to Aitutaki instead of undergoing further treatment
-  - In this case, an observation is said to be *right censored* at the last point of contact
-  
-  
-When you hear someone talk about *censoring*, typically they mean *right censoring*, but there are other types of censoring that you may encounter.
-  
----
-
-## Censoring
-
-Data may be censored in multiple ways:
-
-  - Right censored: the usual type of censoring in health data, accommodated by standard models. In this case you see a study participant at the beginning of the study, but you may not follow them until the outcome occurs (or the outcome may never occur)
-  
-  - Left censored: a study participant may have experienced the event before the study begins. For example, you may want to study when kindergarteners reach a certain reading level, but some may be proficient readers already at the start of your study.
-  
-  - Interval censored: you don't know exactly when an event happened, only that it happened between two times. For example, if a patient enrolled in a cancer screening study is cancer-free at the time of the first screening, `\(t_1\)` but has cancer at the time of the second screening, `\(t_2\)`, you only know that cancer developed sometime after `\(t_1\)` but before `\(t_2\)`
+- One of the most difficult ethical challenges 
+- When is consent required to use data, and how is consent obtained?
+- Data that seem innocuous may in fact be quite revealing, especially when data from multiple sources are combined
 
 ---
 
-## Calendar Time and Participant Time
+## Privacy
 
+[About My Info](https://aboutmyinfo.org/identity), based on work by Prof. Latanya Sweeney at Harvard, allows you to input very basic data (DOB, binary gender, and ZIP code) and tells you how "unique" you are with respect to others around you. If you'd like, give it a try! 
 
-It is important to distinguish between calendar time and participant time. In this plot, an "X" represents a death, and an "O" represents a censored observation.
+For example, I'm the only person with my date of birth and gender in my ZIP code, which contains a population of over 45,000 individuals.
 
-&lt;img src="img/studytime.png" width="80%" style="display: block; margin: auto;" /&gt;
+--
 
----
+## Privacy 
 
-&lt;img src="img/studytime.png" width="70%" style="display: block; margin: auto;" /&gt;
-  - A study may start enrolling patients in September and continue until all 500 patients have been enrolled
-  - This is likely to take months or years
-  - Time is typically converted from calendar time to participant time (time between enrollment and failure or censoring) before analysis
+It is possible to obtain data from social media and use it to predict quite precisely a number of factors an individual may not yet have decided to "take public," and social media users often have expectations of privacy despite their online activity.
 
-
----
-
-The distribution of survival times is characterized by the *survival function*, represented by `\(S(t)\)`.  For a continuous random variable `\(T\)`, `$$S(t)=Pr(T&gt;t)$$` and `\(S(t)\)` represents the proportion of individuals who have not yet failed.  
-
-
-The graph of `\(S(t)\)` versus `\(t\)` is called a survival curve.  The survival curve shows the proportion of survivors at any given time.
+For example, Twitter data are in the public domain. How comfortable would you be with a suicide prevention program screening your tweets and alerting followers if you are considered to be at risk?  Such a program was launched in 2014 but shut down after only a week due to concerns about privacy and stigmatization.
 
 ---
+
+## Data Sharing and Control
+
+- Even in public health emergencies like the COVID-19 pandemic, data sharing across international borders is complex, and many political entities have varying degrees of bans on sharing across international borders.
+
+- What is the role of public health surveillance vs data as a business asset?  
+
+- What are reporting requirements for businesses or nonprofit organizations that may detect new outbreaks or health issues as part of their analytics efforts?
+
+
+
+
+
+
 
 ## Survival of Children in Burkina Faso by Vaccination Status 
 
@@ -648,7 +634,7 @@ The `lung` dataset is available from the `survival` package in R. The data conta
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w15-l01-survival_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w15-l02-ethics_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 

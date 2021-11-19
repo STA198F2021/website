@@ -218,10 +218,3 @@ summary(modelagg)
 
 
 ```
-
-```{r}
-sick_m3 <- logistic_reg() %>%
-  set_engine("glm") %>%
-  fit(cbind(Sickyes, Sickno) ~ GENDER + EDUCATION * GENDER*EDUCATION, data=gats2_agg, family="binomial")
-result2<-tidy(sick_m2, conf.int=TRUE, exponentiate=TRUE)
-```

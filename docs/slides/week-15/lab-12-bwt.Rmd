@@ -1,0 +1,201 @@
+---
+title: 'Lab #12: Predicting Birth Weight'
+output:
+  tufte::tufte_html:    
+    css: "sta199-labs.css"
+    tufte_variant: envisioned
+    highlight: pygments
+    toc: no
+    toc_depth: 1
+  html_document:
+    toc: no
+    toc_depth: '1'
+    df_print: paged
+link-citations: yes
+editor_options:
+  chunk_output_type: console
+---
+
+## Goals
+
+- Practice assessing predictive ability of models
+
+- Practice selecting among models using cross-validation
+
+- Practice exploring model performance in a completely new data set
+
+## Predicting Birth Weight
+
+In this exercise, we consider predicting infant birth weight `BWTG` as a function of several important predictors, including gestational age at delivery `GEST` (babies tend to gain weight each week of gestation), infant gender `SEX` (boys tend to weigh more on average at the same gestational age), maternal smoking status `SMOKE` (smoking has been linked with lower birth weight), plurality `PLURFAC` (singleton births tend to be heavier than twins, `PLURFAC`=2, or triplets, `PLURFAC`=3), and whether the mother has given birth previously `MULTIP` (women who have given prior birth, also called multiparous women, tend to have heavier babies).  Our data are a random sample of Triangle-area births over the last several years and are contained in the file `areabirths.Rmd`.
+
+The relationship between gestational week and birth weight is not linear. For example, a typical fetus may weigh 150g at the end of 15 weeks of pregnancy, but in the latter weeks of pregnancy, the fetus may be gaining 150g or more per week. Thus polynomials like week$^2$, week$^3$, etc. are often used to model birth weight, in order to allow the rate of fetal weight gain to vary over the course of a pregnancy.
+
+While polynomials are often a great way to model nuanced relationships, they are not without potential drawbacks. Sometimes people complain that they hamper interpretations of results, and while that may be true for individual coefficients, e.g. the parameter corresponding to week$^3$, it is always possible to graph a non-linear relationship, so that interpretability isn't a big issue. Another potential problem is overfitting the data, especially near the lower and upper ends of the data range. You can see these effects in selected polynomial fits for boys and girls below (these are not adjusted for any other covariates or predictor variables, though estimates are stratified by sex in the plots).
+
+```{r, warning=FALSE, message=FALSE}
+load("areabirths.RData")
+
+library(tidyverse)
+library(infer)
+library(tidymodels)
+library(kableExtra)
+
+
+```
+
+```{r }    
+m1plot <- durhambirth %>%
+  ggplot(aes(x=GEST,y=BWTG,group=SEX)) +
+  geom_point(aes(color=SEX),alpha=0.2) +
+  stat_smooth(aes(color=SEX), method='lm',formula = y~poly(x,1)) +
+  labs(title="Linear Term",
+       x = "Gestational Age (weeks)",
+       y = "Birth Weight (g)")
+
+m5plot <- durhambirth %>%
+  ggplot(aes(x=GEST,y=BWTG,group=SEX)) +
+  geom_point(aes(color=SEX),alpha=0.2) +
+  stat_smooth(aes(color=SEX), method='lm',formula = y~poly(x,5)) +
+  labs(title="Fifth Order Polynomial",
+       x = "Gestational Age (weeks)",
+       y = "Birth Weight (g)")
+
+m9plot <- durhambirth %>%
+  ggplot(aes(x=GEST,y=BWTG,group=SEX)) +
+  geom_point(aes(color=SEX),alpha=0.2) +
+  stat_smooth(aes(color=SEX), method='lm',formula = y~poly(x,9)) +
+  labs(title="Ninth Order Polynomial",
+       x = "Gestational Age (weeks)",
+       y = "Birth Weight (g)")
+
+m1plot 
+
+m5plot
+
+m9plot
+
+
+```
+
+In this lab, your job is to explore a variety of models for birth weight using cross validation. 
+
+1. First, pick your own seed created from the days of birth of lab team members. Split all the Triangle area data into 10 folds to set up 10-fold cross-validation.
+
+```{r splitdata}
+# pick your own seed - should not be this one!
+set.seed(13121972)
+# before creating high-order polynomials, we should center and scale gestational age
+durhambirth <- durhambirth %>%
+  # now GEST_CS has mean 0 and variance 1
+  mutate(GEST_CS=scale(GEST)) %>%
+  mutate(GEST2=GEST_CS*GEST_CS) %>%
+  mutate(GEST3=GEST2*GEST_CS) %>%
+  mutate(GEST4=GEST3*GEST_CS) %>%
+  mutate(GEST5=GEST4*GEST_CS) %>%
+  mutate(GEST6=GEST5*GEST_CS) %>%
+  mutate(GEST7=GEST6*GEST_CS) %>%
+  mutate(GEST8=GEST7*GEST_CS) %>%
+  mutate(GEST9=GEST8*GEST_CS)
+  
+# create folds
+# folds <-
+
+```
+
+2. Next, using ten-fold cross-validation, fit first through ninth order polynomials in gestational age to the data, controlling for sex, plurality of the pregnancy (the reference is a singleton birth, with categories for twins (2) and triplets (3)), an indicator of first trimester maternal smoking, and and indicator of prior births to the mother. Do not include any interactions in your model. Codes for the first-order polynomial model (a linear term in gestational age), fifth-order polynomial model, and ninth-order polynomial model are provided below to get you started, though I have set the code not to run due to missing pieces you will fill in above.  Then create a table that includes RMSE and R$^2$ for the different models.
+ 
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+
+birth_mod <- linear_reg() %>%
+  set_engine("lm")
+
+b1_rec <- recipe(BWTG ~ GEST_CS+SEX+PLURFAC+SMOKE+MULTIP, data=durhambirth)
+
+b1_wflow <- workflow() %>%
+  add_model(birth_mod) %>%
+  add_recipe(b1_rec)
+
+b1_fit <- b1_wflow %>%
+  fit_resamples(folds)
+
+s1 <- collect_metrics(b1_fit, summarize = TRUE) %>%
+  select(.metric, mean) %>%
+  pivot_wider(names_from = .metric, values_from = mean) %>%
+  add_column(degree=1,.before=TRUE)
+
+
+b5_rec <- recipe(BWTG ~ GEST_CS + GEST2 + GEST3++GEST4+GEST5+SEX+PLURFAC+SMOKE+MULTIP, data=durhambirth)
+
+b5_wflow <- workflow() %>%
+  add_model(birth_mod) %>%
+  add_recipe(b5_rec)
+
+b5_fit <- b5_wflow %>%
+  fit_resamples(folds)
+
+s5 <- collect_metrics(b5_fit, summarize = TRUE) %>%
+  select(.metric, mean) %>%
+  pivot_wider(names_from = .metric, values_from = mean) %>%
+  add_column(degree=5,.before=TRUE)
+
+b9_rec <- recipe(BWTG ~ GEST_CS + GEST2 + GEST3++GEST4+GEST5+GEST6+GEST7+GEST8+GEST9+SEX+PLURFAC+SMOKE+MULTIP, data=durhambirth)
+
+b9_wflow <- workflow() %>%
+  add_model(birth_mod) %>%
+  add_recipe(b9_rec)
+
+b9_fit <- b9_wflow %>%
+  fit_resamples(folds)
+
+s9 <- collect_metrics(b9_fit, summarize = TRUE) %>%
+  select(.metric, mean) %>%
+  pivot_wider(names_from = .metric, values_from = mean) %>%
+  add_column(degree=9,.before=TRUE)
+
+a=full_join(s1,s5)
+fintab=full_join(a,s9)
+
+fintab
+
+```
+
+
+
+3. Based on the results in the table, which model appears to be doing the best job at prediction?  Refer to specific values in the table to justify your choice of a single "best" model. Then, fit this model in the full Triangle area births sample and provide a plot of the residuals versus predicted values for this model. Comment on any concerns.
+
+
+4. Assume your residual plot looks great! Now take your "best" model and assess its performance in data from Mecklenburg County (Charlotte is in Mecklenburg County), which are contained in the file `mecklenburgbirth.RData`. When you assess performance, because we feel the populations are quite similar, you can re-fit the model using data from Mecklenburg County (so that the $\hat{beta}$'s are estimated from the Mecklenburg County data), using the form of the model you found superior in #3. How does the $R^2$ in this brand new sample compare to the $R^2$ you obtained in the test samples in the Triangle area data?
+
+
+```{r mecklenburgvalidate, eval=FALSE}
+load("mecklenburgbirth.RData")
+mecklenburgbirth <- mecklenburgbirth %>%
+  mutate(GEST_CS=scale(GEST)) %>%
+  mutate(GEST2=GEST_CS*GEST_CS) %>%
+  mutate(GEST3=GEST2*GEST_CS) %>%    
+  mutate(GEST4=GEST3*GEST_CS) %>%
+  mutate(GEST5=GEST4*GEST_CS) %>%
+  mutate(GEST6=GEST5*GEST_CS) %>%
+  mutate(GEST7=GEST6*GEST_CS) %>%
+  mutate(GEST8=GEST7*GEST_CS) %>%
+  mutate(GEST9=GEST8*GEST_CS)
+
+```
+
+
+
+5. Based on the fit of your "best" model in the Mecklenburg cohort, which factors are associated with higher birth weights, and which are associated with lower birth weights?  Provide specific interpretations of the (statistically significant at level 0.05) predictors in the model. You do not need to interpret the gestational age terms.
+
+
+## Grading
+Total: 50 pts
+
+- Exercise 1: 5 pts
+- Exercise 2: 10 pts
+- Exercise 3: 10 pts
+- Exercise 4: 10 pts
+- Exercise 5: 10 pts
+
+- Overall:  5 pts
+
+  - Overall includes proper data processing, the number of commits made by different team members (at least 2 by each team member), naming chunks, updating the names on the assignment to your team name clearly identifying all team members, following tidyverse style (see: https://style.tidyverse.org/), and in general producing a nicely formatted, neat report. 
