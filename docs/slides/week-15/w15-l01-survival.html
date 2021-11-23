@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>w15-l01-survival.knit</title>
+    <title>Survival Analysis</title>
     <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
@@ -13,6 +14,14 @@
   </head>
   <body>
     <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Survival Analysis
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
 
 
 
@@ -679,7 +688,7 @@ survfit(Surv(time, status) ~ ph.ecog, data = lung)
 #&gt; ph.ecog=3   1      1    118      NA      NA
 ```
 
-Note: because there was only 1 bedridden patient, the median survival time is the survival time of that patient in ph.ecog=3, and there is no confidence interval provided.
+Note: because there was only 1 bedridden patient, the median survival time is the survival time of that patient, and there is no confidence interval provided.
 
 ---
 

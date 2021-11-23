@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Health Data Science Ethics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Back to Website" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Health Data Science Ethics
+## <br><br> Introduction to Global Health Data Science
+### <a href="https://sta198f2021.github.io/website/">Back to Website</a>
+### <br> Prof. Amy Herring
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://sta198f2021.github.io/website/" target="_blank"&gt;Back to website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+class: middle
+
+# Health Data Science Ethics
+
+---
+## Health Data Science Ethics
+
+Data science tools can be used ethically or unethically.
+
+You might be asked to use your knowledge in a way that is
+ethically questionable: because of business/policy goals, for the
+pursuit of further knowledge, or because your boss tells you to do so. 
+
+How do you train yourself to make the right decisions (or
+reduce the likelihood of accidentally making the wrong
+decisions) at those points?
+
+---
+
+class: middle
+
+We consider a number of concerns and challenges in conducting ethical health data science work, including privacy, data provenance and sharing, consent, roles of various governmental and non-governmental entities,  algorithmic bias, and accountability. 
+
+---
+
+
+## Privacy and Consent
+
+- One of the most difficult ethical challenges 
+- When is consent required to use data, and how is consent obtained?
+- Data that seem innocuous may in fact be quite revealing, especially when data from multiple sources are combined
+
+---
+
+## Privacy
+
+[About My Info](https://aboutmyinfo.org/identity), based on work by Prof. Latanya Sweeney at Harvard, allows you to input very basic data (DOB, binary gender, and ZIP code) and tells you how "unique" you are with respect to others around you. If you'd like, give it a try! 
+
+For example, I'm the only person with my date of birth and gender in my ZIP code, which contains a population of over 45,000 individuals.
+
+---
+
+## Privacy and Consent
+
+It is possible to obtain data from social media and use it to predict quite precisely a number of factors an individual may not yet have decided to "take public," and social media users often have expectations of privacy despite their online activity.
+
+For example, Twitter data are in the public domain. How comfortable would you be with a well-intentioned suicide prevention program screening your tweets and alerting followers if you are considered to be at risk?  Such a program was launched in 2014 but shut down after only a week due to concerns about privacy and stigmatization.
+
+---
+
+
+## Privacy and Consent
+
+&lt;img src="img/cambridge.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+These data were used for "micro-targeting" to influence voting behaviors.
+---
+
+
+## Data Sharing and Control
+
+- Even in public health emergencies like the COVID-19 pandemic, data sharing across international borders is complex, and many political entities have varying degrees of bans on sharing across international borders.
+
+- What is the role of public health surveillance vs data as a business asset?  
+
+- What are reporting requirements for businesses or nonprofit organizations that may detect new outbreaks or health issues as part of their analytics efforts?
+
+---
+
+## Algorithmic Bias
+
+There have been some hideously terrible examples of algorithmic bias in data science 
+
+  - Google and Facebook: both trained image classification algorithms primarily on images of light-skinned humans, misclassifying darker-skinned humans as other primates (nobody caught this?!?)
+  
+  - Early wearables used optical heart rate sensors that were less accurate when skin contained higher levels of melanin
+  
+  - Predictive policing and sentencing algorithms have been shown to be fraught with biases
+  
+  - Well-accepted disease diagnosis cut points and algorithms can bake in disparities (e.g., small-for-gestational-age algorithms that "control" for race/ethnicity; racially-dependent cut points for diabetes)
+  
+  - Critically important to conduct very careful testing and evaluation of data science products
+
+---
+
+## Target(ed) Advertising
+
+Data science teams at retailers like Target study consumer purchase history and demographics to increase sales. Strategies like appropriately pricing items and sending targeting coupons are employed.
+
+A data scientist at Target used buying data to predict shoppers who may be pregnant or planning pregnancy, based on data from individual shoppers who later signed up for a Target baby registry.
+
+Each shopper received a pregnancy prediction score based on purchases (e.g., pregnancy test, unscented products, vitamin supplements) and was sent coupons timed to specific stages of the pregnancy.
+
+---
+
+## Later...
+
+"My daughter got this in the mail!" complained a parent. "She’s still in high school, and you’re sending her coupons for baby clothes and cribs? Are you trying to encourage her to get pregnant?"
+
+---
+
+## Even later...
+
+"I had a talk with my daughter," the parent said. "It turns out there’s been some activities in my house I haven’t been completely aware of. She’s due in August. I owe you an apology."
+
+  - How do you feel about this?
+  - What ethical issues arise when using data for targeted advertising?
+  - Is it possible Target’s pregnancy model isn’t very good?
+
+
+
+
+---
+
+## Misrepresentation of Data
+
+&lt;img src="img/babyboom.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Misrepresentation of Data
+
+&lt;img src="img/guns.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Accountability
+
+Who is accountable for data biases or breaches of ethics?
+
+Everyone!
+
+- producers of biased data (if biases are not acknowledged)
+- data analysts
+- consumers (should be fairly distrustful and want to see validation of any algorithms)
+- leaders of teams
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
