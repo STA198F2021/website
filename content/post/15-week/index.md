@@ -53,5 +53,6 @@ title: 'Week 15 - Ethics and survival'
 | :page_facing_up: |[Review: Probability](https://sta198f2021.github.io/website/slides/week-02/w2-l03-prob.html)  | **Required** |
 | :page_facing_up: |[Review: Conditional Probability ](https://sta198f2021.github.io/website/slides/week-02/w2-l04-condprob.html)  |**Required** |
 | :movie_camera: | [5 Bears in the Bed](https://www.dailymotion.com/video/x6oqa4p)  | **Required (Seriously!)** |
+| :page_facing_up: |[Data Values and Principles ](https://datapractices.org/manifesto/)  |**Required** |
 | :page_facing_up: |[Navigating the Ethics of Big Data in Public Health ](https://sakai.duke.edu/access/content/group/26a48538-f5d9-44cf-bece-434eafc5d340/oxfordhb-9780190245191-e-31.pdf)  |**Recommended** |
 
