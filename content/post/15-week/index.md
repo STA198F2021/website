@@ -42,7 +42,7 @@ title: 'Week 15 - Ethics and survival'
 |:---|:---|:---|
 | Quiz | [Quiz 11](https://sakai.duke.edu) | Tues., 11/30 |
 | Lab 12 | [Model Validation](https://sta198f2021.github.io/website/slides/week-15/lab-12-bwt.html) | Wed., 12/1 |
-| Homework 5 | [Survival Analysis]() | Fri., 12/3 |
+| Homework 5 | [Survival Analysis](https://sta198f2021.github.io/website/slides/week-15/hw5-lbw.html) | Fri., 12/3 |
 
 
 

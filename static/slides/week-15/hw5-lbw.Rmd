@@ -1,0 +1,96 @@
+---
+title: "Survival of Low Birth Weight Infants in an Ethiopian Study"
+author: "Amy Herring"
+date: "11/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Each year over 20 million babies are born with low birth weight, defined as < 2500g. Of these babies, >95% were born in developing countries. Babies born low birth weight are at increased risk of mortality and morbidity. We consider data from 216 newborns admitted to a neonatal intensive care unit (ICU) in 2018-2019 in one of three hospitals in  Ethiopia, where the majority of infant mortality is related to low birth weight. The babies were followed in the study until death, discharge from the ICU, or roughly one month of age. The variable `AgeNeonate` provides the age (in days) of the baby at the time of admission to the ICU, and the variable `stime` provides the time from ICU admission until the end of follow-up (death (`Died`=1)), recovery (`Died`=0), or transfer (`Died`=0)). You can think of `stime` as the amount of time spent in the ICU.
+
+
+```{r readdata, message=FALSE, warning=FALSE}
+library(haven)
+library(tidyverse)
+library(survival)
+library(survminer)
+
+lbw <- read_dta("pone.0238629.s001.dta")
+lbw <- as_tibble(lbw)
+# Died (1=yes, 0=no)
+# stime (days) -- from admission to NICU
+# AgeNeonate (days) - at admission
+# DM (history of diabetes) 1=yes, 2=no
+# HIV (maternal) 1=yes, 2=no
+
+```
+
+
+1. What percentage of the 216 babies in the dataset died?  Provide R code to calculate this quantity.
+
+
+2. Create histograms showing the time spent in the ICU (`stime`) for babies who died and for babies who did not die. Comment on any trends you see.
+
+
+3. The code below plots the Kaplan-Meier estimate of survival probabilities. Based on the plot, what is the approximate value of $\hat{S}(20)$?  Talk about how this value is similar to, or different from, the value you calculated in #1, and explain any differences.
+
+```{r kmplot}
+ggsurvplot(
+    fit = survfit(Surv(stime, Died) ~ 1, data = lbw), 
+    xlab = "Days", 
+    ylab = "Overall survival probability")
+
+```
+
+
+
+4. Write code in R to calculate the following values:  (a) the marginal probability that a mother had diabetes (`DM`=1 for women with diabetes, and `DM`=2 for women without diabetes), (b) the conditional probability that a mother had diabetes, given that her baby died in the ICU (`Died`=1 if the baby died and `Died`=0 if the baby survived), and (c) the conditional probability that a mother had no diabetes, given that her baby did not die in the ICU. Comment on how these probabilities compare to each other.
+
+
+
+
+5. Repeat #4 except calculate probabilities of maternal HIV instead of maternal diabetes. Comment on how these probabilities compare to each other.
+
+
+6. Are presence of maternal HIV and presence of maternal diabetes independent in this population?  Address this question two ways:  (a) using probability rules, and (b) using a formal hypothesis test of independence.
+
+
+
+7. Calculate Kaplan-Meier plots comparing survival of those with and without diabetes, and then produce plots comparing survival of those with and without HIV.  Comment on any trends.
+
+
+
+8. Fit three Cox proportional hazards models: one with only diabetes as a predictor, one with only HIV as a predictor, and one with both diabetes and HIV as predictors. Explain the results. (The model for diabetes is provided to get you started!)
+
+
+```{r cox}
+library(gtsummary)
+coxph(Surv(stime, Died) ~ DM, 
+      data = lbw) %>%
+    tbl_regression(exp = TRUE)
+
+```
+
+
+
+### Grading:
+
+| Component | Points |
+|:----------|:-------|
+| Ex 1      | 4     |
+| Ex 2      | 4     |
+| Ex 3      | 6     |
+| Ex 4      | 6     |
+| Ex 5      | 6     |
+| Ex 6      | 6     |
+| Ex 7      | 6     |
+| Ex 8      | 10     |
+| Workflow & formatting   | 2      |
+
+**Grading notes**:
+
+-   The "Workflow & formatting" grade is to assess the reproducible workflow. This includes having at least 2 informative commit messages, labeling the code chunks, updating the name and date in the YAML, and in general having a neat report.
+
