@@ -32,7 +32,7 @@ lbw <- as_tibble(lbw)
 1. What percentage of the 216 babies in the dataset died?  Provide R code to calculate this quantity.
 
 
-2. Create histograms showing the time spent in the ICU (`stime`) for babies who died and for babies who did not die. Comment on any trends you see.
+2. Create histograms or density plots showing the time spent in the ICU (`stime`) for babies who died and for babies who did not die. Comment on any trends you see.
 
 
 3. The code below plots the Kaplan-Meier estimate of survival probabilities. Based on the plot, what is the approximate value of $\hat{S}(20)$?  Talk about how this value is similar to, or different from, the value you calculated in #1, and explain any differences.
