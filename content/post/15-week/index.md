@@ -28,6 +28,7 @@ title: 'Week 15 - Ethics and survival'
 | <div style="width:250px;text-align:left">Title</div> | <div  style="width:80px;text-align:center">Slides</div> | 
 |:---:|:---------------------|
 | Survival Analysis   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-15/w15-l01-survival.html)  | 
+| Ethics   | [<span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span>](https://sta198f2021.github.io/website/slides/week-15/w15-l02-ethics.html)  | 
 
 
 
