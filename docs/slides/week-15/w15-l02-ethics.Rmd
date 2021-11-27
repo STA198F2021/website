@@ -124,6 +124,7 @@ There have been some hideously terrible examples of algorithmic bias in data sci
   
   - Critically important to conduct very careful testing and evaluation of data science products
 
+
 ---
 
 ## Target(ed) Advertising
@@ -165,9 +166,23 @@ knitr::include_graphics("img/babyboom.png")
 
 ## Misrepresentation of Data
 
-```{r, echo=FALSE}
-knitr::include_graphics("img/guns.png")
+```{r out.width="40%", echo=FALSE}
+knitr::include_graphics("img/guns.jpg")
 ```
+
+---
+
+
+## Pushing Beyond the Bounds of Data
+
+- It's important not to extrapolate beyond the range of the data (e.g., don't make predictions for how children will react to a new treatment based on only adult data)
+
+- It's also important to consider causality very carefully
+  - Do certain Facebook ads lead consumers to be more likely to get vaccinated?
+  - Or do consumers more likely to get vaccinated have a higher likelihood of seeing certain Facebook ads?
+  - Or both?
+  
+- Generally a *longitudinal* design that follows individuals over a period of time is required to sort out cause and effect, and even then, it may be complicated
 
 ---
 
