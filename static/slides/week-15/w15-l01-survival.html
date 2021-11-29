@@ -1154,6 +1154,16 @@ The estimates labeled `exp(coef)` are interpreted as *hazard ratios*. That is, p
 
 So our HR = 2.5 implies that around 2.5 times as many people who are bedridden are dying as those who are asymptomatic, at any given time, conditional on age and weight loss.
 
+---
+
+## Interpretation Summary (No Interactions in Model)
+
+- Linear regression: interpret estimate `\(\hat{\beta}_1\)` corresponding to covariate `\(x_1\)` as *the expected increase in `\(y_i\)` corresponding to a one-unit increase in `\(x_{1}\)`, holding all other factors constant*
+
+- Logistic regression: interpret estimate `\(\exp(\hat{\beta}_1)\)` corresponding to covariate `\(x_1\)` as *the ratio of odds of `\(y_i=1\)` comparing those with `\(x_{1}=c+1\)` to those with `\(x_{1}=c\)` (or corresponding to a 1-unit increase in the value of `\(x_1\)`), holding all other factors constant*
+- Cox proportional hazards (survival) model: interpret estimate `\(\exp(\hat{\beta}_1)\)` corresponding to covariate `\(x_1\)` as *the ratio of hazards of failure comparing those with `\(x_{1}=c+1\)` to those with `\(x_{1}=c\)` (or corresponding to a 1-unit increase in the value of `\(x_1\)`), holding all other factors constant*
+
+
 
 
 
