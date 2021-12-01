@@ -95,7 +95,7 @@ Data may be censored in multiple ways:
 ## Calendar Time and Participant Time
 
 
-It is important to distinguish between calendar time and participant time. In this plot, an "X" represents a death, and an "O" represents a censored observation.
+It is important to distinguish between calendar time and participant time. In this plot, an "X" at the end of a line represents a failure, and an "O" represents a censored observation.
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/studytime.png")
